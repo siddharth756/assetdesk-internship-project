@@ -1,0 +1,63 @@
+<div class="page">
+  <div style="text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <h1 class="chapter" style="border: none; font-size: 18pt; margin-top: 20px;">{{projectTitle}}</h1>
+      <p style="text-align: center; font-size: 12pt; font-weight: bold; color: #475569; text-transform: uppercase; margin-top: 10px;">
+        Internship Project Report
+      </p>
+      <div style="width: 60px; height: 2px; background: #0f172a; margin: 20px auto;"></div>
+      <p style="text-align: center; font-size: 11pt; color: #334155; margin-top: 20px;">
+        Submitted to<br/>
+        <strong>{{instituteName}}</strong><br/>
+        In partial fulfillment of the requirements for the award of the degree of<br/>
+        <strong>{{student.program}}</strong>
+      </p>
+    </div>
+
+    <div>
+      
+    <table class="form-table" style="width: 100%; border-collapse: collapse; margin: 12px 0;">
+      <tbody>
+        
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Student Name</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{student.name}}</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Enrollment Number</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{student.enrollmentNo}}</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Program & Semester</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{student.program}}, {{student.semester}}</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Host Company / Industry</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{company.name}}</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Internal Guide</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{guide.internalName}}</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Industry Mentor</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{guide.mentorName}}</span></td>
+      </tr>
+    
+      </tbody>
+    </table>
+  
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <div style="font-size: 12pt; font-weight: bold; color: #0f172a;">{{instituteName}}</div>
+      <div style="font-size: 10pt; color: #475569;">{{universityName}}</div>
+      <div style="font-size: 10pt; font-weight: 600; color: #0f172a; margin-top: 4px;">Academic Year: {{academicYear}}</div>
+    </div>
+  </div>
+</div>

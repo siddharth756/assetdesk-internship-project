@@ -167,5 +167,18 @@ All files          |   86.52 |    66.62 |   86.88 |   87.52 |
   - Generated `docs/build/data/project-facts.json` containing verified dependencies, versions, model/controller/page counts, LOC breakdown (19,383 lines), and 36 parsed REST endpoints with HTTP verbs, paths, and role requirements.
   - Added `npm run docs:facts` command in root `package.json`.
 
+### Part 11 — VICAIT SOP Document Build Engine (50 Pages Exact)
+- Date: 2026-10-14
+- Status: COMPLETE
+- Highlights:
+  - Production A4 PDF build engine built using Playwright + pdf-lib (`docs/build/package.json`).
+  - Blank-field system implemented with `config.json` (unfilled placeholders) and `config.sample.json` (preview values).
+  - Strict 50-page manifest budget established across 24 document sections in `docs/build/manifest.json`.
+  - VICAIT SOP styling in `docs/build/styles/report.css`: 0.8" top/bottom/right, 1.2" left margin with gutter, Calibri/Carlito typography, corporate cover page with deep black (#0B0F19) and metallic gold (#D4AF37) accents.
+  - 24 modular HTML section templates authored in `docs/build/content/`.
+  - Running headers/footers stamped with `pdf-lib` ("Page | n") excluding cover, certificates, and declaration.
+  - Quality verification: `npm run docs:build` generates `docs/output/Internship_Report.pdf` (1.90 MB, exactly 50 pages, 24/24 parts within budget).
+  - Validation script `npm run docs:check` and thumbnail generator `npm run docs:preview` integrated into root scripts.
+
 
 

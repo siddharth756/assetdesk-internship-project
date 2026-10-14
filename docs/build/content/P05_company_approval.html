@@ -1,0 +1,67 @@
+<div class="page">
+  <div style="text-align: center; margin-bottom: 25px;">
+    <h1 class="chapter" style="border: none; margin-bottom: 4px;">{{company.name}}</h1>
+    <div style="font-size: 10pt; color: #475569;">{{company.address}}</div>
+    <div style="font-size: 13pt; font-weight: bold; color: #0f172a; margin-top: 16px; text-decoration: underline;">
+      COMPANY PERMISSION & APPROVAL LETTER
+    </div>
+  </div>
+
+  <p style="margin-top: 20px; line-height: 1.6;">
+    Date: <span class="blank-field-line" style="display: inline-block; min-width: 40mm; border-bottom: 1.5px dotted #64748b; height: 1.1em; vertical-align: baseline;">&nbsp;</span><br/>
+    To,<br/>
+    The Principal / Head of Department,<br/>
+    {{instituteName}},<br/>
+    {{universityName}}.
+  </p>
+
+  <p style="margin-top: 16px; line-height: 1.6;">
+    <strong>Subject: Permission for Internship and Report Documentation</strong>
+  </p>
+
+  <p style="margin-top: 14px; line-height: 1.6;">
+    Dear Sir/Madam,<br/>
+    We are pleased to confirm that <strong>{{student.name}}</strong> (Enrollment No: <strong>{{student.enrollmentNo}}</strong>) 
+    has been granted permission to undertake their final year internship project on the system titled 
+    <strong>"{{projectTitle}}"</strong> at our engineering facility.
+  </p>
+
+  <p style="margin-top: 14px; line-height: 1.6;">
+    The organization permits the student to document the system architecture, data models, workflow specifications, 
+    and non-proprietary code snippets within their academic project report strictly for educational evaluation purposes.
+  </p>
+
+  <div style="margin-top: 30px;">
+    
+    <div class="blank-box" style="height: 35mm; border: 1.5px dashed #94a3b8; border-radius: 4px; background: #fafafa; position: relative; margin: 10px 0;">
+      <span style="position: absolute; top: 6px; left: 8px; font-size: 8.5pt; color: #94a3b8; text-transform: uppercase;">Official Seal / Stamp Area</span>
+    </div>
+  
+  </div>
+
+  <div style="margin-top: 35px;">
+    
+    <table class="signature-table" style="width: 100%; border-collapse: collapse; margin-top: 24px;">
+      <tr>
+        
+      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
+        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
+          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{guide.mentorName}}</span>
+        </div>
+        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Technical Mentor</div>
+        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
+      </td>
+    
+      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
+        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
+          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{company.name}}</span>
+        </div>
+        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Authorized Official</div>
+        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
+      </td>
+    
+      </tr>
+    </table>
+  
+  </div>
+</div>

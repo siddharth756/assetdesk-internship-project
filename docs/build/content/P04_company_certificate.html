@@ -1,0 +1,81 @@
+<div class="page">
+  <div style="text-align: center; margin-bottom: 25px;">
+    <h1 class="chapter" style="border: none; margin-bottom: 4px;">{{company.name}}</h1>
+    <div style="font-size: 10pt; color: #475569;">{{company.address}}</div>
+    <div style="font-size: 13pt; font-weight: bold; color: #0f172a; margin-top: 16px; text-decoration: underline;">
+      INTERNSHIP COMPLETION CERTIFICATE
+    </div>
+  </div>
+
+  <p style="margin-top: 24px; line-height: 1.6;">
+    TO WHOMSOEVER IT MAY CONCERN
+  </p>
+
+  <p style="margin-top: 16px; line-height: 1.6;">
+    This is to certify that <strong>{{student.name}}</strong>, a student of <strong>{{instituteName}}</strong> 
+    (Enrollment No: <strong>{{student.enrollmentNo}}</strong>), has successfully completed a professional software development 
+    internship with <strong>{{company.name}}</strong> from <strong>{{company.startDate}}</strong> to <strong>{{company.endDate}}</strong>.
+  </p>
+
+  <p style="margin-top: 16px; line-height: 1.6;">
+    During the tenure of the internship, the student worked on the enterprise software engineering project 
+    <strong>"{{projectTitle}}"</strong>. The intern demonstrated diligent application, technical proficiency in full-stack 
+    web technologies, disciplined version control, and adherence to professional software quality standards.
+  </p>
+
+  <div style="margin-top: 20px;">
+    
+    <table class="form-table" style="width: 100%; border-collapse: collapse; margin: 12px 0;">
+      <tbody>
+        
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Project Title</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{projectTitle}}</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Domain & Tech Stack</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">MERN Stack / REST APIs / RBAC</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Performance Assessment</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">EXCELLENT / HIGHLY COMMENDED</span></td>
+      </tr>
+    
+      <tr style="min-height: 11mm; height: 11mm;">
+        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Attendance & Conduct</td>
+        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">REGULAR & SATISFACTORY</span></td>
+      </tr>
+    
+      </tbody>
+    </table>
+  
+  </div>
+
+  <div style="margin-top: 40px;">
+    
+    <table class="signature-table" style="width: 100%; border-collapse: collapse; margin-top: 24px;">
+      <tr>
+        
+      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
+        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
+          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{guide.mentorName}}</span>
+        </div>
+        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Industry Mentor</div>
+        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
+      </td>
+    
+      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
+        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
+          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{company.name}}</span>
+        </div>
+        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Authorized Signatory (HR / Director)</div>
+        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
+      </td>
+    
+      </tr>
+    </table>
+  
+  </div>
+</div>

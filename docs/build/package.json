@@ -1,0 +1,14 @@
+{
+  "name": "assetdesk-docs-build",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PDF Document Build Engine for VICAIT SOP Internship Report",
+  "scripts": {
+    "build": "node scripts/build-pdf.js",
+    "check": "node scripts/check-pdf.js",
+    "preview": "node scripts/preview-pdf.js"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  }
+}

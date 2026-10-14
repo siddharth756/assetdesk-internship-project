@@ -1,0 +1,242 @@
+[
+  {
+    "id": "P01",
+    "file": "P01_cover.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Cover Page",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P02",
+    "file": "P02_title_page.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Title Page",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P03",
+    "file": "P03_college_certificate.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "College Certificate",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P04",
+    "file": "P04_company_certificate.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Company Certificate",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P05",
+    "file": "P05_company_approval.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Company Approval Letter",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P06",
+    "file": "P06_progress_report_1.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Progress Report I",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P07",
+    "file": "P07_progress_report_2.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Progress Report II",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P08",
+    "file": "P08_progress_report_3.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Progress Report III",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P09",
+    "file": "P09_progress_report_4.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Progress Report IV",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "P10",
+    "file": "P10_acknowledgement.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Acknowledgement",
+    "tocLevel": 0,
+    "includeInToc": true
+  },
+  {
+    "id": "P11",
+    "file": "P11_preface.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Preface",
+    "tocLevel": 0,
+    "includeInToc": true
+  },
+  {
+    "id": "P12",
+    "file": "P12_abstract.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Abstract",
+    "tocLevel": 0,
+    "includeInToc": true
+  },
+  {
+    "id": "P13",
+    "file": "P13_index.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Table of Contents",
+    "tocLevel": 0,
+    "includeInToc": false
+  },
+  {
+    "id": "C01",
+    "file": "C01_introduction.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 3,
+    "tocTitle": "Chapter 1: Introduction",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C02",
+    "file": "C02_proposed_system.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 3,
+    "tocTitle": "Chapter 2: Proposed System",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C03",
+    "file": "C03_system_analysis.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 6,
+    "tocTitle": "Chapter 3: System Analysis",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C04",
+    "file": "C04_system_planning.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 2,
+    "tocTitle": "Chapter 4: System Planning",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C05",
+    "file": "C05_tools_and_environment.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 2,
+    "tocTitle": "Chapter 5: Tools & Environment",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C06",
+    "file": "C06_design_and_implementation.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 10,
+    "tocTitle": "Chapter 6: System Design & Implementation",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C07",
+    "file": "C07_system_testing.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 5,
+    "tocTitle": "Chapter 7: System Testing",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C08_C09",
+    "file": "C08_limitations_and_future.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Chapter 8 & 9: Limitations and Future Enhancements",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "CON",
+    "file": "CON_conclusion.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Conclusion",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "C10",
+    "file": "C10_references.html",
+    "orientation": "portrait",
+    "startsNewPage": true,
+    "pageBudget": 1,
+    "tocTitle": "Chapter 10: References",
+    "tocLevel": 1,
+    "includeInToc": true
+  },
+  {
+    "id": "A01",
+    "file": "A01_logbook.html",
+    "orientation": "landscape",
+    "startsNewPage": true,
+    "pageBudget": 3,
+    "tocTitle": "Annexure: Student Work Logbook",
+    "tocLevel": 1,
+    "includeInToc": true
+  }
+]

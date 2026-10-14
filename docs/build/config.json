@@ -1,0 +1,34 @@
+{
+  "student": {
+    "name": "",
+    "enrollmentNo": "",
+    "program": "Bachelor of Computer Applications (BCA)",
+    "semester": "Semester VI",
+    "division": "",
+    "groupMembers": ["", "", ""]
+  },
+  "guide": {
+    "internalName": "",
+    "internalDesignation": "Assistant Professor, Dept of Computer Applications",
+    "mentorName": "",
+    "mentorDesignation": "Senior Technical Lead & Engineering Mentor",
+    "mentorContact": ""
+  },
+  "company": {
+    "name": "",
+    "address": "",
+    "type": "Information Technology / Software Engineering",
+    "startDate": "",
+    "endDate": "",
+    "duration": "15 Weeks",
+    "minHours": "300 Hours",
+    "allowsCodeInReport": true,
+    "website": ""
+  },
+  "academicYear": "2025-2026",
+  "projectTitle": "IT Asset & Support Desk Management System",
+  "instituteName": "Vidhyadeep Institute of Computer & Information Technology",
+  "universityName": "Vidhyadeep University",
+  "repoUrl": "https://github.com/keyur-sarvaiya/internship-project-",
+  "liveUrl": "http://localhost:5173"
+}
