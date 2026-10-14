@@ -1,5 +1,14 @@
-// Purpose: MongoDB connection configuration using Mongoose
+const dns = require("dns");
 const mongoose = require("mongoose");
+
+// Ensure DNS SRV resolution for MongoDB Atlas (+srv://) works smoothly on Windows
+if (dns && typeof dns.setServers === "function") {
+  try {
+    dns.setServers(["8.8.8.8", "1.1.1.1"]);
+  } catch (err) {
+    // Fall back to system DNS
+  }
+}
 
 /**
  * Connect to MongoDB database
