@@ -89,3 +89,27 @@ All files          |   86.52 |    66.62 |   86.88 |   87.52 |
 - Part 7 `cd client && npm run lint`: PASSED (0 errors, 0 warnings).
 - Part 7 `cd client && npm run build`: PASSED (Vite production bundle built cleanly in 1.25s).
 - Part 7 frontend verification: PASSED (verified login flow, invalid password error handling, admin role-based sidebar with all 8 modules, logout redirect, employee role-based sidebar with 3 modules, and protected route 403 access forbidden screen on /users).
+
+### Part 8 — Frontend Module Pages (M1–M5)
+- Date: 2026-10-14
+- Status: COMPLETE
+- Modules & Pages Implemented:
+  1. `Dashboard.jsx`: Role-aware summary, KPI stat cards (Total assets, expiring licenses, open tickets, overdue tickets), CSS bar distribution lists for assets-by-status and tickets-by-status, expiring licenses list table, recent support tickets table, and compliance audit trail (admin).
+  2. `AssetList.jsx`: Search query (`q`), filtering by `category`, `status`, `assigned`, pagination, StatusBadge, Add Asset button, row view and edit actions.
+  3. `AssetForm.jsx`: Create & edit modes, inline validation, duplicate serial conflict (HTTP 409) displayed directly on serial field, retired asset restrictions.
+  4. `AssetDetail.jsx`: Complete specifications, assignment details card, Assign modal (loaded from `/users/lookup`), Unassign confirm dialog, Change Status modal.
+  5. `MyAssets.jsx`: Employee personal inventory table (`/assets/mine`) displaying assigned hardware devices.
+  6. `LicenseList.jsx`: Software name search, status filter (`ACTIVE`, `EXPIRING`, `EXPIRED`), seat utilization progress bars, days remaining countdowns, Add License button.
+  7. `LicenseForm.jsx`: Software name, vendor, license key, total seat capacity, expiry date, notes, validation.
+  8. `LicenseDetail.jsx`: Software details, masked license key with admin reveal toggle, seat capacity gauge, active allocations table with seat release confirm dialog, and user seat allocation modal.
+  9. `TicketList.jsx`: Search, status, priority, category filters, overdue SLA highlight badge, staff assignment filter (`me` / `unassigned`), pagination.
+  10. `TicketForm.jsx`: Issue title, category, priority with SLA target time, description, optional related asset picker for staff.
+  11. `TicketDetail.jsx`: SLA overdue status, details metadata, chronological comments thread with add-reply box, staff triage panel (assign technician, update status with required 5+ char resolution note on RESOLVED), and employee reopen button on resolved tickets.
+  12. `Users.jsx`: Admin user directory with search, role filters, user create/edit modal with password validation, activate/deactivate confirm dialog with self-protection guard.
+  13. `AuditLogs.jsx`: Compliance audit trail with action, entity, and date range filters, pagination, and formatted activity details.
+  14. `Reports.jsx`: Report cards with direct CSV download triggers using Axios blob with authentication headers and automatic browser file downloads.
+  15. `App.jsx`: Fully connected all 17 routes with role-based protection.
+- Quality Checks:
+  - `cd client && npm run lint`: PASSED (0 errors, 0 warnings).
+  - `cd client && npm run build`: PASSED (built cleanly in 1.13s).
+

@@ -1,4 +1,4 @@
-// Purpose: Main React Router application with role-protected routes per Contract Section 9
+// Purpose: Main React Router application with complete role-protected routes per Contract Section 9
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, ProtectedRoute } from "./context/AuthContext";
 import { ToastProvider } from "./context/ToastContext";
@@ -9,7 +9,27 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
-import PlaceholderPage from "./pages/PlaceholderPage";
+
+// Hardware Assets Pages
+import AssetList from "./pages/AssetList";
+import AssetForm from "./pages/AssetForm";
+import AssetDetail from "./pages/AssetDetail";
+import MyAssets from "./pages/MyAssets";
+
+// Software Licenses Pages
+import LicenseList from "./pages/LicenseList";
+import LicenseForm from "./pages/LicenseForm";
+import LicenseDetail from "./pages/LicenseDetail";
+
+// Support Tickets Pages
+import TicketList from "./pages/TicketList";
+import TicketForm from "./pages/TicketForm";
+import TicketDetail from "./pages/TicketDetail";
+
+// Administration & Audit Pages
+import Users from "./pages/Users";
+import AuditLogs from "./pages/AuditLogs";
+import Reports from "./pages/Reports";
 
 export default function App() {
   return (
@@ -37,7 +57,7 @@ export default function App() {
                 path="assets"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="Hardware Assets" />
+                    <AssetList />
                   </ProtectedRoute>
                 }
               />
@@ -45,7 +65,7 @@ export default function App() {
                 path="assets/new"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="Add New Asset" />
+                    <AssetForm />
                   </ProtectedRoute>
                 }
               />
@@ -53,7 +73,7 @@ export default function App() {
                 path="assets/:id"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="Asset Detail" />
+                    <AssetDetail />
                   </ProtectedRoute>
                 }
               />
@@ -61,20 +81,20 @@ export default function App() {
                 path="assets/:id/edit"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="Edit Asset" />
+                    <AssetForm />
                   </ProtectedRoute>
                 }
               />
 
               {/* Personal Assets (All Roles) */}
-              <Route path="my-assets" element={<PlaceholderPage title="My Assets" />} />
+              <Route path="my-assets" element={<MyAssets />} />
 
               {/* Software Licenses (ADMIN, IT_SUPPORT) */}
               <Route
                 path="licenses"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="Software Licenses" />
+                    <LicenseList />
                   </ProtectedRoute>
                 }
               />
@@ -82,7 +102,7 @@ export default function App() {
                 path="licenses/new"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="Add New License" />
+                    <LicenseForm />
                   </ProtectedRoute>
                 }
               />
@@ -90,22 +110,22 @@ export default function App() {
                 path="licenses/:id"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="License Detail" />
+                    <LicenseDetail />
                   </ProtectedRoute>
                 }
               />
 
               {/* Support Tickets (All Roles) */}
-              <Route path="tickets" element={<PlaceholderPage title="Support Tickets" />} />
-              <Route path="tickets/new" element={<PlaceholderPage title="Create Ticket" />} />
-              <Route path="tickets/:id" element={<PlaceholderPage title="Ticket Detail" />} />
+              <Route path="tickets" element={<TicketList />} />
+              <Route path="tickets/new" element={<TicketForm />} />
+              <Route path="tickets/:id" element={<TicketDetail />} />
 
               {/* User Management (ADMIN Only) */}
               <Route
                 path="users"
                 element={
                   <ProtectedRoute roles={["ADMIN"]}>
-                    <PlaceholderPage title="User Management" />
+                    <Users />
                   </ProtectedRoute>
                 }
               />
@@ -115,7 +135,7 @@ export default function App() {
                 path="audit"
                 element={
                   <ProtectedRoute roles={["ADMIN"]}>
-                    <PlaceholderPage title="Audit Log Trail" />
+                    <AuditLogs />
                   </ProtectedRoute>
                 }
               />
@@ -125,7 +145,7 @@ export default function App() {
                 path="reports"
                 element={
                   <ProtectedRoute roles={["ADMIN", "IT_SUPPORT"]}>
-                    <PlaceholderPage title="Reports Export" />
+                    <Reports />
                   </ProtectedRoute>
                 }
               />
