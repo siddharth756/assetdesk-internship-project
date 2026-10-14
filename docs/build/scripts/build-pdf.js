@@ -142,6 +142,31 @@ function autoNumberFiguresAndTables(html, partId) {
   return processed;
 }
 
+function inlineImages(html) {
+  return html.replace(/<img([^>]+)src="([^"]+)"([^>]*)>/gi, (match, pre, src, post) => {
+    if (src.startsWith("data:")) return match;
+    let localPath = decodeURIComponent(src.replace(/^file:\/\/\/?/i, ""));
+    if (process.platform === "win32" && /^[a-zA-Z]:/.test(localPath)) {
+      // standard Windows absolute path
+    } else if (src.startsWith("docs/") || src.startsWith("/docs/")) {
+      localPath = path.resolve(ROOT_DIR, decodeURIComponent(src.replace(/^\//, "")));
+    } else if (src.startsWith("../") || src.startsWith("./")) {
+      localPath = path.resolve(BUILD_DIR, decodeURIComponent(src));
+    }
+    try {
+      if (fs.existsSync(localPath)) {
+        const ext = path.extname(localPath).slice(1).toLowerCase() || "png";
+        const mime = ext === "svg" ? "image/svg+xml" : `image/${ext}`;
+        const base64 = fs.readFileSync(localPath).toString("base64");
+        return `<img${pre}src="data:${mime};base64,${base64}"${post}>`;
+      }
+    } catch (e) {
+      // keep original
+    }
+    return match;
+  });
+}
+
 function buildTocHtml(tocItems) {
   let rows = "";
   for (const item of tocItems) {
@@ -209,6 +234,7 @@ async function main() {
     // Resolve template variables and auto-numbering
     htmlContent = resolvePlaceholders(htmlContent, config, item.id === "P01");
     htmlContent = autoNumberFiguresAndTables(htmlContent, item.id);
+    htmlContent = inlineImages(htmlContent);
 
     // Full HTML document wrapper
     const fullHtml = `

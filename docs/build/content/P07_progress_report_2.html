@@ -1,85 +1,150 @@
-<div class="page">
-  <div style="text-align: center; margin-bottom: 15px;">
-    <h1 class="chapter" style="border: none; margin-bottom: 2px;">{{instituteName}}</h1>
-    <div style="font-size: 12pt; font-weight: bold; text-decoration: underline;">PERIODIC PROGRESS REPORT - II</div>
+<div class="page" style="font-size: 8.5pt; line-height: 1.25;">
+  <div style="text-align: center; margin-bottom: 6px;">
+    <div style="font-size: 11pt; font-weight: bold; color: #0f172a; text-transform: uppercase;">
+      Vidhyadeep Institute of Computer & Information Technology
+    </div>
+    <div style="font-size: 8.5pt; color: #475569;">Constituent College of Vidhyadeep University, Anita-Kim, Surat</div>
+    <div style="font-size: 10.5pt; font-weight: bold; color: #0f172a; margin-top: 4px; text-decoration: underline; text-transform: uppercase;">
+      INTERNSHIP PROGRESS REPORT - II
+    </div>
+    <div style="font-size: 8pt; color: #64748b; font-style: italic; margin-top: 2px;">
+      Suggested milestone covered: Phase II — Mid-Term Review & Core API Development (Week 8)
+    </div>
   </div>
 
-  
-    <table class="form-table" style="width: 100%; border-collapse: collapse; margin: 12px 0;">
-      <tbody>
-        
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Student Name</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{student.name}}</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Enrollment No.</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{student.enrollmentNo}}</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Project Title</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{projectTitle}}</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Host Organization</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">{{company.name}}</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Reporting Period</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value"><span class="blank-field-line" style="display: inline-block; min-width: 70mm; border-bottom: 1.5px dotted #64748b; height: 1.1em; vertical-align: baseline;">&nbsp;</span></span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Tasks Scheduled</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">Implementation & verification of module milestones per SOP timeline</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Tasks Completed</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">Architectural modeling, API endpoints testing, database schemas, and documentation</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Issues / Challenges</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">None encountered; deliverables progressing on schedule</span></td>
-      </tr>
-    
-      </tbody>
-    </table>
-  
+  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 4px 0; border-collapse: collapse;">
+    <tr>
+      <td style="width: 22%; font-weight: bold; background: #f8fafc; padding: 3px 6px;">Internship Title:</td>
+      <td style="width: 44%; padding: 3px 6px;">{{projectTitle}}</td>
+      <td style="width: 18%; font-weight: bold; background: #f8fafc; padding: 3px 6px;">Group No:</td>
+      <td style="width: 16%; padding: 3px 6px;"><span class="blank-field-line" style="min-width: 20mm;">&nbsp;</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; background: #f8fafc; padding: 3px 6px;">Supervisor Name:</td>
+      <td style="padding: 3px 6px;"><span class="filled-field" style="min-width: 45mm;">{{guide.internalName}}</span></td>
+      <td style="font-weight: bold; background: #f8fafc; padding: 3px 6px;">Report No:</td>
+      <td style="padding: 3px 6px;"><strong>II / IV</strong></td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; background: #f8fafc; padding: 3px 6px;">Programming Lang:</td>
+      <td style="padding: 3px 6px;">JavaScript (Node.js & React)</td>
+      <td style="font-weight: bold; background: #f8fafc; padding: 3px 6px;">Duration:</td>
+      <td style="padding: 3px 6px;">Weeks 6 – 8</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; background: #f8fafc; padding: 3px 6px;">Front-end Tools:</td>
+      <td colspan="3" style="padding: 3px 6px;">React 18.3, Vite 5.4, React Router 6.28, Axios 1.7, Vanilla CSS</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; background: #f8fafc; padding: 3px 6px;">Back-end Tools:</td>
+      <td colspan="3" style="padding: 3px 6px;">Node.js 20 LTS, Express 4.21, Mongoose 8.9, MongoDB 7/8</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; background: #f8fafc; padding: 3px 6px;">Reporting Period:</td>
+      <td colspan="3" style="padding: 3px 6px;">From: _____ / _____ / 2026 &nbsp;&nbsp;&nbsp;&nbsp; To: _____ / _____ / 2026</td>
+    </tr>
+  </table>
 
-  <div style="margin-top: 14px;">
-    <h3 class="sub">Guide Comments & Progress Remarks</h3>
-    <div class="blank-lines-container" style="margin: 8px 0;"><div class="ruled-line" style="height: 8mm; border-bottom: 1px solid #cbd5e1; width: 100%;"></div><div class="ruled-line" style="height: 8mm; border-bottom: 1px solid #cbd5e1; width: 100%;"></div><div class="ruled-line" style="height: 8mm; border-bottom: 1px solid #cbd5e1; width: 100%;"></div><div class="ruled-line" style="height: 8mm; border-bottom: 1px solid #cbd5e1; width: 100%;"></div></div>
-  </div>
-
-  <div style="margin-top: 25px;">
-    
-    <table class="signature-table" style="width: 100%; border-collapse: collapse; margin-top: 24px;">
+  <div style="font-size: 9pt; font-weight: bold; color: #0f172a; margin: 4px 0 2px 0;">Internship Members Detail:</div>
+  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0; border-collapse: collapse;">
+    <thead>
+      <tr style="background: #f1f5f9;">
+        <th style="width: 12%; padding: 3px 6px;">Sr. No.</th>
+        <th style="width: 44%; padding: 3px 6px;">Student Full Name</th>
+        <th style="width: 24%; padding: 3px 6px;">Enrollment No.</th>
+        <th style="width: 20%; padding: 3px 6px;">Signature</th>
+      </tr>
+    </thead>
+    <tbody>
       <tr>
-        
-      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
-        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
-          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{student.name}}</span>
-        </div>
-        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Student Signature</div>
-        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
-      </td>
-    
-      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
-        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
-          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{guide.internalName}}</span>
-        </div>
-        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Internal Guide Signature</div>
-        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
-      </td>
-    
+        <td style="text-align: center; padding: 3px 6px;">1</td>
+        <td style="padding: 3px 6px;"><span class="filled-field">{{student.name}}</span></td>
+        <td style="padding: 3px 6px;"><span class="filled-field">{{student.enrollmentNo}}</span></td>
+        <td style="padding: 3px 6px;"></td>
       </tr>
-    </table>
-  
-  </div>
+      <tr>
+        <td style="text-align: center; padding: 3px 6px;">2</td>
+        <td style="padding: 3px 6px;"></td>
+        <td style="padding: 3px 6px;"></td>
+        <td style="padding: 3px 6px;"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding: 3px 6px;">3</td>
+        <td style="padding: 3px 6px;"></td>
+        <td style="padding: 3px 6px;"></td>
+        <td style="padding: 3px 6px;"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding: 3px 6px;">4</td>
+        <td style="padding: 3px 6px;"></td>
+        <td style="padding: 3px 6px;"></td>
+        <td style="padding: 3px 6px;"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-size: 9pt; font-weight: bold; color: #0f172a; margin: 4px 0 2px 0;">Task Details:</div>
+  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0; border-collapse: collapse;">
+    <thead>
+      <tr style="background: #f1f5f9;">
+        <th style="width: 10%; padding: 3px 6px;">Sr. No.</th>
+        <th style="width: 32%; padding: 3px 6px;">Member Name</th>
+        <th style="width: 58%; padding: 3px 6px;">Task Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="height: 12mm;">
+        <td style="text-align: center;">1</td>
+        <td><span class="filled-field">{{student.name}}</span></td>
+        <td>Implemented M1 (JWT authentication, role authorization, bcrypt hashing)</td>
+      </tr>
+      <tr style="height: 12mm;">
+        <td style="text-align: center;">2</td>
+        <td><span class="filled-field">{{student.name}}</span></td>
+        <td>Built M2 Asset Management (CRUD, status transitions, assignment flow)</td>
+      </tr>
+      <tr style="height: 12mm;">
+        <td style="text-align: center;">3</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr style="height: 12mm;">
+        <td style="text-align: center;">4</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr style="height: 12mm;">
+        <td style="text-align: center;">5</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr style="height: 12mm;">
+        <td style="text-align: center;">6</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-size: 9pt; font-weight: bold; color: #0f172a; margin-top: 4px;">Comment By Supervisor:</div>
+  <div style="height: 20mm; border: 1.5px dashed #94a3b8; border-radius: 4px; background: #fafafa; margin: 3px 0; padding: 4px; box-sizing: border-box;"></div>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 8.5pt;">
+    <tr>
+      <td style="width: 55%; vertical-align: middle;">
+        <div style="margin-bottom: 4px;"><strong>Next Progress Report Date:</strong> _____ / _____ / 2026</div>
+        <div>
+          <strong>Is Progress of Internship Approved?</strong> &nbsp;&nbsp;
+          <span style="display: inline-block; width: 12px; height: 12px; border: 1px solid #000; vertical-align: middle; margin-right: 2px;"></span> Yes &nbsp;&nbsp;
+          <span style="display: inline-block; width: 12px; height: 12px; border: 1px solid #000; vertical-align: middle; margin-right: 2px;"></span> No
+        </div>
+      </td>
+      <td style="width: 45%; text-align: center; vertical-align: bottom;">
+        <div style="height: 15mm; border-bottom: 1.5px solid #0f172a; margin-bottom: 4px; display: flex; align-items: flex-end; justify-content: center;">
+          <span class="filled-field" style="font-weight: 600; font-size: 9pt;">{{guide.internalName}}</span>
+        </div>
+        <div style="font-weight: bold; font-size: 8.5pt;">Internship Supervisor Name & Signature</div>
+      </td>
+    </tr>
+  </table>
 </div>

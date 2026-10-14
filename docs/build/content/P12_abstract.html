@@ -1,26 +1,19 @@
 <div class="page">
   <h1 class="chapter">Abstract</h1>
-  <p style="margin-top: 20px;">
-    The <strong>IT Asset & Support Desk Management System (AssetDesk)</strong> is a robust, production-grade enterprise web 
-    application engineered to streamline and unify physical IT asset tracking, software license lifecycle management, and 
-    internal employee helpdesk ticket resolution.
+
+  <p style="margin-top: 14px; text-align: justify; line-height: 1.65; font-size: 11pt;">
+    The <strong>IT Asset & Support Desk Management System</strong> (code-named <em>AssetDesk</em>) is a centralized, enterprise web platform engineered to eliminate inefficiencies, security gaps, and compliance failures common to manual IT inventory tracking and unmonitored helpdesk queues. Organizations routinely encounter misplaced physical hardware, compliance penalties from over-allocated or expired commercial software licenses, and missed resolution timelines due to unmonitored email chains.
   </p>
-  <p>
-    Built using the MERN stack (MongoDB, Express.js, React 18, Node.js), the platform introduces five cohesive functional modules: 
-    <strong>(M1) Authentication & User Management</strong> featuring stateless JWT session issuance, bcrypt password hashing, 
-    and tiered Role-Based Access Control (Admin, IT Support, Employee); 
-    <strong>(M2) Hardware Asset Management</strong> incorporating automated tag generation (<code>AST-YYYY-NNNN</code>), 
-    atomic assignment, and lifecycle tracking; 
-    <strong>(M3) Software License Management</strong> providing automated seat capacity enforcement, key masking, and proactive 30-day expiry alerting; 
-    <strong>(M4) Support Desk & SLA Management</strong> featuring priority-driven resolution deadlines (4h, 24h, 48h, 72h) and strict 
-    state transitions; and 
-    <strong>(M5) Compliance Audit & Reporting</strong> delivering immutable append-only activity tracking, dynamic KPI dashboards, 
-    and RFC-4180 compliant CSV data exports.
+
+  <p style="text-align: justify; line-height: 1.65; font-size: 11pt;">
+    To resolve these challenges, a modern three-tier web application was built utilizing the MERN stack (MongoDB, Express, React, Node.js). The system enforces strict Role-Based Access Control (RBAC) across three distinct personas—<strong>ADMIN</strong>, <strong>IT_SUPPORT</strong>, and <strong>EMPLOYEE</strong>—authenticated via JSON Web Tokens (JWT) and encrypted with bcrypt. The architecture comprises five core functional modules: (1) Identity & Access Management with tamper-proof credential updates; (2) Hardware Asset Lifecycle Tracking from procurement to retirement with atomic assignment locks; (3) Software License Management with seat quota enforcement, license key masking, and automated background expiration alert jobs via <code>node-cron</code>; (4) Support Desk Ticketing with a strictly enforced four-stage state machine (<code>OPEN &rarr; IN_PROGRESS &rarr; RESOLVED &rarr; CLOSED</code>) and SLA due-time computation; and (5) Administrative Intelligence featuring an append-only audit log trail, interactive dashboard summaries, and filtered CSV report exports.
   </p>
-  <p>
-    The system was subjected to exhaustive automated quality assurance, comprising 57 unit tests, 187 integration tests, 
-    12 security tests, and 16 Playwright end-to-end system scenarios, achieving 88.18% line coverage. Performance benchmarking 
-    verified sub-10ms response times for core API endpoints. The resulting application offers an extensible, auditable, and secure 
-    solution for modern organizational IT operations.
+
+  <p style="text-align: justify; line-height: 1.65; font-size: 11pt;">
+    System correctness, resilience, and data integrity were verified through an exhaustive test suite comprising <strong>272 automated test cases</strong> (256 Jest integration/unit tests across 13 suites and 16 Playwright end-to-end system test journeys), achieving a <strong>100% pass rate</strong> with <strong>87.16% statement coverage</strong>. The platform demonstrates rapid response times (average latency &lt;10ms on query endpoints) and provides a secure, lightweight, and auditable solution suitable for enterprise and institutional deployment.
   </p>
+
+  <div style="margin-top: 26px; padding: 12px 14px; background: #f8fafc; border-left: 3.5px solid #0f172a; border-radius: 0 4px 4px 0; font-size: 10pt;">
+    <strong>Keywords:</strong> IT Asset Management, Support Helpdesk, Role-Based Access Control, MERN Architecture, License Expiry Alerts, Immutable Audit Trail.
+  </div>
 </div>

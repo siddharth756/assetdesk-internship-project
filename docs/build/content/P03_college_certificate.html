@@ -1,80 +1,64 @@
-<div class="page">
-  <div style="text-align: center; margin-bottom: 20px;">
-    <h1 class="chapter" style="border: none; margin-bottom: 4px;">{{instituteName}}</h1>
-    <div style="font-size: 10pt; color: #475569;">{{universityName}}</div>
-    <div style="font-size: 13pt; font-weight: bold; color: #0f172a; margin-top: 12px; text-decoration: underline;">
-      CERTIFICATE OF APPROVAL
+<div class="page" style="display: flex; flex-direction: column; justify-content: space-between;">
+  <div>
+    <div style="text-align: center; margin-bottom: 24px;">
+      <div style="margin-bottom: 6px;">{{logo:institute}}</div>
+      <h1 class="chapter" style="border: none; font-size: 14pt; margin-bottom: 4px; color: #0f172a;">
+        Vidhyadeep Institute of Computer & Information Technology
+      </h1>
+      <div style="font-size: 10pt; color: #475569;">Constituent College of Vidhyadeep University, Anita-Kim, Surat</div>
+      <div style="font-size: 13pt; font-weight: bold; color: #0f172a; margin-top: 18px; text-decoration: underline; letter-spacing: 1px;">
+        COLLEGE CERTIFICATE
+      </div>
+    </div>
+
+    <p style="text-align: justify; line-height: 1.7; font-size: 11pt; margin-bottom: 16px;">
+      This is to certify that <span class="filled-field" style="min-width: 65mm; font-weight: 600;">{{student.name}}</span>, 
+      bearing Enrolment No. <span class="filled-field" style="min-width: 40mm; font-weight: 600;">{{student.enrollmentNo}}</span>, 
+      a student of Vidhyadeep Institute of Computer & Information Technology, Vidhyadeep University, pursuing 
+      <strong>{{student.program}} ({{student.semester}})</strong>, has successfully completed an internship at 
+      <strong><span class="filled-field" style="min-width: 60mm; font-weight: 600;">{{company.name}}</span></strong> 
+      for the duration of <strong><span class="filled-field" style="min-width: 30mm; font-weight: 600;">{{company.duration}}</span></strong>. 
+      During this period, the student worked on the Internship titled 
+      <strong>“IT Asset & Support Desk Management System”</strong> as part of the academic curriculum requirement.
+    </p>
+
+    <p style="text-align: justify; line-height: 1.7; font-size: 11pt; margin-bottom: 20px;">
+      The report submitted herewith represents bonafide project work carried out under appropriate guidance and supervision. 
+      To the best of our knowledge, the work presented here satisfies the evaluation norms prescribed by Vidhyadeep University. 
+      The overall conduct and performance of the candidate during the project duration is rated as:
+    </p>
+
+    <div style="margin: 22px 0; padding: 12px 18px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; display: flex; justify-content: space-around; font-size: 10.5pt; font-weight: 600; color: #1e293b;">
+      <span><span style="display: inline-block; width: 14px; height: 14px; border: 1.5px solid #0f172a; margin-right: 6px; vertical-align: middle;"></span> Excellent</span>
+      <span><span style="display: inline-block; width: 14px; height: 14px; border: 1.5px solid #0f172a; margin-right: 6px; vertical-align: middle;"></span> Very Good</span>
+      <span><span style="display: inline-block; width: 14px; height: 14px; border: 1.5px solid #0f172a; margin-right: 6px; vertical-align: middle;"></span> Good</span>
+      <span><span style="display: inline-block; width: 14px; height: 14px; border: 1.5px solid #0f172a; margin-right: 6px; vertical-align: middle;"></span> Satisfactory</span>
     </div>
   </div>
 
-  <p style="margin-top: 24px; line-height: 1.6;">
-    This is to certify that the project report entitled <strong>"{{projectTitle}}"</strong> submitted by 
-    <span class="filled-field" style="min-width: 70mm; font-weight: 600;">{{student.name}}</span> (Enrollment No: <span class="filled-field" style="min-width: 45mm; font-weight: 600;">{{student.enrollmentNo}}</span>)
-    is a bonafide work carried out in partial fulfillment of the requirements for the award of the degree of 
-    <strong>{{student.program}}</strong> of {{universityName}} during the academic session {{academicYear}}.
-  </p>
+  <div style="margin-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between; font-size: 10.5pt; margin-bottom: 35px; color: #334155;">
+      <div><strong>Place:</strong> Anita, Kim</div>
+      <div><strong>Date:</strong> <span class="blank-field-line" style="display: inline-block; width: 45mm; border-bottom: 1.5px dotted #64748b; height: 1.1em;">&nbsp;</span></div>
+    </div>
 
-  <p style="margin-top: 16px; line-height: 1.6;">
-    The internship work was performed at <strong>{{company.name}}</strong> for a duration of <strong>{{company.duration}}</strong>.
-    The report has been approved as satisfying the academic requirements for the semester curriculum.
-  </p>
-
-  <div style="margin-top: 30px;">
-    
-    <table class="form-table" style="width: 100%; border-collapse: collapse; margin: 12px 0;">
-      <tbody>
-        
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Internal Guide Evaluation</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">SATISFACTORY / OUTSTANDING</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Originality & Verification</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value">VERIFIED</span></td>
-      </tr>
-    
-      <tr style="min-height: 11mm; height: 11mm;">
-        <td style="width: 38%; font-weight: bold; padding: 6px 10px; border: 1px solid #cbd5e1; background: #f8fafc; vertical-align: middle;">Date of Submission</td>
-        <td style="width: 62%; padding: 6px 10px; border: 1px solid #cbd5e1; vertical-align: middle;"><span class="filled-value"><span class="blank-field-line" style="display: inline-block; min-width: 50mm; border-bottom: 1.5px dotted #64748b; height: 1.1em; vertical-align: baseline;">&nbsp;</span></span></td>
-      </tr>
-    
-      </tbody>
-    </table>
-  
-  </div>
-
-  <div style="margin-top: 40px;">
-    
-    <table class="signature-table" style="width: 100%; border-collapse: collapse; margin-top: 24px;">
+    <table style="width: 100%; border-collapse: collapse;">
       <tr>
-        
-      <td style="width: 33%; vertical-align: bottom; padding: 0 12px; text-align: center;">
-        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
-          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{guide.internalName}}</span>
-        </div>
-        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Internal Guide</div>
-        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
-      </td>
-    
-      <td style="width: 33%; vertical-align: bottom; padding: 0 12px; text-align: center;">
-        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
-          
-        </div>
-        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Head of Department</div>
-        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
-      </td>
-    
-      <td style="width: 33%; vertical-align: bottom; padding: 0 12px; text-align: center;">
-        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
-          
-        </div>
-        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Principal / Director</div>
-        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
-      </td>
-    
+        <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 0 15px;">
+          <div style="height: 25mm; border-bottom: 1.5px solid #0f172a; margin-bottom: 8px; display: flex; align-items: flex-end; justify-content: center;">
+            <span class="filled-field" style="font-weight: 600; font-size: 10pt; color: #0f172a;">{{guide.internalName}}</span>
+          </div>
+          <div style="font-weight: bold; font-size: 10pt; color: #0f172a;">Institute Guide</div>
+          <div style="font-size: 9pt; color: #475569;">VICAIT, Vidhyadeep University</div>
+        </td>
+        <td style="width: 50%; vertical-align: bottom; text-align: center; padding: 0 15px;">
+          <div style="height: 25mm; border-bottom: 1.5px solid #0f172a; margin-bottom: 8px; display: flex; align-items: flex-end; justify-content: center;">
+            
+          </div>
+          <div style="font-weight: bold; font-size: 10pt; color: #0f172a;">Program Head / Principal</div>
+          <div style="font-size: 9pt; color: #475569;">VICAIT, Vidhyadeep University</div>
+        </td>
       </tr>
     </table>
-  
   </div>
 </div>

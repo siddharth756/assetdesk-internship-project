@@ -179,6 +179,30 @@ All files          |   86.52 |    66.62 |   86.88 |   87.52 |
   - Running headers/footers stamped with `pdf-lib` ("Page | n") excluding cover, certificates, and declaration.
   - Quality verification: `npm run docs:build` generates `docs/output/Internship_Report.pdf` (1.90 MB, exactly 50 pages, 24/24 parts within budget).
   - Validation script `npm run docs:check` and thumbnail generator `npm run docs:preview` integrated into root scripts.
-
-
+### Part 12 — Document Content A: Front Matter + Chapters 1–3
+- Date: 2026-10-14
+- Status: COMPLETE
+- Implemented Sections (Pages 1–25):
+  - Front Matter (P01–P13, 13 pages total):
+    - `P01_cover.html`: Full-bleed black (#0B0F19) and gold (#D4AF37) corporate cover with metallic side-strip.
+    - `P02_title_page.html`: SOP Appendix III layout with dual institute/university logo boxes, guided by / submitted by dual columns, and student group writing lines.
+    - `P03_college_certificate.html`: SOP Appendix IV wording, 4 performance rating checkboxes (Excellent/Very Good/Good/Satisfactory), and 25mm guide/principal signature blocks.
+    - `P04_company_certificate.html`: 70% height bordered frame for attaching original certificate + seal/signature block.
+    - `P05_company_approval.html`: 70% height frame for attaching industry client approval letter (SOP 4.1 item 2) + seal block.
+    - `P06_progress_report_1.html` .. `P09_progress_report_4.html`: SOP Appendix V progress reports I–IV with milestone markers, 4-member details table, 6 task rows (14mm each), 35mm supervisor comments box, approval checkbox, and signature block.
+    - `P10_acknowledgement.html`: 220 words following exact hierarchy of gratitude (guide, mentor, company, principal/HOD, faculty, family).
+    - `P11_preface.html`: 200 words covering project selection, chapter roadmap, and reader guidance.
+    - `P12_abstract.html`: 240 words with 6 keywords and verified metrics (272 tests, 87.16% coverage, 36 endpoints).
+    - `P13_index.html`: Dynamic table of contents container automatically populated during compilation.
+  - Chapters 1–3 (C01–C03, 12 pages total):
+    - `C01_introduction.html` (3 pages): 1.1 College profile & official contact table; 1.2 Company profile formTable (9 rows >=11mm) + 60mm blankBox; 1.3 Project profile table, 120-word overview, and 5-module summary table.
+    - `C02_proposed_system.html` (3 pages): 2.1 Scope & 6 contract objectives; 2.2 8-row operational advantages table; 2.3 Feasibility study (technical, economical table with zero fabricated pricing, operational, and feasibility summary matrix).
+    - `C03_system_analysis.html` (6 pages): 3.1 Existing manual system deficiencies + 55mm blankBox; 3.2 Need for new system (5 numbered points); 3.3 IEEE-830 SRS with 10 abbreviations, 3 user classes, 20 Functional Requirements (FR-01..FR-20) mapped to real IT-*/ST-* tests, 6 Non-Functional Requirements with verified benchmark latency figures, 8 Use Cases; 3.4 Analysis diagrams (Figure 3.1 d02 Context, Figure 3.2 d03 DFD L1, Figure 3.3 d04 DFD L2 Ticket, Figure 3.4 d05 Decomposition) + D1–D5 data store mapping table.
+- Engine Enhancements:
+  - `docs/build/scripts/build-pdf.js` & `preview-pdf.js`: Integrated `inlineImages` with `decodeURIComponent` to convert image paths to Base64 data URIs, completely resolving Chromium local `file:///` sandbox restrictions across paths with spaces/symbols.
+- Verification Results:
+  - `npm run docs:build`: Exactly 50 pages (24/24 parts within budget, status `PERFECT OK`, file size 1.64 MB).
+  - `npm run docs:build -- --sample`: Exactly 50 pages (24/24 parts within budget, status `PERFECT OK`, file size 1.44 MB).
+  - `npm run docs:check`: Passed all tests (50/50 pages, 0 page overflow, 0 budget violations, TOC complete, all required sections present).
+  - `npm run docs:preview`: All 50 page PNG thumbnails generated and verified in `docs/output/preview/`.
 

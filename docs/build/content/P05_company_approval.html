@@ -1,67 +1,38 @@
-<div class="page">
-  <div style="text-align: center; margin-bottom: 25px;">
-    <h1 class="chapter" style="border: none; margin-bottom: 4px;">{{company.name}}</h1>
-    <div style="font-size: 10pt; color: #475569;">{{company.address}}</div>
-    <div style="font-size: 13pt; font-weight: bold; color: #0f172a; margin-top: 16px; text-decoration: underline;">
-      COMPANY PERMISSION & APPROVAL LETTER
+<div class="page" style="display: flex; flex-direction: column; justify-content: space-between;">
+  <div>
+    <div style="text-align: center; margin-bottom: 16px;">
+      <h1 class="chapter" style="border: none; font-size: 14pt; margin-bottom: 4px; color: #0f172a;">
+        INDUSTRY / CLIENT APPROVAL LETTER
+      </h1>
+      <div style="font-size: 10pt; color: #475569;">Permission & Scope Clearance Letter from Organization (SOP 4.1)</div>
+      <div style="width: 50px; height: 1.5px; background: #0f172a; margin: 10px auto;"></div>
+    </div>
+
+    <!-- Large bordered frame occupying ~70% of the page area -->
+    <div style="height: 165mm; border: 2px dashed #94a3b8; border-radius: 6px; background-color: #fafbfc; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; box-sizing: border-box; text-align: center;">
+      <div style="font-size: 28pt; color: #cbd5e1; margin-bottom: 12px;">📄</div>
+      <div style="font-size: 13pt; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.5; max-width: 450px;">
+        Original approval letter issued by the industry / client to be attached here
+      </div>
+      <div style="font-size: 9.5pt; color: #94a3b8; margin-top: 10px;">
+        (Affix the sanctioned project allocation / client approval letter on official company letterhead)
+      </div>
     </div>
   </div>
 
-  <p style="margin-top: 20px; line-height: 1.6;">
-    Date: <span class="blank-field-line" style="display: inline-block; min-width: 40mm; border-bottom: 1.5px dotted #64748b; height: 1.1em; vertical-align: baseline;">&nbsp;</span><br/>
-    To,<br/>
-    The Principal / Head of Department,<br/>
-    {{instituteName}},<br/>
-    {{universityName}}.
-  </p>
-
-  <p style="margin-top: 16px; line-height: 1.6;">
-    <strong>Subject: Permission for Internship and Report Documentation</strong>
-  </p>
-
-  <p style="margin-top: 14px; line-height: 1.6;">
-    Dear Sir/Madam,<br/>
-    We are pleased to confirm that <strong>{{student.name}}</strong> (Enrollment No: <strong>{{student.enrollmentNo}}</strong>) 
-    has been granted permission to undertake their final year internship project on the system titled 
-    <strong>"{{projectTitle}}"</strong> at our engineering facility.
-  </p>
-
-  <p style="margin-top: 14px; line-height: 1.6;">
-    The organization permits the student to document the system architecture, data models, workflow specifications, 
-    and non-proprietary code snippets within their academic project report strictly for educational evaluation purposes.
-  </p>
-
-  <div style="margin-top: 30px;">
-    
-    <div class="blank-box" style="height: 35mm; border: 1.5px dashed #94a3b8; border-radius: 4px; background: #fafafa; position: relative; margin: 10px 0;">
-      <span style="position: absolute; top: 6px; left: 8px; font-size: 8.5pt; color: #94a3b8; text-transform: uppercase;">Official Seal / Stamp Area</span>
-    </div>
-  
-  </div>
-
-  <div style="margin-top: 35px;">
-    
-    <table class="signature-table" style="width: 100%; border-collapse: collapse; margin-top: 24px;">
+  <div style="margin-bottom: 15px;">
+    <table style="width: 100%; border-collapse: collapse;">
       <tr>
-        
-      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
-        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
-          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{guide.mentorName}}</span>
-        </div>
-        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Technical Mentor</div>
-        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
-      </td>
-    
-      <td style="width: 50%; vertical-align: bottom; padding: 0 12px; text-align: center;">
-        <div style="height: 22mm; border-bottom: 1.5px solid #334155; margin-bottom: 6px; display: flex; align-items: flex-end; justify-content: center;">
-          <span style="font-weight: 600; font-size: 10pt; color: #1e293b;">{{company.name}}</span>
-        </div>
-        <div style="font-weight: bold; font-size: 9.5pt; color: #334155;">Authorized Official</div>
-        <div style="font-size: 8.5pt; color: #64748b; margin-top: 2px;">Date: ________________</div>
-      </td>
-    
+        <td style="width: 50%; vertical-align: bottom; padding: 0 15px;">
+          <div style="font-size: 9.5pt; color: #475569; margin-bottom: 4px;">Host Organization Seal / Stamp:</div>
+          <div style="width: 45mm; height: 22mm; border: 1px dashed #cbd5e1; border-radius: 4px;"></div>
+        </td>
+        <td style="width: 50%; vertical-align: bottom; text-align: right; padding: 0 15px;">
+          <div style="height: 22mm; border-bottom: 1.5px solid #0f172a; margin-bottom: 6px; width: 60mm; margin-left: auto;"></div>
+          <div style="font-weight: bold; font-size: 10pt; color: #0f172a;">Authorized Industry Mentor / Client</div>
+          <div style="font-size: 9pt; color: #475569;">Name, Designation & Official Seal</div>
+        </td>
       </tr>
     </table>
-  
   </div>
 </div>

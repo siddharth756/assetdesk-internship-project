@@ -113,6 +113,29 @@ function buildTocHtml(tocItems) {
   return rows;
 }
 
+function inlineImages(html) {
+  return html.replace(/<img([^>]+)src="([^"]+)"([^>]*)>/gi, (match, pre, src, post) => {
+    if (src.startsWith("data:")) return match;
+    let localPath = decodeURIComponent(src.replace(/^file:\/\/\/?/i, ""));
+    if (process.platform === "win32" && /^[a-zA-Z]:/.test(localPath)) {
+      // absolute path
+    } else if (src.startsWith("docs/") || src.startsWith("/docs/")) {
+      localPath = path.resolve(ROOT_DIR, decodeURIComponent(src.replace(/^\//, "")));
+    } else if (src.startsWith("../") || src.startsWith("./")) {
+      localPath = path.resolve(BUILD_DIR, decodeURIComponent(src));
+    }
+    try {
+      if (fs.existsSync(localPath)) {
+        const ext = path.extname(localPath).slice(1).toLowerCase() || "png";
+        const mime = ext === "svg" ? "image/svg+xml" : `image/${ext}`;
+        const base64 = fs.readFileSync(localPath).toString("base64");
+        return `<img${pre}src="data:${mime};base64,${base64}"${post}>`;
+      }
+    } catch (e) {}
+    return match;
+  });
+}
+
 async function main() {
   console.log("==================================================");
   console.log("       VICAIT SOP PAGE THUMBNAILS PREVIEW         ");
@@ -149,6 +172,7 @@ async function main() {
         content = content.replace('<!-- Injected dynamically during two-pass PDF compilation -->', buildTocHtml(tocEntries));
       }
       content = resolvePlaceholders(content, config, item.id === "P01");
+      content = inlineImages(content);
       combinedHtml += content + "\n";
     }
   }
