@@ -22,8 +22,41 @@ function loadConfig() {
   return JSON.parse(raw);
 }
 
-function resolvePlaceholders(html, config) {
+async function launchBrowser() {
+  const channel = process.env.PLAYWRIGHT_CHANNEL;
+  if (channel) {
+    return await chromium.launch({ headless: true, channel });
+  }
+  try {
+    return await chromium.launch({ headless: true });
+  } catch (err) {
+    const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+    const edgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+    if (fs.existsSync(chromePath)) {
+      console.log("  [INFO] Headless shell missing, using system Google Chrome...");
+      return await chromium.launch({ headless: true, channel: "chrome" });
+    } else if (fs.existsSync(edgePath)) {
+      console.log("  [INFO] Headless shell missing, using system Microsoft Edge...");
+      return await chromium.launch({ headless: true, channel: "msedge" });
+    }
+    throw err;
+  }
+}
+
+function resolvePlaceholders(html, config, isCover = false) {
   let result = html;
+
+  // Handle Cover side-strip empty values with gold underscore line
+  if (isCover) {
+    const goldLine = `<span style="display:inline-block; border-bottom: 2px solid #d4af37; width: 60px;">&nbsp;</span>`;
+    result = result.replace(/<div class="cover-side-text">\{\{projectTitle\}\}<\/div>/g, 
+      `<div class="cover-side-text">${config.projectTitle || goldLine}</div>`);
+    result = result.replace(/<div class="cover-side-text">\{\{student\.program\}\}<\/div>/g, 
+      `<div class="cover-side-text">${config.student?.program || goldLine}</div>`);
+    result = result.replace(/<div class="cover-side-text">AY \{\{academicYear\}\}<\/div>/g, 
+      `<div class="cover-side-text">AY ${config.academicYear || goldLine}</div>`);
+  }
+
   result = result.replace(/\{\{projectTitle\}\}/g, config.projectTitle || "");
   result = result.replace(/\{\{academicYear\}\}/g, config.academicYear || "");
   result = result.replace(/\{\{instituteName\}\}/g, config.instituteName || "");
@@ -51,7 +84,62 @@ function resolvePlaceholders(html, config) {
   result = result.replace(/\{\{company\.endDate\}\}/g, config.company?.endDate || "");
   result = result.replace(/\{\{company\.duration\}\}/g, config.company?.duration || "");
 
+  // Blank-Field system transforms: if field was left empty, ensure generous blank writing space
+  result = result.replace(/<span class="filled-field" style="min-width:\s*(\d+)mm;[^"]*">\s*<\/span>/g, (m, w) => {
+    return `<span class="blank-field-line" style="display: inline-block; min-width: ${w}mm; border-bottom: 1.5px dotted #64748b; height: 1.1em; vertical-align: baseline;">&nbsp;</span>`;
+  });
+  result = result.replace(/<span class="filled-value">\s*<\/span>/g, () => {
+    return `<span class="blank-cell-line" style="display: block; width: 100%; border-bottom: 1px dashed #94a3b8; height: 18px;">&nbsp;</span>`;
+  });
+
+  // Logos: institute and university
+  const instituteLogoPath = path.resolve(BUILD_DIR, "assets/logos/institute.png");
+  const universityLogoPath = path.resolve(BUILD_DIR, "assets/logos/university.png");
+  const instLogoHtml = fs.existsSync(instituteLogoPath)
+    ? `<img src="file://${instituteLogoPath.replace(/\\/g, '/')}" style="max-height: 22mm; max-width: 55mm; object-fit: contain;" alt="Institute Logo" />`
+    : `<div class="logo-placeholder-box">Institute Logo</div>`;
+  const univLogoHtml = fs.existsSync(universityLogoPath)
+    ? `<img src="file://${universityLogoPath.replace(/\\/g, '/')}" style="max-height: 22mm; max-width: 55mm; object-fit: contain;" alt="University Logo" />`
+    : `<div class="logo-placeholder-box">University Logo</div>`;
+
+  result = result.replace(/<!--\s*LOGO:INSTITUTE\s*-->/g, instLogoHtml);
+  result = result.replace(/<!--\s*LOGO:UNIVERSITY\s*-->/g, univLogoHtml);
+  result = result.replace(/\{\{logo:institute\}\}/g, instLogoHtml);
+  result = result.replace(/\{\{logo:university\}\}/g, univLogoHtml);
+
   return result;
+}
+
+function autoNumberFiguresAndTables(html, partId) {
+  const match = partId.match(/^C0*(\d+)/);
+  if (!match) return html;
+  const chNum = parseInt(match[1], 10);
+  let figIndex = 1;
+  let tblIndex = 1;
+
+  let processed = html.replace(/<figure([^>]*)>([\s\S]*?)<\/figure>/gi, (figMatch, attrs, inner) => {
+    if (/<figcaption/i.test(inner)) {
+      inner = inner.replace(/<figcaption([^>]*)>(.*?)<\/figcaption>/gi, (capMatch, capAttrs, capText) => {
+        const cleanText = capText.replace(/^Figure\s+\d+\.\d+:\s*/i, "");
+        return `<figcaption${capAttrs}>Figure ${chNum}.${figIndex++}: ${cleanText}</figcaption>`;
+      });
+      return `<figure${attrs}>${inner}</figure>`;
+    } else {
+      const capMatch = attrs.match(/data-caption="([^"]+)"/i);
+      if (capMatch) {
+        return `<figure${attrs}>${inner}<figcaption>Figure ${chNum}.${figIndex++}: ${capMatch[1]}</figcaption></figure>`;
+      }
+      return figMatch;
+    }
+  });
+
+  processed = processed.replace(/<table([^>]*)data-caption="([^"]+)"([^>]*)>([\s\S]*?)<\/table>/gi, (tblMatch, pre, caption, post, inner) => {
+    const cleanCaption = caption.replace(/^Table\s+\d+\.\d+:\s*/i, "");
+    const capHtml = `<div style="font-weight: bold; font-size: 10pt; color: #1e293b; margin: 8px 0 4px 0;">Table ${chNum}.${tblIndex++}: ${cleanCaption}</div>`;
+    return `${capHtml}<table${pre}${post}>${inner}</table>`;
+  });
+
+  return processed;
 }
 
 function buildTocHtml(tocItems) {
@@ -100,7 +188,7 @@ async function main() {
   }
 
   // Launch browser for headless PDF rendering
-  const browser = await chromium.launch({ headless: true });
+  const browser = await launchBrowser();
   const context = await browser.newContext();
 
   const renderedPartPdfs = [];
@@ -118,8 +206,9 @@ async function main() {
       htmlContent = htmlContent.replace('<!-- Injected dynamically during two-pass PDF compilation -->', tocHtml);
     }
 
-    // Resolve template variables
-    htmlContent = resolvePlaceholders(htmlContent, config);
+    // Resolve template variables and auto-numbering
+    htmlContent = resolvePlaceholders(htmlContent, config, item.id === "P01");
+    htmlContent = autoNumberFiguresAndTables(htmlContent, item.id);
 
     // Full HTML document wrapper
     const fullHtml = `

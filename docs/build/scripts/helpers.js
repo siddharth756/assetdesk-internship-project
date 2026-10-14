@@ -1,5 +1,14 @@
-// Purpose: Blank-field system helpers for VICAIT SOP Report formatting
-// Ensures consistent height whether config values are filled or empty
+const fs = require("fs");
+const path = require("path");
+
+function logo(name) {
+  const logosDir = path.resolve(__dirname, "../assets/logos");
+  const logoPath = path.resolve(logosDir, `${name}.png`);
+  if (fs.existsSync(logoPath)) {
+    return `<img src="file://${logoPath.replace(/\\/g, '/')}" style="max-height: 22mm; max-width: 55mm; object-fit: contain;" alt="${name} logo" />`;
+  }
+  return `<div class="logo-placeholder-box">${name} Logo</div>`;
+}
 
 function field(value, options = {}) {
   const minWidthMm = options.minWidthMm || 60;
@@ -78,6 +87,7 @@ function signatureBlock(labels = []) {
 }
 
 module.exports = {
+  logo,
   field,
   formTable,
   blankBox,

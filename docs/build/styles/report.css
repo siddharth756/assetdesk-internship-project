@@ -16,10 +16,24 @@
   print-color-adjust: exact !important;
 }
 
+@font-face {
+  font-family: 'Carlito';
+  src: url('./Carlito-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Carlito';
+  src: url('./Carlito-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Calibri", "Carlito", "Segoe UI", Arial, sans-serif;
+  font-family: "Calibri", "Carlito", sans-serif;
   font-size: 11pt;
   line-height: 1.35;
   color: #1e293b;
@@ -238,3 +252,82 @@ figcaption {
   margin: 10px 0;
   border-radius: 0 4px 4px 0;
 }
+
+/* Blank-Field System per VICAIT SOP */
+.filled-field {
+  display: inline-block;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.blank-field-line {
+  display: inline-block;
+  min-width: 60mm;
+  border-bottom: 1.5px dotted #64748b;
+  height: 1.1em;
+  vertical-align: baseline;
+}
+
+.filled-value {
+  display: inline-block;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.blank-cell-line {
+  display: block;
+  width: 100%;
+  border-bottom: 1px dashed #94a3b8;
+  height: 18px;
+}
+
+.blank-box {
+  border: 1.5px dashed #94a3b8;
+  border-radius: 4px;
+  background: #fafafa;
+  position: relative;
+  margin: 10px 0;
+}
+
+.blank-lines-container {
+  margin: 8px 0;
+}
+
+.ruled-line {
+  height: 9mm;
+  border-bottom: 1px solid #cbd5e1;
+  width: 100%;
+}
+
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.form-table tr {
+  min-height: 11mm;
+  height: 11mm;
+}
+
+.signature-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+}
+
+.logo-placeholder-box {
+  width: 50mm;
+  height: 22mm;
+  border: 1.5px dashed #94a3b8;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9pt;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: #f8fafc;
+}
+
