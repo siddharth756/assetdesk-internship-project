@@ -1,0 +1,11 @@
+node_modules
+.env
+dist
+coverage
+docs/output
+.DS_Store
+
+# Local prompt pack & instructions
+Antigravity_Prompt_Pack_v2/
+00_README_START_HERE.md
+01_PROJECT_CONTRACT.md
