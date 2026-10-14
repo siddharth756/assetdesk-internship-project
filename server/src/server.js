@@ -2,6 +2,7 @@
 const app = require("./app");
 const config = require("./config/env");
 const { connectDB } = require("./config/db");
+const { startLicenseExpiryJob } = require("./jobs/licenseExpiryJob");
 
 async function startServer() {
   try {
@@ -10,8 +11,16 @@ async function startServer() {
       console.log(`Server listening on port ${config.PORT} [${config.NODE_ENV}]`);
     });
 
+    let cronTask = null;
+    if (config.NODE_ENV !== "test") {
+      cronTask = startLicenseExpiryJob();
+    }
+
     const shutdown = async (signal) => {
       console.log(`\nReceived ${signal}. Shutting down gracefully...`);
+      if (cronTask && typeof cronTask.stop === "function") {
+        cronTask.stop();
+      }
       server.close(() => {
         console.log("HTTP server closed.");
         process.exit(0);
@@ -31,3 +40,4 @@ if (require.main === module) {
 }
 
 module.exports = { startServer };
+

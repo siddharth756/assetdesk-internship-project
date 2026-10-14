@@ -23,6 +23,7 @@ router.get("/health", (req, res) => {
 
 // Module M1: Authentication and User Management
 const assetRoutes = require("./assets");
+const licenseRoutes = require("./licenses");
 
 router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
@@ -30,4 +31,8 @@ router.use("/users", userRoutes);
 // Module M2: Hardware Assets
 router.use("/assets", assetRoutes);
 
+// Module M3: Software Licenses & Expiry Alerts
+router.use("/licenses", licenseRoutes);
+
 module.exports = router;
+
