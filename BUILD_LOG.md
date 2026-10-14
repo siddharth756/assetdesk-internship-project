@@ -14,4 +14,8 @@
 - Part 2 `cd server && npm run lint`: PASSED (0 errors, 0 warnings).
 - Part 2 `cd server && npm test`: PASSED (42 passed tests across users.test.js, auth.test.js, models.test.js, dates.test.js, 7 suites skipped for future parts).
 - Part 2 manual curl demo: PASSED (admin login, /auth/me profile fetch, admin POST /users 201, employee POST /users 403, employee GET /users/lookup 403, support GET /users/lookup 200).
+- Part 3 `cd server && npm run lint`: PASSED (0 errors, 0 warnings).
+- Part 3 `cd server && npm test`: PASSED (82 passed tests across assets.test.js, users.test.js, auth.test.js, models.test.js, dates.test.js, 6 suites skipped for future parts).
+- Part 3 manual curl demo: PASSED (admin login, user lookup, create asset with auto tag AST-2026-0016, atomic assign to user, list with category & assigned filters, audit trail verification showing 2 rows for ASSET_CREATE and ASSET_ASSIGN).
+
 

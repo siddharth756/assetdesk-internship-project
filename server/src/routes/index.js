@@ -22,7 +22,12 @@ router.get("/health", (req, res) => {
 });
 
 // Module M1: Authentication and User Management
+const assetRoutes = require("./assets");
+
 router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
+
+// Module M2: Hardware Assets
+router.use("/assets", assetRoutes);
 
 module.exports = router;
