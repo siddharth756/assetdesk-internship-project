@@ -6,6 +6,7 @@
 ## Bugs fixed
 - Seed script collection reset failed on AuditLog: `AuditLog.deleteMany({})` was blocked by the append-only pre hook. Cause: pre-delete hook intercepted administrative reset. Fix: supported `bypassAuditLock: true` query option in `AuditLog.js` and passed it in `seed.js`.
 - Suffix length mismatch in expiring license test fixture: `KEY-EXP-001` yielded `****-****--001` with a dash in the last 4 characters instead of `****-****-0001`. Cause: 3-digit suffix instead of 4 digits. Fix: updated fixture key to `KEY-EXP-0001`.
+- Closed ticket mutation returned 403 instead of 400 when invoked by employee owner: Cause: employee status transition check preceded closed ticket immutability check. Fix: prioritized closed status guard before role-specific transition checks in `updateTicketStatus`.
 
 ## Commands & real results
 - `cd server && npm run lint`: PASSED (0 errors, 0 warnings).
@@ -22,6 +23,7 @@
 - Part 4 `cd server && npm test`: PASSED (122 passed tests across licenses.test.js, assets.test.js, auth.test.js, users.test.js, dates.test.js, models.test.js, 5 suites skipped for future parts).
 - Part 4 `cd server && npm run seed`: PASSED (seeded 8 users, 15 assets, 5 licenses, 12 tickets, 4 audit logs).
 - Part 4 real demo `node -e runLicenseExpiryCheck()`: PASSED (alerted for expired license "Adobe Creative Cloud All Apps", sent simulated mail to `admin@assetdesk.local`, logged audit entry, second run generated 0 duplicate alerts).
-
-
-
+- Part 5 `cd server && npm run lint`: PASSED (0 errors, 0 warnings).
+- Part 5 `cd server && npm test`: PASSED (194 passed tests across tickets.test.js, licenses.test.js, assets.test.js, auth.test.js, users.test.js, ticketRules.test.js, models.test.js, dates.test.js, 3 suites skipped for future parts).
+- Part 5 `cd server && npm run seed`: PASSED (seeded 8 users, 15 assets, 5 licenses, 12 tickets, 4 audit logs).
+- Part 5 live curl/lifecycle demo: PASSED (employee created ticket TCK-2026-0013, support auto-assigned to IN_PROGRESS, employee and support comments, support resolved with note, employee reopened clearing resolvedAt, support re-resolved, admin closed, closed immutability 400 enforcement, and 8 audit logs logged).

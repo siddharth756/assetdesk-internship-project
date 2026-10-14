@@ -1,7 +1,7 @@
 // Purpose: Ticket model for IT support requests, priority SLA calculation, and lifecycle tracking
 const mongoose = require("mongoose");
 const Counter = require("./Counter");
-const { addHours } = require("../utils/dates");
+const { computeDueAt, isOverdue } = require("../services/ticketRules");
 
 const commentSchema = new mongoose.Schema(
   {
@@ -57,7 +57,8 @@ const ticketSchema = new mongoose.Schema(
       enum: {
         values: ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
         message: "{VALUE} is not a valid priority"
-      }
+      },
+      default: "MEDIUM"
     },
     status: {
       type: String,
@@ -102,12 +103,14 @@ const ticketSchema = new mongoose.Schema(
   {
     timestamps: true,
     toJSON: {
+      virtuals: true,
       transform(doc, ret) {
         delete ret.__v;
         return ret;
       }
     },
     toObject: {
+      virtuals: true,
       transform(doc, ret) {
         delete ret.__v;
         return ret;
@@ -119,14 +122,12 @@ const ticketSchema = new mongoose.Schema(
 // Indexes
 ticketSchema.index({ status: 1, assignedTo: 1 });
 ticketSchema.index({ createdBy: 1 });
+ticketSchema.index({ dueAt: 1 });
 
-// Priority SLA due hours lookup (Contract section 5: CRITICAL 4h, HIGH 24h, MEDIUM 48h, LOW 72h)
-const PRIORITY_HOURS = {
-  CRITICAL: 4,
-  HIGH: 24,
-  MEDIUM: 48,
-  LOW: 72
-};
+// Virtual for isOverdue
+ticketSchema.virtual("isOverdue").get(function () {
+  return isOverdue(this);
+});
 
 // Pre-validate hook for auto-generating ticketCode and calculating dueAt
 ticketSchema.pre("validate", async function (next) {
@@ -138,8 +139,7 @@ ticketSchema.pre("validate", async function (next) {
     }
 
     if (!this.dueAt && this.priority) {
-      const hours = PRIORITY_HOURS[this.priority] || 48;
-      this.dueAt = addHours(new Date(), hours);
+      this.dueAt = computeDueAt(this.priority, this.createdAt || new Date());
     }
 
     if (typeof next === "function") next();

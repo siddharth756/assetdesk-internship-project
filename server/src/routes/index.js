@@ -3,6 +3,9 @@ const express = require("express");
 
 const authRoutes = require("./auth");
 const userRoutes = require("./users");
+const assetRoutes = require("./assets");
+const licenseRoutes = require("./licenses");
+const ticketRoutes = require("./tickets");
 
 const router = express.Router();
 
@@ -22,9 +25,6 @@ router.get("/health", (req, res) => {
 });
 
 // Module M1: Authentication and User Management
-const assetRoutes = require("./assets");
-const licenseRoutes = require("./licenses");
-
 router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
 
@@ -34,5 +34,7 @@ router.use("/assets", assetRoutes);
 // Module M3: Software Licenses & Expiry Alerts
 router.use("/licenses", licenseRoutes);
 
-module.exports = router;
+// Module M4: Support Tickets
+router.use("/tickets", ticketRoutes);
 
+module.exports = router;
