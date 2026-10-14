@@ -1,13 +1,76 @@
 <div class="page">
   <h1 class="chapter">Conclusion</h1>
   <div class="section-content" data-part="CON" data-page="1">
-    <h2 class="section">Conclusion - Section 1</h2>
-    <p>
-      Content placeholder for Conclusion (Page 1 of 1). The technical specifications, architectural diagrams,
-      data schemas, implementation listings, and verified metrics for this chapter adhere strictly to the project contract and VICAIT SOP requirements.
+    <p style="font-size: 8.8pt; text-align: justify; line-height: 1.4; margin-bottom: 8px;">
+      The 15-week industrial internship project, titled <strong>“IT Asset & Support Desk Management System (AssetDesk)”</strong>, successfully designed, developed, verified, and documented an enterprise-grade web application in strict compliance with the VICAIT SOP guidelines. The system replaces fragmented spreadsheets and paper custody forms with a unified, role-governed platform managing hardware inventory, software seat quotas, priority SLA support tickets, and compliance audit trails.
     </p>
-    <div class="note-box">
-      <strong>Engineering Milestone:</strong> Verified operational deliverable for CON within the AssetDesk enterprise platform.
+
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+      Table 10.1: Contractual Objectives vs. Empirical Deliverable Verification
     </div>
+    <table class="grid" style="width: 100%; font-size: 7.5pt; margin-bottom: 8px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 8%; padding: 3px 5px; text-align: center;">No.</th>
+          <th style="width: 32%; padding: 3px 5px;">Contractual Objective</th>
+          <th style="width: 14%; padding: 3px 5px; text-align: center;">Status</th>
+          <th style="width: 46%; padding: 3px 5px;">Empirical Evidence & Delivered Artifacts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">1</td>
+          <td>Role-Based Access Control (RBAC)</td>
+          <td style="color: #16a34a; font-weight: bold; text-align: center;">Achieved</td>
+          <td>M1 implemented: 3 distinct roles, 31 integration tests, <code>SEC-02..04</code> verified.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">2</td>
+          <td>Hardware Asset Lifecycle Tracking</td>
+          <td style="color: #16a34a; font-weight: bold; text-align: center;">Achieved</td>
+          <td>M2 implemented: Auto-tagging AST-YYYY-XXXX, atomic assign, 40 integration tests.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">3</td>
+          <td>Software License & Seat Control</td>
+          <td style="color: #16a34a; font-weight: bold; text-align: center;">Achieved</td>
+          <td>M3 implemented: Capacity gauges, masked keys, cron alerts, 37 integration tests.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">4</td>
+          <td>SLA-Governed Incident Support Desk</td>
+          <td style="color: #16a34a; font-weight: bold; text-align: center;">Achieved</td>
+          <td>M4 implemented: 4-tier SLA deadlines, state machine, 45 integration tests, ST-08..11.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">5</td>
+          <td>Append-Only Compliance Audit Logging</td>
+          <td style="color: #16a34a; font-weight: bold; text-align: center;">Achieved</td>
+          <td>M5 implemented: Pre-hook lock, tamper-proof logging, 34 integration tests, <code>SEC-03</code>.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">6</td>
+          <td>Standardized RFC 4180 CSV Reporting</td>
+          <td style="color: #16a34a; font-weight: bold; text-align: center;">Achieved</td>
+          <td>M5 implemented: Formula injection mitigation, streaming export, <code>UT-06..09, 13</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="section" style="margin-top: 6px; margin-bottom: 4px;">Key Technical Learning Outcomes</h2>
+    <p style="font-size: 8.5pt; text-align: justify; line-height: 1.4; margin-bottom: 6px;">
+      Through this capstone engineering endeavor, the candidate developed practical expertise spanning the entire Software Development Life Cycle (SDLC):
+    </p>
+    <ul style="font-size: 8.2pt; line-height: 1.35; margin-bottom: 8px; padding-left: 20px;">
+      <li><strong>Architectural Decomposition:</strong> Designed a decoupled 3-tier client–server architecture separating presentation logic from REST API services.</li>
+      <li><strong>Database Engineering:</strong> Modeled relational schemas within MongoDB using Mongoose, establishing compound indexes that maintain average query response times under 10ms.</li>
+      <li><strong>Defensive Security:</strong> Implemented defense-in-depth protections encompassing JWT tokens, bcrypt password hashing, NoSQL sanitization, rate limiting, and HTTP security headers.</li>
+      <li><strong>Automated Quality Assurance:</strong> Built a multi-layered test pyramid comprising 57 unit tests, 187 integration tests, 16 Playwright E2E journeys, and 12 security test cases achieving 87.16% coverage.</li>
+      <li><strong>Industrial Collaboration:</strong> Collaborated with an industry mentor, translating real-world operational challenges into formal technical requirements, adhering to software milestones, and producing standards-compliant technical documentation.</li>
+    </ul>
+
+    <p style="font-size: 8.5pt; text-align: justify; line-height: 1.4; margin-bottom: 0;">
+      In conclusion, AssetDesk delivers a reliable, production-tested software asset management and support desk platform. The project successfully fulfills all academic prerequisites for the professional degree while delivering tangible operational value through streamlined digital workflows and robust data governance.
+    </p>
   </div>
 </div>

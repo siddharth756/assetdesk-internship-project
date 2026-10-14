@@ -63,6 +63,7 @@ function resolvePlaceholders(html, config, isCover = false) {
   result = result.replace(/\{\{universityName\}\}/g, config.universityName || "");
   result = result.replace(/\{\{repoUrl\}\}/g, config.repoUrl || "");
   result = result.replace(/\{\{liveUrl\}\}/g, config.liveUrl || "");
+  result = result.replace(/\{\{accessDate\}\}/g, config.accessDate || "");
 
   // Student
   result = result.replace(/\{\{student\.name\}\}/g, config.student?.name || "");

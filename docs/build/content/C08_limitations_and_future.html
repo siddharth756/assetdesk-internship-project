@@ -1,13 +1,104 @@
 <div class="page">
-  <h1 class="chapter">Chapter 8 & 9: Limitations and Future Enhancements</h1>
+  <h1 class="chapter">Chapter 8: Limitations & Chapter 9: Future Enhancements</h1>
   <div class="section-content" data-part="C08_C09" data-page="1">
-    <h2 class="section">Chapter 8 & 9: Limitations and Future Enhancements - Section 1</h2>
-    <p>
-      Content placeholder for Chapter 8 & 9: Limitations and Future Enhancements (Page 1 of 1). The technical specifications, architectural diagrams,
-      data schemas, implementation listings, and verified metrics for this chapter adhere strictly to the project contract and VICAIT SOP requirements.
+    <h2 class="section">Chapter 8: System Limitations</h2>
+    <p style="font-size: 8.8pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
+      While the AssetDesk platform successfully satisfies all functional specifications defined in the engineering contract, specific technical boundaries were established to maintain academic scope feasibility within the 15-week internship timeframe:
     </p>
-    <div class="note-box">
-      <strong>Engineering Milestone:</strong> Verified operational deliverable for C08_C09 within the AssetDesk enterprise platform.
+
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+      Table 8.1: Identified Technical and Operational System Limitations
     </div>
+    <table class="grid" style="width: 100%; font-size: 7.8pt; margin-bottom: 8px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 8%; padding: 3px 5px; text-align: center;">No.</th>
+          <th style="width: 28%; padding: 3px 5px;">Limitation Dimension</th>
+          <th style="width: 64%; padding: 3px 5px;">Technical Description & Operational Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">1</td>
+          <td style="font-weight: bold;">Single Organization Tenancy</td>
+          <td>The database architecture enforces a single corporate perimeter; multi-tenant database partitioning and cross-organization isolation are not supported.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">2</td>
+          <td style="font-weight: bold;">No Binary File Attachments</td>
+          <td>Support tickets and threaded comment discussions accept text-only payloads; uploading diagnostic crash dumps, log files, or photos is unsupported.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">3</td>
+          <td style="font-weight: bold;">External SMTP Configuration</td>
+          <td>Automated license expiry warnings require external SMTP transport credentials; failure in third-party mail gateways prevents email alert delivery.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">4</td>
+          <td style="font-weight: bold;">Manual Barcode / Serial Entry</td>
+          <td>Device onboarding requires manual keyboard input of asset tags and serial numbers; hardware optical barcode or QR scanner integration is absent.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">5</td>
+          <td style="font-weight: bold;">Monolingual Interface</td>
+          <td>The user interface, error messages, and compliance reports are implemented exclusively in English without internationalization (i18n) localization.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">6</td>
+          <td style="font-weight: bold;">Free-Tier Cloud Container Wakeup</td>
+          <td>When deployed on non-dedicated free-tier hosting platforms (e.g., Render/Railway), idle container sleep introduces initial cold-start latency.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="section" style="margin-top: 10px;">Chapter 9: Future Enhancements</h2>
+    <p style="font-size: 8.8pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
+      The modular 3-tier architecture and decoupled RESTful design of AssetDesk provide a solid foundation for enterprise scaling. Planned enhancements include:
+    </p>
+
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+      Table 9.1: Strategic Roadmap for Future Architectural Enhancements
+    </div>
+    <table class="grid" style="width: 100%; font-size: 7.8pt; margin-bottom: 6px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 8%; padding: 3px 5px; text-align: center;">No.</th>
+          <th style="width: 28%; padding: 3px 5px;">Planned Enhancement</th>
+          <th style="width: 64%; padding: 3px 5px;">Technical Implementation Strategy & Targeted Organizational Benefit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">1</td>
+          <td style="font-weight: bold;">Cloud Object Attachment Storage</td>
+          <td>Integrate AWS S3 / Cloudinary SDK with pre-signed URLs to enable uploading invoice PDFs, device photos, and crash dumps directly on tickets.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">2</td>
+          <td style="font-weight: bold;">Mobile Optical Barcode / QR Scanner</td>
+          <td>Implement HTML5 WebRTC camera APIs to enable mobile barcode and QR scanning, streamlining physical inventory audits and asset verification.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">3</td>
+          <td style="font-weight: bold;">Multi-Tier Approval Workflows</td>
+          <td>Add configurable multi-level managerial authorization chains for high-value hardware requisitions before technician fulfillment.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">4</td>
+          <td style="font-weight: bold;">Enterprise SSO & Directory Sync</td>
+          <td>Incorporate SAML 2.0 and OAuth2 (Google Workspace, Microsoft Entra ID) for single sign-on authentication and automated user provisioning.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">5</td>
+          <td style="font-weight: bold;">Native Mobile Companion App</td>
+          <td>Develop a cross-platform React Native mobile app delivering instant push notifications for critical SLA breaches to field technicians.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; text-align: center;">6</td>
+          <td style="font-weight: bold;">Financial Depreciation Engine</td>
+          <td>Introduce automated accounting routines calculating straight-line and reducing-balance hardware depreciation for corporate tax reporting.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
