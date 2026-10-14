@@ -1,5 +1,8 @@
-// Purpose: API v1 root router aggregator
+// Purpose: API v1 root router aggregator mounting module route handlers
 const express = require("express");
+
+const authRoutes = require("./auth");
+const userRoutes = require("./users");
 
 const router = express.Router();
 
@@ -17,5 +20,9 @@ router.get("/health", (req, res) => {
     }
   });
 });
+
+// Module M1: Authentication and User Management
+router.use("/auth", authRoutes);
+router.use("/users", userRoutes);
 
 module.exports = router;

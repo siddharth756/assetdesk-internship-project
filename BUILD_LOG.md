@@ -11,3 +11,7 @@
 - `cd server && npm test`: PASSED (11 passed tests across models.test.js and dates.test.js, 9 suites skipped for future parts).
 - `cd server && npm run seed`: PASSED (seeded 8 users, 15 assets, 5 licenses, 12 tickets, 4 audit logs).
 - `curl http://localhost:5000/api/v1/health`: PASSED (HTTP 200 `{"success":true,"data":{"status":"healthy","timestamp":"2026-10-14T05:04:02.628Z"}}`).
+- Part 2 `cd server && npm run lint`: PASSED (0 errors, 0 warnings).
+- Part 2 `cd server && npm test`: PASSED (42 passed tests across users.test.js, auth.test.js, models.test.js, dates.test.js, 7 suites skipped for future parts).
+- Part 2 manual curl demo: PASSED (admin login, /auth/me profile fetch, admin POST /users 201, employee POST /users 403, employee GET /users/lookup 403, support GET /users/lookup 200).
+
