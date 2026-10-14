@@ -1,0 +1,448 @@
+{
+  "User": [
+    {
+      "field": "name",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Full name of the user (2-100 characters)"
+    },
+    {
+      "field": "email",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "Unique Index",
+      "description": "Unique login and contact email address (lowercase)"
+    },
+    {
+      "field": "passwordHash",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Bcrypt salted hash with 10 salt rounds (hidden by default)"
+    },
+    {
+      "field": "role",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Access tier: ADMIN, IT_SUPPORT, or EMPLOYEE"
+    },
+    {
+      "field": "department",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Corporate department / division assignment"
+    },
+    {
+      "field": "isActive",
+      "type": "Boolean",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Account operational state flag (soft deactivation)"
+    },
+    {
+      "field": "_id",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "Primary Key (PK)",
+      "description": "Primary key, unique 12-byte BSON identifier"
+    },
+    {
+      "field": "createdAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when user record was created"
+    },
+    {
+      "field": "updatedAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when user record was last modified"
+    }
+  ],
+  "Asset": [
+    {
+      "field": "assetTag",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "Unique Index",
+      "description": "Sequential hardware tag identifier (e.g., AST-2026-0001)"
+    },
+    {
+      "field": "serialNumber",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "Unique Index",
+      "description": "Unique OEM hardware serial number"
+    },
+    {
+      "field": "name",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Hardware brand, model, and configuration title"
+    },
+    {
+      "field": "category",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Hardware category: LAPTOP, DESKTOP, MONITOR, PRINTER, NETWORK, MOBILE, OTHER"
+    },
+    {
+      "field": "status",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Lifecycle state: AVAILABLE, ASSIGNED, MAINTENANCE, RETIRED"
+    },
+    {
+      "field": "assignedTo",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "FK → User",
+      "description": "Foreign key reference to User model (null if available)"
+    },
+    {
+      "field": "purchaseDate",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Procurement / invoice date of hardware asset"
+    },
+    {
+      "field": "warrantyExpiry",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Warranty protection expiration date"
+    },
+    {
+      "field": "notes",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Internal hardware specifications and maintenance notes"
+    },
+    {
+      "field": "_id",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "Primary Key (PK)",
+      "description": "Primary key, unique 12-byte BSON identifier"
+    },
+    {
+      "field": "createdAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when asset was registered"
+    },
+    {
+      "field": "updatedAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when asset record was last modified"
+    }
+  ],
+  "License": [
+    {
+      "field": "softwareName",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Commercial software application title"
+    },
+    {
+      "field": "vendor",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Software publishing company / publisher name"
+    },
+    {
+      "field": "licenseKey",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Volume license or activation key (masked in UI)"
+    },
+    {
+      "field": "totalSeats",
+      "type": "Number",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Maximum permitted concurrent user seat capacity"
+    },
+    {
+      "field": "allocations",
+      "type": "Array",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Subdocument array of active seat assignments to users"
+    },
+    {
+      "field": "expiryDate",
+      "type": "Date",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Subscription renewal or perpetual license expiry date"
+    },
+    {
+      "field": "notes",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Contract, renewal, and vendor licensing details"
+    },
+    {
+      "field": "_id",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "Primary Key (PK)",
+      "description": "Primary key, unique 12-byte BSON identifier"
+    },
+    {
+      "field": "createdAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when license was registered"
+    },
+    {
+      "field": "updatedAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when license was last modified"
+    }
+  ],
+  "Ticket": [
+    {
+      "field": "ticketCode",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "Unique Index",
+      "description": "Sequential ticket identifier (e.g., TCK-2026-0001)"
+    },
+    {
+      "field": "title",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Brief summary of technical issue (5-150 characters)"
+    },
+    {
+      "field": "description",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Detailed description of problem or service request"
+    },
+    {
+      "field": "category",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Issue classification: HARDWARE, SOFTWARE, NETWORK, ACCESS, OTHER"
+    },
+    {
+      "field": "priority",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Urgency rating: LOW, MEDIUM, HIGH, CRITICAL"
+    },
+    {
+      "field": "status",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Lifecycle workflow: OPEN, IN_PROGRESS, RESOLVED, CLOSED"
+    },
+    {
+      "field": "createdBy",
+      "type": "ObjectId",
+      "required": "Yes",
+      "keyOrIndex": "FK → User",
+      "description": "Foreign key reference to User who filed the ticket"
+    },
+    {
+      "field": "assignedTo",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "FK → User",
+      "description": "Foreign key reference to IT_SUPPORT technician assigned"
+    },
+    {
+      "field": "relatedAsset",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "FK → Asset",
+      "description": "Optional foreign key reference to Asset involved"
+    },
+    {
+      "field": "comments",
+      "type": "Array",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Subdocument array of chronological comment thread messages"
+    },
+    {
+      "field": "resolutionNote",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Mandatory resolution documentation (>= 5 chars)"
+    },
+    {
+      "field": "dueAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Calculated SLA resolution deadline based on priority"
+    },
+    {
+      "field": "resolvedAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when technician marked ticket RESOLVED"
+    },
+    {
+      "field": "closedAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when administrator closed the ticket"
+    },
+    {
+      "field": "_id",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "Primary Key (PK)",
+      "description": "Primary key, unique 12-byte BSON identifier"
+    },
+    {
+      "field": "createdAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when ticket was opened"
+    },
+    {
+      "field": "updatedAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when ticket record was last modified"
+    }
+  ],
+  "AuditLog": [
+    {
+      "field": "user",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "FK → User",
+      "description": "Foreign key reference to acting User (null for system jobs)"
+    },
+    {
+      "field": "userName",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Immutable snapshot of user full name at event time"
+    },
+    {
+      "field": "action",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Categorized audit event code (e.g., LOGIN, ASSET_ASSIGN, TICKET_STATUS)"
+    },
+    {
+      "field": "entity",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "—",
+      "description": "Target resource collection: AUTH, USER, ASSET, LICENSE, TICKET"
+    },
+    {
+      "field": "entityId",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "String identifier of target resource affected"
+    },
+    {
+      "field": "details",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "JSON or stringified change delta and operation payload"
+    },
+    {
+      "field": "ip",
+      "type": "String",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Attribute value"
+    },
+    {
+      "field": "createdAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Attribute value"
+    },
+    {
+      "field": "_id",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "Primary Key (PK)",
+      "description": "Primary key, unique 12-byte BSON identifier"
+    }
+  ],
+  "Counter": [
+    {
+      "field": "key",
+      "type": "String",
+      "required": "Yes",
+      "keyOrIndex": "Unique Index",
+      "description": "Unique sequence namespace identifier (e.g., asset-2026, ticket-2026)"
+    },
+    {
+      "field": "seq",
+      "type": "Number",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Current atomic monotonic integer sequence value"
+    },
+    {
+      "field": "_id",
+      "type": "ObjectId",
+      "required": "No",
+      "keyOrIndex": "Primary Key (PK)",
+      "description": "Primary key, unique 12-byte BSON identifier"
+    },
+    {
+      "field": "createdAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when sequence counter was initialized"
+    },
+    {
+      "field": "updatedAt",
+      "type": "Date",
+      "required": "No",
+      "keyOrIndex": "—",
+      "description": "Timestamp when sequence was last incremented"
+    }
+  ]
+}

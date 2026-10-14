@@ -83,6 +83,9 @@ function resolvePlaceholders(html, config, isCover = false) {
   result = result.replace(/\{\{company\.startDate\}\}/g, config.company?.startDate || "");
   result = result.replace(/\{\{company\.endDate\}\}/g, config.company?.endDate || "");
   result = result.replace(/\{\{company\.duration\}\}/g, config.company?.duration || "");
+  result = result.replace(/\{\{company\.allowsCodeInReport\}\}/g, config.company?.allowsCodeInReport || "");
+  result = result.replace(/\{\{os\}\}/g, config.os || "");
+  result = result.replace(/\{\{hardwareMachine\}\}/g, config.hardwareMachine || "");
 
   // Blank-Field system transforms: if field was left empty, ensure generous blank writing space
   result = result.replace(/<span class="filled-field" style="min-width:\s*(\d+)mm;[^"]*">\s*<\/span>/g, (m, w) => {

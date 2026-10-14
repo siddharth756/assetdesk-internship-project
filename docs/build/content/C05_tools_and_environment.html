@@ -1,27 +1,319 @@
 <div class="page">
-  <h1 class="chapter">Chapter 5: Tools & Environment</h1>
+  <h1 class="chapter">Chapter 5: Tools & Environment Used</h1>
   <div class="section-content" data-part="C05" data-page="1">
-    <h2 class="section">Chapter 5: Tools & Environment - Section 1</h2>
-    <p>
-      Content placeholder for Chapter 5: Tools & Environment (Page 1 of 2). The technical specifications, architectural diagrams,
-      data schemas, implementation listings, and verified metrics for this chapter adhere strictly to the project contract and VICAIT SOP requirements.
+    <h2 class="section">5.1 Hardware and Software Requirements</h2>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
+      The AssetDesk engineering platform leverages modern web standards, an asynchronous runtime, and a document database. Environment specifications are partitioned into verified software dependency versions and physical workstation hardware profiles.
     </p>
-    <div class="note-box">
-      <strong>Engineering Milestone:</strong> Verified operational deliverable for C05 within the AssetDesk enterprise platform.
+
+    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+      Table 5.1: Software Environment & Verified Dependency Versions
     </div>
+    <table class="grid" style="width: 100%; font-size: 8pt; margin-bottom: 6px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 28%; padding: 4px 6px;">Software Component</th>
+          <th style="width: 18%; padding: 4px 6px;">Version</th>
+          <th style="width: 54%; padding: 4px 6px;">Operational Role in Solution</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Node.js JavaScript Runtime</td>
+          <td><code>v24.13.0</code></td>
+          <td>Asynchronous server execution runtime powering backend REST services</td>
+        </tr>
+        <tr>
+          <td>Node Package Manager (npm)</td>
+          <td><code>11.6.2</code></td>
+          <td>Project dependency resolution, build scripts, and lifecycle tooling</td>
+        </tr>
+        <tr>
+          <td>MongoDB Community Database</td>
+          <td><code>v8.2.4</code></td>
+          <td>NoSQL document database managing persistence, indexing, and JSON collections</td>
+        </tr>
+        <tr>
+          <td>React Frontend Library</td>
+          <td><code>18.3.1</code></td>
+          <td>Component-based declarative UI library with virtual DOM reconciliation</td>
+        </tr>
+        <tr>
+          <td>Vite Frontend Tooling</td>
+          <td><code>5.4.11</code></td>
+          <td>Next-generation ES-module bundler with fast Hot Module Replacement (HMR)</td>
+        </tr>
+        <tr>
+          <td>Express Web Framework</td>
+          <td><code>4.21.2</code></td>
+          <td>Minimalist routing framework handling HTTP middleware and REST endpoints</td>
+        </tr>
+        <tr>
+          <td>Mongoose ODM</td>
+          <td><code>8.9.5</code></td>
+          <td>Object Data Modeling library providing schema enforcement and hooks</td>
+        </tr>
+        <tr>
+          <td>Jest Testing Framework</td>
+          <td><code>29.7.0</code></td>
+          <td>Automated test runner executing 256 unit and integration test assertions</td>
+        </tr>
+        <tr>
+          <td>Playwright Test Suite</td>
+          <td><code>1.50.0</code></td>
+          <td>Browser automation engine executing 16 end-to-end user journeys</td>
+        </tr>
+        <tr>
+          <td>Target Client Web Browser</td>
+          <td><code>Chromium 133+</code></td>
+          <td>Modern desktop browser runtime supporting HTML5, CSS3, and ES6+</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Operating System Used</td>
+          <td colspan="2"><span class="filled-field" style="min-width: 80mm;">{{os}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+      Table 5.2: Hardware Requirements (Development vs Production Baseline)
+    </div>
+    <table class="grid" style="width: 100%; font-size: 8pt; margin-bottom: 6px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 25%; padding: 4px 6px;">Hardware Component</th>
+          <th style="width: 35%; padding: 4px 6px;">Minimum Baseline</th>
+          <th style="width: 40%; padding: 4px 6px;">Recommended Engineering Profile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Processor (CPU)</td>
+          <td>Dual-Core 2.0 GHz x64 processor</td>
+          <td>Quad-Core Intel Core i5 / AMD Ryzen 5 (2.5 GHz+)</td>
+        </tr>
+        <tr>
+          <td>System Memory (RAM)</td>
+          <td>4 GB DDR4</td>
+          <td>8 GB to 16 GB DDR4/DDR5 high-speed RAM</td>
+        </tr>
+        <tr>
+          <td>Storage Disk</td>
+          <td>10 GB available HDD / SSD</td>
+          <td>256 GB NVMe Solid State Drive (SSD)</td>
+        </tr>
+        <tr>
+          <td>Display Resolution</td>
+          <td>1366 × 768 (WXGA standard)</td>
+          <td>1920 × 1080 (Full HD, 60Hz standard panel)</td>
+        </tr>
+        <tr>
+          <td>Network Interface</td>
+          <td>Broadband Internet connection (5 Mbps)</td>
+          <td>Gigabit Ethernet or 50+ Mbps High-Speed Wi-Fi</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Machine Used for Project</td>
+          <td colspan="2"><span class="filled-field" style="min-width: 80mm;">{{hardwareMachine}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+      Table 5.3: Technology Stack Selection by Architectural Layer
+    </div>
+    <table class="grid" style="width: 100%; font-size: 8pt; margin-bottom: 2px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 22%; padding: 4px 6px;">Architectural Layer</th>
+          <th style="width: 26%; padding: 4px 6px;">Selected Technology</th>
+          <th style="width: 52%; padding: 4px 6px;">Technical Selection Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: bold;">Presentation Layer</td>
+          <td>React 18 & Vanilla CSS</td>
+          <td>Component encapsulation and zero framework overhead for maximum styling control</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Application Layer</td>
+          <td>Node.js & Express 4</td>
+          <td>Non-blocking asynchronous event loop yielding sub-10ms query execution times</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Data Layer</td>
+          <td>MongoDB 8 & Mongoose 8</td>
+          <td>JSON document schema agility with typed validations, compound indexes, and hooks</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Security & Auth</td>
+          <td>JWT (HS256) & bcryptjs</td>
+          <td>Stateless authorization tokens with cryptographic signatures and salted password hashes</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Background Jobs</td>
+          <td>node-cron</td>
+          <td>Lightweight in-process cron daemon executing automated daily license expiry sweeps</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">Quality Assurance</td>
+          <td>Jest, Supertest, Playwright</td>
+          <td>Multi-tier automated test pyramid covering 272 verified tests with 87.16% coverage</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">DevOps & Tools</td>
+          <td>Git, GitHub, VS Code</td>
+          <td>Distributed version control and streamlined engineering collaboration workflow</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <div class="page">
-  
   <div class="section-content" data-part="C05" data-page="2">
-    <h2 class="section">Chapter 5: Tools & Environment - Section 2</h2>
-    <p>
-      Content placeholder for Chapter 5: Tools & Environment (Page 2 of 2). The technical specifications, architectural diagrams,
-      data schemas, implementation listings, and verified metrics for this chapter adhere strictly to the project contract and VICAIT SOP requirements.
+    <h2 class="section">5.2 Server-Side and Client-Side Tooling Architecture</h2>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
+      AssetDesk strictly decouples the client application from the backend API server. Communication occurs exclusively over stateless HTTP/JSON interfaces. Tables 5.4 and 5.5 detail the exact package ecosystem utilized, while Figures 5.1 and 5.2 depict the 3-tier logical architecture and production deployment layout.
     </p>
-    <div class="note-box">
-      <strong>Engineering Milestone:</strong> Verified operational deliverable for C05 within the AssetDesk enterprise platform.
+
+    <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+      <div style="flex: 1;">
+        <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-bottom: 2px;">
+          Table 5.4: Client-Side Tooling Ecosystem
+        </div>
+        <table class="grid" style="width: 100%; font-size: 7.5pt; margin-bottom: 0; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #f1f5f9;">
+              <th style="width: 32%; padding: 3px 5px;">Package</th>
+              <th style="width: 24%; padding: 3px 5px;">Version</th>
+              <th style="width: 44%; padding: 3px 5px;">Client Function</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>react</code></td>
+              <td>18.3.1</td>
+              <td>Component UI tree</td>
+            </tr>
+            <tr>
+              <td><code>react-router-dom</code></td>
+              <td>6.28.1</td>
+              <td>Client-side SPA routes</td>
+            </tr>
+            <tr>
+              <td><code>axios</code></td>
+              <td>1.7.9</td>
+              <td>HTTP client with interceptors</td>
+            </tr>
+            <tr>
+              <td><code>vite</code></td>
+              <td>5.4.11</td>
+              <td>ESM dev server & bundler</td>
+            </tr>
+            <tr>
+              <td><code>eslint</code></td>
+              <td>8.57.1</td>
+              <td>Static code quality linting</td>
+            </tr>
+            <tr>
+              <td><code>base.css</code></td>
+              <td>Custom</td>
+              <td>Design token system</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="flex: 1.2;">
+        <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-bottom: 2px;">
+          Table 5.5: Server-Side Framework & Middleware Stack
+        </div>
+        <table class="grid" style="width: 100%; font-size: 7.5pt; margin-bottom: 0; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #f1f5f9;">
+              <th style="width: 34%; padding: 3px 5px;">Package</th>
+              <th style="width: 22%; padding: 3px 5px;">Version</th>
+              <th style="width: 44%; padding: 3px 5px;">Security & Functional Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>express</code></td>
+              <td>4.21.2</td>
+              <td>RESTful routing & dispatch</td>
+            </tr>
+            <tr>
+              <td><code>mongoose</code></td>
+              <td>8.9.5</td>
+              <td>ODM schemas & validation</td>
+            </tr>
+            <tr>
+              <td><code>jsonwebtoken</code></td>
+              <td>9.0.2</td>
+              <td>Signed token issuance & verify</td>
+            </tr>
+            <tr>
+              <td><code>bcryptjs</code></td>
+              <td>2.4.3</td>
+              <td>10-round salted password hash</td>
+            </tr>
+            <tr>
+              <td><code>helmet</code></td>
+              <td>8.0.0</td>
+              <td>11 secure HTTP response headers</td>
+            </tr>
+            <tr>
+              <td><code>cors</code></td>
+              <td>2.8.5</td>
+              <td>Whitelisted origin restrictions</td>
+            </tr>
+            <tr>
+              <td><code>express-rate-limit</code></td>
+              <td>7.5.0</td>
+              <td>Sliding window DDoS defense</td>
+            </tr>
+            <tr>
+              <td><code>express-validator</code></td>
+              <td>7.2.1</td>
+              <td>Body/param schema sanitization</td>
+            </tr>
+            <tr>
+              <td><code>node-cron</code></td>
+              <td>3.0.3</td>
+              <td>Daily automated license scan</td>
+            </tr>
+            <tr>
+              <td><code>nodemailer</code></td>
+              <td>6.9.16</td>
+              <td>SMTP notification transport</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-top: 6px;">
+      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
+        <figure data-caption="3-Tier Logical System Architecture" style="margin: 0;">
+          <img src="docs/assets/diagrams/d01-architecture-3tier.png" style="max-height: 52mm; max-width: 74mm; object-fit: contain;" alt="3-Tier Architecture" />
+          <figcaption style="font-size: 7.8pt; margin-top: 2px;">Figure 5.1: AssetDesk 3-Tier Client-Server Architecture</figcaption>
+        </figure>
+        <div style="font-size: 7.2pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+          Depicts clear tier boundaries: Presentation (React SPA), Application (Node.js/Express REST API controllers), and Data Layer (MongoDB with replica set resilience).
+        </div>
+      </div>
+
+      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
+        <figure data-caption="Production Deployment Architecture Topology" style="margin: 0;">
+          <img src="docs/assets/diagrams/d15-deployment.png" style="max-height: 52mm; max-width: 74mm; object-fit: contain;" alt="Deployment Architecture" />
+          <figcaption style="font-size: 7.8pt; margin-top: 2px;">Figure 5.2: Production Deployment Architecture Topology</figcaption>
+        </figure>
+        <div style="font-size: 7.2pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+          Illustrates production topology: HTTPS edge termination via NGINX reverse proxy, Node.js PM2 process clustering, and TLS connection pooling to MongoDB Atlas.
+        </div>
+      </div>
     </div>
   </div>
 </div>

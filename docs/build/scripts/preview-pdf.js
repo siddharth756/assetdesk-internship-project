@@ -71,6 +71,9 @@ function resolvePlaceholders(html, config, isCover = false) {
   result = result.replace(/\{\{company\.startDate\}\}/g, config.company?.startDate || "");
   result = result.replace(/\{\{company\.endDate\}\}/g, config.company?.endDate || "");
   result = result.replace(/\{\{company\.duration\}\}/g, config.company?.duration || "");
+  result = result.replace(/\{\{company\.allowsCodeInReport\}\}/g, config.company?.allowsCodeInReport || "");
+  result = result.replace(/\{\{os\}\}/g, config.os || "");
+  result = result.replace(/\{\{hardwareMachine\}\}/g, config.hardwareMachine || "");
 
   result = result.replace(/<span class="filled-field" style="min-width:\s*(\d+)mm;[^"]*">\s*<\/span>/g, (m, w) => {
     return `<span class="blank-field-line" style="display: inline-block; min-width: ${w}mm; border-bottom: 1.5px dotted #64748b; height: 1.1em; vertical-align: baseline;">&nbsp;</span>`;
