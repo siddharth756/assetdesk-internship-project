@@ -3,6 +3,7 @@ node_modules
 dist
 coverage
 docs/output
+test-results
 .DS_Store
 
 # Local prompt pack & instructions

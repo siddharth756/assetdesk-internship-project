@@ -109,7 +109,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
   });
 
   describe("POST /api/v1/tickets (Create Ticket)", () => {
-    it("employee creates ticket ok with default priority MEDIUM and status OPEN", async () => {
+    it("IT-M4-01 employee creates ticket ok with default priority MEDIUM and status OPEN", async () => {
       const year = new Date().getFullYear();
       const res = await request(app)
         .post("/api/v1/tickets")
@@ -138,7 +138,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(audit.details).toContain(`Created ticket TCK-${year}-0001`);
     });
 
-    it("code format and increment sequentially", async () => {
+    it("IT-M4-02 code format and increment sequentially", async () => {
       const year = new Date().getFullYear();
 
       const res1 = await request(app)
@@ -165,7 +165,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res2.body.data.ticketCode).toBe(`TCK-${year}-0002`);
     });
 
-    it("creates ticket with explicit priority and valid relatedAsset", async () => {
+    it("IT-M4-03 creates ticket with explicit priority and valid relatedAsset", async () => {
       const res = await request(app)
         .post("/api/v1/tickets")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -183,7 +183,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data.relatedAsset.assetTag).toBe(sampleAsset.assetTag);
     });
 
-    it("relatedAsset invalid returns 400 when asset does not exist", async () => {
+    it("IT-M4-04 relatedAsset invalid returns 400 when asset does not exist", async () => {
       const nonExistentId = new mongoose.Types.ObjectId().toString();
       const res = await request(app)
         .post("/api/v1/tickets")
@@ -200,7 +200,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.message).toMatch(/Related asset not found/i);
     });
 
-    it("relatedAsset invalid returns 400 when ID format is malformed", async () => {
+    it("IT-M4-05 relatedAsset invalid returns 400 when ID format is malformed", async () => {
       const res = await request(app)
         .post("/api/v1/tickets")
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -215,7 +215,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.success).toBe(false);
     });
 
-    it("rejects ticket creation when title is too short (< 5 chars)", async () => {
+    it("IT-M4-06 rejects ticket creation when title is too short (< 5 chars)", async () => {
       const res = await request(app)
         .post("/api/v1/tickets")
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -230,7 +230,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("rejects ticket creation when description is missing", async () => {
+    it("IT-M4-07 rejects ticket creation when description is missing", async () => {
       const res = await request(app)
         .post("/api/v1/tickets")
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -243,7 +243,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.success).toBe(false);
     });
 
-    it("rejects ticket creation when category is invalid", async () => {
+    it("IT-M4-08 rejects ticket creation when category is invalid", async () => {
       const res = await request(app)
         .post("/api/v1/tickets")
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -308,7 +308,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       });
     });
 
-    it("employee list only own tickets (auto restricted to createdBy = self)", async () => {
+    it("IT-M4-09 employee list only own tickets (auto restricted to createdBy = self)", async () => {
       const res = await request(app)
         .get("/api/v1/tickets")
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -323,7 +323,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(ticketIds).not.toContain(tckOverdue._id.toString());
     });
 
-    it("employee list ignores any attempt to pass another createdBy filter", async () => {
+    it("IT-M4-10 employee list ignores any attempt to pass another createdBy filter", async () => {
       const res = await request(app)
         .get(`/api/v1/tickets?createdBy=${employeeUser2._id}`)
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -335,7 +335,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       });
     });
 
-    it("support sees all tickets across all users", async () => {
+    it("IT-M4-11 support sees all tickets across all users", async () => {
       const res = await request(app)
         .get("/api/v1/tickets")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -344,7 +344,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data.length).toBe(4);
     });
 
-    it("admin sees all tickets across all users", async () => {
+    it("IT-M4-12 admin sees all tickets across all users", async () => {
       const res = await request(app)
         .get("/api/v1/tickets")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -353,7 +353,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data.length).toBe(4);
     });
 
-    it("filters tickets by status", async () => {
+    it("IT-M4-13 filters tickets by status", async () => {
       const res = await request(app)
         .get("/api/v1/tickets?status=IN_PROGRESS")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -363,7 +363,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data[0]._id).toBe(tckSupportAssigned._id.toString());
     });
 
-    it("filters tickets by priority", async () => {
+    it("IT-M4-14 filters tickets by priority", async () => {
       const res = await request(app)
         .get("/api/v1/tickets?priority=CRITICAL")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -373,7 +373,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data[0]._id).toBe(tckOverdue._id.toString());
     });
 
-    it("filters tickets by category", async () => {
+    it("IT-M4-15 filters tickets by category", async () => {
       const res = await request(app)
         .get("/api/v1/tickets?category=HARDWARE")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -383,7 +383,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data[0]._id).toBe(tckSupportAssigned._id.toString());
     });
 
-    it("filters tickets by assignedTo=me", async () => {
+    it("IT-M4-16 filters tickets by assignedTo=me", async () => {
       const res = await request(app)
         .get("/api/v1/tickets?assignedTo=me")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -393,7 +393,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data[0]._id).toBe(tckSupportAssigned._id.toString());
     });
 
-    it("filters tickets by assignedTo=none (unassigned)", async () => {
+    it("IT-M4-17 filters tickets by assignedTo=none (unassigned)", async () => {
       const res = await request(app)
         .get("/api/v1/tickets?assignedTo=none")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -405,7 +405,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       });
     });
 
-    it("overdue filter: overdue=true returns only not RESOLVED/CLOSED tickets past dueAt", async () => {
+    it("IT-M4-18 overdue filter: overdue=true returns only not RESOLVED/CLOSED tickets past dueAt", async () => {
       // Also add a resolved ticket whose dueAt is past to ensure it's excluded
       await Ticket.create({
         title: "Past resolved ticket",
@@ -427,7 +427,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data[0]._id).toBe(tckOverdue._id.toString());
     });
 
-    it("searches tickets by q matching title or ticketCode", async () => {
+    it("IT-M4-19 searches tickets by q matching title or ticketCode", async () => {
       const res = await request(app)
         .get("/api/v1/tickets?q=printer")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -437,7 +437,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data[0].title).toContain("Printer");
     });
 
-    it("paginates ticket list with meta { page, limit, total }", async () => {
+    it("IT-M4-20 paginates ticket list with meta { page, limit, total }", async () => {
       const res = await request(app)
         .get("/api/v1/tickets?page=1&limit=2")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -478,7 +478,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       });
     });
 
-    it("employee can get own ticket including comments with author names", async () => {
+    it("IT-M4-21 employee can get own ticket including comments with author names", async () => {
       const res = await request(app)
         .get(`/api/v1/tickets/${emp1Ticket._id}`)
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -491,7 +491,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data.comments[0].author.email).toBe("employee@assetdesk.local");
     });
 
-    it("employee cannot open someone else's ticket (returns 404 to avoid leaking existence)", async () => {
+    it("IT-M4-22 employee cannot open someone else's ticket (returns 404 to avoid leaking existence)", async () => {
       const res = await request(app)
         .get(`/api/v1/tickets/${emp2Ticket._id}`)
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -501,7 +501,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.message).toMatch(/Ticket not found/i);
     });
 
-    it("support can open any ticket by ID", async () => {
+    it("IT-M4-23 support can open any ticket by ID", async () => {
       const res = await request(app)
         .get(`/api/v1/tickets/${emp1Ticket._id}`)
         .set("Authorization", `Bearer ${supportToken}`);
@@ -510,7 +510,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data._id).toBe(emp1Ticket._id.toString());
     });
 
-    it("returns 404 for non-existent ticket ID", async () => {
+    it("IT-M4-24 returns 404 for non-existent ticket ID", async () => {
       const nonExistentId = new mongoose.Types.ObjectId().toString();
       const res = await request(app)
         .get(`/api/v1/tickets/${nonExistentId}`)
@@ -519,7 +519,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.status).toBe(404);
     });
 
-    it("returns 400 for malformed ticket ID", async () => {
+    it("IT-M4-25 returns 400 for malformed ticket ID", async () => {
       const res = await request(app)
         .get("/api/v1/tickets/invalid-id-format")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -541,7 +541,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       });
     });
 
-    it("assign moves OPEN ticket automatically to IN_PROGRESS and writes audit", async () => {
+    it("IT-M4-26 assign moves OPEN ticket automatically to IN_PROGRESS and writes audit", async () => {
       const res = await request(app)
         .patch(`/api/v1/tickets/${openTicket._id}/assign`)
         .set("Authorization", `Bearer ${supportToken}`)
@@ -561,7 +561,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(audit.details).toContain(`Assigned ticket ${openTicket.ticketCode} to Support User`);
     });
 
-    it("assign to employee user rejected with 400", async () => {
+    it("IT-M4-27 assign to employee user rejected with 400", async () => {
       const res = await request(app)
         .patch(`/api/v1/tickets/${openTicket._id}/assign`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -572,7 +572,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.message).toMatch(/active administrator or IT support staff/i);
     });
 
-    it("assign to inactive user rejected with 400", async () => {
+    it("IT-M4-28 assign to inactive user rejected with 400", async () => {
       const res = await request(app)
         .patch(`/api/v1/tickets/${openTicket._id}/assign`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -583,7 +583,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.message).toMatch(/inactive/i);
     });
 
-    it("employee forbidden from assigning tickets (returns 403)", async () => {
+    it("IT-M4-29 employee forbidden from assigning tickets (returns 403)", async () => {
       const res = await request(app)
         .patch(`/api/v1/tickets/${openTicket._id}/assign`)
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -593,7 +593,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.success).toBe(false);
     });
 
-    it("cannot assign a CLOSED ticket (returns 400)", async () => {
+    it("IT-M4-30 cannot assign a CLOSED ticket (returns 400)", async () => {
       const closedTicket = await Ticket.create({
         title: "Already closed ticket",
         description: "Closed maintenance request.",
@@ -615,7 +615,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
   });
 
   describe("PATCH /api/v1/tickets/:id/status (Lifecycle State Machine)", () => {
-    it("full happy path: OPEN -> IN_PROGRESS -> RESOLVED -> CLOSED", async () => {
+    it("IT-M4-31 full happy path: OPEN -> IN_PROGRESS -> RESOLVED -> CLOSED", async () => {
       // 1. Create ticket in OPEN status
       const ticket = await Ticket.create({
         title: "Full lifecycle happy path ticket",
@@ -662,7 +662,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(resClosed.body.data.closedAt).toBeDefined();
     });
 
-    it("invalid transitions (OPEN -> RESOLVED, OPEN -> CLOSED) return 400", async () => {
+    it("IT-M4-32 invalid transitions (OPEN -> RESOLVED, OPEN -> CLOSED) return 400", async () => {
       const ticket = await Ticket.create({
         title: "Testing invalid direct skip transitions",
         description: "Attempting to skip mandatory in progress step.",
@@ -695,7 +695,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res2.body.error.message).toMatch(/Invalid status transition from OPEN to CLOSED/i);
     });
 
-    it("transition to IN_PROGRESS without assignedTo returns 400", async () => {
+    it("IT-M4-33 transition to IN_PROGRESS without assignedTo returns 400", async () => {
       const unassignedTicket = await Ticket.create({
         title: "Unassigned ticket trying to start progress",
         description: "Rule 5 requires an assigned user before moving to IN_PROGRESS.",
@@ -715,7 +715,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.message).toMatch(/Assigned user is required/i);
     });
 
-    it("resolve without note returns 400", async () => {
+    it("IT-M4-34 resolve without note returns 400", async () => {
       const inProgressTicket = await Ticket.create({
         title: "In progress ticket resolving without note",
         description: "Resolution note requirement validation.",
@@ -745,7 +745,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(resShortNote.body.success).toBe(false);
     });
 
-    it("employee reopen own resolved ticket (RESOLVED -> IN_PROGRESS) clears resolvedAt", async () => {
+    it("IT-M4-35 employee reopen own resolved ticket (RESOLVED -> IN_PROGRESS) clears resolvedAt", async () => {
       const resolvedTicket = await Ticket.create({
         title: "Employee ticket was resolved but problem recurred",
         description: "Wifi disconnected again after reboot.",
@@ -776,7 +776,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(audit.details).toBe("Status changed from RESOLVED to IN_PROGRESS");
     });
 
-    it("employee cannot change status otherwise (returns 403)", async () => {
+    it("IT-M4-36 employee cannot change status otherwise (returns 403)", async () => {
       const openTicket = await Ticket.create({
         title: "Employee own open ticket",
         description: "Employee attempts unauthorized state transition.",
@@ -797,7 +797,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.message).toMatch(/Employees can only reopen/i);
     });
 
-    it("employee cannot change status on someone else's ticket (returns 404)", async () => {
+    it("IT-M4-37 employee cannot change status on someone else's ticket (returns 404)", async () => {
       const resolvedTicketEmp2 = await Ticket.create({
         title: "Employee 2 resolved ticket",
         description: "Belongs to employee 2.",
@@ -818,7 +818,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.success).toBe(false);
     });
 
-    it("closed ticket immutable: any status change returns 400 Ticket is closed", async () => {
+    it("IT-M4-38 closed ticket immutable: any status change returns 400 Ticket is closed", async () => {
       const closedTicket = await Ticket.create({
         title: "Immutable closed ticket",
         description: "Already finalized ticket.",
@@ -848,7 +848,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(resEmp.body.error.message).toMatch(/Ticket is closed/i);
     });
 
-    it("audit row written with format 'Status changed from X to Y'", async () => {
+    it("IT-M4-39 audit row written with format 'Status changed from X to Y'", async () => {
       const ticket = await Ticket.create({
         title: "Audit logging test ticket",
         description: "Testing audit row details format.",
@@ -905,7 +905,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       });
     });
 
-    it("employee can comment on own open ticket", async () => {
+    it("IT-M4-40 employee can comment on own open ticket", async () => {
       const res = await request(app)
         .post(`/api/v1/tickets/${emp1Ticket._id}/comments`)
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -927,7 +927,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(audit.details).toContain(`Added comment to ticket ${emp1Ticket.ticketCode}`);
     });
 
-    it("support can comment on any open ticket", async () => {
+    it("IT-M4-41 support can comment on any open ticket", async () => {
       const res = await request(app)
         .post(`/api/v1/tickets/${emp1Ticket._id}/comments`)
         .set("Authorization", `Bearer ${supportToken}`)
@@ -938,7 +938,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data.comments[0].author.name).toBe("Support User");
     });
 
-    it("admin can comment on any open ticket", async () => {
+    it("IT-M4-42 admin can comment on any open ticket", async () => {
       const res = await request(app)
         .post(`/api/v1/tickets/${emp1Ticket._id}/comments`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -949,7 +949,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.data.comments[0].author.role).toBe("ADMIN");
     });
 
-    it("employee cannot comment on someone else's ticket (returns 403)", async () => {
+    it("IT-M4-43 employee cannot comment on someone else's ticket (returns 403)", async () => {
       const res = await request(app)
         .post(`/api/v1/tickets/${emp2Ticket._id}/comments`)
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -960,7 +960,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(res.body.error.message).toMatch(/Employees can only comment on their own tickets/i);
     });
 
-    it("nobody can comment on a CLOSED ticket (returns 400)", async () => {
+    it("IT-M4-44 nobody can comment on a CLOSED ticket (returns 400)", async () => {
       // Support attempt
       const resSupport = await request(app)
         .post(`/api/v1/tickets/${closedTicket._id}/comments`)
@@ -980,7 +980,7 @@ describe("Support Tickets Integration Tests (Module M4)", () => {
       expect(resEmp.body.error.message).toMatch(/Ticket is closed/i);
     });
 
-    it("rejects empty comment or comment exceeding 1000 characters", async () => {
+    it("IT-M4-45 rejects empty comment or comment exceeding 1000 characters", async () => {
       const resEmpty = await request(app)
         .post(`/api/v1/tickets/${emp1Ticket._id}/comments`)
         .set("Authorization", `Bearer ${employeeToken}`)

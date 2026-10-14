@@ -4,7 +4,7 @@ const { addDays, startOfToday } = require("../../src/utils/dates");
 
 describe("Models Unit Tests", () => {
   describe("Asset Model", () => {
-    it("should auto-generate assetTag in format AST-YYYY-0001 and increment sequentially", async () => {
+    it("UT-24 should auto-generate assetTag in format AST-YYYY-0001 and increment sequentially", async () => {
       const year = new Date().getFullYear();
 
       const asset1 = await Asset.create({
@@ -23,7 +23,7 @@ describe("Models Unit Tests", () => {
       expect(asset2.assetTag).toBe(`AST-${year}-0002`);
     });
 
-    it("should reject duplicate serialNumber with conflict / duplicate key error", async () => {
+    it("UT-25 should reject duplicate serialNumber with conflict / duplicate key error", async () => {
       await Asset.create({
         serialNumber: "SN-UNIQUE-XYZ",
         name: "Test Laptop",
@@ -47,7 +47,7 @@ describe("Models Unit Tests", () => {
   });
 
   describe("Ticket Model", () => {
-    it("should auto-generate ticketCode in format TCK-YYYY-0001 and compute dueAt based on priority", async () => {
+    it("UT-26 should auto-generate ticketCode in format TCK-YYYY-0001 and compute dueAt based on priority", async () => {
       const year = new Date().getFullYear();
       const user = await User.create({
         name: "Requester",
@@ -75,7 +75,7 @@ describe("Models Unit Tests", () => {
   });
 
   describe("License Model Virtuals", () => {
-    it("should correctly compute status for EXPIRED, EXPIRING, and ACTIVE licenses", async () => {
+    it("UT-27 should correctly compute status for EXPIRED, EXPIRING, and ACTIVE licenses", async () => {
       const today = startOfToday();
 
       const expiredLicense = new License({
@@ -103,7 +103,7 @@ describe("Models Unit Tests", () => {
       expect(activeLicense.status).toBe("ACTIVE");
     });
 
-    it("should correctly compute usedSeats and availableSeats virtuals", async () => {
+    it("UT-28 should correctly compute usedSeats and availableSeats virtuals", async () => {
       const user1 = await User.create({
         name: "User One",
         email: "user1@assetdesk.local",
@@ -137,7 +137,7 @@ describe("Models Unit Tests", () => {
   });
 
   describe("AuditLog Model (Append-only enforcement)", () => {
-    it("should block updateOne, findOneAndUpdate, and delete operations on AuditLog", async () => {
+    it("UT-29 should block updateOne, findOneAndUpdate, and delete operations on AuditLog", async () => {
       const log = await AuditLog.create({
         userName: "System Admin",
         action: "LOGIN",
@@ -166,7 +166,7 @@ describe("Models Unit Tests", () => {
   });
 
   describe("User Model Security", () => {
-    it("should never expose passwordHash in toJSON output", async () => {
+    it("UT-30 should never expose passwordHash in toJSON output", async () => {
       const user = await User.create({
         name: "Security Test User",
         email: "security@assetdesk.local",

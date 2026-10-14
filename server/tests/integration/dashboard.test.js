@@ -190,13 +190,13 @@ describe("Dashboard Summary Integration Tests (Module M5)", () => {
   });
 
   describe("GET /api/v1/dashboard/summary", () => {
-    it("should reject unauthenticated request with 401", async () => {
+    it("IT-M5-15 should reject unauthenticated request with 401", async () => {
       const res = await request(app).get("/api/v1/dashboard/summary");
       expect(res.status).toBe(401);
       expect(res.body.success).toBe(false);
     });
 
-    it("should return full organizational dashboard for ADMIN including recentAudit", async () => {
+    it("IT-M5-16 should return full organizational dashboard for ADMIN including recentAudit", async () => {
       const res = await request(app)
         .get("/api/v1/dashboard/summary")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -236,7 +236,7 @@ describe("Dashboard Summary Integration Tests (Module M5)", () => {
       expect(d.recentAudit.length).toBe(1);
     });
 
-    it("should return organizational dashboard for IT_SUPPORT without recentAudit", async () => {
+    it("IT-M5-17 should return organizational dashboard for IT_SUPPORT without recentAudit", async () => {
       const res = await request(app)
         .get("/api/v1/dashboard/summary")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -251,7 +251,7 @@ describe("Dashboard Summary Integration Tests (Module M5)", () => {
       expect(d.recentAudit).toBeUndefined();
     });
 
-    it("should return personal dashboard for EMPLOYEE with only own data", async () => {
+    it("IT-M5-18 should return personal dashboard for EMPLOYEE with only own data", async () => {
       const res = await request(app)
         .get("/api/v1/dashboard/summary")
         .set("Authorization", `Bearer ${employeeToken1}`);
@@ -271,7 +271,7 @@ describe("Dashboard Summary Integration Tests (Module M5)", () => {
       expect(d.myRecentTickets.length).toBe(3); // 3 tickets created by emp1
     });
 
-    it("should compute ticketsOverdue using ticketRules (not RESOLVED/CLOSED and dueAt < now)", async () => {
+    it("IT-M5-19 should compute ticketsOverdue using ticketRules (not RESOLVED/CLOSED and dueAt < now)", async () => {
       const res = await request(app)
         .get("/api/v1/dashboard/summary")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -280,7 +280,7 @@ describe("Dashboard Summary Integration Tests (Module M5)", () => {
       expect(res.body.data.ticketsOverdue).toBe(1);
     });
 
-    it("should populate recentTickets with createdBy, assignedTo, and relatedAsset", async () => {
+    it("IT-M5-20 should populate recentTickets with createdBy, assignedTo, and relatedAsset", async () => {
       const res = await request(app)
         .get("/api/v1/dashboard/summary")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -291,7 +291,7 @@ describe("Dashboard Summary Integration Tests (Module M5)", () => {
       expect(recent[0].createdBy.name).toBeDefined();
     });
 
-    it("should limit recentTickets and recentAudit to maximum 5 items", async () => {
+    it("IT-M5-21 should limit recentTickets and recentAudit to maximum 5 items", async () => {
       // Add more tickets to exceed 5
       const extraTickets = [];
       for (let i = 0; i < 5; i++) {
@@ -312,7 +312,7 @@ describe("Dashboard Summary Integration Tests (Module M5)", () => {
       expect(res.body.data.recentTickets.length).toBe(5);
     });
 
-    it("should return zero counts when collections are empty without errors", async () => {
+    it("IT-M5-22 should return zero counts when collections are empty without errors", async () => {
       await Asset.deleteMany({});
       await License.deleteMany({});
       await Ticket.deleteMany({});

@@ -1,0 +1,2226 @@
+{
+  "generatedAt": "2026-10-14T10:49:33.605Z",
+  "environment": {
+    "os": "Darwin 24.6.0 (x64)",
+    "node": "v24.13.0",
+    "mongodb": "v8.2.4",
+    "browser": "Chromium 131.0 (Headless)"
+  },
+  "jest": {
+    "suites": 13,
+    "tests": 256,
+    "passed": 256,
+    "failed": 0,
+    "durationMs": 67894,
+    "coverage": {
+      "statements": {
+        "total": 1247,
+        "covered": 1087,
+        "skipped": 0,
+        "pct": 87.16
+      },
+      "branches": {
+        "total": 885,
+        "covered": 602,
+        "skipped": 0,
+        "pct": 68.02
+      },
+      "functions": {
+        "total": 122,
+        "covered": 108,
+        "skipped": 0,
+        "pct": 88.52
+      },
+      "lines": {
+        "total": 1202,
+        "covered": 1060,
+        "skipped": 0,
+        "pct": 88.18
+      }
+    }
+  },
+  "playwright": {
+    "tests": 16,
+    "passed": 16,
+    "failed": 0,
+    "durationMs": 13813
+  },
+  "cases": [
+    {
+      "id": "IT-M4-01",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee creates ticket ok with default priority MEDIUM and status OPEN",
+      "status": "PASSED",
+      "durationMs": 234
+    },
+    {
+      "id": "IT-M4-02",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "code format and increment sequentially",
+      "status": "PASSED",
+      "durationMs": 112
+    },
+    {
+      "id": "IT-M4-03",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "creates ticket with explicit priority and valid relatedAsset",
+      "status": "PASSED",
+      "durationMs": 98
+    },
+    {
+      "id": "IT-M4-04",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "relatedAsset invalid returns 400 when asset does not exist",
+      "status": "PASSED",
+      "durationMs": 91
+    },
+    {
+      "id": "IT-M4-05",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "relatedAsset invalid returns 400 when ID format is malformed",
+      "status": "PASSED",
+      "durationMs": 86
+    },
+    {
+      "id": "IT-M4-06",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "rejects ticket creation when title is too short (< 5 chars)",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M4-07",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "rejects ticket creation when description is missing",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M4-08",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "rejects ticket creation when category is invalid",
+      "status": "PASSED",
+      "durationMs": 90
+    },
+    {
+      "id": "IT-M4-09",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee list only own tickets (auto restricted to createdBy = self)",
+      "status": "PASSED",
+      "durationMs": 112
+    },
+    {
+      "id": "IT-M4-10",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee list ignores any attempt to pass another createdBy filter",
+      "status": "PASSED",
+      "durationMs": 106
+    },
+    {
+      "id": "IT-M4-11",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "support sees all tickets across all users",
+      "status": "PASSED",
+      "durationMs": 106
+    },
+    {
+      "id": "IT-M4-12",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "admin sees all tickets across all users",
+      "status": "PASSED",
+      "durationMs": 112
+    },
+    {
+      "id": "IT-M4-13",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "filters tickets by status",
+      "status": "PASSED",
+      "durationMs": 98
+    },
+    {
+      "id": "IT-M4-14",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "filters tickets by priority",
+      "status": "PASSED",
+      "durationMs": 98
+    },
+    {
+      "id": "IT-M4-15",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "filters tickets by category",
+      "status": "PASSED",
+      "durationMs": 98
+    },
+    {
+      "id": "IT-M4-16",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "filters tickets by assignedTo=me",
+      "status": "PASSED",
+      "durationMs": 99
+    },
+    {
+      "id": "IT-M4-17",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "filters tickets by assignedTo=none (unassigned)",
+      "status": "PASSED",
+      "durationMs": 103
+    },
+    {
+      "id": "IT-M4-18",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "overdue filter: overdue=true returns only not RESOLVED/CLOSED tickets past dueAt",
+      "status": "PASSED",
+      "durationMs": 105
+    },
+    {
+      "id": "IT-M4-19",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "searches tickets by q matching title or ticketCode",
+      "status": "PASSED",
+      "durationMs": 105
+    },
+    {
+      "id": "IT-M4-20",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "paginates ticket list with meta { page, limit, total }",
+      "status": "PASSED",
+      "durationMs": 102
+    },
+    {
+      "id": "IT-M4-21",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee can get own ticket including comments with author names",
+      "status": "PASSED",
+      "durationMs": 111
+    },
+    {
+      "id": "IT-M4-22",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee cannot open someone else's ticket (returns 404 to avoid leaking existence)",
+      "status": "PASSED",
+      "durationMs": 116
+    },
+    {
+      "id": "IT-M4-23",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "support can open any ticket by ID",
+      "status": "PASSED",
+      "durationMs": 100
+    },
+    {
+      "id": "IT-M4-24",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "returns 404 for non-existent ticket ID",
+      "status": "PASSED",
+      "durationMs": 92
+    },
+    {
+      "id": "IT-M4-25",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "returns 400 for malformed ticket ID",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M4-26",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "assign moves OPEN ticket automatically to IN_PROGRESS and writes audit",
+      "status": "PASSED",
+      "durationMs": 97
+    },
+    {
+      "id": "IT-M4-27",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "assign to employee user rejected with 400",
+      "status": "PASSED",
+      "durationMs": 93
+    },
+    {
+      "id": "IT-M4-28",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "assign to inactive user rejected with 400",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M4-29",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee forbidden from assigning tickets (returns 403)",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M4-30",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "cannot assign a CLOSED ticket (returns 400)",
+      "status": "PASSED",
+      "durationMs": 91
+    },
+    {
+      "id": "IT-M4-31",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "full happy path: OPEN -> IN_PROGRESS -> RESOLVED -> CLOSED",
+      "status": "PASSED",
+      "durationMs": 113
+    },
+    {
+      "id": "IT-M4-32",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "invalid transitions (OPEN -> RESOLVED, OPEN -> CLOSED) return 400",
+      "status": "PASSED",
+      "durationMs": 91
+    },
+    {
+      "id": "IT-M4-33",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "transition to IN_PROGRESS without assignedTo returns 400",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M4-34",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "resolve without note returns 400",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M4-35",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee reopen own resolved ticket (RESOLVED -> IN_PROGRESS) clears resolvedAt",
+      "status": "PASSED",
+      "durationMs": 91
+    },
+    {
+      "id": "IT-M4-36",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee cannot change status otherwise (returns 403)",
+      "status": "PASSED",
+      "durationMs": 147
+    },
+    {
+      "id": "IT-M4-37",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee cannot change status on someone else's ticket (returns 404)",
+      "status": "PASSED",
+      "durationMs": 247
+    },
+    {
+      "id": "IT-M4-38",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "closed ticket immutable: any status change returns 400 Ticket is closed",
+      "status": "PASSED",
+      "durationMs": 103
+    },
+    {
+      "id": "IT-M4-39",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "audit row written with format 'Status changed from X to Y'",
+      "status": "PASSED",
+      "durationMs": 92
+    },
+    {
+      "id": "IT-M4-40",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee can comment on own open ticket",
+      "status": "PASSED",
+      "durationMs": 97
+    },
+    {
+      "id": "IT-M4-41",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "support can comment on any open ticket",
+      "status": "PASSED",
+      "durationMs": 96
+    },
+    {
+      "id": "IT-M4-42",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "admin can comment on any open ticket",
+      "status": "PASSED",
+      "durationMs": 98
+    },
+    {
+      "id": "IT-M4-43",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "employee cannot comment on someone else's ticket (returns 403)",
+      "status": "PASSED",
+      "durationMs": 96
+    },
+    {
+      "id": "IT-M4-44",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "nobody can comment on a CLOSED ticket (returns 400)",
+      "status": "PASSED",
+      "durationMs": 95
+    },
+    {
+      "id": "IT-M4-45",
+      "level": "INTEGRATION",
+      "module": "M4",
+      "title": "rejects empty comment or comment exceeding 1000 characters",
+      "status": "PASSED",
+      "durationMs": 93
+    },
+    {
+      "id": "SEC-01",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "NoSQL injection payload on login -> 400",
+      "status": "PASSED",
+      "durationMs": 181
+    },
+    {
+      "id": "SEC-02",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "tampered JWT role claim -> 401",
+      "status": "PASSED",
+      "durationMs": 82
+    },
+    {
+      "id": "SEC-03",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "expired token -> 401",
+      "status": "PASSED",
+      "durationMs": 78
+    },
+    {
+      "id": "SEC-04",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "employee calling admin endpoints -> 403",
+      "status": "PASSED",
+      "durationMs": 81
+    },
+    {
+      "id": "SEC-05",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "employee reading another user's ticket -> 404",
+      "status": "PASSED",
+      "durationMs": 95
+    },
+    {
+      "id": "SEC-06",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "password hash never in responses",
+      "status": "PASSED",
+      "durationMs": 158
+    },
+    {
+      "id": "SEC-07",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "rate limit on login returns 429 after the limit",
+      "status": "PASSED",
+      "durationMs": 813
+    },
+    {
+      "id": "SEC-08",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "XSS string stored as plain text and returned escaped as data (JSON)",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "SEC-09",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "oversized body rejected",
+      "status": "PASSED",
+      "durationMs": 77
+    },
+    {
+      "id": "SEC-10",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "helmet headers present",
+      "status": "PASSED",
+      "durationMs": 83
+    },
+    {
+      "id": "SEC-11",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "CORS blocks other origin",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "SEC-12",
+      "level": "SECURITY",
+      "module": "SECURITY",
+      "title": "CSV injection prefix applied",
+      "status": "PASSED",
+      "durationMs": 75
+    },
+    {
+      "id": "IT-M2-01",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "allows ADMIN to create an asset with auto-generated assetTag and default AVAILABLE status",
+      "status": "PASSED",
+      "durationMs": 169
+    },
+    {
+      "id": "IT-M2-02",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "allows IT_SUPPORT to create an asset",
+      "status": "PASSED",
+      "durationMs": 91
+    },
+    {
+      "id": "IT-M2-03",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "auto-generates sequential assetTags (AST-YEAR-0001, AST-YEAR-0002)",
+      "status": "PASSED",
+      "durationMs": 108
+    },
+    {
+      "id": "IT-M2-04",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects duplicate serialNumber with 409 and exact message 'Serial number already registered'",
+      "status": "PASSED",
+      "durationMs": 107
+    },
+    {
+      "id": "IT-M2-05",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects missing required fields with 400 VALIDATION_ERROR",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M2-06",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects invalid category enum with 400",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M2-07",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "forbids EMPLOYEE role from creating an asset (403)",
+      "status": "PASSED",
+      "durationMs": 81
+    },
+    {
+      "id": "IT-M2-08",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects unauthenticated creation request with 401",
+      "status": "PASSED",
+      "durationMs": 79
+    },
+    {
+      "id": "IT-M2-09",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "lists assets with pagination metadata for ADMIN",
+      "status": "PASSED",
+      "durationMs": 97
+    },
+    {
+      "id": "IT-M2-10",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "supports search query q across name, serialNumber, and assetTag",
+      "status": "PASSED",
+      "durationMs": 97
+    },
+    {
+      "id": "IT-M2-11",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "escapes regex special characters in search query q safely",
+      "status": "PASSED",
+      "durationMs": 90
+    },
+    {
+      "id": "IT-M2-12",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "filters assets by category",
+      "status": "PASSED",
+      "durationMs": 90
+    },
+    {
+      "id": "IT-M2-13",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "filters assets by status",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M2-14",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "filters assets by assigned status (yes / no)",
+      "status": "PASSED",
+      "durationMs": 94
+    },
+    {
+      "id": "IT-M2-15",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "supports sorting by name ascending",
+      "status": "PASSED",
+      "durationMs": 96
+    },
+    {
+      "id": "IT-M2-16",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "forbids EMPLOYEE role from listing assets (403)",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M2-17",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "returns only assets assigned to the authenticated user",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M2-18",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "returns empty array when user has no assigned assets",
+      "status": "PASSED",
+      "durationMs": 80
+    },
+    {
+      "id": "IT-M2-19",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "allows ADMIN and IT_SUPPORT to fetch single asset by ID",
+      "status": "PASSED",
+      "durationMs": 83
+    },
+    {
+      "id": "IT-M2-20",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "allows EMPLOYEE to view asset assigned to them",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M2-21",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "returns 403 when EMPLOYEE tries to view asset not assigned to them",
+      "status": "PASSED",
+      "durationMs": 84
+    },
+    {
+      "id": "IT-M2-22",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "returns 400 for invalid ObjectId format",
+      "status": "PASSED",
+      "durationMs": 82
+    },
+    {
+      "id": "IT-M2-23",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "returns 404 for non-existent asset ID",
+      "status": "PASSED",
+      "durationMs": 82
+    },
+    {
+      "id": "IT-M2-24",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "updates editable fields (name, category, notes, serialNumber) for active asset",
+      "status": "PASSED",
+      "durationMs": 90
+    },
+    {
+      "id": "IT-M2-25",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects duplicate serialNumber on update with 409",
+      "status": "PASSED",
+      "durationMs": 107
+    },
+    {
+      "id": "IT-M2-26",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "allows updating ONLY notes on RETIRED assets",
+      "status": "PASSED",
+      "durationMs": 112
+    },
+    {
+      "id": "IT-M2-27",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects editing non-notes fields on RETIRED assets with 400",
+      "status": "PASSED",
+      "durationMs": 109
+    },
+    {
+      "id": "IT-M2-28",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "assigns AVAILABLE asset to an active user successfully",
+      "status": "PASSED",
+      "durationMs": 145
+    },
+    {
+      "id": "IT-M2-29",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects assigning non-available asset with 400 'Asset is not available'",
+      "status": "PASSED",
+      "durationMs": 236
+    },
+    {
+      "id": "IT-M2-30",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "double-assign race: two parallel requests -> exactly one 200",
+      "status": "PASSED",
+      "durationMs": 207
+    },
+    {
+      "id": "IT-M2-31",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects assigning to inactive user with 400",
+      "status": "PASSED",
+      "durationMs": 158
+    },
+    {
+      "id": "IT-M2-32",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects assigning to non-existent user with 404",
+      "status": "PASSED",
+      "durationMs": 196
+    },
+    {
+      "id": "IT-M2-33",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects assigning a RETIRED asset with 400 'Asset is not available'",
+      "status": "PASSED",
+      "durationMs": 105
+    },
+    {
+      "id": "IT-M2-34",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "unassigns an ASSIGNED asset and resets to AVAILABLE with null assignedTo",
+      "status": "PASSED",
+      "durationMs": 95
+    },
+    {
+      "id": "IT-M2-35",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects unassigning an asset that is not in ASSIGNED status with 400",
+      "status": "PASSED",
+      "durationMs": 101
+    },
+    {
+      "id": "IT-M2-36",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "changing status to MAINTENANCE clears assignee",
+      "status": "PASSED",
+      "durationMs": 101
+    },
+    {
+      "id": "IT-M2-37",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "changing status to RETIRED clears assignee",
+      "status": "PASSED",
+      "durationMs": 93
+    },
+    {
+      "id": "IT-M2-38",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects changing status of a RETIRED asset with 400",
+      "status": "PASSED",
+      "durationMs": 96
+    },
+    {
+      "id": "IT-M2-39",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "rejects setting status to ASSIGNED directly via status endpoint with 400",
+      "status": "PASSED",
+      "durationMs": 84
+    },
+    {
+      "id": "IT-M2-40",
+      "level": "INTEGRATION",
+      "module": "M2",
+      "title": "logs audit rows for ASSET_CREATE, ASSET_UPDATE, ASSET_ASSIGN, ASSET_UNASSIGN, and ASSET_STATUS",
+      "status": "PASSED",
+      "durationMs": 114
+    },
+    {
+      "id": "IT-M3-01",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "allows ADMIN to create a license with valid fields",
+      "status": "PASSED",
+      "durationMs": 154
+    },
+    {
+      "id": "IT-M3-02",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "allows IT_SUPPORT to create a license (receives masked key)",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M3-03",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects missing required softwareName with 400 VALIDATION_ERROR",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M3-04",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects missing licenseKey with 400 VALIDATION_ERROR",
+      "status": "PASSED",
+      "durationMs": 83
+    },
+    {
+      "id": "IT-M3-05",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects invalid totalSeats (< 1 or non-integer) with 400 VALIDATION_ERROR",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M3-06",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects invalid expiryDate with 400 VALIDATION_ERROR",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M3-07",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "forbids EMPLOYEE role from creating a license (403)",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M3-08",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects unauthenticated creation request with 401",
+      "status": "PASSED",
+      "durationMs": 84
+    },
+    {
+      "id": "IT-M3-09",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "lists licenses with pagination metadata and always masks licenseKey for ADMIN and IT_SUPPORT",
+      "status": "PASSED",
+      "durationMs": 103
+    },
+    {
+      "id": "IT-M3-10",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "supports search query q across softwareName and vendor",
+      "status": "PASSED",
+      "durationMs": 93
+    },
+    {
+      "id": "IT-M3-11",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "filters licenses by status EXPIRED",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M3-12",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "filters licenses by status EXPIRING",
+      "status": "PASSED",
+      "durationMs": 93
+    },
+    {
+      "id": "IT-M3-13",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "filters licenses by status ACTIVE",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M3-14",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "defaults to sorting by expiryDate ascending",
+      "status": "PASSED",
+      "durationMs": 91
+    },
+    {
+      "id": "IT-M3-15",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "supports custom sort order (e.g. softwareName)",
+      "status": "PASSED",
+      "durationMs": 93
+    },
+    {
+      "id": "IT-M3-16",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "forbids EMPLOYEE role from listing licenses (403)",
+      "status": "PASSED",
+      "durationMs": 84
+    },
+    {
+      "id": "IT-M3-17",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "returns licenses expiring within default 30 days plus already expired, ordered by expiryDate",
+      "status": "PASSED",
+      "durationMs": 116
+    },
+    {
+      "id": "IT-M3-18",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "supports custom days parameter (e.g. days=60)",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M3-19",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "forbids EMPLOYEE role from accessing expiring licenses (403)",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M3-20",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "returns FULL unmasked license key to ADMIN in detail view",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M3-21",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "returns MASKED license key (****-****-XXXX) to IT_SUPPORT in detail view",
+      "status": "PASSED",
+      "durationMs": 86
+    },
+    {
+      "id": "IT-M3-22",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "returns 404 for non-existent license ID",
+      "status": "PASSED",
+      "durationMs": 83
+    },
+    {
+      "id": "IT-M3-23",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "returns 400 for invalid ObjectId format",
+      "status": "PASSED",
+      "durationMs": 82
+    },
+    {
+      "id": "IT-M3-24",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "forbids EMPLOYEE role from viewing license details (403)",
+      "status": "PASSED",
+      "durationMs": 83
+    },
+    {
+      "id": "IT-M3-25",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "updates editable fields and totalSeats when >= usedSeats",
+      "status": "PASSED",
+      "durationMs": 102
+    },
+    {
+      "id": "IT-M3-26",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects reducing totalSeats below currently allocated seats with 400",
+      "status": "PASSED",
+      "durationMs": 86
+    },
+    {
+      "id": "IT-M3-27",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "returns 404 for non-existent license ID on update",
+      "status": "PASSED",
+      "durationMs": 86
+    },
+    {
+      "id": "IT-M3-28",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "allocates seat to an active user successfully",
+      "status": "PASSED",
+      "durationMs": 95
+    },
+    {
+      "id": "IT-M3-29",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "allocates until full, then subsequent allocation fails with 400 'No seats available'",
+      "status": "PASSED",
+      "durationMs": 114
+    },
+    {
+      "id": "IT-M3-30",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects duplicate allocation to same user with 409",
+      "status": "PASSED",
+      "durationMs": 96
+    },
+    {
+      "id": "IT-M3-31",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects allocation to an inactive user with 400",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M3-32",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects allocation with non-existent user ID with 404",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M3-33",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "atomic race: two parallel allocations for last remaining seat result in exactly one 200 and one 400",
+      "status": "PASSED",
+      "durationMs": 95
+    },
+    {
+      "id": "IT-M3-34",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "releases allocated seat successfully (200)",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M3-35",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "rejects releasing seat if user is not allocated with 404",
+      "status": "PASSED",
+      "durationMs": 80
+    },
+    {
+      "id": "IT-M3-36",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "returns 404 for non-existent license ID on release",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M3-37",
+      "level": "INTEGRATION",
+      "module": "M3",
+      "title": "writes audit logs for LICENSE_CREATE, LICENSE_UPDATE, LICENSE_ALLOCATE, and LICENSE_RELEASE",
+      "status": "PASSED",
+      "durationMs": 107
+    },
+    {
+      "id": "IT-M1-01",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "1. login ok: should authenticate active user and return JWT token and user profile",
+      "status": "PASSED",
+      "durationMs": 276
+    },
+    {
+      "id": "IT-M1-02",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "2. wrong password: should return 401 with generic error message",
+      "status": "PASSED",
+      "durationMs": 147
+    },
+    {
+      "id": "IT-M1-03",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "3. unknown email: should return 401 with identical generic error message",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M1-04",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "4. inactive user blocked: should reject login for deactivated user with 401",
+      "status": "PASSED",
+      "durationMs": 153
+    },
+    {
+      "id": "IT-M1-05",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "5. NoSQL-injection style payload: should reject object payload with 400 VALIDATION_ERROR",
+      "status": "PASSED",
+      "durationMs": 79
+    },
+    {
+      "id": "IT-M1-06",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "6. missing fields: should return 400 VALIDATION_ERROR when email or password is missing",
+      "status": "PASSED",
+      "durationMs": 81
+    },
+    {
+      "id": "IT-M1-07",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "7. audit rows created for successful login",
+      "status": "PASSED",
+      "durationMs": 156
+    },
+    {
+      "id": "IT-M1-08",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "8. audit rows created for failed login",
+      "status": "PASSED",
+      "durationMs": 180
+    },
+    {
+      "id": "IT-M1-09",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "9. me with valid token: should return current authenticated user profile",
+      "status": "PASSED",
+      "durationMs": 78
+    },
+    {
+      "id": "IT-M1-10",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "10. me without token: should return 401 UNAUTHORIZED",
+      "status": "PASSED",
+      "durationMs": 79
+    },
+    {
+      "id": "IT-M1-11",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "11. tampered token: should return 401 UNAUTHORIZED",
+      "status": "PASSED",
+      "durationMs": 77
+    },
+    {
+      "id": "IT-M1-12",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "12. expired token: should return 401 UNAUTHORIZED with expired message",
+      "status": "PASSED",
+      "durationMs": 118
+    },
+    {
+      "id": "IT-M1-13",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "13. change password ok: should update password and allow login with new password",
+      "status": "PASSED",
+      "durationMs": 374
+    },
+    {
+      "id": "IT-M1-14",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "14. change password wrong current: should reject with 400",
+      "status": "PASSED",
+      "durationMs": 156
+    },
+    {
+      "id": "IT-M1-15",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "15. change password weak new: should reject password without digits or under 8 chars with 400",
+      "status": "PASSED",
+      "durationMs": 86
+    },
+    {
+      "id": "IT-M1-16",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "16. audit row created for PASSWORD_CHANGE",
+      "status": "PASSED",
+      "durationMs": 233
+    },
+    {
+      "id": "IT-M1-17",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "1. EMPLOYEE blocked from /users: should return 403 FORBIDDEN",
+      "status": "PASSED",
+      "durationMs": 296
+    },
+    {
+      "id": "IT-M1-18",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "2. IT_SUPPORT blocked from /users: should return 403 FORBIDDEN",
+      "status": "PASSED",
+      "durationMs": 105
+    },
+    {
+      "id": "IT-M1-19",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "3. ADMIN can list users with pagination and search",
+      "status": "PASSED",
+      "durationMs": 181
+    },
+    {
+      "id": "IT-M1-20",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "4. ADMIN create user ok: should create user and return 201 with user data",
+      "status": "PASSED",
+      "durationMs": 216
+    },
+    {
+      "id": "IT-M1-21",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "5. duplicate email: should reject with 409 CONFLICT",
+      "status": "PASSED",
+      "durationMs": 90
+    },
+    {
+      "id": "IT-M1-22",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "6. weak password: should reject with 400 VALIDATION_ERROR",
+      "status": "PASSED",
+      "durationMs": 123
+    },
+    {
+      "id": "IT-M1-23",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "7. audit row created for user create",
+      "status": "PASSED",
+      "durationMs": 175
+    },
+    {
+      "id": "IT-M1-24",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "8. ADMIN update user: should update name, department, role",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M1-25",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "9. admin cannot demote self: should reject self-demotion with 400",
+      "status": "PASSED",
+      "durationMs": 82
+    },
+    {
+      "id": "IT-M1-26",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "10. admin cannot deactivate self: should reject self-deactivation with 400",
+      "status": "PASSED",
+      "durationMs": 83
+    },
+    {
+      "id": "IT-M1-27",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "11. ADMIN can toggle another user status",
+      "status": "PASSED",
+      "durationMs": 115
+    },
+    {
+      "id": "IT-M1-28",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "12. lookup allowed for IT_SUPPORT",
+      "status": "PASSED",
+      "durationMs": 112
+    },
+    {
+      "id": "IT-M1-29",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "13. lookup allowed for ADMIN",
+      "status": "PASSED",
+      "durationMs": 195
+    },
+    {
+      "id": "IT-M1-30",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "14. lookup forbidden for EMPLOYEE: should return 403",
+      "status": "PASSED",
+      "durationMs": 87
+    },
+    {
+      "id": "IT-M1-31",
+      "level": "INTEGRATION",
+      "module": "M1",
+      "title": "15. password hash never in any response",
+      "status": "PASSED",
+      "durationMs": 94
+    },
+    {
+      "id": "IT-M5-01",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should reject unauthenticated request with 401",
+      "status": "PASSED",
+      "durationMs": 131
+    },
+    {
+      "id": "IT-M5-02",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should reject employee request with 403 Forbidden",
+      "status": "PASSED",
+      "durationMs": 200
+    },
+    {
+      "id": "IT-M5-03",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should reject IT_SUPPORT request with 403 Forbidden (ADMIN only)",
+      "status": "PASSED",
+      "durationMs": 103
+    },
+    {
+      "id": "IT-M5-04",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should allow ADMIN to list all audit logs with populated user",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M5-05",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should filter audit logs by action",
+      "status": "PASSED",
+      "durationMs": 104
+    },
+    {
+      "id": "IT-M5-06",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should filter audit logs by entity",
+      "status": "PASSED",
+      "durationMs": 85
+    },
+    {
+      "id": "IT-M5-07",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should filter audit logs by user ID",
+      "status": "PASSED",
+      "durationMs": 89
+    },
+    {
+      "id": "IT-M5-08",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should filter audit logs by date range (from and to)",
+      "status": "PASSED",
+      "durationMs": 83
+    },
+    {
+      "id": "IT-M5-09",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should paginate results with meta and limit",
+      "status": "PASSED",
+      "durationMs": 84
+    },
+    {
+      "id": "IT-M5-10",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should sort newest logs first by default (-createdAt)",
+      "status": "PASSED",
+      "durationMs": 84
+    },
+    {
+      "id": "IT-M5-11",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return 404 for PUT /api/v1/audit-logs",
+      "status": "PASSED",
+      "durationMs": 82
+    },
+    {
+      "id": "IT-M5-12",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return 404 for DELETE /api/v1/audit-logs",
+      "status": "PASSED",
+      "durationMs": 78
+    },
+    {
+      "id": "IT-M5-13",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return 404 for PUT /api/v1/audit-logs/:id",
+      "status": "PASSED",
+      "durationMs": 78
+    },
+    {
+      "id": "IT-M5-14",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return 404 for DELETE /api/v1/audit-logs/:id",
+      "status": "PASSED",
+      "durationMs": 78
+    },
+    {
+      "id": "IT-M5-23",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should reject unauthenticated requests for all report endpoints with 401",
+      "status": "PASSED",
+      "durationMs": 138
+    },
+    {
+      "id": "IT-M5-24",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should reject employee requests with 403 Forbidden on all reports",
+      "status": "PASSED",
+      "durationMs": 102
+    },
+    {
+      "id": "IT-M5-25",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should allow IT_SUPPORT to export assets, licenses, and tickets",
+      "status": "PASSED",
+      "durationMs": 123
+    },
+    {
+      "id": "IT-M5-26",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should reject IT_SUPPORT on audit report (ADMIN only)",
+      "status": "PASSED",
+      "durationMs": 88
+    },
+    {
+      "id": "IT-M5-27",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should set text/csv content-type and attachment filename on assets report",
+      "status": "PASSED",
+      "durationMs": 91
+    },
+    {
+      "id": "IT-M5-28",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "assets report should include expected header row and data rows",
+      "status": "PASSED",
+      "durationMs": 98
+    },
+    {
+      "id": "IT-M5-29",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "licenses report should mask license key in CSV export (****-****-XXXX)",
+      "status": "PASSED",
+      "durationMs": 99
+    },
+    {
+      "id": "IT-M5-30",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should apply formula injection mitigation for cells starting with '='",
+      "status": "PASSED",
+      "durationMs": 110
+    },
+    {
+      "id": "IT-M5-31",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "tickets report should include ticket headers and row data",
+      "status": "PASSED",
+      "durationMs": 129
+    },
+    {
+      "id": "IT-M5-32",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "admin can export audit logs report as CSV",
+      "status": "PASSED",
+      "durationMs": 121
+    },
+    {
+      "id": "IT-M5-33",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should write REPORT_EXPORT audit log for each exported report",
+      "status": "PASSED",
+      "durationMs": 126
+    },
+    {
+      "id": "IT-M5-34",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should respect simple query filters on report endpoints",
+      "status": "PASSED",
+      "durationMs": 97
+    },
+    {
+      "id": "IT-M5-15",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should reject unauthenticated request with 401",
+      "status": "PASSED",
+      "durationMs": 164
+    },
+    {
+      "id": "IT-M5-16",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return full organizational dashboard for ADMIN including recentAudit",
+      "status": "PASSED",
+      "durationMs": 181
+    },
+    {
+      "id": "IT-M5-17",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return organizational dashboard for IT_SUPPORT without recentAudit",
+      "status": "PASSED",
+      "durationMs": 110
+    },
+    {
+      "id": "IT-M5-18",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return personal dashboard for EMPLOYEE with only own data",
+      "status": "PASSED",
+      "durationMs": 106
+    },
+    {
+      "id": "IT-M5-19",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should compute ticketsOverdue using ticketRules (not RESOLVED/CLOSED and dueAt < now)",
+      "status": "PASSED",
+      "durationMs": 115
+    },
+    {
+      "id": "IT-M5-20",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should populate recentTickets with createdBy, assignedTo, and relatedAsset",
+      "status": "PASSED",
+      "durationMs": 132
+    },
+    {
+      "id": "IT-M5-21",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should limit recentTickets and recentAudit to maximum 5 items",
+      "status": "PASSED",
+      "durationMs": 126
+    },
+    {
+      "id": "IT-M5-22",
+      "level": "INTEGRATION",
+      "module": "M5",
+      "title": "should return zero counts when collections are empty without errors",
+      "status": "PASSED",
+      "durationMs": 114
+    },
+    {
+      "id": "UT-24",
+      "level": "UNIT",
+      "module": "CORE",
+      "title": "should auto-generate assetTag in format AST-YYYY-0001 and increment sequentially",
+      "status": "PASSED",
+      "durationMs": 115
+    },
+    {
+      "id": "UT-25",
+      "level": "UNIT",
+      "module": "CORE",
+      "title": "should reject duplicate serialNumber with conflict / duplicate key error",
+      "status": "PASSED",
+      "durationMs": 11
+    },
+    {
+      "id": "UT-26",
+      "level": "UNIT",
+      "module": "CORE",
+      "title": "should auto-generate ticketCode in format TCK-YYYY-0001 and compute dueAt based on priority",
+      "status": "PASSED",
+      "durationMs": 7
+    },
+    {
+      "id": "UT-27",
+      "level": "UNIT",
+      "module": "CORE",
+      "title": "should correctly compute status for EXPIRED, EXPIRING, and ACTIVE licenses",
+      "status": "PASSED",
+      "durationMs": 3
+    },
+    {
+      "id": "UT-28",
+      "level": "UNIT",
+      "module": "CORE",
+      "title": "should correctly compute usedSeats and availableSeats virtuals",
+      "status": "PASSED",
+      "durationMs": 6
+    },
+    {
+      "id": "UT-29",
+      "level": "UNIT",
+      "module": "CORE",
+      "title": "should block updateOne, findOneAndUpdate, and delete operations on AuditLog",
+      "status": "PASSED",
+      "durationMs": 13
+    },
+    {
+      "id": "UT-30",
+      "level": "UNIT",
+      "module": "CORE",
+      "title": "should never expose passwordHash in toJSON output",
+      "status": "PASSED",
+      "durationMs": 4
+    },
+    {
+      "id": "UT-17",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "startOfToday should return a date with zeroed hours, minutes, seconds, ms",
+      "status": "PASSED",
+      "durationMs": 18
+    },
+    {
+      "id": "UT-18",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "daysBetween should calculate difference in calendar days",
+      "status": "PASSED",
+      "durationMs": 7
+    },
+    {
+      "id": "UT-19",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "addDays should accurately add days to date",
+      "status": "PASSED",
+      "durationMs": 4
+    },
+    {
+      "id": "UT-20",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "addHours should accurately add hours to date",
+      "status": "PASSED",
+      "durationMs": 4
+    },
+    {
+      "id": "UT-21",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "triggers alerts for licenses with injected dates at exactly 30, 15, 7, and 0 days",
+      "status": "PASSED",
+      "durationMs": 96
+    },
+    {
+      "id": "UT-22",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "triggers alert when daysLeft <= 0 (already expired)",
+      "status": "PASSED",
+      "durationMs": 16
+    },
+    {
+      "id": "UT-23",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "does not create duplicate alert twice on the same day for the same license",
+      "status": "PASSED",
+      "durationMs": 21
+    },
+    {
+      "id": "UT-31",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should allow OPEN -> IN_PROGRESS transition",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-32",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should allow IN_PROGRESS -> RESOLVED transition",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-33",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should allow RESOLVED -> CLOSED transition",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-34",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should allow RESOLVED -> IN_PROGRESS transition (ticket reopen)",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-35",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should disallow direct transition from OPEN to RESOLVED",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-36",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should disallow direct transition from OPEN to CLOSED",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-37",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should disallow skipping RESOLVED: IN_PROGRESS to CLOSED is invalid",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-38",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should disallow backwards transition from IN_PROGRESS to OPEN",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-39",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should disallow backwards transition from RESOLVED to OPEN",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-40",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should disallow any transition out of CLOSED status",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-41",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return false when target status is identical to current status",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-42",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return false for invalid, null, or undefined status inputs",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-43",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should compute 4 hours SLA for CRITICAL priority",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-44",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should compute 24 hours SLA for HIGH priority",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-45",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should compute 48 hours SLA for MEDIUM priority",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-46",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should compute 72 hours SLA for LOW priority",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-47",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should default to 48 hours SLA when priority is omitted or invalid",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-48",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should use current timestamp when createdAt is not provided",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-49",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return true when ticket is OPEN and now is past dueAt",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-50",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return true when ticket is IN_PROGRESS and now is past dueAt",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-51",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return false when ticket is OPEN but dueAt is in the future",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-52",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return false when ticket is IN_PROGRESS but dueAt is in the future",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-53",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return false when ticket is RESOLVED even if current time is past dueAt",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-54",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return false when ticket is CLOSED even if current time is past dueAt",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-55",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should return false for missing ticket or missing dueAt",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-56",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should match Contract section 5 SLA priority definitions",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-57",
+      "level": "UNIT",
+      "module": "M4",
+      "title": "should define transitions matching Contract section 7 Rule 5",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-01",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should return empty string for null and undefined",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-02",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should return plain alphanumeric strings untouched",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-03",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should wrap cells containing commas in double quotes",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-04",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should double internal quotes and wrap in quotes for cells with double quotes",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-05",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should wrap cells containing newline characters in quotes",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-06",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should mitigate formula injection by prefixing '=' with single quote",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-07",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should mitigate formula injection by prefixing '+' with single quote",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-08",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should mitigate formula injection by prefixing '-' with single quote",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-09",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should mitigate formula injection by prefixing '@' with single quote",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-10",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should format Date instances into ISO date strings",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-11",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should generate proper header row and CRLF separated data rows",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-12",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should correctly escape commas, quotes, and newlines across multi-column data",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-13",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should protect against spreadsheet formula injection in CSV cells",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-14",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should return only header row when rows array is empty",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "UT-15",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should support array of column strings as simplified column definitions",
+      "status": "PASSED",
+      "durationMs": 1
+    },
+    {
+      "id": "UT-16",
+      "level": "UNIT",
+      "module": "M1",
+      "title": "should return empty string if columns array is missing or empty",
+      "status": "PASSED",
+      "durationMs": 0
+    },
+    {
+      "id": "ST-01",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "admin login success and dashboard visible",
+      "status": "PASSED",
+      "durationMs": 859
+    },
+    {
+      "id": "ST-02",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "wrong password shows error",
+      "status": "PASSED",
+      "durationMs": 562
+    },
+    {
+      "id": "ST-03",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "employee cannot open /users (Not allowed)",
+      "status": "PASSED",
+      "durationMs": 567
+    },
+    {
+      "id": "ST-04",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "admin creates an asset",
+      "status": "PASSED",
+      "durationMs": 785
+    },
+    {
+      "id": "ST-05",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "duplicate serial shows error",
+      "status": "PASSED",
+      "durationMs": 851
+    },
+    {
+      "id": "ST-06",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "admin assigns asset to employee",
+      "status": "PASSED",
+      "durationMs": 1218
+    },
+    {
+      "id": "ST-07",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "employee sees asset in My Assets",
+      "status": "PASSED",
+      "durationMs": 629
+    },
+    {
+      "id": "ST-08",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "employee creates a ticket",
+      "status": "PASSED",
+      "durationMs": 722
+    },
+    {
+      "id": "ST-09",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "support assigns and resolves the ticket",
+      "status": "PASSED",
+      "durationMs": 821
+    },
+    {
+      "id": "ST-10",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "employee reopens then support closes",
+      "status": "PASSED",
+      "durationMs": 1613
+    },
+    {
+      "id": "ST-11",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "closed ticket cannot receive comments",
+      "status": "PASSED",
+      "durationMs": 843
+    },
+    {
+      "id": "ST-12",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "license allocate until seats full, then error",
+      "status": "PASSED",
+      "durationMs": 1395
+    },
+    {
+      "id": "ST-13",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "expiring licenses visible with badges",
+      "status": "PASSED",
+      "durationMs": 668
+    },
+    {
+      "id": "ST-14",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "admin downloads assets CSV and file has header row",
+      "status": "PASSED",
+      "durationMs": 888
+    },
+    {
+      "id": "ST-15",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "audit log shows the actions performed in ST-04..ST-10",
+      "status": "PASSED",
+      "durationMs": 735
+    },
+    {
+      "id": "ST-16",
+      "level": "SYSTEM",
+      "module": "SYSTEM",
+      "title": "logout clears session",
+      "status": "PASSED",
+      "durationMs": 657
+    }
+  ]
+}

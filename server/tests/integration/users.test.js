@@ -64,7 +64,7 @@ describe("Users Integration Tests (Module M1)", () => {
   });
 
   describe("GET /api/v1/users (RBAC & Listing)", () => {
-    it("1. EMPLOYEE blocked from /users: should return 403 FORBIDDEN", async () => {
+    it("IT-M1-17 1. EMPLOYEE blocked from /users: should return 403 FORBIDDEN", async () => {
       const res = await request(app)
         .get("/api/v1/users")
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -74,7 +74,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(res.body.error.code).toBe("FORBIDDEN");
     });
 
-    it("2. IT_SUPPORT blocked from /users: should return 403 FORBIDDEN", async () => {
+    it("IT-M1-18 2. IT_SUPPORT blocked from /users: should return 403 FORBIDDEN", async () => {
       const res = await request(app)
         .get("/api/v1/users")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -84,7 +84,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(res.body.error.code).toBe("FORBIDDEN");
     });
 
-    it("3. ADMIN can list users with pagination and search", async () => {
+    it("IT-M1-19 3. ADMIN can list users with pagination and search", async () => {
       const res = await request(app)
         .get("/api/v1/users?page=1&limit=2")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -110,7 +110,7 @@ describe("Users Integration Tests (Module M1)", () => {
   });
 
   describe("POST /api/v1/users (Creation)", () => {
-    it("4. ADMIN create user ok: should create user and return 201 with user data", async () => {
+    it("IT-M1-20 4. ADMIN create user ok: should create user and return 201 with user data", async () => {
       const res = await request(app)
         .post("/api/v1/users")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -130,7 +130,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(res.body.data.passwordHash).toBeUndefined();
     });
 
-    it("5. duplicate email: should reject with 409 CONFLICT", async () => {
+    it("IT-M1-21 5. duplicate email: should reject with 409 CONFLICT", async () => {
       const res = await request(app)
         .post("/api/v1/users")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -146,7 +146,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(res.body.error.code).toBe("CONFLICT");
     });
 
-    it("6. weak password: should reject with 400 VALIDATION_ERROR", async () => {
+    it("IT-M1-22 6. weak password: should reject with 400 VALIDATION_ERROR", async () => {
       const res = await request(app)
         .post("/api/v1/users")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -162,7 +162,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("7. audit row created for user create", async () => {
+    it("IT-M1-23 7. audit row created for user create", async () => {
       const res = await request(app)
         .post("/api/v1/users")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -187,7 +187,7 @@ describe("Users Integration Tests (Module M1)", () => {
   });
 
   describe("PUT /api/v1/users/:id (Update)", () => {
-    it("8. ADMIN update user: should update name, department, role", async () => {
+    it("IT-M1-24 8. ADMIN update user: should update name, department, role", async () => {
       const res = await request(app)
         .put(`/api/v1/users/${employeeUser._id}`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -211,7 +211,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(audit).not.toBeNull();
     });
 
-    it("9. admin cannot demote self: should reject self-demotion with 400", async () => {
+    it("IT-M1-25 9. admin cannot demote self: should reject self-demotion with 400", async () => {
       const res = await request(app)
         .put(`/api/v1/users/${adminUser._id}`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -226,7 +226,7 @@ describe("Users Integration Tests (Module M1)", () => {
   });
 
   describe("PATCH /api/v1/users/:id/status (Toggle Status)", () => {
-    it("10. admin cannot deactivate self: should reject self-deactivation with 400", async () => {
+    it("IT-M1-26 10. admin cannot deactivate self: should reject self-deactivation with 400", async () => {
       const res = await request(app)
         .patch(`/api/v1/users/${adminUser._id}/status`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -239,7 +239,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(res.body.error.message).toMatch(/cannot deactivate/i);
     });
 
-    it("11. ADMIN can toggle another user status", async () => {
+    it("IT-M1-27 11. ADMIN can toggle another user status", async () => {
       const res = await request(app)
         .patch(`/api/v1/users/${employeeUser._id}/status`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -261,7 +261,7 @@ describe("Users Integration Tests (Module M1)", () => {
   });
 
   describe("GET /api/v1/users/lookup (Dropdown Lookup)", () => {
-    it("12. lookup allowed for IT_SUPPORT", async () => {
+    it("IT-M1-28 12. lookup allowed for IT_SUPPORT", async () => {
       const res = await request(app)
         .get("/api/v1/users/lookup")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -280,7 +280,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(first.passwordHash).toBeUndefined();
     });
 
-    it("13. lookup allowed for ADMIN", async () => {
+    it("IT-M1-29 13. lookup allowed for ADMIN", async () => {
       const res = await request(app)
         .get("/api/v1/users/lookup")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -290,7 +290,7 @@ describe("Users Integration Tests (Module M1)", () => {
       expect(Array.isArray(res.body.data)).toBe(true);
     });
 
-    it("14. lookup forbidden for EMPLOYEE: should return 403", async () => {
+    it("IT-M1-30 14. lookup forbidden for EMPLOYEE: should return 403", async () => {
       const res = await request(app)
         .get("/api/v1/users/lookup")
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -302,7 +302,7 @@ describe("Users Integration Tests (Module M1)", () => {
   });
 
   describe("Security Guarantee: passwordHash leak prevention", () => {
-    it("15. password hash never in any response", async () => {
+    it("IT-M1-31 15. password hash never in any response", async () => {
       // 1. List users
       const listRes = await request(app)
         .get("/api/v1/users")

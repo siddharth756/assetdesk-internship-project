@@ -3,51 +3,51 @@ const { toCsv, sanitizeCell } = require("../../src/services/csv");
 
 describe("CSV Unit Tests (Module M5)", () => {
   describe("sanitizeCell", () => {
-    it("should return empty string for null and undefined", () => {
+    it("UT-01 should return empty string for null and undefined", () => {
       expect(sanitizeCell(null)).toBe("");
       expect(sanitizeCell(undefined)).toBe("");
     });
 
-    it("should return plain alphanumeric strings untouched", () => {
+    it("UT-02 should return plain alphanumeric strings untouched", () => {
       expect(sanitizeCell("Hello World")).toBe("Hello World");
       expect(sanitizeCell(12345)).toBe("12345");
       expect(sanitizeCell(true)).toBe("true");
     });
 
-    it("should wrap cells containing commas in double quotes", () => {
+    it("UT-03 should wrap cells containing commas in double quotes", () => {
       expect(sanitizeCell("San Francisco, CA")).toBe('"San Francisco, CA"');
     });
 
-    it("should double internal quotes and wrap in quotes for cells with double quotes", () => {
+    it("UT-04 should double internal quotes and wrap in quotes for cells with double quotes", () => {
       expect(sanitizeCell('Dell 27" 4K Monitor')).toBe('"Dell 27"" 4K Monitor"');
     });
 
-    it("should wrap cells containing newline characters in quotes", () => {
+    it("UT-05 should wrap cells containing newline characters in quotes", () => {
       expect(sanitizeCell("Line 1\nLine 2")).toBe('"Line 1\nLine 2"');
       expect(sanitizeCell("Line 1\r\nLine 2")).toBe('"Line 1\r\nLine 2"');
     });
 
-    it("should mitigate formula injection by prefixing '=' with single quote", () => {
+    it("UT-06 should mitigate formula injection by prefixing '=' with single quote", () => {
       const sanitized = sanitizeCell("=SUM(A1:A10)");
       expect(sanitized).toBe("'=SUM(A1:A10)");
     });
 
-    it("should mitigate formula injection by prefixing '+' with single quote", () => {
+    it("UT-07 should mitigate formula injection by prefixing '+' with single quote", () => {
       const sanitized = sanitizeCell("+123456789");
       expect(sanitized).toBe("'+123456789");
     });
 
-    it("should mitigate formula injection by prefixing '-' with single quote", () => {
+    it("UT-08 should mitigate formula injection by prefixing '-' with single quote", () => {
       const sanitized = sanitizeCell("-5000");
       expect(sanitized).toBe("'-5000");
     });
 
-    it("should mitigate formula injection by prefixing '@' with single quote", () => {
+    it("UT-09 should mitigate formula injection by prefixing '@' with single quote", () => {
       const sanitized = sanitizeCell("@SUM(1,2)");
       expect(sanitized).toBe('"\'@SUM(1,2)"');
     });
 
-    it("should format Date instances into ISO date strings", () => {
+    it("UT-10 should format Date instances into ISO date strings", () => {
       const date = new Date("2026-05-15T12:00:00.000Z");
       expect(sanitizeCell(date)).toBe("2026-05-15T12:00:00.000Z");
     });
@@ -61,7 +61,7 @@ describe("CSV Unit Tests (Module M5)", () => {
       { key: "notes", header: "Notes" }
     ];
 
-    it("should generate proper header row and CRLF separated data rows", () => {
+    it("UT-11 should generate proper header row and CRLF separated data rows", () => {
       const rows = [
         { assetTag: "AST-2026-0001", name: "MacBook Pro", category: "LAPTOP", notes: "Standard issue" },
         { assetTag: "AST-2026-0002", name: "Dell XPS", category: "LAPTOP", notes: "Developer edition" }
@@ -73,7 +73,7 @@ describe("CSV Unit Tests (Module M5)", () => {
       expect(csv).toContain("AST-2026-0002,Dell XPS,LAPTOP,Developer edition\r\n");
     });
 
-    it("should correctly escape commas, quotes, and newlines across multi-column data", () => {
+    it("UT-12 should correctly escape commas, quotes, and newlines across multi-column data", () => {
       const rows = [
         {
           assetTag: "AST-2026-0003",
@@ -88,7 +88,7 @@ describe("CSV Unit Tests (Module M5)", () => {
       expect(csv).toContain('"Condition: ""Refurbished"",\nChecked by QA"');
     });
 
-    it("should protect against spreadsheet formula injection in CSV cells", () => {
+    it("UT-13 should protect against spreadsheet formula injection in CSV cells", () => {
       const rows = [
         {
           assetTag: "AST-2026-0004",
@@ -103,12 +103,12 @@ describe("CSV Unit Tests (Module M5)", () => {
       expect(csv).toContain("'@exploit");
     });
 
-    it("should return only header row when rows array is empty", () => {
+    it("UT-14 should return only header row when rows array is empty", () => {
       const csv = toCsv(columns, []);
       expect(csv).toBe("Asset Tag,Asset Name,Category,Notes\r\n");
     });
 
-    it("should support array of column strings as simplified column definitions", () => {
+    it("UT-15 should support array of column strings as simplified column definitions", () => {
       const simpleCols = ["assetTag", "name"];
       const rows = [{ assetTag: "AST-2026-0005", name: "Test Device" }];
 
@@ -116,7 +116,7 @@ describe("CSV Unit Tests (Module M5)", () => {
       expect(csv).toBe("assetTag,name\r\nAST-2026-0005,Test Device\r\n");
     });
 
-    it("should return empty string if columns array is missing or empty", () => {
+    it("UT-16 should return empty string if columns array is missing or empty", () => {
       expect(toCsv([], [{ foo: "bar" }])).toBe("");
       expect(toCsv(null, [{ foo: "bar" }])).toBe("");
     });

@@ -90,7 +90,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
   });
 
   describe("POST /api/v1/assets (Creation)", () => {
-    it("allows ADMIN to create an asset with auto-generated assetTag and default AVAILABLE status", async () => {
+    it("IT-M2-01 allows ADMIN to create an asset with auto-generated assetTag and default AVAILABLE status", async () => {
       const res = await request(app)
         .post("/api/v1/assets")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -113,7 +113,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.assetTag).toBe(`AST-${currentYear}-0001`);
     });
 
-    it("allows IT_SUPPORT to create an asset", async () => {
+    it("IT-M2-02 allows IT_SUPPORT to create an asset", async () => {
       const res = await request(app)
         .post("/api/v1/assets")
         .set("Authorization", `Bearer ${supportToken}`)
@@ -128,7 +128,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.category).toBe("PRINTER");
     });
 
-    it("auto-generates sequential assetTags (AST-YEAR-0001, AST-YEAR-0002)", async () => {
+    it("IT-M2-03 auto-generates sequential assetTags (AST-YEAR-0001, AST-YEAR-0002)", async () => {
       const res1 = await request(app)
         .post("/api/v1/assets")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -152,7 +152,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res2.body.data.assetTag).toBe(`AST-${currentYear}-0002`);
     });
 
-    it("rejects duplicate serialNumber with 409 and exact message 'Serial number already registered'", async () => {
+    it("IT-M2-04 rejects duplicate serialNumber with 409 and exact message 'Serial number already registered'", async () => {
       await request(app)
         .post("/api/v1/assets")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -177,7 +177,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(duplicateRes.body.error.message).toBe("Serial number already registered");
     });
 
-    it("rejects missing required fields with 400 VALIDATION_ERROR", async () => {
+    it("IT-M2-05 rejects missing required fields with 400 VALIDATION_ERROR", async () => {
       const res = await request(app)
         .post("/api/v1/assets")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -190,7 +190,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("rejects invalid category enum with 400", async () => {
+    it("IT-M2-06 rejects invalid category enum with 400", async () => {
       const res = await request(app)
         .post("/api/v1/assets")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -204,7 +204,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.success).toBe(false);
     });
 
-    it("forbids EMPLOYEE role from creating an asset (403)", async () => {
+    it("IT-M2-07 forbids EMPLOYEE role from creating an asset (403)", async () => {
       const res = await request(app)
         .post("/api/v1/assets")
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -219,7 +219,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.code).toBe("FORBIDDEN");
     });
 
-    it("rejects unauthenticated creation request with 401", async () => {
+    it("IT-M2-08 rejects unauthenticated creation request with 401", async () => {
       const res = await request(app)
         .post("/api/v1/assets")
         .send({
@@ -268,7 +268,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       ]);
     });
 
-    it("lists assets with pagination metadata for ADMIN", async () => {
+    it("IT-M2-09 lists assets with pagination metadata for ADMIN", async () => {
       const res = await request(app)
         .get("/api/v1/assets?page=1&limit=2")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -284,7 +284,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       });
     });
 
-    it("supports search query q across name, serialNumber, and assetTag", async () => {
+    it("IT-M2-10 supports search query q across name, serialNumber, and assetTag", async () => {
       const res = await request(app)
         .get("/api/v1/assets?q=MacBook")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -294,7 +294,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data[0].name).toBe("MacBook Pro M3");
     });
 
-    it("escapes regex special characters in search query q safely", async () => {
+    it("IT-M2-11 escapes regex special characters in search query q safely", async () => {
       const res = await request(app)
         .get("/api/v1/assets?q=Dell+*?^$()")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -303,7 +303,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.length).toBe(0);
     });
 
-    it("filters assets by category", async () => {
+    it("IT-M2-12 filters assets by category", async () => {
       const res = await request(app)
         .get("/api/v1/assets?category=MONITOR")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -313,7 +313,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data[0].category).toBe("MONITOR");
     });
 
-    it("filters assets by status", async () => {
+    it("IT-M2-13 filters assets by status", async () => {
       const res = await request(app)
         .get("/api/v1/assets?status=MAINTENANCE")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -323,7 +323,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data[0].status).toBe("MAINTENANCE");
     });
 
-    it("filters assets by assigned status (yes / no)", async () => {
+    it("IT-M2-14 filters assets by assigned status (yes / no)", async () => {
       const resYes = await request(app)
         .get("/api/v1/assets?assigned=yes")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -341,7 +341,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(resNo.body.data.length).toBe(3);
     });
 
-    it("supports sorting by name ascending", async () => {
+    it("IT-M2-15 supports sorting by name ascending", async () => {
       const res = await request(app)
         .get("/api/v1/assets?sort=name")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -350,7 +350,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data[0].name).toBe("Cisco Catalyst 2960");
     });
 
-    it("forbids EMPLOYEE role from listing assets (403)", async () => {
+    it("IT-M2-16 forbids EMPLOYEE role from listing assets (403)", async () => {
       const res = await request(app)
         .get("/api/v1/assets")
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -362,7 +362,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
   });
 
   describe("GET /api/v1/assets/mine", () => {
-    it("returns only assets assigned to the authenticated user", async () => {
+    it("IT-M2-17 returns only assets assigned to the authenticated user", async () => {
       await Asset.create([
         {
           serialNumber: "EMP-AST-1",
@@ -398,7 +398,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data[0].assignedTo.email).toBe(employeeUser.email);
     });
 
-    it("returns empty array when user has no assigned assets", async () => {
+    it("IT-M2-18 returns empty array when user has no assigned assets", async () => {
       const res = await request(app)
         .get("/api/v1/assets/mine")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -421,7 +421,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       });
     });
 
-    it("allows ADMIN and IT_SUPPORT to fetch single asset by ID", async () => {
+    it("IT-M2-19 allows ADMIN and IT_SUPPORT to fetch single asset by ID", async () => {
       const res = await request(app)
         .get(`/api/v1/assets/${testAsset._id}`)
         .set("Authorization", `Bearer ${supportToken}`);
@@ -432,7 +432,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.assignedTo.email).toBe(employeeUser.email);
     });
 
-    it("allows EMPLOYEE to view asset assigned to them", async () => {
+    it("IT-M2-20 allows EMPLOYEE to view asset assigned to them", async () => {
       const res = await request(app)
         .get(`/api/v1/assets/${testAsset._id}`)
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -441,7 +441,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data._id).toBe(testAsset._id.toString());
     });
 
-    it("returns 403 when EMPLOYEE tries to view asset not assigned to them", async () => {
+    it("IT-M2-21 returns 403 when EMPLOYEE tries to view asset not assigned to them", async () => {
       const otherAsset = await Asset.create({
         serialNumber: "OTHER-UNASSIGNED",
         name: "Server Rack",
@@ -458,7 +458,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.code).toBe("FORBIDDEN");
     });
 
-    it("returns 400 for invalid ObjectId format", async () => {
+    it("IT-M2-22 returns 400 for invalid ObjectId format", async () => {
       const res = await request(app)
         .get("/api/v1/assets/invalid-mongo-id")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -467,7 +467,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("returns 404 for non-existent asset ID", async () => {
+    it("IT-M2-23 returns 404 for non-existent asset ID", async () => {
       const nonExistentId = "507f1f77bcf86cd799439011";
       const res = await request(app)
         .get(`/api/v1/assets/${nonExistentId}`)
@@ -500,7 +500,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       });
     });
 
-    it("updates editable fields (name, category, notes, serialNumber) for active asset", async () => {
+    it("IT-M2-24 updates editable fields (name, category, notes, serialNumber) for active asset", async () => {
       const res = await request(app)
         .put(`/api/v1/assets/${activeAsset._id}`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -518,7 +518,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.serialNumber).toBe("ACTIVE-001-MOD");
     });
 
-    it("rejects duplicate serialNumber on update with 409", async () => {
+    it("IT-M2-25 rejects duplicate serialNumber on update with 409", async () => {
       await Asset.create({
         serialNumber: "EXISTING-SN",
         name: "Another machine",
@@ -536,7 +536,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.message).toBe("Serial number already registered");
     });
 
-    it("allows updating ONLY notes on RETIRED assets", async () => {
+    it("IT-M2-26 allows updating ONLY notes on RETIRED assets", async () => {
       const res = await request(app)
         .put(`/api/v1/assets/${retiredAsset._id}`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -548,7 +548,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.notes).toBe("Updated disposal records");
     });
 
-    it("rejects editing non-notes fields on RETIRED assets with 400", async () => {
+    it("IT-M2-27 rejects editing non-notes fields on RETIRED assets with 400", async () => {
       const res = await request(app)
         .put(`/api/v1/assets/${retiredAsset._id}`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -574,7 +574,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       });
     });
 
-    it("assigns AVAILABLE asset to an active user successfully", async () => {
+    it("IT-M2-28 assigns AVAILABLE asset to an active user successfully", async () => {
       const res = await request(app)
         .patch(`/api/v1/assets/${availableAsset._id}/assign`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -587,7 +587,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.assignedTo.name).toBe(employeeUser.name);
     });
 
-    it("rejects assigning non-available asset with 400 'Asset is not available'", async () => {
+    it("IT-M2-29 rejects assigning non-available asset with 400 'Asset is not available'", async () => {
       const assignedAsset = await Asset.create({
         serialNumber: "ALREADY-ASSIGNED",
         name: "Busy Laptop",
@@ -605,7 +605,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.message).toBe("Asset is not available");
     });
 
-    it("double-assign race: two parallel requests -> exactly one 200", async () => {
+    it("IT-M2-30 double-assign race: two parallel requests -> exactly one 200", async () => {
       const [res1, res2] = await Promise.all([
         request(app)
           .patch(`/api/v1/assets/${availableAsset._id}/assign`)
@@ -628,7 +628,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(failRes.body.error.message).toBe("Asset is not available");
     });
 
-    it("rejects assigning to inactive user with 400", async () => {
+    it("IT-M2-31 rejects assigning to inactive user with 400", async () => {
       const res = await request(app)
         .patch(`/api/v1/assets/${availableAsset._id}/assign`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -638,7 +638,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.message).toBe("Cannot assign asset to an inactive user");
     });
 
-    it("rejects assigning to non-existent user with 404", async () => {
+    it("IT-M2-32 rejects assigning to non-existent user with 404", async () => {
       const nonExistentUserId = "507f1f77bcf86cd799439011";
       const res = await request(app)
         .patch(`/api/v1/assets/${availableAsset._id}/assign`)
@@ -649,7 +649,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.message).toBe("User not found");
     });
 
-    it("rejects assigning a RETIRED asset with 400 'Asset is not available'", async () => {
+    it("IT-M2-33 rejects assigning a RETIRED asset with 400 'Asset is not available'", async () => {
       const retiredAsset = await Asset.create({
         serialNumber: "RETIRED-CANNOT-ASSIGN",
         name: "Old PC",
@@ -668,7 +668,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
   });
 
   describe("PATCH /api/v1/assets/:id/unassign", () => {
-    it("unassigns an ASSIGNED asset and resets to AVAILABLE with null assignedTo", async () => {
+    it("IT-M2-34 unassigns an ASSIGNED asset and resets to AVAILABLE with null assignedTo", async () => {
       const assignedAsset = await Asset.create({
         serialNumber: "TO-UNASSIGN",
         name: "Assigned Monitor",
@@ -687,7 +687,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.assignedTo).toBeNull();
     });
 
-    it("rejects unassigning an asset that is not in ASSIGNED status with 400", async () => {
+    it("IT-M2-35 rejects unassigning an asset that is not in ASSIGNED status with 400", async () => {
       const availableAsset = await Asset.create({
         serialNumber: "ALREADY-AVAIL",
         name: "Available Printer",
@@ -718,7 +718,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       });
     });
 
-    it("changing status to MAINTENANCE clears assignee", async () => {
+    it("IT-M2-36 changing status to MAINTENANCE clears assignee", async () => {
       const res = await request(app)
         .patch(`/api/v1/assets/${assignedAsset._id}/status`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -729,7 +729,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.assignedTo).toBeNull();
     });
 
-    it("changing status to RETIRED clears assignee", async () => {
+    it("IT-M2-37 changing status to RETIRED clears assignee", async () => {
       const res = await request(app)
         .patch(`/api/v1/assets/${assignedAsset._id}/status`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -740,7 +740,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.data.assignedTo).toBeNull();
     });
 
-    it("rejects changing status of a RETIRED asset with 400", async () => {
+    it("IT-M2-38 rejects changing status of a RETIRED asset with 400", async () => {
       const retiredAsset = await Asset.create({
         serialNumber: "PERMANENT-RETIRED",
         name: "Scrapped Hardware",
@@ -758,7 +758,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
       expect(res.body.error.message).toContain("Retired assets cannot change status");
     });
 
-    it("rejects setting status to ASSIGNED directly via status endpoint with 400", async () => {
+    it("IT-M2-39 rejects setting status to ASSIGNED directly via status endpoint with 400", async () => {
       const res = await request(app)
         .patch(`/api/v1/assets/${assignedAsset._id}/status`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -770,7 +770,7 @@ describe("Hardware Assets Integration Tests (Module M2)", () => {
   });
 
   describe("Audit trail logging for asset mutations", () => {
-    it("logs audit rows for ASSET_CREATE, ASSET_UPDATE, ASSET_ASSIGN, ASSET_UNASSIGN, and ASSET_STATUS", async () => {
+    it("IT-M2-40 logs audit rows for ASSET_CREATE, ASSET_UPDATE, ASSET_ASSIGN, ASSET_UNASSIGN, and ASSET_STATUS", async () => {
       // 1. Create asset
       const createRes = await request(app)
         .post("/api/v1/assets")

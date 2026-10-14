@@ -89,7 +89,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
   });
 
   describe("POST /api/v1/licenses (Creation)", () => {
-    it("allows ADMIN to create a license with valid fields", async () => {
+    it("IT-M3-01 allows ADMIN to create a license with valid fields", async () => {
       const res = await request(app)
         .post("/api/v1/licenses")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -114,7 +114,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data.licenseKey).toBe("JB-IDEA-2026-ABCD-1234");
     });
 
-    it("allows IT_SUPPORT to create a license (receives masked key)", async () => {
+    it("IT-M3-02 allows IT_SUPPORT to create a license (receives masked key)", async () => {
       const res = await request(app)
         .post("/api/v1/licenses")
         .set("Authorization", `Bearer ${supportToken}`)
@@ -131,7 +131,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data.licenseKey).toBe("****-****-9876");
     });
 
-    it("rejects missing required softwareName with 400 VALIDATION_ERROR", async () => {
+    it("IT-M3-03 rejects missing required softwareName with 400 VALIDATION_ERROR", async () => {
       const res = await request(app)
         .post("/api/v1/licenses")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -146,7 +146,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("rejects missing licenseKey with 400 VALIDATION_ERROR", async () => {
+    it("IT-M3-04 rejects missing licenseKey with 400 VALIDATION_ERROR", async () => {
       const res = await request(app)
         .post("/api/v1/licenses")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -160,7 +160,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("rejects invalid totalSeats (< 1 or non-integer) with 400 VALIDATION_ERROR", async () => {
+    it("IT-M3-05 rejects invalid totalSeats (< 1 or non-integer) with 400 VALIDATION_ERROR", async () => {
       const res1 = await request(app)
         .post("/api/v1/licenses")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -187,7 +187,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res2.status).toBe(400);
     });
 
-    it("rejects invalid expiryDate with 400 VALIDATION_ERROR", async () => {
+    it("IT-M3-06 rejects invalid expiryDate with 400 VALIDATION_ERROR", async () => {
       const res = await request(app)
         .post("/api/v1/licenses")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -202,7 +202,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("forbids EMPLOYEE role from creating a license (403)", async () => {
+    it("IT-M3-07 forbids EMPLOYEE role from creating a license (403)", async () => {
       const res = await request(app)
         .post("/api/v1/licenses")
         .set("Authorization", `Bearer ${employeeToken}`)
@@ -217,7 +217,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.code).toBe("FORBIDDEN");
     });
 
-    it("rejects unauthenticated creation request with 401", async () => {
+    it("IT-M3-08 rejects unauthenticated creation request with 401", async () => {
       const res = await request(app)
         .post("/api/v1/licenses")
         .send({
@@ -262,7 +262,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
     });
 
 
-    it("lists licenses with pagination metadata and always masks licenseKey for ADMIN and IT_SUPPORT", async () => {
+    it("IT-M3-09 lists licenses with pagination metadata and always masks licenseKey for ADMIN and IT_SUPPORT", async () => {
       const resAdmin = await request(app)
         .get("/api/v1/licenses?page=1&limit=10")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -290,7 +290,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       });
     });
 
-    it("supports search query q across softwareName and vendor", async () => {
+    it("IT-M3-10 supports search query q across softwareName and vendor", async () => {
       const res = await request(app)
         .get("/api/v1/licenses?q=Adobe")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -300,7 +300,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[0].softwareName).toBe("Old Photoshop CS6");
     });
 
-    it("filters licenses by status EXPIRED", async () => {
+    it("IT-M3-11 filters licenses by status EXPIRED", async () => {
       const res = await request(app)
         .get("/api/v1/licenses?status=EXPIRED")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -311,7 +311,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[0].status).toBe("EXPIRED");
     });
 
-    it("filters licenses by status EXPIRING", async () => {
+    it("IT-M3-12 filters licenses by status EXPIRING", async () => {
       const res = await request(app)
         .get("/api/v1/licenses?status=EXPIRING")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -322,7 +322,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[0].status).toBe("EXPIRING");
     });
 
-    it("filters licenses by status ACTIVE", async () => {
+    it("IT-M3-13 filters licenses by status ACTIVE", async () => {
       const res = await request(app)
         .get("/api/v1/licenses?status=ACTIVE")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -333,7 +333,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[0].status).toBe("ACTIVE");
     });
 
-    it("defaults to sorting by expiryDate ascending", async () => {
+    it("IT-M3-14 defaults to sorting by expiryDate ascending", async () => {
       const res = await request(app)
         .get("/api/v1/licenses")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -344,7 +344,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[2].softwareName).toBe("Microsoft 365 E5"); // Farthest expiry
     });
 
-    it("supports custom sort order (e.g. softwareName)", async () => {
+    it("IT-M3-15 supports custom sort order (e.g. softwareName)", async () => {
       const res = await request(app)
         .get("/api/v1/licenses?sort=softwareName")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -353,7 +353,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[0].softwareName).toBe("JetBrains WebStorm");
     });
 
-    it("forbids EMPLOYEE role from listing licenses (403)", async () => {
+    it("IT-M3-16 forbids EMPLOYEE role from listing licenses (403)", async () => {
       const res = await request(app)
         .get("/api/v1/licenses")
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -401,7 +401,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       });
     });
 
-    it("returns licenses expiring within default 30 days plus already expired, ordered by expiryDate", async () => {
+    it("IT-M3-17 returns licenses expiring within default 30 days plus already expired, ordered by expiryDate", async () => {
       const res = await request(app)
         .get("/api/v1/licenses/expiring")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -416,7 +416,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[0].licenseKey).toBe("****-****-0001");
     });
 
-    it("supports custom days parameter (e.g. days=60)", async () => {
+    it("IT-M3-18 supports custom days parameter (e.g. days=60)", async () => {
       const res = await request(app)
         .get("/api/v1/licenses/expiring?days=60")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -426,7 +426,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data[3].softwareName).toBe("Expiring in 45 Days Tool");
     });
 
-    it("forbids EMPLOYEE role from accessing expiring licenses (403)", async () => {
+    it("IT-M3-19 forbids EMPLOYEE role from accessing expiring licenses (403)", async () => {
       const res = await request(app)
         .get("/api/v1/licenses/expiring")
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -450,7 +450,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       });
     });
 
-    it("returns FULL unmasked license key to ADMIN in detail view", async () => {
+    it("IT-M3-20 returns FULL unmasked license key to ADMIN in detail view", async () => {
       const res = await request(app)
         .get(`/api/v1/licenses/${testLicense._id}`)
         .set("Authorization", `Bearer ${adminToken}`);
@@ -460,7 +460,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data.licenseKey).toBe("POSTMAN-ENT-SEC-5544");
     });
 
-    it("returns MASKED license key (****-****-XXXX) to IT_SUPPORT in detail view", async () => {
+    it("IT-M3-21 returns MASKED license key (****-****-XXXX) to IT_SUPPORT in detail view", async () => {
       const res = await request(app)
         .get(`/api/v1/licenses/${testLicense._id}`)
         .set("Authorization", `Bearer ${supportToken}`);
@@ -470,7 +470,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data.licenseKey).toBe("****-****-5544");
     });
 
-    it("returns 404 for non-existent license ID", async () => {
+    it("IT-M3-22 returns 404 for non-existent license ID", async () => {
       const nonExistentId = "507f1f77bcf86cd799439011";
       const res = await request(app)
         .get(`/api/v1/licenses/${nonExistentId}`)
@@ -480,7 +480,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.code).toBe("NOT_FOUND");
     });
 
-    it("returns 400 for invalid ObjectId format", async () => {
+    it("IT-M3-23 returns 400 for invalid ObjectId format", async () => {
       const res = await request(app)
         .get("/api/v1/licenses/invalid-id-format")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -489,7 +489,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.code).toBe("VALIDATION_ERROR");
     });
 
-    it("forbids EMPLOYEE role from viewing license details (403)", async () => {
+    it("IT-M3-24 forbids EMPLOYEE role from viewing license details (403)", async () => {
       const res = await request(app)
         .get(`/api/v1/licenses/${testLicense._id}`)
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -517,7 +517,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       });
     });
 
-    it("updates editable fields and totalSeats when >= usedSeats", async () => {
+    it("IT-M3-25 updates editable fields and totalSeats when >= usedSeats", async () => {
       const res = await request(app)
         .put(`/api/v1/licenses/${testLicense._id}`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -536,7 +536,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data.availableSeats).toBe(3);
     });
 
-    it("rejects reducing totalSeats below currently allocated seats with 400", async () => {
+    it("IT-M3-26 rejects reducing totalSeats below currently allocated seats with 400", async () => {
       // testLicense currently has 2 allocated seats
       const res = await request(app)
         .put(`/api/v1/licenses/${testLicense._id}`)
@@ -549,7 +549,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.message).toContain("cannot be less than currently allocated seats");
     });
 
-    it("returns 404 for non-existent license ID on update", async () => {
+    it("IT-M3-27 returns 404 for non-existent license ID on update", async () => {
       const nonExistentId = "507f1f77bcf86cd799439011";
       const res = await request(app)
         .put(`/api/v1/licenses/${nonExistentId}`)
@@ -573,7 +573,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       });
     });
 
-    it("allocates seat to an active user successfully", async () => {
+    it("IT-M3-28 allocates seat to an active user successfully", async () => {
       const res = await request(app)
         .post(`/api/v1/licenses/${license._id}/allocate`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -587,7 +587,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data.allocations[0].user._id).toBe(employeeUser._id.toString());
     });
 
-    it("allocates until full, then subsequent allocation fails with 400 'No seats available'", async () => {
+    it("IT-M3-29 allocates until full, then subsequent allocation fails with 400 'No seats available'", async () => {
       // Allocate seat 1
       await request(app)
         .post(`/api/v1/licenses/${license._id}/allocate`)
@@ -618,7 +618,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(resFail.body.error.message).toBe("No seats available");
     });
 
-    it("rejects duplicate allocation to same user with 409", async () => {
+    it("IT-M3-30 rejects duplicate allocation to same user with 409", async () => {
       await request(app)
         .post(`/api/v1/licenses/${license._id}/allocate`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -634,7 +634,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(resDuplicate.body.error.message).toContain("already allocated");
     });
 
-    it("rejects allocation to an inactive user with 400", async () => {
+    it("IT-M3-31 rejects allocation to an inactive user with 400", async () => {
       const res = await request(app)
         .post(`/api/v1/licenses/${license._id}/allocate`)
         .set("Authorization", `Bearer ${adminToken}`)
@@ -644,7 +644,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.message).toContain("inactive user");
     });
 
-    it("rejects allocation with non-existent user ID with 404", async () => {
+    it("IT-M3-32 rejects allocation with non-existent user ID with 404", async () => {
       const nonExistentUserId = "507f1f77bcf86cd799439011";
       const res = await request(app)
         .post(`/api/v1/licenses/${license._id}/allocate`)
@@ -655,7 +655,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.message).toBe("User not found");
     });
 
-    it("atomic race: two parallel allocations for last remaining seat result in exactly one 200 and one 400", async () => {
+    it("IT-M3-33 atomic race: two parallel allocations for last remaining seat result in exactly one 200 and one 400", async () => {
       // Set totalSeats = 1
       license.totalSeats = 1;
       await license.save();
@@ -696,7 +696,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       });
     });
 
-    it("releases allocated seat successfully (200)", async () => {
+    it("IT-M3-34 releases allocated seat successfully (200)", async () => {
       const res = await request(app)
         .delete(`/api/v1/licenses/${license._id}/allocate/${employeeUser._id}`)
         .set("Authorization", `Bearer ${adminToken}`);
@@ -708,7 +708,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.data.allocations.length).toBe(0);
     });
 
-    it("rejects releasing seat if user is not allocated with 404", async () => {
+    it("IT-M3-35 rejects releasing seat if user is not allocated with 404", async () => {
       const res = await request(app)
         .delete(`/api/v1/licenses/${license._id}/allocate/${employeeUser2._id}`)
         .set("Authorization", `Bearer ${adminToken}`);
@@ -717,7 +717,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
       expect(res.body.error.message).toContain("not allocated a seat");
     });
 
-    it("returns 404 for non-existent license ID on release", async () => {
+    it("IT-M3-36 returns 404 for non-existent license ID on release", async () => {
       const nonExistentId = "507f1f77bcf86cd799439011";
       const res = await request(app)
         .delete(`/api/v1/licenses/${nonExistentId}/allocate/${employeeUser._id}`)
@@ -728,7 +728,7 @@ describe("Software Licenses Integration Tests (Module M3)", () => {
   });
 
   describe("Audit trail logging for license operations", () => {
-    it("writes audit logs for LICENSE_CREATE, LICENSE_UPDATE, LICENSE_ALLOCATE, and LICENSE_RELEASE", async () => {
+    it("IT-M3-37 writes audit logs for LICENSE_CREATE, LICENSE_UPDATE, LICENSE_ALLOCATE, and LICENSE_RELEASE", async () => {
       // 1. Create license
       const createRes = await request(app)
         .post("/api/v1/licenses")

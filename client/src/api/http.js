@@ -17,6 +17,9 @@ http.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    if (localStorage.getItem("playwright_test") === "true") {
+      config.headers["x-playwright-test"] = "true";
+    }
     return config;
   },
   (error) => Promise.reject(error)

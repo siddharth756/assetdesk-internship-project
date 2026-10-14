@@ -5,7 +5,7 @@ const { License, User, AuditLog } = require("../../src/models");
 const mailService = require("../../src/services/mailService");
 
 describe("Dates Utility Unit Tests", () => {
-  it("startOfToday should return a date with zeroed hours, minutes, seconds, ms", () => {
+  it("UT-17 startOfToday should return a date with zeroed hours, minutes, seconds, ms", () => {
     const today = startOfToday();
     expect(today.getHours()).toBe(0);
     expect(today.getMinutes()).toBe(0);
@@ -13,19 +13,19 @@ describe("Dates Utility Unit Tests", () => {
     expect(today.getMilliseconds()).toBe(0);
   });
 
-  it("daysBetween should calculate difference in calendar days", () => {
+  it("UT-18 daysBetween should calculate difference in calendar days", () => {
     const d1 = new Date("2026-01-01T10:00:00Z");
     const d2 = new Date("2026-01-11T15:00:00Z");
     expect(daysBetween(d1, d2)).toBe(10);
   });
 
-  it("addDays should accurately add days to date", () => {
+  it("UT-19 addDays should accurately add days to date", () => {
     const start = new Date("2026-05-01T00:00:00.000Z");
     const result = addDays(start, 5);
     expect(result.getDate()).toBe(6);
   });
 
-  it("addHours should accurately add hours to date", () => {
+  it("UT-20 addHours should accurately add hours to date", () => {
     const start = new Date("2026-05-01T10:00:00.000Z");
     const result = addHours(start, 4);
     expect(result.getTime() - start.getTime()).toBe(4 * 60 * 60 * 1000);
@@ -79,7 +79,7 @@ describe("License Expiry Alert Job Unit Tests (runLicenseExpiryCheck)", () => {
     }
   });
 
-  it("triggers alerts for licenses with injected dates at exactly 30, 15, 7, and 0 days", async () => {
+  it("UT-21 triggers alerts for licenses with injected dates at exactly 30, 15, 7, and 0 days", async () => {
     const today = new Date("2026-06-01T00:00:00.000Z");
 
     await License.create({
@@ -147,7 +147,7 @@ describe("License Expiry Alert Job Unit Tests (runLicenseExpiryCheck)", () => {
     expect(logDetails.some((d) => d.includes("expired today"))).toBe(true);
   });
 
-  it("triggers alert when daysLeft <= 0 (already expired)", async () => {
+  it("UT-22 triggers alert when daysLeft <= 0 (already expired)", async () => {
     const today = new Date("2026-06-01T00:00:00.000Z");
 
     await License.create({
@@ -167,7 +167,7 @@ describe("License Expiry Alert Job Unit Tests (runLicenseExpiryCheck)", () => {
     expect(log.details).toContain("expired (10 days ago)");
   });
 
-  it("does not create duplicate alert twice on the same day for the same license", async () => {
+  it("UT-23 does not create duplicate alert twice on the same day for the same license", async () => {
     const today = new Date("2026-06-01T00:00:00.000Z");
 
     await License.create({

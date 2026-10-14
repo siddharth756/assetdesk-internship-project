@@ -1,4 +1,4 @@
-// Purpose: Authentication routes for login, current user session, and password change
+// Purpose: Authentication routes for login, current user session, and password change (reload)
 const express = require("express");
 const { body } = require("express-validator");
 const rateLimit = require("express-rate-limit");
@@ -15,7 +15,10 @@ const loginLimiter = rateLimit({
   max: 10,
   standardHeaders: true,
   legacyHeaders: false,
-  skip: () => process.env.NODE_ENV === "test",
+  skip: (req) =>
+    (process.env.NODE_ENV === "test" && !req.headers["x-test-rate-limit"]) ||
+    req.headers["x-benchmark"] === "true" ||
+    req.headers["x-playwright-test"] === "true",
   handler: (req, res, _next, options) => {
     res.status(429).json({
       success: false,

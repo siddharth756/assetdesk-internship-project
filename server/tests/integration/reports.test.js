@@ -107,7 +107,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
   });
 
   describe("Access Control & Permissions", () => {
-    it("should reject unauthenticated requests for all report endpoints with 401", async () => {
+    it("IT-M5-23 should reject unauthenticated requests for all report endpoints with 401", async () => {
       const endpoints = [
         "/api/v1/reports/assets",
         "/api/v1/reports/licenses",
@@ -121,7 +121,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       }
     });
 
-    it("should reject employee requests with 403 Forbidden on all reports", async () => {
+    it("IT-M5-24 should reject employee requests with 403 Forbidden on all reports", async () => {
       const endpoints = [
         "/api/v1/reports/assets",
         "/api/v1/reports/licenses",
@@ -137,7 +137,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       }
     });
 
-    it("should allow IT_SUPPORT to export assets, licenses, and tickets", async () => {
+    it("IT-M5-25 should allow IT_SUPPORT to export assets, licenses, and tickets", async () => {
       const endpoints = [
         "/api/v1/reports/assets",
         "/api/v1/reports/licenses",
@@ -152,7 +152,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       }
     });
 
-    it("should reject IT_SUPPORT on audit report (ADMIN only)", async () => {
+    it("IT-M5-26 should reject IT_SUPPORT on audit report (ADMIN only)", async () => {
       const res = await request(app)
         .get("/api/v1/reports/audit")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -164,7 +164,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
   describe("Response Headers and CSV Content", () => {
     const todayStr = new Date().toISOString().split("T")[0];
 
-    it("should set text/csv content-type and attachment filename on assets report", async () => {
+    it("IT-M5-27 should set text/csv content-type and attachment filename on assets report", async () => {
       const res = await request(app)
         .get("/api/v1/reports/assets")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -176,7 +176,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       );
     });
 
-    it("assets report should include expected header row and data rows", async () => {
+    it("IT-M5-28 assets report should include expected header row and data rows", async () => {
       const res = await request(app)
         .get("/api/v1/reports/assets")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -188,7 +188,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       expect(res.text).toContain("SN-LAP-101");
     });
 
-    it("licenses report should mask license key in CSV export (****-****-XXXX)", async () => {
+    it("IT-M5-29 licenses report should mask license key in CSV export (****-****-XXXX)", async () => {
       const res = await request(app)
         .get("/api/v1/reports/licenses")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -198,7 +198,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       expect(res.text).not.toContain("ADOBE-SEC-KEY-9999");
     });
 
-    it("should apply formula injection mitigation for cells starting with '='", async () => {
+    it("IT-M5-30 should apply formula injection mitigation for cells starting with '='", async () => {
       const res = await request(app)
         .get("/api/v1/reports/assets")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -208,7 +208,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       expect(res.text).toContain("'=SUM(1+2)");
     });
 
-    it("tickets report should include ticket headers and row data", async () => {
+    it("IT-M5-31 tickets report should include ticket headers and row data", async () => {
       const res = await request(app)
         .get("/api/v1/reports/tickets")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -222,7 +222,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       expect(res.text).toContain("Employee User");
     });
 
-    it("admin can export audit logs report as CSV", async () => {
+    it("IT-M5-32 admin can export audit logs report as CSV", async () => {
       const res = await request(app)
         .get("/api/v1/reports/audit")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -238,7 +238,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       expect(res.text).toContain("LOGIN");
     });
 
-    it("should write REPORT_EXPORT audit log for each exported report", async () => {
+    it("IT-M5-33 should write REPORT_EXPORT audit log for each exported report", async () => {
       await request(app)
         .get("/api/v1/reports/tickets")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -251,7 +251,7 @@ describe("CSV Reports Integration Tests (Module M5)", () => {
       expect(audit.details).toContain("Exported tickets report");
     });
 
-    it("should respect simple query filters on report endpoints", async () => {
+    it("IT-M5-34 should respect simple query filters on report endpoints", async () => {
       // Filter assets by category=MONITOR (no monitor in db)
       const res = await request(app)
         .get("/api/v1/reports/assets?category=MONITOR")

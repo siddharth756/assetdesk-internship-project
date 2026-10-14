@@ -113,13 +113,13 @@ describe("Audit Log Integration Tests (Module M5)", () => {
   });
 
   describe("Access Control & Authorization", () => {
-    it("should reject unauthenticated request with 401", async () => {
+    it("IT-M5-01 should reject unauthenticated request with 401", async () => {
       const res = await request(app).get("/api/v1/audit-logs");
       expect(res.status).toBe(401);
       expect(res.body.success).toBe(false);
     });
 
-    it("should reject employee request with 403 Forbidden", async () => {
+    it("IT-M5-02 should reject employee request with 403 Forbidden", async () => {
       const res = await request(app)
         .get("/api/v1/audit-logs")
         .set("Authorization", `Bearer ${employeeToken}`);
@@ -128,7 +128,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.body.success).toBe(false);
     });
 
-    it("should reject IT_SUPPORT request with 403 Forbidden (ADMIN only)", async () => {
+    it("IT-M5-03 should reject IT_SUPPORT request with 403 Forbidden (ADMIN only)", async () => {
       const res = await request(app)
         .get("/api/v1/audit-logs")
         .set("Authorization", `Bearer ${supportToken}`);
@@ -137,7 +137,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.body.success).toBe(false);
     });
 
-    it("should allow ADMIN to list all audit logs with populated user", async () => {
+    it("IT-M5-04 should allow ADMIN to list all audit logs with populated user", async () => {
       const res = await request(app)
         .get("/api/v1/audit-logs")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -152,7 +152,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
   });
 
   describe("Filtering and Sorting", () => {
-    it("should filter audit logs by action", async () => {
+    it("IT-M5-05 should filter audit logs by action", async () => {
       const res = await request(app)
         .get("/api/v1/audit-logs?action=LOGIN")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -162,7 +162,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.body.data[0].action).toBe("LOGIN");
     });
 
-    it("should filter audit logs by entity", async () => {
+    it("IT-M5-06 should filter audit logs by entity", async () => {
       const res = await request(app)
         .get("/api/v1/audit-logs?entity=TICKET")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -174,7 +174,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       });
     });
 
-    it("should filter audit logs by user ID", async () => {
+    it("IT-M5-07 should filter audit logs by user ID", async () => {
       const res = await request(app)
         .get(`/api/v1/audit-logs?user=${employeeUser._id}`)
         .set("Authorization", `Bearer ${adminToken}`);
@@ -184,7 +184,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.body.data[0].userName).toBe(employeeUser.name);
     });
 
-    it("should filter audit logs by date range (from and to)", async () => {
+    it("IT-M5-08 should filter audit logs by date range (from and to)", async () => {
       const pastFrom = new Date(Date.now() - 6000).toISOString();
       const res = await request(app)
         .get(`/api/v1/audit-logs?from=${pastFrom}`)
@@ -194,7 +194,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.body.data.length).toBe(2);
     });
 
-    it("should paginate results with meta and limit", async () => {
+    it("IT-M5-09 should paginate results with meta and limit", async () => {
       const res = await request(app)
         .get("/api/v1/audit-logs?page=1&limit=2")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -208,7 +208,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       });
     });
 
-    it("should sort newest logs first by default (-createdAt)", async () => {
+    it("IT-M5-10 should sort newest logs first by default (-createdAt)", async () => {
       const res = await request(app)
         .get("/api/v1/audit-logs")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -222,7 +222,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
   });
 
   describe("Append-Only Proof (No Edit/Delete Routes)", () => {
-    it("should return 404 for PUT /api/v1/audit-logs", async () => {
+    it("IT-M5-11 should return 404 for PUT /api/v1/audit-logs", async () => {
       const res = await request(app)
         .put("/api/v1/audit-logs")
         .set("Authorization", `Bearer ${adminToken}`)
@@ -231,7 +231,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.status).toBe(404);
     });
 
-    it("should return 404 for DELETE /api/v1/audit-logs", async () => {
+    it("IT-M5-12 should return 404 for DELETE /api/v1/audit-logs", async () => {
       const res = await request(app)
         .delete("/api/v1/audit-logs")
         .set("Authorization", `Bearer ${adminToken}`);
@@ -239,7 +239,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.status).toBe(404);
     });
 
-    it("should return 404 for PUT /api/v1/audit-logs/:id", async () => {
+    it("IT-M5-13 should return 404 for PUT /api/v1/audit-logs/:id", async () => {
       const fakeId = new mongoose.Types.ObjectId().toString();
       const res = await request(app)
         .put(`/api/v1/audit-logs/${fakeId}`)
@@ -249,7 +249,7 @@ describe("Audit Log Integration Tests (Module M5)", () => {
       expect(res.status).toBe(404);
     });
 
-    it("should return 404 for DELETE /api/v1/audit-logs/:id", async () => {
+    it("IT-M5-14 should return 404 for DELETE /api/v1/audit-logs/:id", async () => {
       const fakeId = new mongoose.Types.ObjectId().toString();
       const res = await request(app)
         .delete(`/api/v1/audit-logs/${fakeId}`)
