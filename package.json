@@ -8,8 +8,10 @@
     "client:dev": "npm --prefix client run dev",
     "seed": "npm --prefix server run seed",
     "test": "npm --prefix server test",
-    "e2e": "playwright test --config=e2e/playwright.config.js",
-    "collect:tests": "node docs/build/scripts/collect-test-results.js"
+    "e2e": "playwright test e2e/tests/system.spec.js --config=e2e/playwright.config.js",
+    "screenshots": "playwright test e2e/tests/screenshots.spec.js --config=e2e/playwright.config.js",
+    "collect:tests": "node docs/build/scripts/collect-test-results.js",
+    "docs:facts": "node docs/build/scripts/generate-project-facts.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0"

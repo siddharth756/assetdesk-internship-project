@@ -4,6 +4,7 @@
       "/usr/local/bin/node",
       "/Users/imac/Documents/Internship_project/node_modules/.bin/playwright",
       "test",
+      "e2e/tests/screenshots.spec.js",
       "--config=e2e/playwright.config.js"
     ],
     "configFile": "/Users/imac/Documents/Internship_project/e2e/playwright.config.js",
@@ -101,20 +102,20 @@
   },
   "suites": [
     {
-      "title": "system.spec.js",
-      "file": "system.spec.js",
+      "title": "screenshots.spec.js",
+      "file": "screenshots.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "AssetDesk System Verification (ST-01..ST-16)",
-          "file": "system.spec.js",
-          "line": 31,
+          "title": "Documentation Screenshots Generation",
+          "file": "screenshots.spec.js",
+          "line": 42,
           "column": 15,
           "specs": [
             {
-              "title": "ST-01 admin login success and dashboard visible",
+              "title": "01-login: Capture login screen",
               "ok": true,
               "tags": [],
               "tests": [
@@ -124,8 +125,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -138,18 +139,22 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 859,
+                      "duration": 1358,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 01-login.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/01-login.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:51.316Z",
+                      "startTime": "2026-10-14T11:01:09.182Z",
                       "annotations": [
                         {
                           "type": "serial",
                           "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
                             "column": 15
                           }
                         }
@@ -160,13 +165,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-0be4d222542976bd2ccd",
-              "file": "system.spec.js",
-              "line": 35,
+              "id": "53bacfe0c91763a7148e-3c2dc4014c633486e27c",
+              "file": "screenshots.spec.js",
+              "line": 47,
               "column": 3
             },
             {
-              "title": "ST-02 wrong password shows error",
+              "title": "02-dashboard-admin: Capture admin dashboard",
               "ok": true,
               "tags": [],
               "tests": [
@@ -176,8 +181,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -190,18 +195,22 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 562,
+                      "duration": 1564,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 02-dashboard-admin.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/02-dashboard-admin.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:52.451Z",
+                      "startTime": "2026-10-14T11:01:10.938Z",
                       "annotations": [
                         {
                           "type": "serial",
                           "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
                             "column": 15
                           }
                         }
@@ -212,13 +221,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-bbb1e179219666a565bf",
-              "file": "system.spec.js",
-              "line": 44,
+              "id": "53bacfe0c91763a7148e-f1e6b4873136dd98eac4",
+              "file": "screenshots.spec.js",
+              "line": 53,
               "column": 3
             },
             {
-              "title": "ST-03 employee cannot open /users (Not allowed)",
+              "title": "03-asset-list: Capture hardware assets inventory table",
               "ok": true,
               "tags": [],
               "tests": [
@@ -228,8 +237,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -242,18 +251,22 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 567,
+                      "duration": 1660,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 03-asset-list.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/03-asset-list.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:53.041Z",
+                      "startTime": "2026-10-14T11:01:12.525Z",
                       "annotations": [
                         {
                           "type": "serial",
                           "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
                             "column": 15
                           }
                         }
@@ -264,13 +277,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-79008996c387bc48c8af",
-              "file": "system.spec.js",
-              "line": 56,
+              "id": "53bacfe0c91763a7148e-f36769709cd0d6022394",
+              "file": "screenshots.spec.js",
+              "line": 61,
               "column": 3
             },
             {
-              "title": "ST-04 admin creates an asset",
+              "title": "04-asset-form: Capture add asset form",
               "ok": true,
               "tags": [],
               "tests": [
@@ -280,8 +293,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -294,18 +307,22 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 785,
+                      "duration": 1491,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 04-asset-form.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/04-asset-form.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:53.618Z",
+                      "startTime": "2026-10-14T11:01:14.196Z",
                       "annotations": [
                         {
                           "type": "serial",
                           "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
                             "column": 15
                           }
                         }
@@ -316,13 +333,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-2f65f72ea4aad68d5136",
-              "file": "system.spec.js",
-              "line": 64,
+              "id": "53bacfe0c91763a7148e-1f299adb1cbcdf358cdf",
+              "file": "screenshots.spec.js",
+              "line": 68,
               "column": 3
             },
             {
-              "title": "ST-05 duplicate serial shows error",
+              "title": "05-asset-detail: Capture asset details view",
               "ok": true,
               "tags": [],
               "tests": [
@@ -332,8 +349,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -346,18 +363,22 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 851,
+                      "duration": 1610,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 05-asset-detail.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/05-asset-detail.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:54.418Z",
+                      "startTime": "2026-10-14T11:01:15.700Z",
                       "annotations": [
                         {
                           "type": "serial",
                           "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
                             "column": 15
                           }
                         }
@@ -368,14 +389,14 @@
                   "status": "expected"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-c362722d2926314ef870",
-              "file": "system.spec.js",
-              "line": 80,
+              "id": "53bacfe0c91763a7148e-ea43a0ff3c55d897765f",
+              "file": "screenshots.spec.js",
+              "line": 75,
               "column": 3
             },
             {
-              "title": "ST-06 admin assigns asset to employee",
-              "ok": true,
+              "title": "06-asset-assign-dialog: Capture assign asset modal dialog",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -384,8 +405,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -397,36 +418,50 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1218,
-                      "errors": [],
+                      "status": "timedOut",
+                      "duration": 30033,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        }
+                      ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:55.290Z",
+                      "startTime": "2026-10-14T11:01:17.326Z",
                       "annotations": [
                         {
                           "type": "serial",
                           "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
                             "column": 15
                           }
                         }
                       ],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/imac/Documents/Internship_project/test-results/screenshots-Documentation--7b0a3-e-assign-asset-modal-dialog-chromium/error-context.md"
+                        }
+                      ]
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-342960e95ce6ecf93824",
-              "file": "system.spec.js",
-              "line": 94,
+              "id": "53bacfe0c91763a7148e-5d3233157cbe51d978d7",
+              "file": "screenshots.spec.js",
+              "line": 85,
               "column": 3
             },
             {
-              "title": "ST-07 employee sees asset in My Assets",
+              "title": "07-my-assets-employee: Capture employee personal assets view",
               "ok": true,
               "tags": [],
               "tests": [
@@ -436,8 +471,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -447,38 +482,115 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 629,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:56.527Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.404Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-11fcab8201625d6a3ead",
-              "file": "system.spec.js",
+              "id": "53bacfe0c91763a7148e-b9a183b71d1f12088abc",
+              "file": "screenshots.spec.js",
+              "line": 101,
+              "column": 3
+            },
+            {
+              "title": "08-license-list: Capture software licenses table",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-14T11:01:47.410Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "53bacfe0c91763a7148e-cb4451e2de4ad44f5ce5",
+              "file": "screenshots.spec.js",
+              "line": 109,
+              "column": 3
+            },
+            {
+              "title": "09-license-detail: Capture software license detail view",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-14T11:01:47.414Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "53bacfe0c91763a7148e-18a5c7fcc7f1a86231a2",
+              "file": "screenshots.spec.js",
               "line": 116,
               "column": 3
             },
             {
-              "title": "ST-08 employee creates a ticket",
+              "title": "10-ticket-list: Capture support tickets desk queue",
               "ok": true,
               "tags": [],
               "tests": [
@@ -488,8 +600,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -499,38 +611,29 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 722,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:57.180Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.419Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-58c2a785ccd818756498",
-              "file": "system.spec.js",
-              "line": 124,
+              "id": "53bacfe0c91763a7148e-b97024f204f70b672e6c",
+              "file": "screenshots.spec.js",
+              "line": 126,
               "column": 3
             },
             {
-              "title": "ST-09 support assigns and resolves the ticket",
+              "title": "11-ticket-new: Capture new ticket creation form",
               "ok": true,
               "tags": [],
               "tests": [
@@ -540,8 +643,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -551,38 +654,29 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 821,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:57.914Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.424Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-81eefb6a110773f07edf",
-              "file": "system.spec.js",
-              "line": 147,
+              "id": "53bacfe0c91763a7148e-054a0789701d050c9e16",
+              "file": "screenshots.spec.js",
+              "line": 133,
               "column": 3
             },
             {
-              "title": "ST-10 employee reopens then support closes",
+              "title": "12-ticket-detail: Capture ticket detail with comments and staff controls",
               "ok": true,
               "tags": [],
               "tests": [
@@ -592,8 +686,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -603,38 +697,29 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1613,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:45:58.751Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.428Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-ea098be21b4ac4fdf8ad",
-              "file": "system.spec.js",
-              "line": 175,
+              "id": "53bacfe0c91763a7148e-69a3d2fba4af23d4e7e5",
+              "file": "screenshots.spec.js",
+              "line": 140,
               "column": 3
             },
             {
-              "title": "ST-11 closed ticket cannot receive comments",
+              "title": "13-users: Capture user administration directory",
               "ok": true,
               "tags": [],
               "tests": [
@@ -644,8 +729,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -655,38 +740,29 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 843,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:46:00.383Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.433Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-1de729f9051d803d984d",
-              "file": "system.spec.js",
-              "line": 210,
+              "id": "53bacfe0c91763a7148e-9b2f511b059710577409",
+              "file": "screenshots.spec.js",
+              "line": 150,
               "column": 3
             },
             {
-              "title": "ST-12 license allocate until seats full, then error",
+              "title": "14-audit-log: Capture compliance audit trail table",
               "ok": true,
               "tags": [],
               "tests": [
@@ -696,8 +772,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -707,38 +783,29 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1395,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:46:01.237Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.438Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-40faa38d576d37b1f65b",
-              "file": "system.spec.js",
-              "line": 225,
+              "id": "53bacfe0c91763a7148e-0500c9802bfa4097725b",
+              "file": "screenshots.spec.js",
+              "line": 157,
               "column": 3
             },
             {
-              "title": "ST-13 expiring licenses visible with badges",
+              "title": "15-reports: Capture CSV export reports panel",
               "ok": true,
               "tags": [],
               "tests": [
@@ -748,8 +815,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -759,38 +826,29 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 668,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:46:02.656Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.443Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-7f5d227c0d580ae3dde5",
-              "file": "system.spec.js",
-              "line": 250,
+              "id": "53bacfe0c91763a7148e-3b65e07f581261f58168",
+              "file": "screenshots.spec.js",
+              "line": 164,
               "column": 3
             },
             {
-              "title": "ST-14 admin downloads assets CSV and file has header row",
+              "title": "16-dashboard-employee: Capture employee dashboard view",
               "ok": true,
               "tags": [],
               "tests": [
@@ -800,8 +858,8 @@
                     {
                       "type": "serial",
                       "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
+                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                        "line": 42,
                         "column": 15
                       }
                     }
@@ -811,138 +869,25 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 888,
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T10:46:03.348Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
+                      "startTime": "2026-10-14T11:01:47.447Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "expected"
+                  "status": "skipped"
                 }
               ],
-              "id": "93ad8bafe40673c6163d-6c97f8bba1471583f89e",
-              "file": "system.spec.js",
-              "line": 261,
-              "column": 3
-            },
-            {
-              "title": "ST-15 audit log shows the actions performed in ST-04..ST-10",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 735,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-10-14T10:46:04.246Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "93ad8bafe40673c6163d-54a0efd51b550e24b522",
-              "file": "system.spec.js",
-              "line": 283,
-              "column": 3
-            },
-            {
-              "title": "ST-16 logout clears session",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "serial",
-                      "location": {
-                        "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                        "line": 31,
-                        "column": 15
-                      }
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 657,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-10-14T10:46:04.999Z",
-                      "annotations": [
-                        {
-                          "type": "serial",
-                          "location": {
-                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/system.spec.js",
-                            "line": 31,
-                            "column": 15
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "93ad8bafe40673c6163d-d935b689cde3d7ba43a8",
-              "file": "system.spec.js",
-              "line": 305,
+              "id": "53bacfe0c91763a7148e-0ca2de53f9f7db3782a5",
+              "file": "screenshots.spec.js",
+              "line": 171,
               "column": 3
             }
           ]
@@ -952,11 +897,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-14T10:45:49.977Z",
-    "duration": 15783.848,
-    "expected": 16,
-    "skipped": 0,
-    "unexpected": 0,
+    "startTime": "2026-10-14T11:01:07.603Z",
+    "duration": 39887.085999999996,
+    "expected": 5,
+    "skipped": 10,
+    "unexpected": 1,
     "flaky": 0
   }
 }
