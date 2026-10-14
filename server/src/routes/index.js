@@ -6,6 +6,9 @@ const userRoutes = require("./users");
 const assetRoutes = require("./assets");
 const licenseRoutes = require("./licenses");
 const ticketRoutes = require("./tickets");
+const dashboardRoutes = require("./dashboard");
+const reportsRoutes = require("./reports");
+const auditLogRoutes = require("./auditLogs");
 
 const router = express.Router();
 
@@ -36,5 +39,10 @@ router.use("/licenses", licenseRoutes);
 
 // Module M4: Support Tickets
 router.use("/tickets", ticketRoutes);
+
+// Module M5: Audit Log, Dashboard & Reports
+router.use("/dashboard", dashboardRoutes);
+router.use("/reports", reportsRoutes);
+router.use("/audit-logs", auditLogRoutes);
 
 module.exports = router;

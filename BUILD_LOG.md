@@ -27,3 +27,62 @@
 - Part 5 `cd server && npm test`: PASSED (194 passed tests across tickets.test.js, licenses.test.js, assets.test.js, auth.test.js, users.test.js, ticketRules.test.js, models.test.js, dates.test.js, 3 suites skipped for future parts).
 - Part 5 `cd server && npm run seed`: PASSED (seeded 8 users, 15 assets, 5 licenses, 12 tickets, 4 audit logs).
 - Part 5 live curl/lifecycle demo: PASSED (employee created ticket TCK-2026-0013, support auto-assigned to IN_PROGRESS, employee and support comments, support resolved with note, employee reopened clearing resolvedAt, support re-resolved, admin closed, closed immutability 400 enforcement, and 8 audit logs logged).
+- Part 6 `cd server && npm run lint`: PASSED (0 errors, 0 warnings).
+- Part 6 `cd server && npm test`: PASSED (244 passed tests across 12 test suites, 0 failed, 0 skipped — backend test suite complete).
+- Part 6 `cd server && npm run seed`: PASSED (seeded 8 users, 15 assets, 5 licenses, 12 tickets, 4 audit logs).
+- Part 6 `npm test -- --coverage` real output:
+```
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   86.52 |    66.62 |   86.88 |   87.52 |                   
+ src               |      92 |       25 |   66.66 |      92 |                   
+  app.js           |      92 |       25 |   66.66 |      92 | 28,45             
+ src/config        |   88.88 |       65 |     100 |   88.88 |                   
+  env.js           |   88.88 |       65 |     100 |   88.88 | 12                
+ src/controllers   |   89.28 |     71.3 |     100 |    90.8 |                   
+  assets.js        |   94.35 |       80 |     100 |   94.35 | ...78,306,341,348 
+  auditLogs.js     |   82.75 |    67.85 |     100 |   82.75 | 37-43             
+  auth.js          |   97.36 |    83.33 |     100 |   97.36 | 105               
+  dashboard.js     |     100 |       80 |     100 |     100 | 87-114,132        
+  licenses.js      |   95.23 |    84.09 |     100 |   96.69 | 216,220,264,303   
+  reports.js       |   66.32 |     44.2 |     100 |   72.61 | ...24,251,254-265 
+  tickets.js       |    92.7 |    84.42 |     100 |    92.7 | ...15,224,276,367 
+  users.js         |   88.88 |    68.42 |     100 |    88.4 | ...33,106,133,176 
+ src/jobs          |   80.85 |       80 |      40 |   80.43 |                   
+  ...eExpiryJob.js |   80.85 |       80 |      40 |   80.43 | 105-123           
+ src/middleware    |   58.69 |    39.65 |    87.5 |   58.88 |                   
+  audit.js         |   66.66 |      100 |     100 |   66.66 | 13-14             
+  auth.js          |   81.48 |       75 |     100 |   81.48 | 20,34,39,43,49    
+  errorHandler.js  |   28.57 |    15.15 |      50 |   29.26 | 20-56             
+  roles.js         |    87.5 |       75 |     100 |    87.5 | 11                
+  validate.js      |     100 |       60 |     100 |     100 | 13                
+ src/models        |   84.67 |    68.88 |   76.19 |   85.93 |                   
+  Asset.js         |   78.26 |       50 |   66.66 |   80.95 | 68-69,90-91       
+  AuditLog.js      |   83.33 |    73.33 |      80 |   80.76 | 86-87,102,106,126 
+  Counter.js       |     100 |      100 |     100 |     100 |                   
+  License.js       |   89.28 |    66.66 |      80 |   92.59 | 68-69             
+  Ticket.js        |   82.75 |       75 |      75 |   85.18 | 115-116,147-148   
+  User.js          |   76.92 |      100 |   66.66 |   76.92 | 56-58             
+  index.js         |     100 |      100 |     100 |     100 |                   
+ src/routes        |   96.38 |    46.15 |      60 |   97.53 |                   
+  assets.js        |     100 |      100 |     100 |     100 |                   
+  auditLogs.js     |     100 |      100 |     100 |     100 |                   
+  auth.js          |   93.75 |        0 |      50 |   93.75 | 20                
+  dashboard.js     |     100 |      100 |     100 |     100 |                   
+  index.js         |   95.23 |      100 |       0 |   95.23 | 21                
+  licenses.js      |     100 |      100 |     100 |     100 |                   
+  reports.js       |     100 |      100 |     100 |     100 |                   
+  tickets.js       |   87.09 |    54.54 |     100 |   92.59 | 40-41             
+  users.js         |     100 |      100 |     100 |     100 |                   
+ src/services      |   77.38 |    60.68 |   83.33 |   75.64 |                   
+  auditService.js  |   84.61 |    51.51 |     100 |   84.61 | 47-48             
+  csv.js           |   96.55 |       80 |     100 |   96.42 | 20                
+  mailService.js   |    23.8 |     8.33 |       0 |    23.8 | 8-65,74           
+  ticketRules.js   |     100 |      100 |     100 |     100 |                   
+ src/utils         |   94.11 |       50 |   85.71 |   93.93 |                   
+  ApiError.js      |   85.71 |       50 |      75 |   85.71 | 39-43             
+  asyncHandler.js  |     100 |      100 |     100 |     100 |                   
+  dates.js         |     100 |      100 |     100 |     100 |                   
+-------------------|---------|----------|---------|---------|-------------------
+```
