@@ -139,7 +139,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1358,
+                      "duration": 1406,
                       "errors": [],
                       "stdout": [
                         {
@@ -148,7 +148,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:09.182Z",
+                      "startTime": "2026-10-14T11:13:12.909Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -195,7 +195,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1564,
+                      "duration": 1668,
                       "errors": [],
                       "stdout": [
                         {
@@ -204,7 +204,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:10.938Z",
+                      "startTime": "2026-10-14T11:13:14.737Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -251,7 +251,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1660,
+                      "duration": 1648,
                       "errors": [],
                       "stdout": [
                         {
@@ -260,7 +260,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:12.525Z",
+                      "startTime": "2026-10-14T11:13:16.436Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -307,7 +307,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1491,
+                      "duration": 1519,
                       "errors": [],
                       "stdout": [
                         {
@@ -316,7 +316,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:14.196Z",
+                      "startTime": "2026-10-14T11:13:18.099Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -363,7 +363,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1610,
+                      "duration": 1632,
                       "errors": [],
                       "stdout": [
                         {
@@ -372,7 +372,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:15.700Z",
+                      "startTime": "2026-10-14T11:13:19.633Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -396,7 +396,7 @@
             },
             {
               "title": "06-asset-assign-dialog: Capture assign asset modal dialog",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -418,21 +418,17 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "timedOut",
-                      "duration": 30033,
-                      "error": {
-                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                      },
-                      "errors": [
+                      "status": "passed",
+                      "duration": 1846,
+                      "errors": [],
+                      "stdout": [
                         {
-                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                          "text": "[Captured] 06-asset-assign-dialog.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/06-asset-assign-dialog.png\n"
                         }
                       ],
-                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:17.326Z",
+                      "startTime": "2026-10-14T11:13:21.282Z",
                       "annotations": [
                         {
                           "type": "serial",
@@ -443,16 +439,10 @@
                           }
                         }
                       ],
-                      "attachments": [
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/Users/imac/Documents/Internship_project/test-results/screenshots-Documentation--7b0a3-e-assign-asset-modal-dialog-chromium/error-context.md"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-5d3233157cbe51d978d7",
@@ -482,25 +472,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1574,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 07-my-assets-employee.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/07-my-assets-employee.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.404Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:23.148Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-b9a183b71d1f12088abc",
               "file": "screenshots.spec.js",
-              "line": 101,
+              "line": 100,
               "column": 3
             },
             {
@@ -525,25 +528,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1576,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 08-license-list.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/08-license-list.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.410Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:24.737Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-cb4451e2de4ad44f5ce5",
               "file": "screenshots.spec.js",
-              "line": 109,
+              "line": 108,
               "column": 3
             },
             {
@@ -568,25 +584,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1704,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 09-license-detail.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/09-license-detail.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.414Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:26.332Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-18a5c7fcc7f1a86231a2",
               "file": "screenshots.spec.js",
-              "line": 116,
+              "line": 115,
               "column": 3
             },
             {
@@ -611,25 +640,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1576,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 10-ticket-list.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/10-ticket-list.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.419Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:28.048Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-b97024f204f70b672e6c",
               "file": "screenshots.spec.js",
-              "line": 126,
+              "line": 125,
               "column": 3
             },
             {
@@ -654,25 +696,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1481,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 11-ticket-new.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/11-ticket-new.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.424Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:29.635Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-054a0789701d050c9e16",
               "file": "screenshots.spec.js",
-              "line": 133,
+              "line": 132,
               "column": 3
             },
             {
@@ -697,25 +752,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1638,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 12-ticket-detail.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/12-ticket-detail.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.428Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:31.129Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-69a3d2fba4af23d4e7e5",
               "file": "screenshots.spec.js",
-              "line": 140,
+              "line": 139,
               "column": 3
             },
             {
@@ -740,25 +808,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1525,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 13-users.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/13-users.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.433Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:32.779Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-9b2f511b059710577409",
               "file": "screenshots.spec.js",
-              "line": 150,
+              "line": 149,
               "column": 3
             },
             {
@@ -783,25 +864,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1647,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 14-audit-log.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/14-audit-log.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.438Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:34.316Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-0500c9802bfa4097725b",
               "file": "screenshots.spec.js",
-              "line": 157,
+              "line": 156,
               "column": 3
             },
             {
@@ -826,25 +920,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1470,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 15-reports.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/15-reports.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.443Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:35.974Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-3b65e07f581261f58168",
               "file": "screenshots.spec.js",
-              "line": 164,
+              "line": 163,
               "column": 3
             },
             {
@@ -869,25 +976,38 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1509,
                       "errors": [],
-                      "stdout": [],
+                      "stdout": [
+                        {
+                          "text": "[Captured] 16-dashboard-employee.png -> /Users/imac/Documents/Internship_project/docs/assets/screenshots/16-dashboard-employee.png\n"
+                        }
+                      ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-14T11:01:47.447Z",
-                      "annotations": [],
+                      "startTime": "2026-10-14T11:13:37.455Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/imac/Documents/Internship_project/e2e/tests/screenshots.spec.js",
+                            "line": 42,
+                            "column": 15
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "53bacfe0c91763a7148e-0ca2de53f9f7db3782a5",
               "file": "screenshots.spec.js",
-              "line": 171,
+              "line": 170,
               "column": 3
             }
           ]
@@ -897,11 +1017,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-14T11:01:07.603Z",
-    "duration": 39887.085999999996,
-    "expected": 5,
-    "skipped": 10,
-    "unexpected": 1,
+    "startTime": "2026-10-14T11:13:11.466Z",
+    "duration": 27602.541,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 0,
     "flaky": 0
   }
 }

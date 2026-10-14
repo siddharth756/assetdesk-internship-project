@@ -1,0 +1,38 @@
+sequenceDiagram
+    autonumber
+    actor User as User Browser
+    participant Client as React Client (AuthContext)
+    participant API as Express Router & RateLimiter
+    participant AuthCtrl as Auth Controller
+    participant UserModel as User Model (MongoDB)
+    participant Audit as Audit Service (logAudit)
+
+    User->>Client: Enters email and password, clicks "Sign In"
+    Client->>API: POST /api/v1/auth/login { email, password }
+    
+    API->>API: Check rate limit (10 req / 15m)
+    API->>API: Validate input schemas (isEmail, isString)
+    
+    API->>AuthCtrl: login(req, res, next)
+    AuthCtrl->>UserModel: User.findOne({ email }).select('+passwordHash')
+    UserModel-->>AuthCtrl: Return user document (or null)
+
+    alt User Not Found or Inactive
+        AuthCtrl->>Audit: logAudit(LOGIN_FAILED, 'Invalid credentials')
+        AuthCtrl-->>Client: 401 Unauthorized / 403 Forbidden
+        Client-->>User: Display alert error message
+    else User Exists & Active
+        AuthCtrl->>UserModel: user.comparePassword(candidatePassword)
+        UserModel-->>AuthCtrl: bcrypt.compare() -> true
+
+        AuthCtrl->>UserModel: User.findByIdAndUpdate(user._id, { lastLogin: now })
+        AuthCtrl->>AuthCtrl: jwt.sign({ id, email, role }, JWT_SECRET, { expiresIn: '7d' })
+        
+        AuthCtrl->>Audit: logAudit(LOGIN, 'User logged in successfully', user._id)
+        Audit-->>AuthCtrl: Audit recorded
+        
+        AuthCtrl-->>Client: 200 OK { token, user: { id, name, email, role } }
+        Client->>Client: localStorage.setItem('assetdesk_token', token)
+        Client->>Client: setAuthState({ token, user, isAuthenticated: true })
+        Client-->>User: Redirect to role-tailored dashboard
+    end

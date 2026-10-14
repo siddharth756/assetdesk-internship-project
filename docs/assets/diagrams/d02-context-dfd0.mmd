@@ -1,0 +1,22 @@
+flowchart LR
+    Admin["System Administrator"]
+    Support["IT Support Staff"]
+    Employee["Employee / Requester"]
+    SMTP["External SMTP Mailer"]
+
+    System(["0.0<br/>IT Asset & Support Desk<br/>Management System<br/>(AssetDesk)"])
+
+    %% Admin flows
+    Admin -- "Credentials, User Accounts,<br/>Hardware Catalog, Licenses,<br/>System Policies" --> System
+    System -- "Inventory Metrics, System Audit Trail,<br/>Compliance CSV Reports" --> Admin
+
+    %% IT Support flows
+    Support -- "Triage Updates, Assignees,<br/>Resolution Notes, Hardware Status" --> System
+    System -- "Open Tickets Queue, SLA Timers,<br/>Hardware Assignment Details" --> Support
+
+    %% Employee flows
+    Employee -- "Login, Ticket Submissions,<br/>Comments, Reopen Requests" --> System
+    System -- "Assigned Assets, Ticket Progress,<br/>Profile & Password Status" --> Employee
+
+    %% SMTP flows
+    System -- "Dispatch Alerts, Overdue Warnings,<br/>Password Reset Links" --> SMTP

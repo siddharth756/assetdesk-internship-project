@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrator
+    participant Client as React Client (AssetDetail)
+    participant AuthMw as Auth & RBAC Middleware
+    participant AssetCtrl as Assets Controller
+    participant AssetModel as Asset Model (MongoDB)
+    participant UserModel as User Model (MongoDB)
+    participant Audit as Audit Service (logAudit)
+
+    Admin->>Client: Selects employee from modal & clicks "Confirm Assignment"
+    Client->>AuthMw: POST /api/v1/assets/:id/assign { userId } [Bearer JWT]
+    
+    AuthMw->>AuthMw: Verify JWT signature & expiration
+    AuthMw->>AuthMw: Check RBAC: role in ['ADMIN', 'IT_SUPPORT']
+    
+    AuthMw->>AssetCtrl: assignAsset(req, res, next)
+    
+    AssetCtrl->>AssetModel: Asset.findById(assetId)
+    AssetModel-->>AssetCtrl: Return asset document
+
+    AssetCtrl->>AssetCtrl: Check asset.status === 'AVAILABLE'
+    
+    AssetCtrl->>UserModel: User.findById(userId)
+    UserModel-->>AssetCtrl: Return user document (isActive: true)
+
+    AssetCtrl->>AssetModel: findByIdAndUpdate(assetId, { assignedTo, status: 'ASSIGNED', assignedAt: now }, { new: true })
+    AssetModel-->>AssetCtrl: Return populated assigned asset
+
+    AssetCtrl->>Audit: logAudit(ASSET_ASSIGN, 'Assigned to Employee X', assetId)
+    Audit-->>AssetCtrl: Audit persisted
+
+    AssetCtrl-->>Client: 200 OK { success: true, data: asset }
+    Client->>Client: showToast('Asset assigned successfully', 'success')
+    Client-->>Admin: Updates page UI with ASSIGNED badge & assignee details

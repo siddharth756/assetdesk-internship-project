@@ -1,0 +1,74 @@
+graph TD
+    Root["AssetDesk IT Management Platform"]
+
+    M1["Module 1: Auth & User Administration"]
+    M2["Module 2: Hardware Asset Management"]
+    M3["Module 3: Software License Management"]
+    M4["Module 4: Helpdesk & Ticket Management"]
+    M5["Module 5: Audit, Dashboard & Reporting"]
+
+    Root --> M1
+    Root --> M2
+    Root --> M3
+    Root --> M4
+    Root --> M5
+
+    %% M1 Sub-functions
+    M1_1["JWT Authentication & Rate Limiting"]
+    M1_2["User CRUD & Role Assignments"]
+    M1_3["Self Password Change & Profile"]
+    M1_4["Account Activation & Safe Deactivation"]
+    M1 --> M1_1
+    M1 --> M1_2
+    M1 --> M1_3
+    M1 --> M1_4
+
+    %% M2 Sub-functions
+    M2_1["Asset Tag Generation (AST-YYYY-NNNN)"]
+    M2_2["Hardware Catalog & Unique Serials"]
+    M2_3["Atomic Employee Assignment & Unassign"]
+    M2_4["Maintenance & Retirement Transitions"]
+    M2_5["Employee 'My Assets' Portal"]
+    M2 --> M2_1
+    M2 --> M2_2
+    M2 --> M2_3
+    M2 --> M2_4
+    M2 --> M2_5
+
+    %% M3 Sub-functions
+    M3_1["Software License Subscription Catalog"]
+    M3_2["Encrypted / Masked Product Key Guard"]
+    M3_3["Seat Capacity Enforcement & Over-allocation Guard"]
+    M3_4["Seat Allocation & Release Management"]
+    M3_5["30-Day Expiry Notification Status"]
+    M3 --> M3_1
+    M3 --> M3_2
+    M3 --> M3_3
+    M3 --> M3_4
+    M3 --> M3_5
+
+    %% M4 Sub-functions
+    M4_1["Ticket Logging (TCK-YYYY-NNNN)"]
+    M4_2["Priority-Driven SLA Deadline Calculator"]
+    M4_3["Technician Assignment & Queue Routing"]
+    M4_4["Strict Status Transition State Machine"]
+    M4_5["Chronological Comments Thread"]
+    M4_6["Resolution Validation & Requester Reopen"]
+    M4 --> M4_1
+    M4 --> M4_2
+    M4 --> M4_3
+    M4 --> M4_4
+    M4 --> M4_5
+    M4 --> M4_6
+
+    %% M5 Sub-functions
+    M5_1["Real-time KPI Overview Dashboard"]
+    M5_2["Distribution Progress Metrics & Overdue SLA Counter"]
+    M5_3["Immutable Append-Only Audit Trail"]
+    M5_4["Filterable Compliance Activity View"]
+    M5_5["RFC-4180 CSV Streaming Reports Engine"]
+    M5 --> M5_1
+    M5 --> M5_2
+    M5 --> M5_3
+    M5 --> M5_4
+    M5 --> M5_5

@@ -1,0 +1,95 @@
+erDiagram
+    USERS ||--o{ ASSETS : "holds assignment"
+    USERS ||--o{ TICKETS : "creates"
+    USERS ||--o{ TICKETS : "assigned as technician"
+    USERS ||--o{ AUDIT_LOGS : "triggers action"
+    USERS ||--o{ LICENSE_ALLOCATIONS : "holds seat"
+    LICENSES ||--|{ LICENSE_ALLOCATIONS : "contains"
+    ASSETS ||--o{ TICKETS : "related hardware"
+    TICKETS ||--o{ TICKET_COMMENTS : "contains"
+    USERS ||--o{ TICKET_COMMENTS : "authors"
+
+    USERS {
+        ObjectId _id PK
+        string name
+        string email UK
+        string passwordHash
+        string role "ADMIN | IT_SUPPORT | EMPLOYEE"
+        string department
+        boolean isActive
+        date lastLogin
+        date createdAt
+        date updatedAt
+    }
+
+    ASSETS {
+        ObjectId _id PK
+        string assetTag UK "AST-YYYY-NNNN"
+        string serialNumber UK
+        string name
+        string category "LAPTOP | DESKTOP | MONITOR | etc"
+        string status "AVAILABLE | ASSIGNED | MAINTENANCE | RETIRED"
+        ObjectId assignedTo FK "ref USERS"
+        date assignedAt
+        date purchaseDate
+        date warrantyExpiry
+        string notes
+        ObjectId createdBy FK "ref USERS"
+        date createdAt
+        date updatedAt
+    }
+
+    LICENSES {
+        ObjectId _id PK
+        string softwareName
+        string vendor
+        string licenseKey
+        int totalSeats
+        date expiryDate
+        string notes
+        date createdAt
+        date updatedAt
+    }
+
+    LICENSE_ALLOCATIONS {
+        ObjectId user FK "ref USERS"
+        date allocatedAt
+    }
+
+    TICKETS {
+        ObjectId _id PK
+        string ticketCode UK "TCK-YYYY-NNNN"
+        string title
+        string description
+        string category "HARDWARE | SOFTWARE | NETWORK | ACCESS | OTHER"
+        string priority "LOW | MEDIUM | HIGH | CRITICAL"
+        string status "OPEN | IN_PROGRESS | RESOLVED | CLOSED"
+        ObjectId createdBy FK "ref USERS"
+        ObjectId assignedTo FK "ref USERS"
+        ObjectId relatedAsset FK "ref ASSETS"
+        date dueAt
+        date resolvedAt
+        date closedAt
+        string resolutionNote
+        date createdAt
+        date updatedAt
+    }
+
+    TICKET_COMMENTS {
+        ObjectId author FK "ref USERS"
+        string message
+        date createdAt
+    }
+
+    AUDIT_LOGS {
+        ObjectId _id PK
+        ObjectId user FK "ref USERS"
+        string userName
+        string userRole
+        string action
+        string entity "AUTH | USER | ASSET | LICENSE | TICKET | REPORT"
+        string entityId
+        string details
+        string ipAddress
+        date createdAt
+    }

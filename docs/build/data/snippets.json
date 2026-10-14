@@ -1,0 +1,30 @@
+[
+  {
+    "title": "JWT Authentication Middleware",
+    "file": "server/src/middleware/auth.js",
+    "startLine": 11,
+    "endLine": 30,
+    "code": "async function authenticate(req, res, next) {\n  try {\n    const authHeader = req.headers.authorization;\n    if (!authHeader || !authHeader.startsWith(\"Bearer \")) {\n      return next(ApiError.unauthorized(\"Authentication token required\"));\n    }\n\n    const token = authHeader.split(\" \")[1];\n    if (!token) {\n      return next(ApiError.unauthorized(\"Authentication token required\"));\n    }\n\n    let decoded;\n    try {\n      decoded = jwt.verify(token, config.JWT_SECRET, { algorithms: [\"HS256\"] });\n    } catch (err) {\n      if (err.name === \"TokenExpiredError\") {\n        return next(ApiError.unauthorized(\"Token has expired\"));\n      }\n      return next(ApiError.unauthorized(\"Invalid or tampered token\"));"
+  },
+  {
+    "title": "Atomic Asset Assignment with Concurrency Guard",
+    "file": "server/src/controllers/assets.js",
+    "startLine": 256,
+    "endLine": 281,
+    "code": "const assignAsset = asyncHandler(async (req, res) => {\n  const { userId } = req.body;\n\n  const targetUser = await User.findById(userId);\n  if (!targetUser) {\n    throw ApiError.notFound(\"User not found\");\n  }\n\n  if (!targetUser.isActive) {\n    throw ApiError.badRequest(\"Cannot assign asset to an inactive user\");\n  }\n\n  // Atomic conditional update ensuring only an AVAILABLE asset is assigned\n  const asset = await Asset.findOneAndUpdate(\n    { _id: req.params.id, status: \"AVAILABLE\" },\n    { $set: { status: \"ASSIGNED\", assignedTo: targetUser._id } },\n    { new: true }\n  ).populate(\"assignedTo\", \"name email\");\n\n  if (!asset) {\n    const exists = await Asset.findById(req.params.id);\n    if (!exists) {\n      throw ApiError.notFound(\"Asset not found\");\n    }\n    throw ApiError.badRequest(\"Asset is not available\");\n  }"
+  },
+  {
+    "title": "Ticket Status Transition State Machine Rules",
+    "file": "server/src/services/ticketRules.js",
+    "startLine": 14,
+    "endLine": 33,
+    "code": "const VALID_TRANSITIONS = {\n  OPEN: [\"IN_PROGRESS\"],\n  IN_PROGRESS: [\"RESOLVED\"],\n  RESOLVED: [\"IN_PROGRESS\", \"CLOSED\"],\n  CLOSED: []\n};\n\n/**\n * Checks if status transition from -> to is valid per business rules\n * @param {string} from - Source status\n * @param {string} to - Target status\n * @returns {boolean}\n */\nfunction canTransition(from, to) {\n  if (!from || !to) return false;\n  if (from === to) return false;\n  const allowed = VALID_TRANSITIONS[from];\n  if (!allowed) return false;\n  return allowed.includes(to);\n}"
+  },
+  {
+    "title": "Software License Expiry & Status Computation",
+    "file": "server/src/models/License.js",
+    "startLine": 90,
+    "endLine": 104,
+    "code": "licenseSchema.virtual(\"status\").get(function () {\n  if (!this.expiryDate) return \"ACTIVE\";\n  const today = startOfToday();\n  const expiry = new Date(this.expiryDate);\n  expiry.setHours(0, 0, 0, 0);\n\n  if (expiry.getTime() < today.getTime()) {\n    return \"EXPIRED\";\n  }\n  const thirtyDaysAhead = addDays(today, 30);\n  if (expiry.getTime() <= thirtyDaysAhead.getTime()) {\n    return \"EXPIRING\";\n  }\n  return \"ACTIVE\";\n});"
+  }
+]

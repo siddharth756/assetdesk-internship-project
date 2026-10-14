@@ -1,0 +1,59 @@
+graph TB
+    subgraph ClientTier ["Presentation Tier (Frontend Client)"]
+        UI["React 18 SPA (Vite)"]
+        Router["React Router v6"]
+        AuthCtx["Auth Context (JWT In-Memory + Storage)"]
+        Theme["Vanilla CSS Design System & Layout"]
+        UI --> Router
+        Router --> AuthCtx
+        Router --> Theme
+    end
+
+    subgraph APITier ["Application Logic Tier (Node.js / Express API)"]
+        Gateway["Express Router & HTTP Server (:5000)"]
+        RateLimit["Rate Limiter (express-rate-limit)"]
+        SecMw["Security Middleware (Helmet, MongoSanitize, XSS)"]
+        AuthMw["Authentication & RBAC (authenticate, authorize)"]
+        
+        subgraph Controllers ["Controllers & Service Logic"]
+            C_Auth["Auth Controller"]
+            C_User["Users Controller"]
+            C_Asset["Assets Controller"]
+            C_Lic["Licenses Controller"]
+            C_Tkt["Tickets & SLA Controller"]
+            C_Audit["Audit Log Controller"]
+            C_Rep["Reports & CSV Generator"]
+        end
+
+        Rules["Business Rules Engine (ticketRules, passwordRules, dates)"]
+        AuditHelper["Immutable Audit Trail Helper (logAudit)"]
+
+        Gateway --> RateLimit --> SecMw --> AuthMw
+        AuthMw --> Controllers
+        Controllers --> Rules
+        Controllers --> AuditHelper
+    end
+
+    subgraph DataTier ["Data & Persistence Tier"]
+        Mongoose["Mongoose ODM (Schema & Strict Validation)"]
+        MongoDB[("MongoDB 8.0 Engine\n(Unique Indexes, Compound Keys)")]
+        
+        subgraph Collections ["Database Collections"]
+            Col_Users[("users")]
+            Col_Assets[("assets")]
+            Col_Licenses[("licenses")]
+            Col_Tickets[("tickets")]
+            Col_Audit[("audit_logs")]
+        end
+
+        Mongoose --> MongoDB
+        MongoDB --> Collections
+    end
+
+    subgraph ExternalServices ["External Systems"]
+        SMTP["SMTP Mail Gateway (Nodemailer / Console Stub)"]
+    end
+
+    ClientTier -- "REST API (JSON over HTTPS/Axios)" --> APITier
+    Controllers --> Mongoose
+    Controllers -. "Notification Alerts" .-> SMTP

@@ -1,0 +1,25 @@
+flowchart TD
+    Start([Initiate Asset Allocation]) --> RoleCheck{Caller is ADMIN or IT_SUPPORT?}
+    
+    RoleCheck -- No --> ErrForbidden["Return HTTP 403 FORBIDDEN"] --> EndFail([Operation Aborted])
+    
+    RoleCheck -- Yes --> LoadAsset["Fetch Hardware Asset by ID"]
+    LoadAsset --> AssetFound{Asset Exists?}
+    
+    AssetFound -- No --> ErrNotFound["Return HTTP 404 Asset Not Found"] --> EndFail
+    
+    AssetFound -- Yes --> StatusCheck{"Asset status === AVAILABLE?"}
+    StatusCheck -- No --> ErrStatus["Return HTTP 400 Invalid Status for Assignment"] --> EndFail
+    
+    StatusCheck -- Yes --> LoadUser["Fetch Target Assignee User"]
+    LoadUser --> UserActive{"User Exists & isActive is true?"}
+    
+    UserActive -- No --> ErrUser["Return HTTP 400 Inactive or Non-existent User"] --> EndFail
+    
+    UserActive -- Yes --> AtomicAssign["Atomic Assignment Update:<br/>status = ASSIGNED<br/>assignedTo = user._id<br/>assignedAt = new Date()"]
+    AtomicAssign --> SaveDB[("Commit to MongoDB")]
+    SaveDB --> RecordAudit["Log ASSET_ASSIGN Audit Entry with Details"]
+    RecordAudit --> DispatchAlert["Trigger Notification Service Email Stub"]
+    DispatchAlert --> ReturnRes["Return HTTP 200 with Populated Asset"]
+    ReturnRes --> UIUpdate["UI Updates to ASSIGNED Badge & Emp Name"]
+    UIUpdate --> EndSuccess([Allocation Complete])

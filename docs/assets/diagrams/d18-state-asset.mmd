@@ -1,0 +1,15 @@
+stateDiagram-v2
+    [*] --> AVAILABLE : Asset created and added to inventory
+    
+    AVAILABLE --> ASSIGNED : Admin allocates to employee (assignedTo set)
+    ASSIGNED --> AVAILABLE : Admin unassigns asset (clears assignedTo)
+    
+    AVAILABLE --> MAINTENANCE : Hardware defect / routine service
+    MAINTENANCE --> AVAILABLE : Diagnostics & repair completed
+    
+    ASSIGNED --> MAINTENANCE : Device sent for urgent servicing (auto unassigned)
+    
+    AVAILABLE --> RETIRED : End of operational lifecycle (EOM / EOL)
+    MAINTENANCE --> RETIRED : Decommissioned due to unrepairable fault
+    
+    RETIRED --> [*] : Archived hardware record (terminal state)

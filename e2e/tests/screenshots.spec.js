@@ -84,9 +84,8 @@ test.describe.serial("Documentation Screenshots Generation", () => {
 
   test("06-asset-assign-dialog: Capture assign asset modal dialog", async ({ page }) => {
     await loginAs(page, "admin@assetdesk.local", "Demo@1234");
-    // Find an available asset from list to ensure Assign button is active
     await page.goto("/assets");
-    await page.selectOption("select", "AVAILABLE");
+    await page.fill('input[placeholder*="Search"]', "AST-2026-0004");
     await page.click('button:has-text("Search")');
     await expect(page.locator("table tbody tr").first()).toBeVisible();
     await page.locator("table tbody tr").first().locator('a:has-text("View")').click();

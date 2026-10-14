@@ -1,0 +1,38 @@
+flowchart TD
+    Employee["Employee"]
+    Support["IT Support Staff"]
+    D4[("D4: Tickets Collection")]
+    D5[("D5: AuditLogs Collection")]
+
+    P51(["5.1<br/>Ticket Submission &<br/>Input Validation"])
+    P52(["5.2<br/>Automatic SLA Due Date<br/>Calculation (PRIORITY_HOURS)"])
+    P53(["5.3<br/>Technician Assignment<br/>(OPEN -> IN_PROGRESS)"])
+    P54(["5.4<br/>Discussion Comments Thread<br/>(1-1000 Chars)"])
+    P55(["5.5<br/>Resolution Validation<br/>(Min 5 Chars Note)"])
+    P56(["5.6<br/>Employee Reopen Evaluation<br/>(RESOLVED -> IN_PROGRESS)"])
+    P57(["5.7<br/>Final Ticket Closure<br/>(RESOLVED -> CLOSED)"])
+
+    Employee -->|Title, Priority, Category, Description| P51
+    P51 -->|Valid Ticket Data| P52
+    P52 -->|Insert OPEN with dueAt| D4
+    P52 -->|Log TICKET_CREATE| D5
+
+    Support -->|Select Technician| P53
+    P53 <-->|Update assignedTo & Status| D4
+    P53 -->|Log TICKET_ASSIGN| D5
+
+    Employee & Support -->|Add Reply / Message| P54
+    P54 <-->|Append to comments array| D4
+    P54 -->|Log TICKET_COMMENT| D5
+
+    Support -->|Submit Resolution Note| P55
+    P55 <-->|Set resolvedAt & Status RESOLVED| D4
+    P55 -->|Log TICKET_STATUS| D5
+
+    Employee -->|Issue Persists? Reopen| P56
+    P56 <-->|Clear resolvedAt, Status IN_PROGRESS| D4
+    P56 -->|Log TICKET_STATUS Reopened| D5
+
+    Support -->|Mark Completed & Close| P57
+    P57 <-->|Set closedAt & Status CLOSED| D4
+    P57 -->|Log TICKET_STATUS Closed| D5

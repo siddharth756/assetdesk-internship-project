@@ -1,0 +1,33 @@
+sequenceDiagram
+    autonumber
+    actor Staff as IT Support Staff
+    participant Client as React Client (TicketDetail)
+    participant AuthMw as Auth Middleware
+    participant TicketCtrl as Tickets Controller
+    participant Rules as Ticket Rules (ticketRules.js)
+    participant TicketModel as Ticket Model (MongoDB)
+    participant Audit as Audit Service (logAudit)
+
+    Staff->>Client: Selects "RESOLVED", inputs resolution notes, clicks "Update Status"
+    Client->>AuthMw: PATCH /api/v1/tickets/:id/status { status: 'RESOLVED', resolutionNote } [Bearer JWT]
+
+    AuthMw->>AuthMw: Authenticate token & authorize IT_SUPPORT role
+    AuthMw->>TicketCtrl: updateTicketStatus(req, res, next)
+
+    TicketCtrl->>TicketModel: Ticket.findById(ticketId)
+    TicketModel-->>TicketCtrl: Return ticket document (status: 'IN_PROGRESS')
+
+    TicketCtrl->>Rules: canTransition('IN_PROGRESS', 'RESOLVED')
+    Rules-->>TicketCtrl: true (valid state progression)
+
+    TicketCtrl->>TicketCtrl: Validate resolutionNote length >= 5 characters
+
+    TicketCtrl->>TicketModel: findByIdAndUpdate(ticketId, { status: 'RESOLVED', resolutionNote, resolvedAt: now }, { new: true })
+    TicketModel-->>TicketCtrl: Return updated ticket
+
+    TicketCtrl->>Audit: logAudit(TICKET_STATUS, 'from IN_PROGRESS to RESOLVED', ticketId)
+    Audit-->>TicketCtrl: Audit persisted
+
+    TicketCtrl-->>Client: 200 OK { success: true, data: updatedTicket }
+    Client->>Client: showToast('Ticket status updated to RESOLVED', 'success')
+    Client-->>Staff: Render green RESOLVED badge and resolution notes card

@@ -1,0 +1,33 @@
+graph TB
+    subgraph ClientHosting ["Frontend Production Hosting (Vercel Edge Network)"]
+        Browser["User Workstation Browser<br/>(Chrome, Firefox, Safari, Edge)"]
+        VercelCDN["Vercel Global Edge CDN<br/>(HTTPS / HTTP/2 SSL)"]
+        SPA["Vite Static Production Assets<br/>(HTML5, Bundled JS, CSS tokens)"]
+        
+        Browser -- "HTTPS :443" --> VercelCDN
+        VercelCDN --> SPA
+    end
+
+    subgraph BackendHosting ["Backend API Cloud Server (Render / Linux Container)"]
+        RenderEnv["Render Web Service (Node.js 20 LTS Runtime)"]
+        ExpressApp["Express.js REST API Server (:5000)<br/>(CORS, Helmet, RateLimiter, JWT)"]
+        Nodemailer["Nodemailer Mail Dispatcher"]
+
+        RenderEnv --> ExpressApp
+        ExpressApp --> Nodemailer
+    end
+
+    subgraph DatabaseCloud ["Database Cloud (MongoDB Atlas Tier M0/M10)"]
+        AtlasCluster[("MongoDB Atlas Replica Set<br/>(TLS Encrypted, VPC Peered)")]
+        Collections[("Collections: users, assets,<br/>licenses, tickets, audit_logs")]
+
+        AtlasCluster --> Collections
+    end
+
+    subgraph ThirdPartyCloud ["External Cloud Services"]
+        SMTPGateway["SMTP Server / Brevo / SendGrid<br/>(Port 587 TLS)"]
+    end
+
+    SPA -- "REST API Calls (JSON / Bearer Token)" --> ExpressApp
+    ExpressApp -- "Mongoose Driver (mongodb+srv://)" --> AtlasCluster
+    Nodemailer -- "SMTP Auth (TLS)" --> SMTPGateway

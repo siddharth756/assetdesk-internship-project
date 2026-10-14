@@ -1,0 +1,28 @@
+flowchart TD
+    Start([User Submits Login Form]) --> RateCheck{Exceeded 10 req / 15m Rate Limit?}
+    
+    RateCheck -- Yes --> ErrRate[Return HTTP 429 RATE_LIMITED] --> EndFail([Login Terminated])
+    
+    RateCheck -- No --> LookupUser[Query User by Normalized Email]
+    LookupUser --> FoundUser{User Record Exists?}
+    
+    FoundUser -- No --> AuditFail1[Record Audit LOGIN_FAILED]
+    AuditFail1 --> ErrInvalid[Return HTTP 401 Invalid Credentials] --> EndFail
+    
+    FoundUser -- Yes --> CheckActive{Is isActive === true?}
+    CheckActive -- No --> AuditFail2[Record Audit LOGIN_FAILED Deactivated]
+    CheckActive -- No --> ErrDeactive[Return HTTP 403 Account Deactivated] --> EndFail
+    
+    CheckActive -- Yes --> ComparePwd[Verify Password with bcrypt]
+    ComparePwd --> PwdMatch{Password Matches Hash?}
+    
+    PwdMatch -- No --> AuditFail3[Record Audit LOGIN_FAILED]
+    AuditFail3 --> ErrInvalid
+    
+    PwdMatch -- Yes --> IssueJWT[Sign JWT Token with User ID & Role]
+    IssueJWT --> UpdateLastLogin[Update user.lastLogin Timestamp]
+    UpdateLastLogin --> AuditSuccess[Record Immutable Audit Event LOGIN]
+    AuditSuccess --> ReturnSuccess[Return HTTP 200 with JWT & User Info]
+    ReturnSuccess --> ClientStore[Client Stores JWT in localStorage]
+    ClientStore --> RedirectRole[Redirect to Role-Aware Dashboard]
+    RedirectRole --> EndSuccess([Session Authenticated])

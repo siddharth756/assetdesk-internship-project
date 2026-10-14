@@ -1,0 +1,12 @@
+stateDiagram-v2
+    [*] --> OPEN : Employee submits ticket
+    
+    OPEN --> IN_PROGRESS : Support assigns technician
+    
+    IN_PROGRESS --> RESOLVED : Issue resolved with resolution note
+    
+    RESOLVED --> IN_PROGRESS : Employee reopens if issue persists
+    
+    RESOLVED --> CLOSED : Support or Admin marks closed
+    
+    CLOSED --> [*] : Ticket archived and immutable

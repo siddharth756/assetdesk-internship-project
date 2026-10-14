@@ -147,4 +147,25 @@ All files          |   86.52 |    66.62 |   86.88 |   87.52 |
   - Implemented compliant two-step reopen resolution in ST-10 to uphold UT-37 state transition invariant (`IN_PROGRESS -> RESOLVED -> CLOSED`).
   - Implemented automated test result collector script `docs/build/scripts/collect-test-results.js` writing verified non-fabricated metrics to `docs/build/data/test-results.json`.
 
+### Part 10 — Real Screenshots, Diagrams & Repo Facts
+- Date: 2026-10-14
+- Status: COMPLETE
+- Part A — Screenshots:
+  - 16 full-fidelity live UI screenshots captured at 1366x768 without browser chrome using Playwright:
+    `01-login.png`, `02-dashboard-admin.png`, `03-asset-list.png`, `04-asset-form.png`, `05-asset-detail.png`, `06-asset-assign-dialog.png`, `07-my-assets-employee.png`, `08-license-list.png`, `09-license-detail.png`, `10-ticket-list.png`, `11-ticket-new.png`, `12-ticket-detail.png`, `13-users.png`, `14-audit-log.png`, `15-reports.png`, `16-dashboard-employee.png`.
+  - Added `npm run screenshots` command in root `package.json`.
+- Part B — Architecture & Process Diagrams:
+  - 18 diagrams authored in Mermaid (`.mmd`) and rendered to high-res PNG (2x scale) and SVG format:
+    `d01-architecture-3tier`, `d02-context-dfd0`, `d03-dfd-level1`, `d04-dfd-level2-ticket`, `d05-functional-decomposition`, `d06-usecase`, `d07-class-diagram`, `d08-er-diagram`, `d09-activity-login`, `d10-activity-asset-assign`, `d11-activity-ticket-lifecycle`, `d12-sequence-login`, `d13-sequence-asset-assign`, `d14-sequence-ticket-resolve`, `d15-deployment`, `d16-gantt-15-weeks`, `d17-state-ticket`, `d18-state-asset`.
+- Part C — Code Snippets:
+  - Extracted 4 verified excerpts programmatically into `docs/build/data/snippets.json`:
+    1. JWT Authentication Middleware (`server/src/middleware/auth.js:11-30`)
+    2. Atomic Asset Assignment with Concurrency Guard (`server/src/controllers/assets.js:256-281`)
+    3. Ticket Status Transition State Machine Rules (`server/src/services/ticketRules.js:14-33`)
+    4. Software License Expiry & Status Computation (`server/src/models/License.js:90-104`)
+- Part D — Real Data Extracts:
+  - Generated `docs/build/data/project-facts.json` containing verified dependencies, versions, model/controller/page counts, LOC breakdown (19,383 lines), and 36 parsed REST endpoints with HTTP verbs, paths, and role requirements.
+  - Added `npm run docs:facts` command in root `package.json`.
+
+
 
