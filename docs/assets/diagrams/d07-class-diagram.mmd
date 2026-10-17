@@ -1,71 +1,43 @@
 classDiagram
+    direction TB
     class User {
         +ObjectId _id
         +String name
         +String email
-        +String passwordHash
         +String role
         +String department
         +Boolean isActive
-        +Date lastLogin
-        +Date createdAt
-        +Date updatedAt
-        +comparePassword(candidatePassword) Boolean
+        +comparePassword(pwd) Boolean
     }
 
     class Asset {
         +ObjectId _id
         +String assetTag
         +String serialNumber
-        +String name
         +String category
         +String status
         +ObjectId assignedTo
         +Date assignedAt
-        +Date purchaseDate
-        +Date warrantyExpiry
-        +String notes
-        +ObjectId createdBy
-        +Date createdAt
-        +Date updatedAt
     }
 
     class License {
         +ObjectId _id
         +String softwareName
         +String vendor
-        +String licenseKey
         +Number totalSeats
-        +Allocation[] allocations
-        +Date expiryDate
-        +String notes
         +Number usedSeats
-        +String status
-    }
-
-    class Allocation {
-        +ObjectId user
-        +Date allocatedAt
+        +Date expiryDate
     }
 
     class Ticket {
         +ObjectId _id
         +String ticketCode
         +String title
-        +String description
-        +String category
         +String priority
         +String status
         +ObjectId createdBy
         +ObjectId assignedTo
-        +ObjectId relatedAsset
         +Date dueAt
-        +Date resolvedAt
-        +Date closedAt
-        +String resolutionNote
-        +Comment[] comments
-        +Date createdAt
-        +Date updatedAt
     }
 
     class Comment {
@@ -77,23 +49,15 @@ classDiagram
     class AuditLog {
         +ObjectId _id
         +ObjectId user
-        +String userName
-        +String userRole
         +String action
         +String entity
-        +String entityId
-        +String details
         +String ipAddress
-        +Date createdAt
+        +Date timestamp
     }
 
     User "1" <-- "0..*" Asset : assignedTo
-    User "1" <-- "0..*" Asset : createdBy
-    User "1" <-- "0..*" Allocation : user
-    License "1" *-- "0..*" Allocation : contains
     User "1" <-- "0..*" Ticket : createdBy
     User "1" <-- "0..1" Ticket : assignedTo
-    Asset "1" <-- "0..*" Ticket : relatedAsset
-    User "1" <-- "0..*" Comment : author
     Ticket "1" *-- "0..*" Comment : contains
-    User "1" <-- "0..*" AuditLog : user
+    License "1" <-- "0..*" User : allocates
+    User "1" <-- "0..*" AuditLog : actor

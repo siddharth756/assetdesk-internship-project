@@ -1,12 +1,7 @@
-stateDiagram-v2
-    [*] --> OPEN : Employee submits ticket
-    
-    OPEN --> IN_PROGRESS : Support assigns technician
-    
-    IN_PROGRESS --> RESOLVED : Issue resolved with resolution note
-    
-    RESOLVED --> IN_PROGRESS : Employee reopens if issue persists
-    
-    RESOLVED --> CLOSED : Support or Admin marks closed
-    
-    CLOSED --> [*] : Ticket archived and immutable
+flowchart TD
+    S0((Start)) --> S1["<b>OPEN</b><br/>Ticket logged & SLA timer active"]
+    S1 -->|Technician Claims| S2["<b>IN_PROGRESS</b><br/>Investigation & triage active"]
+    S2 -->|Resolution Note Added| S3["<b>RESOLVED</b><br/>Solution submitted for review"]
+    S3 -->|Employee Reopens| S2
+    S3 -->|Confirmed / Admin Close| S4["<b>CLOSED</b><br/>Archived & immutable"]
+    S4 --> S5(((End)))

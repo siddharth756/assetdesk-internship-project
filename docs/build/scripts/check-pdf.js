@@ -27,11 +27,11 @@ async function main() {
 
   let passed = true;
 
-  // 1. Exactly 50 pages check
-  if (pages === 50) {
-    console.log("  ✓ [PASS] Page Count: Exactly 50 A4 pages.");
+  // 1. 45 to 50 pages check per user requirement
+  if (pages >= 45 && pages <= 50) {
+    console.log(`  ✓ [PASS] Page Count: ${pages} A4 pages (within 45 to 50 range).`);
   } else {
-    console.error(`  ✗ [FAIL] Page Count: Found ${pages} pages (Expected EXACTLY 50).`);
+    console.error(`  ✗ [FAIL] Page Count: Found ${pages} pages (Expected between 45 and 50).`);
     passed = false;
   }
 

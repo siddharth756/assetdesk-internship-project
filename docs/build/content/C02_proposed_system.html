@@ -2,24 +2,24 @@
   <h1 class="chapter">Chapter 2: Proposed System</h1>
 
   <h2 class="section">2.1 Scope & Objectives</h2>
-  <p style="text-align: justify; line-height: 1.55; margin-bottom: 10px;">
+  <p style="text-align: justify; line-height: 1.45; font-size: 10pt; margin-bottom: 8px;">
     The proposed <strong>IT Asset & Support Desk Management System</strong> (<em>AssetDesk</em>) is engineered as an integrated, secure web platform to modernize internal IT governance. The scope is purposefully defined to fulfill core enterprise IT operational requirements while maintaining simplicity, reliability, and ease of demonstration during academic review.
   </p>
 
-  <h3 class="sub" style="margin-top: 8px; margin-bottom: 4px;">System Boundary & Scope Definition</h3>
-  <table class="grid" style="width: 100%; font-size: 9pt; margin: 6px 0 12px 0; border-collapse: collapse;">
+  <h3 class="sub" style="margin-top: 6px; margin-bottom: 4px;">System Boundary & Scope Definition</h3>
+  <table class="grid" style="width: 100%; font-size: 9pt; margin: 4px 0 8px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
-        <th style="width: 50%; padding: 5px 8px; color: #047857;">In-Scope Engineering Features</th>
-        <th style="width: 50%; padding: 5px 8px; color: #b91c1c;">Out-of-Scope Elements (Deliberate Exclusions)</th>
+        <th style="width: 50%; padding: 4px 8px; color: #047857;">In-Scope Engineering Features</th>
+        <th style="width: 50%; padding: 4px 8px; color: #b91c1c;">Out-of-Scope Elements (Deliberate Exclusions)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style="padding: 5px 8px; vertical-align: top;">
-          <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
-            <li>Role-Based Access Control (ADMIN, IT_SUPPORT, EMPLOYEE)</li>
-            <li>Hardware asset lifecycle management (CRUD, assign, unassign)</li>
+        <td style="padding: 4px 8px; vertical-align: top;">
+          <ul style="margin: 0; padding-left: 18px; line-height: 1.4;">
+            <li>Role-Based Access Control (Admin, IT Support, Employee)</li>
+            <li>Hardware asset lifecycle management (CRUD, assign, return)</li>
             <li>Software license seat allocation & key masking</li>
             <li>Automated cron-based license expiry alert checks</li>
             <li>Support ticketing workflow with comments & SLA calculation</li>
@@ -27,8 +27,8 @@
             <li>Executive dashboard summary cards & CSV export reports</li>
           </ul>
         </td>
-        <td style="padding: 5px 8px; vertical-align: top;">
-          <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
+        <td style="padding: 4px 8px; vertical-align: top;">
+          <ul style="margin: 0; padding-left: 18px; line-height: 1.4;">
             <li>Payment gateways, billing systems & e-commerce checkout</li>
             <li>Native mobile apps (iOS / Android platform binaries)</li>
             <li>Physical barcode/RFID scanner hardware integrations</li>
@@ -41,8 +41,8 @@
     </tbody>
   </table>
 
-  <h3 class="sub" style="margin-top: 8px; margin-bottom: 4px;">Core Engineering Objectives</h3>
-  <ol style="font-size: 9.5pt; line-height: 1.5; margin-top: 4px; padding-left: 20px;">
+  <h2 class="section" style="margin-top: 8px; margin-bottom: 4px;">2.2 Core Operational Objectives</h2>
+  <ol style="font-size: 9.5pt; line-height: 1.45; margin-top: 4px; margin-bottom: 6px; padding-left: 20px;">
     <li><strong>Centralized Asset Inventory:</strong> Establish a single, auditable repository for all computing hardware with serials, specs, and status tracking.</li>
     <li><strong>Custody & Ownership Tracking:</strong> Prevent hardware shrinkage through atomic, concurrency-safe equipment assignment to designated staff members.</li>
     <li><strong>Software License Compliance:</strong> Enforce strict seat allocation limits and alert administrators automatically 30 days prior to license expirations.</li>
@@ -53,93 +53,27 @@
 </div>
 
 <div class="page">
-  <h2 class="section" style="margin-top: 0;">2.2 Advantages of Proposed System</h2>
-  <p style="text-align: justify; line-height: 1.5; margin-bottom: 10px;">
-    The proposed web platform eliminates the inherent vulnerabilities of manual spreadsheet records, email-based helpdesk queues, and untracked asset handovers. Table 2.1 details the comparative advantages achieved across each architectural module:
-  </p>
-
-  <div style="font-weight: bold; font-size: 10pt; color: #1e293b; margin-bottom: 4px;">
-    Table 2.1: Operational Advantages of the Proposed System
-  </div>
-  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 4px 0; border-collapse: collapse;">
-    <thead>
-      <tr style="background: #f1f5f9;">
-        <th style="width: 20%; padding: 4px 6px;">Advantage</th>
-        <th style="width: 65%; padding: 4px 6px;">Technical & Operational Explanation</th>
-        <th style="width: 15%; padding: 4px 6px;">Module</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-weight: bold;">Centralized Record</td>
-        <td>Replaces scattered desktop spreadsheets with a single, indexed database accessible via secure API endpoints.</td>
-        <td style="text-align: center;">M2, M3</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Role-Based Access</td>
-        <td>Enforces strict privilege boundaries so employees only access their assigned items, while administrators manage configuration.</td>
-        <td style="text-align: center;">M1</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Immutable Audit Trail</td>
-        <td>Every status change, assignment, and profile modification is captured permanently with timestamp, user ID, and IP address.</td>
-        <td style="text-align: center;">M5</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Seat Quota Control</td>
-        <td>Prevents vendor compliance violations by restricting license allocations to purchased seat thresholds using atomic validation.</td>
-        <td style="text-align: center;">M3</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Proactive Expiry Alerts</td>
-        <td>Automated daily cron jobs detect licenses nearing expiration (&le;30 days) and highlight them prominently on the dashboard.</td>
-        <td style="text-align: center;">M3, M5</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">SLA Ticket Tracking</td>
-        <td>Computes deterministic resolution deadlines based on ticket priority (High: 8h, Medium: 24h, Low: 72h) to eliminate forgotten tasks.</td>
-        <td style="text-align: center;">M4</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Exportable CSV Reports</td>
-        <td>Enables one-click generation of formatted CSV files for physical audits, accounting reconciliations, and executive meetings.</td>
-        <td style="text-align: center;">M5</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Universal Web Access</td>
-        <td>Runs seamlessly across desktop and mobile browsers via a responsive React SPA without requiring local client installations.</td>
-        <td style="text-align: center;">All Modules</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="note-box" style="margin-top: 14px;">
-    <strong>Operational Impact:</strong> Transitioning from unstructured email chains to AssetDesk reduces asset retrieval ambiguity to zero and guarantees an unbroken chain of custody for all corporate equipment.
-  </div>
-</div>
-
-<div class="page">
   <h2 class="section" style="margin-top: 0;">2.3 Feasibility Study</h2>
-  <p style="text-align: justify; line-height: 1.5; margin-bottom: 8px;">
-    Prior to full-scale development, a rigorous three-pillar feasibility evaluation was conducted to confirm the technical, economical, and operational viability of the project within institutional constraints.
+  <p style="text-align: justify; line-height: 1.45; font-size: 10pt; margin-bottom: 8px;">
+    Prior to full-scale development, a rigorous three-pillar feasibility evaluation was conducted to confirm technical, economical, and operational viability within institutional constraints.
   </p>
 
   <h3 class="sub" style="margin-top: 6px; margin-bottom: 3px;">2.3.1 Technical Feasibility</h3>
-  <p style="text-align: justify; line-height: 1.45; font-size: 9.5pt; margin-bottom: 8px;">
-    The selected technology stack—Node.js, Express, React, Vite, and MongoDB—represents widely adopted, mature, and extensively documented industry standards. JavaScript is utilized across both client and server tiers, eliminating context switching and serialization overhead. The candidate possessed foundational coursework in database modeling and web frameworks, ensuring all technical requirements (REST APIs, JWT encryption, state machines) were fully realizable within standard engineering capabilities.
+  <p style="text-align: justify; line-height: 1.4; font-size: 9.5pt; margin-bottom: 6px;">
+    The selected technology stack—Node.js, Express, React, Vite, and MongoDB—represents widely adopted, mature, and extensively documented industry standards. JavaScript is utilized across both client and server tiers, eliminating context switching and serialization overhead. The developer possessed foundational coursework in database modeling and web frameworks, ensuring all technical requirements (REST APIs, JWT encryption, state machines) were fully realizable within standard engineering capabilities.
   </p>
 
   <h3 class="sub" style="margin-top: 6px; margin-bottom: 3px;">2.3.2 Economical Feasibility</h3>
-  <p style="text-align: justify; line-height: 1.45; font-size: 9.5pt; margin-bottom: 6px;">
+  <p style="text-align: justify; line-height: 1.4; font-size: 9.5pt; margin-bottom: 6px;">
     The project incurs <strong>zero software licensing or subscription expenditure</strong>. All runtime frameworks, compilers, libraries, and IDE tools are distributed under permissive open-source licenses (MIT/Apache 2.0). Deployment utilizes generous free-tier cloud hosting (Render for API, Vercel for SPA, and MongoDB Atlas for database clusters). No proprietary hardware or specialized servers were required.
   </p>
 
-  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 4px 0 10px 0; border-collapse: collapse;">
+  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 4px 0 8px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
-        <th style="width: 30%; padding: 3px 6px;">Component / Resource</th>
-        <th style="width: 45%; padding: 3px 6px;">Tool / Cloud Provider</th>
-        <th style="width: 25%; padding: 3px 6px;">Licensing & Cost</th>
+        <th style="width: 30%; padding: 4px 6px;">Component / Resource</th>
+        <th style="width: 45%; padding: 4px 6px;">Tool / Cloud Provider</th>
+        <th style="width: 25%; padding: 4px 6px;">Licensing & Cost</th>
       </tr>
     </thead>
     <tbody>
@@ -171,15 +105,12 @@
     </tbody>
   </table>
 
-  <h3 class="sub" style="margin-top: 6px; margin-bottom: 3px;">2.3.3 Operational Feasibility</h3>
-  <p style="text-align: justify; line-height: 1.45; font-size: 9.5pt; margin-bottom: 8px;">
+  <h3 class="sub" style="margin-top: 6px; margin-bottom: 3px;">2.3.3 Operational Feasibility & Viability Matrix</h3>
+  <p style="text-align: justify; line-height: 1.4; font-size: 9.5pt; margin-bottom: 6px;">
     The user interface follows clean, responsive, and intuitive web design principles. Standard HTML forms, clear status badges, and descriptive confirmation dialogs ensure that minimal onboarding or training is required for end users. The role-tailored navigation dynamically presents only the actions appropriate to the authenticated user's permission level.
   </p>
 
-  <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-bottom: 4px;">
-    Table 2.2: Feasibility Study Summary Matrix
-  </div>
-  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 2px 0; border-collapse: collapse;">
+  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 4px 0 0 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
         <th style="width: 25%; padding: 4px 6px;">Dimension</th>

@@ -1,921 +1,527 @@
+<!-- C06 Page 1 of 13 -->
 <div class="page">
   <h1 class="chapter">Chapter 6: System Design & Implementation</h1>
   <div class="section-content" data-part="C06" data-page="1">
     <h2 class="section">6.1 Unified Modeling Language (UML) Modeling</h2>
-    <p style="font-size: 9pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
-      Object-oriented analysis and structural modeling for AssetDesk are formalized through standard Unified Modeling Language (UML 2.5) diagrams. Figure 6.1 captures functional interactions across three distinct user roles, while Figure 6.2 models class attributes, multiplicities, and persistence associations.
+    <p style="font-size: 10pt; text-align: justify; line-height: 1.4; margin-bottom: 8px;">
+      Object-oriented analysis and structural modeling for AssetDesk are formalized through standard Unified Modeling Language (UML 2.5) diagrams. Figure 6.1 captures functional interactions across three distinct user roles (System Administrator, IT Support Technician, and Standard Employee), depicting secure authentication, operational boundaries, and system event triggers.
     </p>
 
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa; margin-bottom: 6px;">
-      <figure data-caption="System Use Case Diagram" style="margin: 0;">
-        <img src="docs/assets/diagrams/d06-usecase.png" style="max-height: 54mm; max-width: 155mm; object-fit: contain;" alt="Use Case Diagram" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 6.1: AssetDesk System Use Case Diagram Across User Roles</figcaption>
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; text-align: center; background: #fafafa; margin-bottom: 8px;">
+      <figure data-caption="AssetDesk System Use Case Diagram Across User Roles" style="margin: 0;">
+        <img src="docs/assets/diagrams/d06-usecase.png" style="max-height: 125mm; max-width: 172mm; object-fit: contain;" alt="Use Case Diagram" />
+        <figcaption style="font-size: 10pt; font-weight: bold; margin-top: 4px;">Figure 6.1: AssetDesk System Use Case Diagram Across User Roles</figcaption>
       </figure>
-      <div style="font-size: 7.2pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
-        <strong>Actor Roles & Boundary Scopes:</strong> <em>Administrator</em> exercises complete oversight (user creation, license key reveal, system configuration, audit review, CSV exports). <em>IT Support</em> triages hardware assets, executes state transitions, and resolves assigned support tickets. <em>Employee</em> accesses self-service inventory, logs tickets, participates in threaded comments, and reopens resolved tickets.
-      </div>
-    </div>
-
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-      <figure data-caption="Domain Class Model Diagram" style="margin: 0;">
-        <img src="docs/assets/diagrams/d07-class-diagram.png" style="max-height: 56mm; max-width: 155mm; object-fit: contain;" alt="Class Diagram" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 6.2: Structural Class Diagram with Mongoose Entity Schemas</figcaption>
-      </figure>
-      <div style="font-size: 7.2pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
-        <strong>Structural Schema Entities:</strong> Details attributes and methods for <code>User</code>, <code>Asset</code>, <code>License</code>, <code>Ticket</code>, <code>AuditLog</code>, and <code>Counter</code>. Multiplicities enforce 1:N relations (User to assigned Assets and created Tickets) and N:M seat allocations (License to Users) with subdocument composition.
+      <div style="font-size: 8.2pt; color: #475569; text-align: justify; margin-top: 4px; line-height: 1.3;">
+        <strong>Actor Roles & Boundary Scopes:</strong> <em>Administrator</em> exercises complete governance (user onboarding, role updates, license reveal, system configuration, audit review, and CSV export). <em>IT Support</em> triages hardware inventory, executes state transitions, and resolves assigned helpdesk tickets. <em>Employee</em> accesses self-service inventory, logs incident tickets, and tracks resolution status.
       </div>
     </div>
   </div>
 </div>
 
+<!-- C06 Page 2 of 13 -->
 <div class="page">
   <div class="section-content" data-part="C06" data-page="2">
-    <h3 class="sub" style="font-size: 11pt; margin-top: 0; margin-bottom: 6px;">6.1.1 Operational Activity Workflows</h3>
-    <p style="font-size: 9pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
-      Activity diagrams specify algorithmic control flow, decision branches, and swimlane handoffs across primary lifecycle workflows: authenticated session establishment, concurrency-safe hardware assignment, and incident resolution.
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 6px;">6.1.1 Structural Class Modeling</h3>
+    <p style="font-size: 10pt; text-align: justify; line-height: 1.4; margin-bottom: 6px;">
+      Figure 6.2 models domain class attributes, methods, visibility indicators, and persistence associations implemented across Mongoose ODM schemas. Multiplicities capture one-to-many relationships (User to Assets and Tickets) and many-to-many associations (License to Users via subdocument seat allocations).
     </p>
 
-    <div style="display: flex; gap: 8px; margin-bottom: 6px;">
-      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-        <figure data-caption="Activity Diagram: User Authentication" style="margin: 0;">
-          <img src="docs/assets/diagrams/d09-activity-login.png" style="max-height: 58mm; max-width: 74mm; object-fit: contain;" alt="Activity Login" />
-          <figcaption style="font-size: 7.5pt; margin-top: 2px;">Figure 6.3: User Authentication Activity</figcaption>
-        </figure>
-        <div style="font-size: 7pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.2;">
-          Validates credentials against active directory hash. Successful bcrypt comparison issues signed JWT token; failed attempts increment rate-limiter counters.
-        </div>
-      </div>
-
-      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-        <figure data-caption="Activity Diagram: Asset Assignment" style="margin: 0;">
-          <img src="docs/assets/diagrams/d10-activity-asset-assign.png" style="max-height: 58mm; max-width: 74mm; object-fit: contain;" alt="Activity Asset Assignment" />
-          <figcaption style="font-size: 7.5pt; margin-top: 2px;">Figure 6.4: Asset Assignment Activity</figcaption>
-        </figure>
-        <div style="font-size: 7pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.2;">
-          Verifies target user status, checks asset availability, executes atomic database state mutation, and persists compliance audit record.
-        </div>
-      </div>
-    </div>
-
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-      <figure data-caption="Activity Diagram: Support Ticket Lifecycle" style="margin: 0;">
-        <img src="docs/assets/diagrams/d11-activity-ticket-lifecycle.png" style="max-height: 54mm; max-width: 155mm; object-fit: contain;" alt="Activity Ticket Lifecycle" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 6.5: End-to-End Support Ticket Lifecycle Activity</figcaption>
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; text-align: center; background: #fafafa; margin-bottom: 6px;">
+      <figure data-caption="Structural Class Diagram with Mongoose Entity Schemas" style="margin: 0;">
+        <img src="docs/assets/diagrams/d07-class-diagram.png" style="max-height: 155mm; max-width: 172mm; object-fit: contain;" alt="Class Diagram" />
+        <figcaption style="font-size: 10pt; font-weight: bold; margin-top: 4px;">Figure 6.2: Structural Class Diagram with Mongoose Entity Schemas</figcaption>
       </figure>
-      <div style="font-size: 7.2pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
-        Captures employee ticket creation with SLA calculation, technician auto/manual assignment, iterative threaded comments, resolution note validation (>= 5 chars), employee confirmation, and administrative closure.
+      <div style="font-size: 8.2pt; color: #475569; text-align: justify; margin-top: 4px; line-height: 1.3;">
+        <strong>Domain Entities:</strong> Captures complete schema definitions for <code>User</code>, <code>Asset</code>, <code>License</code>, <code>Allocation</code>, <code>Ticket</code>, <code>Comment</code>, and <code>AuditLog</code>. Associations enforce atomic relationship integrity at the database model layer.
       </div>
     </div>
   </div>
 </div>
 
+<!-- C06 Page 3 of 13 -->
 <div class="page">
   <div class="section-content" data-part="C06" data-page="3">
-    <h3 class="sub" style="font-size: 11pt; margin-top: 0; margin-bottom: 6px;">6.1.2 Sequence & State Machine Behavioral Models</h3>
-    <p style="font-size: 9pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
-      Sequence diagrams illustrate chronological message passing between client components, Express controllers, and MongoDB models. State machine diagrams govern valid status transitions.
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 6px;">6.1.2 Operational Activity Workflows</h3>
+    <p style="font-size: 10pt; text-align: justify; line-height: 1.4; margin-bottom: 6px;">
+      Activity diagrams specify algorithmic control flows, conditional branch evaluations, and database commit gates across rate-limited session authentication and concurrency-safe hardware asset allocation.
     </p>
 
-    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <figure data-caption="Sequence: User Authentication" style="margin: 0;">
-          <img src="docs/assets/diagrams/d12-sequence-login.png" style="max-height: 44mm; max-width: 48mm; object-fit: contain;" alt="Sequence Login" />
-          <figcaption style="font-size: 7pt; margin-top: 1px;">Figure 6.6: Login Sequence</figcaption>
-        </figure>
-        <div style="font-size: 6.5pt; color: #475569; text-align: justify; margin-top: 1px; line-height: 1.15;">
-          Client POST dispatches to authController; verifies passwordHash; returns signed JWT.
-        </div>
-      </div>
-
-      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <figure data-caption="Sequence: Asset Assignment" style="margin: 0;">
-          <img src="docs/assets/diagrams/d13-sequence-asset-assign.png" style="max-height: 44mm; max-width: 48mm; object-fit: contain;" alt="Sequence Asset Assignment" />
-          <figcaption style="font-size: 7pt; margin-top: 1px;">Figure 6.7: Assign Sequence</figcaption>
-        </figure>
-        <div style="font-size: 6.5pt; color: #475569; text-align: justify; margin-top: 1px; line-height: 1.15;">
-          Atomic <code>findOneAndUpdate</code> with condition guard; returns populated user object.
-        </div>
-      </div>
-
-      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <figure data-caption="Sequence: Ticket Resolution" style="margin: 0;">
-          <img src="docs/assets/diagrams/d14-sequence-ticket-resolve.png" style="max-height: 44mm; max-width: 48mm; object-fit: contain;" alt="Sequence Ticket Resolve" />
-          <figcaption style="font-size: 7pt; margin-top: 1px;">Figure 6.8: Resolve Sequence</figcaption>
-        </figure>
-        <div style="font-size: 6.5pt; color: #475569; text-align: justify; margin-top: 1px; line-height: 1.15;">
-          Validates state transition rule; enforces resolution note; timestamps resolvedAt.
-        </div>
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa; margin-bottom: 8px;">
+      <figure data-caption="Activity Diagram: User Authentication" style="margin: 0;">
+        <img src="docs/assets/diagrams/d09-activity-login.png" style="max-height: 72mm; max-width: 172mm; object-fit: contain;" alt="Activity Login" />
+        <figcaption style="font-size: 9pt; font-weight: bold; margin-top: 3px;">Figure 6.3: User Authentication Workflow</figcaption>
+      </figure>
+      <div style="font-size: 7.8pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+        Validates email format, checks rate limit counters, verifies password with salted bcrypt hash, issues signed JWT, and logs audit events.
       </div>
     </div>
 
-    <div style="display: flex; gap: 8px;">
-      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-        <figure data-caption="State Diagram: Support Ticket State Machine" style="margin: 0;">
-          <img src="docs/assets/diagrams/d17-state-ticket.png" style="max-height: 42mm; max-width: 74mm; object-fit: contain;" alt="State Ticket" />
-          <figcaption style="font-size: 7.5pt; margin-top: 2px;">Figure 6.9: Ticket State Machine</figcaption>
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa;">
+      <figure data-caption="Activity Diagram: Hardware Asset Allocation" style="margin: 0;">
+        <img src="docs/assets/diagrams/d10-activity-asset-assign.png" style="max-height: 72mm; max-width: 172mm; object-fit: contain;" alt="Activity Asset Assignment" />
+        <figcaption style="font-size: 9pt; font-weight: bold; margin-top: 3px;">Figure 6.4: Hardware Asset Allocation Workflow</figcaption>
+      </figure>
+      <div style="font-size: 7.8pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+        Verifies caller RBAC permissions, confirms device availability, atomically updates status, commits audit journal entry, and returns updated asset.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- C06 Page 4 of 13 -->
+<div class="page">
+  <div class="section-content" data-part="C06" data-page="4">
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 4px;">6.1.3 Incident Lifecycle & Behavioral State Models</h3>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
+      Figure 6.5 diagrams the complete support ticket lifecycle from employee submission to administrative closure. Figures 6.6 and 6.7 formalize finite state machine rules governing ticket progress and hardware inventory lifecycle transitions.
+    </p>
+
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa; margin-bottom: 8px;">
+      <figure data-caption="Support Ticket Lifecycle Activity" style="margin: 0;">
+        <img src="docs/assets/diagrams/d11-activity-ticket-lifecycle.png" style="max-height: 80mm; max-width: 172mm; object-fit: contain;" alt="Ticket Lifecycle" />
+        <figcaption style="font-size: 9pt; font-weight: bold; margin-top: 3px;">Figure 6.5: End-to-End Support Ticket Lifecycle Activity</figcaption>
+      </figure>
+      <div style="font-size: 7.8pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+        Details sequential code generation, SLA due-date computation, staff triage, threaded comments, mandatory resolution note validation, employee reopening, and closure.
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px;">
+      <div style="flex: 1; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa;">
+        <figure data-caption="Support Ticket State Machine" style="margin: 0;">
+          <img src="docs/assets/diagrams/d17-state-ticket.png" style="max-height: 75mm; max-width: 82mm; object-fit: contain;" alt="Ticket State Machine" />
+          <figcaption style="font-size: 9pt; font-weight: bold; margin-top: 3px;">Figure 6.6: Support Ticket State Machine</figcaption>
         </figure>
-        <div style="font-size: 7pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.2;">
-          Strict transitions: <code>OPEN → IN_PROGRESS → RESOLVED → CLOSED</code>. Employees may reopen resolved tickets to <code>IN_PROGRESS</code>; closed tickets are immutable.
+        <div style="font-size: 7.6pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+          Transitions: <code>OPEN &rarr; IN_PROGRESS &rarr; RESOLVED &rarr; CLOSED</code>. Employees may reopen resolved tickets; closed tickets are immutable.
         </div>
       </div>
 
-      <div style="flex: 1; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-        <figure data-caption="State Diagram: Hardware Asset Lifecycle" style="margin: 0;">
-          <img src="docs/assets/diagrams/d18-state-asset.png" style="max-height: 42mm; max-width: 74mm; object-fit: contain;" alt="State Asset" />
-          <figcaption style="font-size: 7.5pt; margin-top: 2px;">Figure 6.10: Hardware Asset Lifecycle</figcaption>
+      <div style="flex: 1; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa;">
+        <figure data-caption="Hardware Asset Lifecycle State Machine" style="margin: 0;">
+          <img src="docs/assets/diagrams/d18-state-asset.png" style="max-height: 75mm; max-width: 82mm; object-fit: contain;" alt="Asset Lifecycle" />
+          <figcaption style="font-size: 9pt; font-weight: bold; margin-top: 3px;">Figure 6.7: Hardware Asset Lifecycle State Machine</figcaption>
         </figure>
-        <div style="font-size: 7pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.2;">
-          Lifecycle path: <code>AVAILABLE ↔ ASSIGNED</code>; transition to <code>MAINTENANCE</code> temporarily clears assignment; terminal state is <code>RETIRED</code>.
+        <div style="font-size: 7.6pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+          Transitions: <code>AVAILABLE &harr; ASSIGNED</code>; transition to <code>MAINTENANCE</code> clears assignment; terminal retirement state is <code>RETIRED</code>.
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- C06 Page 5 of 13 -->
 <div class="page">
-  <div class="section-content" data-part="C06" data-page="4">
-    <h2 class="section">6.2 Database Design & Data Dictionary (Part I)</h2>
-    <p style="font-size: 9pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
-      The data architecture is implemented in MongoDB Community Edition using Mongoose schemas. Tables 6.1 through 6.3 define field specifications, BSON data types, nullability constraints, and index mappings extracted programmatically from <code>User.js</code>, <code>Asset.js</code>, and <code>Counter.js</code>.
+  <div class="section-content" data-part="C06" data-page="5">
+    <h2 class="section">6.2 Database Design & Data Dictionary</h2>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      The persistence tier is engineered using MongoDB Community Edition with Mongoose ODM schemas. Tables 6.1 through 6.5 specify field types, nullability rules, indices, and foreign key relations ensuring data integrity across all core business collections.
     </p>
 
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 3px; margin-bottom: 1px;">
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
       Table 6.1: User Collection Schema Specification (<code>users</code>)
     </div>
-    <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 6px; border-collapse: collapse;">
+    <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 5px; border-collapse: collapse;">
       <thead>
         <tr style="background: #f1f5f9;">
           <th style="width: 18%; padding: 2px 4px;">Field Name</th>
           <th style="width: 14%; padding: 2px 4px;">BSON Type</th>
           <th style="width: 12%; padding: 2px 4px; text-align: center;">Required</th>
           <th style="width: 18%; padding: 2px 4px;">Key / Index</th>
-          <th style="width: 38%; padding: 2px 4px;">Functional Description</th>
+          <th style="width: 38%; padding: 2px 4px;">Functional Role</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><code>_id</code></td>
-          <td>ObjectId</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Primary Key (PK)</td>
-          <td>Unique 12-byte BSON document identifier</td>
-        </tr>
-        <tr>
-          <td><code>name</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>—</td>
-          <td>Full name of user (2–100 characters, trimmed)</td>
-        </tr>
-        <tr>
-          <td><code>email</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Unique Index</td>
-          <td>Unique lowercase email address used for login authentication</td>
-        </tr>
-        <tr>
-          <td><code>passwordHash</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>—</td>
-          <td>Bcrypt hash with 10 salt rounds (hidden from API JSON payloads)</td>
-        </tr>
-        <tr>
-          <td><code>role</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Access control tier: <code>ADMIN</code>, <code>IT_SUPPORT</code>, <code>EMPLOYEE</code></td>
-        </tr>
-        <tr>
-          <td><code>department</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Corporate department / functional division assignment</td>
-        </tr>
-        <tr>
-          <td><code>isActive</code></td>
-          <td>Boolean</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Operational account state flag (soft deactivation guard)</td>
-        </tr>
-        <tr>
-          <td><code>createdAt / updatedAt</code></td>
-          <td>Date</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Mongoose automated audit timestamps for document lifecycle</td>
-        </tr>
+        <tr><td><code>_id</code></td><td>ObjectId</td><td style="text-align:center;">Yes</td><td>PK</td><td>Unique 12-byte document identifier</td></tr>
+        <tr><td><code>name</code></td><td>String</td><td style="text-align:center;">Yes</td><td>—</td><td>User full name (2–100 chars, trimmed)</td></tr>
+        <tr><td><code>email</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Unique Index</td><td>Normalized lowercase email for authentication</td></tr>
+        <tr><td><code>passwordHash</code></td><td>String</td><td style="text-align:center;">Yes</td><td>—</td><td>10-round salted bcrypt hash (omitted in toJSON)</td></tr>
+        <tr><td><code>role</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Index</td><td>RBAC enum: ADMIN, IT_SUPPORT, EMPLOYEE</td></tr>
+        <tr><td><code>department</code></td><td>String</td><td style="text-align:center;">Yes</td><td>—</td><td>Institutional department or division name</td></tr>
+        <tr><td><code>isActive</code></td><td>Boolean</td><td style="text-align:center;">Yes</td><td>Index</td><td>Account state toggle (default: true)</td></tr>
       </tbody>
     </table>
 
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 3px; margin-bottom: 1px;">
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
       Table 6.2: Asset Collection Schema Specification (<code>assets</code>)
     </div>
-    <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 6px; border-collapse: collapse;">
+    <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 5px; border-collapse: collapse;">
       <thead>
         <tr style="background: #f1f5f9;">
           <th style="width: 18%; padding: 2px 4px;">Field Name</th>
           <th style="width: 14%; padding: 2px 4px;">BSON Type</th>
           <th style="width: 12%; padding: 2px 4px; text-align: center;">Required</th>
           <th style="width: 18%; padding: 2px 4px;">Key / Index</th>
-          <th style="width: 38%; padding: 2px 4px;">Functional Description</th>
+          <th style="width: 38%; padding: 2px 4px;">Functional Role</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><code>_id</code></td>
-          <td>ObjectId</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Primary Key (PK)</td>
-          <td>Unique 12-byte BSON document identifier</td>
-        </tr>
-        <tr>
-          <td><code>assetTag</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>Unique Index</td>
-          <td>Monotonic barcode tag identifier (e.g., <code>AST-2026-0001</code>)</td>
-        </tr>
-        <tr>
-          <td><code>serialNumber</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Unique Index</td>
-          <td>OEM hardware serial number guaranteeing physical uniqueness</td>
-        </tr>
-        <tr>
-          <td><code>name</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>—</td>
-          <td>Hardware brand, model, and configuration descriptor</td>
-        </tr>
-        <tr>
-          <td><code>category</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Compound Index</td>
-          <td>Enum: <code>LAPTOP</code>, <code>DESKTOP</code>, <code>MONITOR</code>, <code>PRINTER</code>, <code>NETWORK</code>, <code>MOBILE</code>, <code>OTHER</code></td>
-        </tr>
-        <tr>
-          <td><code>status</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>Compound Index</td>
-          <td>Enum: <code>AVAILABLE</code>, <code>ASSIGNED</code>, <code>MAINTENANCE</code>, <code>RETIRED</code></td>
-        </tr>
-        <tr>
-          <td><code>assignedTo</code></td>
-          <td>ObjectId</td>
-          <td style="text-align: center;">No</td>
-          <td>FK → User</td>
-          <td>Foreign key reference to allocated employee user document</td>
-        </tr>
-        <tr>
-          <td><code>purchaseDate / warranty</code></td>
-          <td>Date</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Procurement invoice date and warranty protection expiration date</td>
-        </tr>
-        <tr>
-          <td><code>notes</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Maintenance history, technical remarks (max 500 characters)</td>
-        </tr>
+        <tr><td><code>assetTag</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Unique Index</td><td>Unique sequential code (AST-YYYY-XXXX)</td></tr>
+        <tr><td><code>serialNumber</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Unique Index</td><td>OEM hardware serial number</td></tr>
+        <tr><td><code>name / category</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Index</td><td>Device label & enum (LAPTOP, DESKTOP, etc.)</td></tr>
+        <tr><td><code>status</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Compound Index</td><td>Lifecycle: AVAILABLE, ASSIGNED, MAINTENANCE, RETIRED</td></tr>
+        <tr><td><code>assignedTo</code></td><td>ObjectId</td><td style="text-align:center;">No</td><td>FK &rarr; User</td><td>Active custodian employee user reference</td></tr>
       </tbody>
     </table>
 
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 3px; margin-bottom: 1px;">
-      Table 6.3: Counter Collection Schema Specification (<code>counters</code>)
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
+      Table 6.3: License & Ticket Schema Specifications (<code>licenses</code> & <code>tickets</code>)
+    </div>
+    <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 5px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 18%; padding: 2px 4px;">Field Name</th>
+          <th style="width: 14%; padding: 2px 4px;">BSON Type</th>
+          <th style="width: 12%; padding: 2px 4px; text-align: center;">Required</th>
+          <th style="width: 18%; padding: 2px 4px;">Key / Index</th>
+          <th style="width: 38%; padding: 2px 4px;">Functional Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>softwareName</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Index</td><td>Application name and publisher identity</td></tr>
+        <tr><td><code>totalSeats / usedSeats</code></td><td>Number</td><td style="text-align:center;">Yes</td><td>—</td><td>Purchased seat quota and allocated counter</td></tr>
+        <tr><td><code>expiryDate</code></td><td>Date</td><td style="text-align:center;">Yes</td><td>Index (Asc)</td><td>Contract renewal date used for expiry alerts</td></tr>
+        <tr><td><code>ticketCode</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Unique Index</td><td>Incident code format: TCK-YYYY-XXXX</td></tr>
+        <tr><td><code>priority / status</code></td><td>String</td><td style="text-align:center;">Yes</td><td>Compound Index</td><td>SLA priority (4 tiers) and workflow state (4 states)</td></tr>
+        <tr><td><code>dueAt / resolvedAt</code></td><td>Date</td><td style="text-align:center;">No</td><td>Index</td><td>Dynamic SLA deadline and resolution timestamp</td></tr>
+      </tbody>
+    </table>
+
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
+      Table 6.4: Relational Integrity & Schema Foreign Key Mappings
     </div>
     <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 2px; border-collapse: collapse;">
       <thead>
         <tr style="background: #f1f5f9;">
-          <th style="width: 18%; padding: 2px 4px;">Field Name</th>
-          <th style="width: 14%; padding: 2px 4px;">BSON Type</th>
-          <th style="width: 12%; padding: 2px 4px; text-align: center;">Required</th>
-          <th style="width: 18%; padding: 2px 4px;">Key / Index</th>
-          <th style="width: 38%; padding: 2px 4px;">Functional Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>key</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Unique Index</td>
-          <td>Sequence namespace identifier (e.g., <code>asset-2026</code>, <code>ticket-2026</code>)</td>
-        </tr>
-        <tr>
-          <td><code>seq</code></td>
-          <td>Number</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Atomic integer sequence incremented via <code>$inc</code> in <code>findOneAndUpdate</code></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="page">
-  <div class="section-content" data-part="C06" data-page="5">
-    <h3 class="sub" style="font-size: 11pt; margin-top: 0; margin-bottom: 4px;">6.2.2 Data Dictionary (Part II) & Relational Mapping</h3>
-    <p style="font-size: 9pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
-      Tables 6.4 through 6.6 document schemas for software license allocation, incident ticket tracking, and compliance audit logging. Table 6.7 summarizes referential integrity constraints across collections.
-    </p>
-
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Table 6.4: License Collection Schema Specification (<code>licenses</code>)
-    </div>
-    <table class="grid" style="width: 100%; font-size: 7pt; margin-bottom: 4px; border-collapse: collapse;">
-      <thead>
-        <tr style="background: #f1f5f9;">
-          <th style="width: 18%; padding: 2px 4px;">Field Name</th>
-          <th style="width: 14%; padding: 2px 4px;">BSON Type</th>
-          <th style="width: 10%; padding: 2px 4px; text-align: center;">Required</th>
-          <th style="width: 18%; padding: 2px 4px;">Key / Index</th>
-          <th style="width: 40%; padding: 2px 4px;">Functional Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>softwareName / vendor</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>—</td>
-          <td>Commercial software title descriptor and publishing vendor organization</td>
-        </tr>
-        <tr>
-          <td><code>licenseKey</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>—</td>
-          <td>Volume license activation key (masked in UI for non-admins)</td>
-        </tr>
-        <tr>
-          <td><code>totalSeats</code></td>
-          <td>Number</td>
-          <td style="text-align: center;">Yes</td>
-          <td>—</td>
-          <td>Maximum permitted concurrent user seat entitlement quota (integer >= 1)</td>
-        </tr>
-        <tr>
-          <td><code>allocations</code></td>
-          <td>Array&lt;SubDoc&gt;</td>
-          <td style="text-align: center;">No</td>
-          <td>FK → User</td>
-          <td>Active seat assignments containing <code>user</code> (ObjectId) and <code>allocatedAt</code></td>
-        </tr>
-        <tr>
-          <td><code>expiryDate</code></td>
-          <td>Date</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Index (Asc)</td>
-          <td>License contract renewal date used by cron daemon for alert dispatch</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Table 6.5: Ticket Collection Schema Specification (<code>tickets</code>)
-    </div>
-    <table class="grid" style="width: 100%; font-size: 7pt; margin-bottom: 4px; border-collapse: collapse;">
-      <thead>
-        <tr style="background: #f1f5f9;">
-          <th style="width: 18%; padding: 2px 4px;">Field Name</th>
-          <th style="width: 14%; padding: 2px 4px;">BSON Type</th>
-          <th style="width: 10%; padding: 2px 4px; text-align: center;">Required</th>
-          <th style="width: 18%; padding: 2px 4px;">Key / Index</th>
-          <th style="width: 40%; padding: 2px 4px;">Functional Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>ticketCode</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>Unique Index</td>
-          <td>Formatted incident identifier (e.g., <code>TCK-2026-0001</code>)</td>
-        </tr>
-        <tr>
-          <td><code>title / description</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>—</td>
-          <td>Issue summary (5–150 chars) and detailed incident explanation (max 2000 chars)</td>
-        </tr>
-        <tr>
-          <td><code>category / priority</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Index</td>
-          <td>Category (HARDWARE, SOFTWARE, etc.) and priority (LOW, MEDIUM, HIGH, CRITICAL)</td>
-        </tr>
-        <tr>
-          <td><code>status</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>Index</td>
-          <td>Workflow state: <code>OPEN</code>, <code>IN_PROGRESS</code>, <code>RESOLVED</code>, <code>CLOSED</code></td>
-        </tr>
-        <tr>
-          <td><code>createdBy / assignedTo</code></td>
-          <td>ObjectId</td>
-          <td style="text-align: center;">Yes / No</td>
-          <td>FK → User</td>
-          <td>Ticket author (Employee) and assigned technician (IT_SUPPORT)</td>
-        </tr>
-        <tr>
-          <td><code>relatedAsset</code></td>
-          <td>ObjectId</td>
-          <td style="text-align: center;">No</td>
-          <td>FK → Asset</td>
-          <td>Optional hardware asset linked to the technical incident</td>
-        </tr>
-        <tr>
-          <td><code>comments</code></td>
-          <td>Array&lt;SubDoc&gt;</td>
-          <td style="text-align: center;">No</td>
-          <td>FK → User</td>
-          <td>Thread messages: <code>author</code> (User ref), <code>message</code>, and <code>createdAt</code></td>
-        </tr>
-        <tr>
-          <td><code>dueAt / resolvedAt / closedAt</code></td>
-          <td>Date</td>
-          <td style="text-align: center;">No</td>
-          <td>Index</td>
-          <td>SLA resolution deadline, resolution timestamp, and administrative closure timestamp</td>
-        </tr>
-        <tr>
-          <td><code>resolutionNote</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Mandatory technical explanation captured when status transitions to RESOLVED</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Table 6.6: AuditLog Collection Schema Specification (<code>auditlogs</code>)
-    </div>
-    <table class="grid" style="width: 100%; font-size: 7pt; margin-bottom: 4px; border-collapse: collapse;">
-      <thead>
-        <tr style="background: #f1f5f9;">
-          <th style="width: 18%; padding: 2px 4px;">Field Name</th>
-          <th style="width: 14%; padding: 2px 4px;">BSON Type</th>
-          <th style="width: 10%; padding: 2px 4px; text-align: center;">Required</th>
-          <th style="width: 18%; padding: 2px 4px;">Key / Index</th>
-          <th style="width: 40%; padding: 2px 4px;">Functional Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>user / userName</code></td>
-          <td>ObjectId / String</td>
-          <td style="text-align: center;">No / Yes</td>
-          <td>FK → User</td>
-          <td>Actor user ID reference and immutable plaintext name snapshot</td>
-        </tr>
-        <tr>
-          <td><code>action / entity</code></td>
-          <td>String</td>
-          <td style="text-align: center;">Yes</td>
-          <td>Compound Index</td>
-          <td>Audit verb (LOGIN, ASSET_ASSIGN, etc.) and resource domain (AUTH, ASSET, TICKET)</td>
-        </tr>
-        <tr>
-          <td><code>entityId / details</code></td>
-          <td>String</td>
-          <td style="text-align: center;">No</td>
-          <td>—</td>
-          <td>Target resource identifier and JSON-serialized audit payload</td>
-        </tr>
-        <tr>
-          <td><code>ipAddress / timestamp</code></td>
-          <td>String / Date</td>
-          <td style="text-align: center;">No</td>
-          <td>Index (Desc)</td>
-          <td>Client IP address and immutable record creation timestamp</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Table 6.7: Relational Integrity & Schema Foreign Key Mappings
-    </div>
-    <table class="grid" style="width: 100%; font-size: 7pt; margin-bottom: 2px; border-collapse: collapse;">
-      <thead>
-        <tr style="background: #f1f5f9;">
-          <th style="width: 25%; padding: 2px 4px;">Source Entity → Target Entity</th>
-          <th style="width: 18%; padding: 2px 4px;">Cardinality</th>
+          <th style="width: 25%; padding: 2px 4px;">Source &rarr; Target Entity</th>
+          <th style="width: 16%; padding: 2px 4px;">Cardinality</th>
           <th style="width: 25%; padding: 2px 4px;">Implementation Field</th>
-          <th style="width: 32%; padding: 2px 4px;">Integrity Rule & Validation Guard</th>
+          <th style="width: 34%; padding: 2px 4px;">Referential Integrity Rule</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><code>Asset → User</code></td>
-          <td>N : 1 (Zero-or-One)</td>
-          <td><code>Asset.assignedTo</code></td>
-          <td>Must reference an active user; unassignment sets field to <code>null</code>.</td>
-        </tr>
-        <tr>
-          <td><code>Ticket → User (Creator)</code></td>
-          <td>N : 1</td>
-          <td><code>Ticket.createdBy</code></td>
-          <td>Mandatory reference to authoring employee; immutable post-creation.</td>
-        </tr>
-        <tr>
-          <td><code>Ticket → User (Technician)</code></td>
-          <td>N : 1 (Zero-or-One)</td>
-          <td><code>Ticket.assignedTo</code></td>
-          <td>Must reference user with role <code>ADMIN</code> or <code>IT_SUPPORT</code>.</td>
-        </tr>
-        <tr>
-          <td><code>License → User (Seat Allocations)</code></td>
-          <td>N : M</td>
-          <td><code>allocations.user</code></td>
-          <td>Seat array cannot exceed <code>totalSeats</code> quota constraint.</td>
-        </tr>
+        <tr><td><code>Asset &rarr; User</code></td><td>N : 1 (0..1)</td><td><code>Asset.assignedTo</code></td><td>Must reference active user; unassignment sets to null</td></tr>
+        <tr><td><code>Ticket &rarr; User (Author)</code></td><td>N : 1</td><td><code>Ticket.createdBy</code></td><td>Mandatory reference to author; immutable post-creation</td></tr>
+        <tr><td><code>Ticket &rarr; User (Tech)</code></td><td>N : 1 (0..1)</td><td><code>Ticket.assignedTo</code></td><td>Must reference user with ADMIN or IT_SUPPORT role</td></tr>
+        <tr><td><code>License &rarr; User (Seats)</code></td><td>N : M</td><td><code>allocations.user</code></td><td>Array length cannot exceed totalSeats quota</td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
+<!-- C06 Page 6 of 13 -->
 <div class="page">
   <div class="section-content" data-part="C06" data-page="6">
     <h2 class="section">6.3 Entity-Relationship (E-R) Diagram & Indexing Strategy</h2>
-    <p style="font-size: 9pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
-      The conceptual data model is expressed in Figure 6.11 as an Entity-Relationship (ER) diagram illustrating Crow’s Foot cardinalities. While MongoDB is a schema-flexible document store, strict referential integrity and performance indexing are maintained at the Mongoose ODM layer.
+    <p style="font-size: 10pt; text-align: justify; line-height: 1.4; margin-bottom: 6px;">
+      The conceptual data model is expressed in Figure 6.8 as an Entity-Relationship (ER) diagram illustrating Crow’s Foot cardinalities. While MongoDB is a document database, strict referential integrity and high-performance querying are enforced via indexes at the Mongoose ODM layer.
     </p>
 
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa; margin-bottom: 8px;">
-      <figure data-caption="Entity-Relationship Diagram" style="margin: 0;">
-        <img src="docs/assets/diagrams/d08-er-diagram.png" style="max-height: 82mm; max-width: 155mm; object-fit: contain;" alt="ER Diagram" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 6.11: Complete Entity-Relationship Diagram (ERD) with Multiplicities</figcaption>
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa; margin-bottom: 8px;">
+      <figure data-caption="Complete Entity-Relationship Diagram (ERD)" style="margin: 0;">
+        <img src="docs/assets/diagrams/d08-er-diagram.png" style="max-height: 125mm; max-width: 172mm; object-fit: contain;" alt="ER Diagram" />
+        <figcaption style="font-size: 9.5pt; font-weight: bold; margin-top: 3px;">Figure 6.8: Complete Entity-Relationship Diagram (ERD) with Multiplicities</figcaption>
       </figure>
-      <div style="font-size: 7.2pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
-        <strong>Entity Relationships:</strong> <code>User</code> serves as the central entity linked to assigned hardware (<code>Asset</code>), allocated software seats (<code>License</code>), incident requests (<code>Ticket</code>), and audit actions (<code>AuditLog</code>). <code>Counter</code> maintains decoupled monotonic counters for atomic code generation.
+      <div style="font-size: 7.8pt; color: #475569; text-align: justify; margin-top: 3px; line-height: 1.25;">
+        <strong>Entity Relationships:</strong> <code>User</code> serves as the central hub linked to hardware (<code>Asset</code>), software seats (<code>License</code>), incident requests (<code>Ticket</code>), and audit actions (<code>AuditLog</code>). <code>Counter</code> maintains monotonic counters for atomic code generation.
       </div>
     </div>
 
-    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
-      Table 6.8: Database Indexing Strategy & Performance Optimization
+    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 3px; margin-bottom: 2px;">
+      Table 6.5: Database Indexing Strategy & Performance Optimization
     </div>
     <table class="grid" style="width: 100%; font-size: 7.8pt; margin-bottom: 2px; border-collapse: collapse;">
       <thead>
         <tr style="background: #f1f5f9;">
-          <th style="width: 18%; padding: 3px 5px;">Collection</th>
-          <th style="width: 26%; padding: 3px 5px;">Indexed Field(s)</th>
-          <th style="width: 18%; padding: 3px 5px;">Index Type</th>
-          <th style="width: 38%; padding: 3px 5px;">Operational Query Optimization Rationale</th>
+          <th style="width: 18%; padding: 2.5px 5px;">Collection</th>
+          <th style="width: 28%; padding: 2.5px 5px;">Indexed Field(s)</th>
+          <th style="width: 18%; padding: 2.5px 5px;">Index Type</th>
+          <th style="width: 36%; padding: 2.5px 5px;">Query Optimization Rationale</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><code>users</code></td>
-          <td><code>email</code></td>
-          <td>Unique B-Tree</td>
-          <td>Provides O(1) instantaneous lookup during user login and duplicate registration guard.</td>
-        </tr>
-        <tr>
-          <td><code>assets</code></td>
-          <td><code>assetTag</code>, <code>serialNumber</code></td>
-          <td>Unique B-Tree</td>
-          <td>Guarantees physical device tag and OEM hardware serial uniqueness across database.</td>
-        </tr>
-        <tr>
-          <td><code>assets</code></td>
-          <td><code>status, category</code></td>
-          <td>Compound Index</td>
-          <td>Accelerates catalog filtering and pagination queries, maintaining avg latency &lt;7.5ms.</td>
-        </tr>
-        <tr>
-          <td><code>licenses</code></td>
-          <td><code>expiryDate</code></td>
-          <td>Ascending Index</td>
-          <td>Optimizes daily background cron scans identifying licenses expiring within 30 days.</td>
-        </tr>
-        <tr>
-          <td><code>tickets</code></td>
-          <td><code>ticketCode</code></td>
-          <td>Unique B-Tree</td>
-          <td>Enables fast direct URL lookup and search by ticket identifier (e.g., TCK-2026-0001).</td>
-        </tr>
-        <tr>
-          <td><code>tickets</code></td>
-          <td><code>status, priority, dueAt</code></td>
-          <td>Compound Index</td>
-          <td>Powers technician queue ordering and real-time SLA overdue highlight computation.</td>
-        </tr>
-        <tr>
-          <td><code>auditlogs</code></td>
-          <td><code>timestamp (desc), entity</code></td>
-          <td>Compound Index</td>
-          <td>Supports high-throughput compliance audit review and date-range CSV reporting.</td>
-        </tr>
+        <tr><td><code>users</code></td><td><code>email</code></td><td>Unique B-Tree</td><td>Instantaneous O(1) user login lookup and registration uniqueness</td></tr>
+        <tr><td><code>assets</code></td><td><code>assetTag, serialNumber</code></td><td>Unique B-Tree</td><td>Prevents duplicate physical tags and manufacturer hardware serials</td></tr>
+        <tr><td><code>assets</code></td><td><code>status, category</code></td><td>Compound Index</td><td>Accelerates inventory pagination; maintains avg latency &lt;7.5ms</td></tr>
+        <tr><td><code>licenses</code></td><td><code>expiryDate</code></td><td>Ascending Index</td><td>Optimizes daily cron scans detecting licenses expiring in 30 days</td></tr>
+        <tr><td><code>tickets</code></td><td><code>status, priority, dueAt</code></td><td>Compound Index</td><td>Powers technician triage queues and real-time SLA overdue highlights</td></tr>
+        <tr><td><code>auditlogs</code></td><td><code>timestamp (desc), entity</code></td><td>Compound Index</td><td>Accelerates compliance audit reviews and date-range CSV reporting</td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
+<!-- C06 Page 7 of 13: Screenshots Part 1 (2 per page) -->
 <div class="page">
   <div class="section-content" data-part="C06" data-page="7">
-    <h2 class="section">6.4 User Interface Design & Input/Output Layouts (Part I)</h2>
-    <p style="font-size: 8.5pt; text-align: justify; line-height: 1.3; margin-bottom: 4px;">
-      The frontend interface is engineered using React 18 and a custom CSS design system. The palette uses Navy (<code>#1e3a8a</code>), Slate (<code>#f8fafc</code>, <code>#e2e8f0</code>), and status colors (Success <code>#16a34a</code>, Warning <code>#d97706</code>, Danger <code>#dc2626</code>, Info <code>#0284c7</code>) with font stack <code>Calibri, Carlito, "Segoe UI", Arial, sans-serif</code>. Figures 6.12 through 6.17 present core authentication, dashboard, and asset management screens.
+    <h2 class="section">6.4 User Interface Design & Screen Layouts (Part I)</h2>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      The user interface is engineered using React 18 with a custom CSS design system adhering to WCAG 2.1 AA accessibility standards. Figures 6.9 and 6.10 present the authenticated entry point and executive administrator dashboard.
     </p>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; margin-top: 4px;">
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/01-login.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Login Screen" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.12: Login Screen — All Roles</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Stateless JWT authentication portal with email validation and error feedback.</div>
+    <div class="screenshots-2-container">
+      <div class="screenshot-card-large">
+        <figure data-caption="Login Screen — All Roles" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/01-login.png" alt="Login Screen" />
+          <figcaption class="screenshot-title-large">Figure 6.9: Login Screen — All Roles</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Stateless JWT authentication portal with real-time field validation, credential masking, and automated rate-limiter feedback.
+        </div>
       </div>
 
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/02-dashboard-admin.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Admin Dashboard" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.13: Executive Dashboard — Administrator</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Enterprise KPI counters, asset/ticket distributions, and real-time audit stream.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/16-dashboard-employee.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Employee Dashboard" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.14: Self-Service Portal — Employee</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Personal equipment custody summary and active support ticket tracking hub.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/03-asset-list.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Asset Catalog" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.15: Hardware Asset Directory — Admin / Support</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Filterable hardware table by category, lifecycle state, custodian, and pagination.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/04-asset-form.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Asset Form" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.16: Asset Registration Form — Admin / Support</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Device onboarding form with client-side validation and serial conflict handling.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/05-asset-detail.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Asset Detail" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.17: Asset Specification & Lifecycle View — Staff</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Comprehensive hardware specifications, custodian card, and status change actions.</div>
+      <div class="screenshot-card-large">
+        <figure data-caption="Executive Dashboard — Administrator" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/02-dashboard-admin.png" alt="Admin Dashboard" />
+          <figcaption class="screenshot-title-large">Figure 6.10: Executive Dashboard — Administrator</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          High-level operational overview featuring real-time KPI metrics, asset allocation breakdowns, ticket urgency counters, and recent audit activity.
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- C06 Page 8 of 13: Screenshots Part 2 (2 per page) -->
 <div class="page">
   <div class="section-content" data-part="C06" data-page="8">
-    <h3 class="sub" style="font-size: 11pt; margin-top: 0; margin-bottom: 4px;">6.4.1 User Interface Design & Input/Output Layouts (Part II)</h3>
-    <p style="font-size: 8.5pt; text-align: justify; line-height: 1.3; margin-bottom: 4px;">
-      Figures 6.18 through 6.23 illustrate modal interaction dialogs, employee personal custody views, software license seat gauges, and the end-to-end incident support ticket management workflow.
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 4px;">6.4.1 User Interface Design & Screen Layouts (Part II)</h3>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      Figures 6.11 and 6.12 display the personalized self-service dashboard for employees and the centralized hardware asset inventory catalog for administrative and technical personnel.
     </p>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; margin-top: 4px;">
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/06-asset-assign-dialog.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Assign Modal" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.18: Asset Assignment Modal — Admin / Support</div>
-        <div style="font-size: 6.8pt; color: #64748b;">User lookup picker with atomic assignment confirmation and concurrency lock.</div>
+    <div class="screenshots-2-container">
+      <div class="screenshot-card-large">
+        <figure data-caption="Self-Service Portal — Employee" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/16-dashboard-employee.png" alt="Employee Dashboard" />
+          <figcaption class="screenshot-title-large">Figure 6.11: Self-Service Portal — Employee</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Personalized employee overview showcasing company-assigned computing devices, active helpdesk incident statuses, and quick action shortcuts.
+        </div>
       </div>
 
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/07-my-assets-employee.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="My Assets" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.19: My Assigned Assets — Employee</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Employee inventory table displaying company-issued hardware and serial numbers.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/08-license-list.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="License Catalog" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.20: Software License Catalog — Admin / Support</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Software seat capacity gauges, status pills, and remaining days until renewal.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/09-license-detail.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="License Detail" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.21: License Management Hub — Admin / Support</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Masked activation key with admin reveal toggle and seat allocation table.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/10-ticket-list.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Ticket Queue" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.22: Support Incident Ticket Queue — All Roles</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Priority-sorted triage queue with overdue SLA warning indicators and filters.</div>
-      </div>
-
-      <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 3px; text-align: center; background: #fafafa;">
-        <img src="docs/assets/screenshots/12-ticket-detail.png" style="width: 100%; height: 38mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 3px;" alt="Ticket Detail" />
-        <div style="font-size: 7.5pt; font-weight: bold; color: #1e293b; margin-top: 2px;">Figure 6.23: Ticket Resolution & Comments Thread — All Roles</div>
-        <div style="font-size: 6.8pt; color: #64748b;">Chronological discussion thread, staff triage panel, and resolution note input.</div>
+      <div class="screenshot-card-large">
+        <figure data-caption="Hardware Asset Directory — Admin / Support" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/03-asset-list.png" alt="Asset Catalog" />
+          <figcaption class="screenshot-title-large">Figure 6.12: Hardware Asset Directory — Admin / Support</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Comprehensive equipment inventory table supporting search, category filtering, lifecycle state badges, custodian assignments, and CSV exports.
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- C06 Page 9 of 13: Screenshots Part 3 (2 per page) -->
 <div class="page">
   <div class="section-content" data-part="C06" data-page="9">
-    <h2 class="section">6.5 Implementation: Program Code Samples</h2>
-    <p style="font-size: 8.5pt; text-align: justify; line-height: 1.3; margin-bottom: 4px;">
-      Core business logic is encapsulated in production JavaScript modules. Below are four key code listings illustrating token authentication, concurrency guards, state machine rules, and dynamic virtual properties.
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 4px;">6.4.2 User Interface Design & Screen Layouts (Part III)</h3>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      Figures 6.13 and 6.14 depict the hardware onboarding registration form and the detailed asset specification view complete with lifecycle action triggers.
     </p>
 
-    <div style="font-size: 8pt; font-weight: bold; color: #1e293b; margin-top: 4px; margin-bottom: 1px;">
-      Listing 6.1: JWT Authentication Middleware (<code>server/src/middleware/auth.js:11-30</code>)
+    <div class="screenshots-2-container">
+      <div class="screenshot-card-large">
+        <figure data-caption="Asset Registration Form — Admin / Support" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/04-asset-form.png" alt="Asset Form" />
+          <figcaption class="screenshot-title-large">Figure 6.13: Asset Registration Form — Admin / Support</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Hardware onboarding interface with automatic tag assignment, client-side serial validation, purchase tracking, and warranty expiry inputs.
+        </div>
+      </div>
+
+      <div class="screenshot-card-large">
+        <figure data-caption="Asset Specification & Lifecycle View — Staff" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/05-asset-detail.png" alt="Asset Detail" />
+          <figcaption class="screenshot-title-large">Figure 6.14: Asset Specification & Lifecycle View — Staff</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Detailed specification profile displaying current custodian identity, maintenance history, warranty status, and direct state mutation buttons.
+        </div>
+      </div>
     </div>
-    <div class="code-box" style="font-size: 7.2pt; line-height: 1.25; margin: 2px 0 3px 0; padding: 4px 8px;">async function authenticate(req, res, next) {
+  </div>
+</div>
+
+<!-- C06 Page 10 of 13: Screenshots Part 4 (2 per page) -->
+<div class="page">
+  <div class="section-content" data-part="C06" data-page="10">
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 4px;">6.4.3 User Interface Design & Screen Layouts (Part IV)</h3>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      Figures 6.15 and 6.16 display the interactive user assignment modal dialog and the employee-specific personal hardware custody view.
+    </p>
+
+    <div class="screenshots-2-container">
+      <div class="screenshot-card-large">
+        <figure data-caption="Asset Assignment Modal — Admin / Support" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/06-asset-assign-dialog.png" alt="Assign Modal" />
+          <figcaption class="screenshot-title-large">Figure 6.15: Asset Assignment Modal — Admin / Support</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Modal dialog providing searchable employee selection, concurrency checking, and instant assignment confirmation with audit event creation.
+        </div>
+      </div>
+
+      <div class="screenshot-card-large">
+        <figure data-caption="My Assigned Assets — Employee" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/07-my-assets-employee.png" alt="My Assets" />
+          <figcaption class="screenshot-title-large">Figure 6.16: My Assigned Assets — Employee</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Self-service inventory view displaying all physical hardware assets currently assigned to the logged-in employee with serials and specs.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- C06 Page 11 of 13: Screenshots Part 5 (2 per page) -->
+<div class="page">
+  <div class="section-content" data-part="C06" data-page="11">
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 4px;">6.4.4 User Interface Design & Screen Layouts (Part V)</h3>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      Figures 6.17 and 6.18 present the enterprise software license catalog with seat utilization progress bars and the administrative license management hub.
+    </p>
+
+    <div class="screenshots-2-container">
+      <div class="screenshot-card-large">
+        <figure data-caption="Software License Catalog — Admin / Support" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/08-license-list.png" alt="License Catalog" />
+          <figcaption class="screenshot-title-large">Figure 6.17: Software License Catalog — Admin / Support</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Software entitlement catalog featuring visual seat capacity gauges, contract expiration countdowns, and automated renewal warning badges.
+        </div>
+      </div>
+
+      <div class="screenshot-card-large">
+        <figure data-caption="License Management Hub — Admin / Support" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/09-license-detail.png" alt="License Detail" />
+          <figcaption class="screenshot-title-large">Figure 6.18: License Management Hub — Admin / Support</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          License administration view with masked product key display, administrator key reveal toggle, and active employee seat allocation roster.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- C06 Page 12 of 13: Screenshots Part 6 (2 per page) -->
+<div class="page">
+  <div class="section-content" data-part="C06" data-page="12">
+    <h3 class="sub" style="font-size: 11.5pt; margin-top: 0; margin-bottom: 4px;">6.4.5 User Interface Design & Screen Layouts (Part VI)</h3>
+    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      Figures 6.19 and 6.20 display the support desk triage queue with SLA urgency indicators and the interactive incident discussion thread.
+    </p>
+
+    <div class="screenshots-2-container">
+      <div class="screenshot-card-large">
+        <figure data-caption="Support Incident Ticket Queue — All Roles" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/10-ticket-list.png" alt="Ticket Queue" />
+          <figcaption class="screenshot-title-large">Figure 6.19: Support Incident Ticket Queue — All Roles</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Multi-column triage queue sorted by SLA deadline urgency, featuring color-coded priority badges, overdue alerts, and category filtering.
+        </div>
+      </div>
+
+      <div class="screenshot-card-large">
+        <figure data-caption="Ticket Resolution & Comments Thread — All Roles" style="margin: 0;">
+          <img class="screenshot-img-large" src="docs/assets/screenshots/12-ticket-detail.png" alt="Ticket Detail" />
+          <figcaption class="screenshot-title-large">Figure 6.20: Ticket Resolution & Comments Thread — All Roles</figcaption>
+        </figure>
+        <div class="screenshot-desc-large">
+          Interactive communication panel featuring chronological threaded discussions, technician assignment controls, and mandatory resolution note inputs.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- C06 Page 13 of 13: Code Listings & Security -->
+<div class="page">
+  <div class="section-content" data-part="C06" data-page="13">
+    <h2 class="section">6.5 Implementation: Code Listings & Security Architecture</h2>
+    <p style="font-size: 9pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
+      Core business logic is encapsulated in modular Node.js/Express service controllers. Listings 6.1 through 6.3 show production implementations of authentication middleware, atomic hardware assignment, and ticket state machine validation.
+    </p>
+
+    <div style="font-size: 8pt; font-weight: bold; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
+      Listing 6.1: JWT Authentication Middleware (<code>server/src/middleware/auth.js</code>)
+    </div>
+    <div class="code-box" style="font-size: 7.2pt; line-height: 1.25; margin: 1px 0 3px 0; padding: 3px 6px;">async function authenticate(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return next(ApiError.unauthorized("Authentication token required"));
-    }
+    if (!authHeader || !authHeader.startsWith("Bearer ")) return next(ApiError.unauthorized("Token required"));
     const token = authHeader.split(" ")[1];
-    let decoded = jwt.verify(token, config.JWT_SECRET, { algorithms: ["HS256"] });
-    req.user = decoded;
+    req.user = jwt.verify(token, config.JWT_SECRET, { algorithms: ["HS256"] });
     next();
   } catch (err) {
     return next(ApiError.unauthorized(err.name === "TokenExpiredError" ? "Token expired" : "Invalid token"));
   }
 }</div>
-    <p style="font-size: 7.5pt; color: #475569; margin-bottom: 5px; line-height: 1.25;">
-      <em>Explanation:</em> Extracts Bearer tokens from authorization headers, enforces HS256 algorithm integrity, decodes user claims into <code>req.user</code>, and traps expiration errors.
-    </p>
 
     <div style="font-size: 8pt; font-weight: bold; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Listing 6.2: Atomic Asset Assignment with Concurrency Guard (<code>server/src/controllers/assets.js:256-281</code>)
+      Listing 6.2: Atomic Asset Assignment with Concurrency Guard (<code>server/src/controllers/assets.js</code>)
     </div>
-    <div class="code-box" style="font-size: 7.2pt; line-height: 1.25; margin: 2px 0 3px 0; padding: 4px 8px;">const asset = await Asset.findOneAndUpdate(
+    <div class="code-box" style="font-size: 7.2pt; line-height: 1.25; margin: 1px 0 3px 0; padding: 3px 6px;">const asset = await Asset.findOneAndUpdate(
   { _id: req.params.id, status: "AVAILABLE" },
-  { $set: { status: "ASSIGNED", assignedTo: targetUser._id } },
+  { $set: { status: "ASSIGNED", assignedTo: targetUser._id, assignedAt: new Date() } },
   { new: true }
-).populate("assignedTo", "name email");
-if (!asset) {
-  throw ApiError.badRequest("Asset is not available or concurrently allocated");
-}</div>
-    <p style="font-size: 7.5pt; color: #475569; margin-bottom: 5px; line-height: 1.25;">
-      <em>Explanation:</em> Atomic condition guard prevents double-allocation race conditions under concurrent assignment requests without requiring heavy multi-document transactions.
-    </p>
+).populate("assignedTo", "name email department");
+if (!asset) throw ApiError.badRequest("Asset is not available or concurrently allocated");</div>
 
     <div style="font-size: 8pt; font-weight: bold; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Listing 6.3: Ticket State Machine Transition Rules (<code>server/src/services/ticketRules.js:14-33</code>)
+      Listing 6.3: Ticket State Machine Rules (<code>server/src/services/ticketRules.js</code>)
     </div>
-    <div class="code-box" style="font-size: 7.2pt; line-height: 1.25; margin: 2px 0 3px 0; padding: 4px 8px;">const VALID_TRANSITIONS = {
-  OPEN: ["IN_PROGRESS"],
-  IN_PROGRESS: ["RESOLVED"],
-  RESOLVED: ["IN_PROGRESS", "CLOSED"],
-  CLOSED: []
+    <div class="code-box" style="font-size: 7.2pt; line-height: 1.25; margin: 1px 0 3px 0; padding: 3px 6px;">const VALID_TRANSITIONS = {
+  OPEN: ["IN_PROGRESS"], IN_PROGRESS: ["RESOLVED"],
+  RESOLVED: ["IN_PROGRESS", "CLOSED"], CLOSED: []
 };
-function canTransition(from, to) {
-  if (!from || !to || from === to) return false;
-  return (VALID_TRANSITIONS[from] || []).includes(to);
-}</div>
-    <p style="font-size: 7.5pt; color: #475569; margin-bottom: 5px; line-height: 1.25;">
-      <em>Explanation:</em> Pure deterministic transition lookup table guaranteeing that tickets progress linearly through verified states and protecting closed tickets from further mutation.
-    </p>
+function canTransition(from, to) { return (VALID_TRANSITIONS[from] || []).includes(to); }</div>
 
-    <div style="font-size: 8pt; font-weight: bold; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Listing 6.4: Software License Expiry & Status Virtual (<code>server/src/models/License.js:90-104</code>)
+    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 3px; margin-bottom: 1px;">
+      Table 6.6: Defense-in-Depth Security Controls Implementation Matrix
     </div>
-    <div class="code-box" style="font-size: 7.2pt; line-height: 1.25; margin: 2px 0 3px 0; padding: 4px 8px;">licenseSchema.virtual("status").get(function () {
-  if (!this.expiryDate) return "ACTIVE";
-  const today = startOfToday(), expiry = new Date(this.expiryDate);
-  if (expiry.getTime() < today.getTime()) return "EXPIRED";
-  if (expiry.getTime() <= addDays(today, 30).getTime()) return "EXPIRING";
-  return "ACTIVE";
-});</div>
-    <p style="font-size: 7.5pt; color: #475569; margin-bottom: 5px; line-height: 1.25;">
-      <em>Explanation:</em> Computes dynamic status (ACTIVE, EXPIRING, EXPIRED) in real time against UTC midnight boundaries without requiring stale persisted status flags.
-    </p>
+    <table class="grid" style="width: 100%; font-size: 7pt; margin-bottom: 4px; border-collapse: collapse;">
+      <thead>
+        <tr style="background: #f1f5f9;">
+          <th style="width: 22%; padding: 2px 4px;">Security Mechanism</th>
+          <th style="width: 38%; padding: 2px 4px;">Implementation & Defense Details</th>
+          <th style="width: 26%; padding: 2px 4px;">Source Module</th>
+          <th style="width: 14%; padding: 2px 4px; text-align: center;">Verified By</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Salted Password Hashing</td><td>Bcrypt 10 salt rounds executed in Mongoose pre-save hook</td><td><code>models/User.js</code></td><td style="text-align:center;"><code>SEC-08</code></td></tr>
+        <tr><td>Stateless JWT Tokens</td><td>HMAC-SHA256 tokens with 24h lifetime and algorithmic pinning</td><td><code>middleware/auth.js</code></td><td style="text-align:center;"><code>SEC-01</code></td></tr>
+        <tr><td>Role-Based Access Control</td><td>Route-level RBAC guards enforcing ADMIN/SUPPORT/EMPLOYEE</td><td><code>middleware/roles.js</code></td><td style="text-align:center;"><code>SEC-04</code></td></tr>
+        <tr><td>Brute-Force Rate Limiting</td><td>Sliding window IP limiter (10 login attempts per 15 mins)</td><td><code>middleware/rateLimit.js</code></td><td style="text-align:center;"><code>SEC-07</code></td></tr>
+        <tr><td>NoSQL Injection Defense</td><td>Sanitizer stripping <code>$</code>/<code>.</code> operators alongside Mongoose types</td><td><code>app.js</code></td><td style="text-align:center;"><code>SEC-01</code></td></tr>
+        <tr><td>Immutable Audit Logging</td><td>Pre-hook blocking update/delete on AuditLog documents</td><td><code>models/AuditLog.js</code></td><td style="text-align:center;"><code>SEC-03</code></td></tr>
+      </tbody>
+    </table>
 
-    <div style="font-weight: bold; font-size: 8pt; color: #1e293b; margin-top: 4px; margin-bottom: 1px;">
-      Table 6.9: Source Code Availability & Academic Repository Compliance
+    <div style="font-weight: bold; font-size: 8pt; color: #1e293b; margin-top: 3px; margin-bottom: 1px;">
+      Table 6.7: Source Code Availability & Academic Compliance
     </div>
-    <table class="grid" style="width: 100%; font-size: 7.5pt; margin-bottom: 2px; border-collapse: collapse;">
+    <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 2px; border-collapse: collapse;">
       <tbody>
         <tr>
           <td style="width: 32%; font-weight: bold;">Shared Project Repository URL</td>
           <td style="width: 68%;"><span class="filled-field" style="min-width: 80mm;">{{repoUrl}}</span></td>
         </tr>
         <tr>
-          <td style="font-weight: bold;">Company Code Disclosure Policy</td>
-          <td><span class="filled-field" style="min-width: 80mm;">{{company.allowsCodeInReport}}</span></td>
-        </tr>
-        <tr>
-          <td colspan="2" style="font-size: 7pt; color: #64748b; background: #f8fafc;">
-            <em>Institutional Compliance Note:</em> Full, unredacted source code, test suites, and deployment assets are submitted to the shared university repository in accordance with VICAIT SOP Section 2.2 (item 11).
-          </td>
+          <td style="font-weight: bold;">Institutional Compliance Note</td>
+          <td style="color: #475569;">Full source code submitted to shared university repository per VICAIT SOP Section 2.2.</td>
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
-
-<div class="page">
-  <div class="section-content" data-part="C06" data-page="10">
-    <h2 class="section">6.6 Implementation of Security Architecture</h2>
-    <p style="font-size: 8.5pt; text-align: justify; line-height: 1.35; margin-bottom: 4px;">
-      AssetDesk adopts a comprehensive defense-in-depth security model. Protections operate across network edge proxies, Express middleware stacks, cryptographic models, and persistence layers. Table 6.10 maps every implemented security control to its operational source file and verifying automated test case.
-    </p>
-
-    <div style="font-weight: bold; font-size: 8.5pt; color: #1e293b; margin-top: 2px; margin-bottom: 1px;">
-      Table 6.10: Security Controls Implementation & Verification Traceability Matrix
-    </div>
-    <table class="grid" style="width: 100%; font-size: 7.2pt; margin-bottom: 6px; border-collapse: collapse;">
-      <thead>
-        <tr style="background: #f1f5f9;">
-          <th style="width: 20%; padding: 2px 4px;">Security Control</th>
-          <th style="width: 36%; padding: 2px 4px;">Technical Implementation Mechanism</th>
-          <th style="width: 28%; padding: 2px 4px;">Source Code Location</th>
-          <th style="width: 16%; padding: 2px 4px; text-align: center;">Verified By</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="font-weight: bold;">Salted Password Hashing</td>
-          <td>One-way Bcrypt hashing with 10 salt rounds executed in Mongoose pre-save hook.</td>
-          <td><code>server/src/models/User.js</code></td>
-          <td style="text-align: center;"><code>UT-06, SEC-08</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">Stateless Token Auth</td>
-          <td>Cryptographically signed HMAC-SHA256 JWT tokens with 24-hour expiration.</td>
-          <td><code>server/src/middleware/auth.js</code></td>
-          <td style="text-align: center;"><code>IT-M1-02, SEC-01</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">Role-Based Access Control</td>
-          <td>Route-level RBAC guards enforcing ADMIN, IT_SUPPORT, or EMPLOYEE roles.</td>
-          <td><code>server/src/middleware/roles.js</code></td>
-          <td style="text-align: center;"><code>IT-M1-04, SEC-02</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">Input Parameter Sanitation</td>
-          <td>Strict validation rules checking string lengths, email regex, and integer ranges.</td>
-          <td><code>server/src/middleware/validate.js</code></td>
-          <td style="text-align: center;"><code>UT-02, SEC-07</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">Brute-Force Rate Limiting</td>
-          <td>IP-based sliding window rate limiter (max 10 login attempts per 15-minute window).</td>
-          <td><code>server/src/middleware/rateLimiter.js</code></td>
-          <td style="text-align: center;"><code>SEC-04</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">HTTP Security Headers</td>
-          <td>Helmet middleware configuring CSP, HSTS, X-Frame-Options, and nosniff policies.</td>
-          <td><code>server/src/app.js</code></td>
-          <td style="text-align: center;"><code>SEC-05</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">CORS Policy Enforcement</td>
-          <td>Restricts cross-origin requests exclusively to whitelisted frontend origin domain.</td>
-          <td><code>server/src/config/cors.js</code></td>
-          <td style="text-align: center;"><code>SEC-06</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">NoSQL Injection Defense</td>
-          <td>Express sanitizer stripping <code>$</code> and <code>.</code> operators alongside typed Mongoose schemas.</td>
-          <td><code>server/src/app.js</code></td>
-          <td style="text-align: center;"><code>SEC-07</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">Sensitive Key Masking</td>
-          <td>Software keys masked as <code>****-****-XXXX</code>; unmasking restricted to ADMIN.</td>
-          <td><code>server/src/controllers/licenses.js</code></td>
-          <td style="text-align: center;"><code>SEC-09</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">CSV Formula Injection Defense</td>
-          <td>Prepending risky leading characters (<code>=</code>, <code>+</code>, <code>-</code>, <code>@</code>) with single quotes on export.</td>
-          <td><code>server/src/services/csv.js</code></td>
-          <td style="text-align: center;"><code>UT-44, SEC-10</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">Tamper-Proof Audit Trail</td>
-          <td>Append-only pre-hook preventing update/delete operations on AuditLog documents.</td>
-          <td><code>server/src/models/AuditLog.js</code></td>
-          <td style="text-align: center;"><code>IT-M5-03, SEC-03</code></td>
-        </tr>
-        <tr>
-          <td style="font-weight: bold;">Transport Layer Security</td>
-          <td>End-to-end HTTPS/TLS encryption configured on edge reverse proxy (NGINX/Cloud).</td>
-          <td><code>server/src/server.js</code></td>
-          <td style="text-align: center;"><code>SEC-11</code></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note-box" style="margin-top: 4px; padding: 6px 10px; font-size: 8pt; line-height: 1.3;">
-      <strong>Security Architecture Synthesis:</strong> By integrating cryptographic token validation at the network boundary, parameterized query sanitization in application middleware, and append-only immutability in the database tier, AssetDesk achieves a robust security posture verified across 12 dedicated automated security test suites (<code>SEC-01</code> through <code>SEC-12</code>).
-    </div>
   </div>
 </div>

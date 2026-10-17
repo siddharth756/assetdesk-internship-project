@@ -1,15 +1,8 @@
-stateDiagram-v2
-    [*] --> AVAILABLE : Asset created and added to inventory
-    
-    AVAILABLE --> ASSIGNED : Admin allocates to employee (assignedTo set)
-    ASSIGNED --> AVAILABLE : Admin unassigns asset (clears assignedTo)
-    
-    AVAILABLE --> MAINTENANCE : Hardware defect / routine service
-    MAINTENANCE --> AVAILABLE : Diagnostics & repair completed
-    
-    ASSIGNED --> MAINTENANCE : Device sent for urgent servicing (auto unassigned)
-    
-    AVAILABLE --> RETIRED : End of operational lifecycle (EOM / EOL)
-    MAINTENANCE --> RETIRED : Decommissioned due to unrepairable fault
-    
-    RETIRED --> [*] : Archived hardware record (terminal state)
+flowchart TD
+    S0((New Asset)) --> A["<b>AVAILABLE</b><br/>In stock & ready for allocation"]
+    A <-->|Assign / Unassign| B["<b>ASSIGNED</b><br/>Bound to employee custodian"]
+    A <-->|Fault / Repair| C["<b>MAINTENANCE</b><br/>Under active diagnostics"]
+    B -->|Defect Reported| C
+    A -->|End of Life| D["<b>RETIRED</b><br/>Decommissioned"]
+    C -->|Unrepairable| D
+    D --> S1(((Archived)))

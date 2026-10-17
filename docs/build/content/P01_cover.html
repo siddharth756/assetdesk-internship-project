@@ -1,42 +1,52 @@
 <div class="page cover-page">
-  <div class="cover-side-strip">
-    <div class="cover-side-text">{{projectTitle}}</div>
-    <div class="cover-side-text">{{student.program}}</div>
-    <div class="cover-side-text">AY {{academicYear}}</div>
-  </div>
-  <div class="cover-main-content">
+  <div class="cover-border-frame">
     <div>
-      <div style="font-size: 11pt; letter-spacing: 2px; color: #cbd5e1; text-transform: uppercase; margin-bottom: 8px;">A Major Project Report on</div>
-      <h1 class="cover-title">{{projectTitle}}</h1>
-      <div class="cover-subtitle">Internship / Final Year Project Report</div>
+      <!-- Institute & University Header -->
+      <div class="cover-institution-header">{{instituteName}}</div>
+      <div class="cover-univ-sub">{{universityName}}, Anita (Kim), Surat, Gujarat</div>
+      <div style="font-size: 9pt; color: #64748b; margin-top: 2px;">(Recognized by UGC & State Government)</div>
+      
       <div class="cover-divider"></div>
-      <p style="font-size: 11pt; color: #94a3b8; max-width: 500px; margin: 0 auto; text-align: center;">
+      
+      <!-- Project Report Main Heading -->
+      <div class="cover-report-on">A Major Internship Project Report On</div>
+      <h1 class="cover-title">{{projectTitle}}</h1>
+      <div class="cover-subtitle">Web-Based Enterprise Management System</div>
+      
+      <div class="cover-divider"></div>
+      
+      <p class="cover-degree">
         Submitted in partial fulfillment of the requirements for the degree of<br/>
-        <strong style="color: #e2e8f0;">{{student.program}}</strong>
+        <strong style="color: #0f172a; font-size: 12pt;">{{student.program}}</strong><br/>
+        <span style="font-size: 10.5pt; color: #334155;">{{student.semester}} &bull; Academic Year {{academicYear}}</span>
       </p>
     </div>
 
-    <div style="margin: 30px 0; background: rgba(30, 41, 59, 0.6); padding: 16px; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 6px;">
-      <div style="display: flex; justify-content: space-around; text-align: left;">
-        <div>
-          <div style="font-size: 9pt; color: #94a3b8; text-transform: uppercase;">Submitted By:</div>
-          <div style="font-size: 11pt; font-weight: bold; color: #f8fafc;">{{student.name}}</div>
-          <div style="font-size: 9.5pt; color: #cbd5e1;">Enr: {{student.enrollmentNo}}</div>
-          <div style="font-size: 9.5pt; color: #cbd5e1;">Div: {{student.division}} ({{student.semester}})</div>
-        </div>
-        <div>
-          <div style="font-size: 9pt; color: #94a3b8; text-transform: uppercase;">Under the Guidance of:</div>
-          <div style="font-size: 11pt; font-weight: bold; color: #f8fafc;">{{guide.internalName}}</div>
-          <div style="font-size: 9pt; color: #cbd5e1;">{{guide.internalDesignation}}</div>
-          <div style="font-size: 9.5pt; color: #d4af37; margin-top: 4px;">{{company.name}}</div>
-        </div>
-      </div>
+    <!-- Submitted By & Guided By Table -->
+    <div class="cover-columns-box">
+      <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <tr>
+          <td style="width: 50%; vertical-align: top; padding-right: 15px; border-right: 1px solid #cbd5e1;">
+            <div style="font-size: 9.5pt; font-weight: bold; color: #1e3a8a; text-transform: uppercase; margin-bottom: 4px;">Submitted By:</div>
+            <div style="font-size: 11pt; font-weight: bold; color: #0f172a;">{{student.name}}</div>
+            <div style="font-size: 9.5pt; color: #334155; margin-top: 2px;">Enrollment No: <strong>{{student.enrollmentNo}}</strong></div>
+            <div style="font-size: 9.5pt; color: #334155;">Division: {{student.division}} ({{student.semester}})</div>
+          </td>
+          <td style="width: 50%; vertical-align: top; padding-left: 18px;">
+            <div style="font-size: 9.5pt; font-weight: bold; color: #1e3a8a; text-transform: uppercase; margin-bottom: 4px;">Under the Guidance of:</div>
+            <div style="font-size: 11pt; font-weight: bold; color: #0f172a;">{{guide.internalName}}</div>
+            <div style="font-size: 9pt; color: #475569;">{{guide.internalDesignation}}</div>
+            <div style="font-size: 9.5pt; color: #1e3a8a; font-weight: 600; margin-top: 3px;">{{company.name}}</div>
+          </td>
+        </tr>
+      </table>
     </div>
 
-    <div class="cover-institution">
-      <div style="font-size: 12pt; font-weight: bold; color: #f8fafc;">{{instituteName}}</div>
-      <div style="font-size: 10pt; color: #cbd5e1; margin-top: 3px;">{{universityName}}</div>
-      <div style="font-size: 9.5pt; color: #d4af37; margin-top: 5px;">Academic Year {{academicYear}}</div>
+    <!-- Bottom Department & University Footer -->
+    <div style="margin-top: 10px;">
+      <div style="font-size: 11.5pt; font-weight: bold; color: #0f172a; text-transform: uppercase;">Department of Computer Applications</div>
+      <div style="font-size: 11pt; font-weight: 600; color: #1e3a8a; margin-top: 2px;">{{instituteName}}</div>
+      <div style="font-size: 10pt; color: #475569; margin-top: 2px;">{{universityName}} &bull; Academic Year {{academicYear}}</div>
     </div>
   </div>
 </div>

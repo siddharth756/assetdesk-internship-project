@@ -1,52 +1,35 @@
 flowchart TD
-    %% External Entities
-    Admin["Administrator"]
-    Support["IT Support Staff"]
-    Employee["Employee"]
+    subgraph Entities ["External Entities"]
+        direction LR
+        Admin["System Administrator"]
+        Support["IT Support Staff"]
+        Employee["Employee / Requester"]
+    end
 
-    %% Data Stores
-    D1[("D1: Users Collection")]
-    D2[("D2: Assets Collection")]
-    D3[("D3: Licenses Collection")]
-    D4[("D4: Tickets Collection")]
-    D5[("D5: AuditLogs Collection")]
+    subgraph Processes ["Core Functional Processes (Level 1)"]
+        direction LR
+        P1(["1.0 User Authentication<br/>& Session Authority"])
+        P2(["2.0 Hardware Asset<br/>Lifecycle Engine"])
+        P3(["3.0 Software License<br/>& Quota Manager"])
+        P4(["4.0 Incident Helpdesk<br/>& SLA Triage Desk"])
+        P5(["5.0 Audit Logging<br/>& CSV Analytics"])
+    end
 
-    %% Level 1 Processes
-    P1(["1.0<br/>Authentication &<br/>Session Authority"])
-    P2(["2.0<br/>User Management &<br/>Role Provisioning"])
-    P3(["3.0<br/>Hardware Asset<br/>Lifecycle Engine"])
-    P4(["4.0<br/>Software License &<br/>Seat Allocation"])
-    P5(["5.0<br/>Helpdesk Ticketing &<br/>SLA Engine"])
-    P6(["6.0<br/>Compliance Audit &<br/>Analytics Aggregator"])
-    P7(["7.0<br/>RFC-4180 CSV<br/>Export Processor"])
+    subgraph DataStores ["Database Collections (MongoDB)"]
+        direction LR
+        D1[("D1: users")]
+        D2[("D2: assets")]
+        D3[("D3: licenses")]
+        D4[("D4: tickets")]
+        D5[("D5: auditlogs")]
+    end
 
-    %% Data Flows
-    Admin & Support & Employee -->|Credentials| P1
-    P1 -->|JWT Claims| D1
-    P1 -->|Auth Audit| D5
+    Admin -->|Admin Controls| P2 & P3 & P5
+    Support -->|Triage & Maintenance| P2 & P4
+    Employee -->|Self-Service & Tickets| P1 & P4
 
-    Admin -->|CRUD Profiles| P2
-    P2 <-->|Read / Write Users| D1
-    P2 -->|User Actions| D5
-
-    Admin & Support -->|Register, Assign, Status| P3
-    P3 <-->|Asset Records| D2
-    P3 -->|User Lookup| D1
-    P3 -->|Asset Trail| D5
-
-    Admin -->|Licenses & Allocations| P4
-    P4 <-->|Seat Records| D3
-    P4 -->|Allocated Users| D1
-    P4 -->|Licensing Events| D5
-
-    Employee & Support & Admin -->|Raise, Triage, Resolve| P5
-    P5 <-->|Ticket Records| D4
-    P5 -->|Related Assets| D2
-    P5 -->|Technicians & Requesters| D1
-    P5 -->|Ticket Logs| D5
-
-    Admin -->|Inspect Logs| P6
-    P6 <-->|Read Metrics| D1 & D2 & D3 & D4 & D5
-
-    Admin & Support -->|Download CSV| P7
-    P7 <-->|Streaming Cursor| D2 & D3 & D4 & D5
+    P1 <--> D1
+    P2 <--> D2
+    P3 <--> D3
+    P4 <--> D4
+    P5 <--> D5

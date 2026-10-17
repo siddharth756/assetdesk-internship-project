@@ -1,37 +1,10 @@
-flowchart TD
-    Start([Employee Submits Ticket]) --> GenerateCode[Generate Sequential Code TCK-YYYY-NNNN]
-    GenerateCode --> CalcDueAt[Calculate SLA dueAt: now + PRIORITY_HOURS]
-    CalcDueAt --> CreateOpen[Save Status: OPEN, createdBy: empId]
-    CreateOpen --> OpenQueue[(Open Tickets Queue)]
-
-    OpenQueue --> StaffTriage[Support Staff Triages Ticket]
-    StaffTriage --> AssignStaff{Assign Technician?}
-    
-    AssignStaff -- Yes --> SetAssigned[Update assignedTo & Status: IN_PROGRESS]
-    SetAssigned --> AuditAssign[Audit: TICKET_ASSIGN]
-    AuditAssign --> InProgressState[(Ticket In Progress)]
-
-    InProgressState --> Discuss[Two-Way Discussion Comments Thread]
-    Discuss --> AuditComment[Audit: TICKET_COMMENT]
-    AuditComment --> InProgressState
-
-    InProgressState --> ResolveAction[Support Solves Issue & Submits Resolution]
-    ResolveAction --> CheckNote{Resolution Note >= 5 Chars?}
-    
-    CheckNote -- No --> NoteError[Reject Transition: Note Required] --> InProgressState
-    
-    CheckNote -- Yes --> SetResolved[Update Status: RESOLVED, resolvedAt: now]
-    SetResolved --> AuditResolved[Audit: TICKET_STATUS from IN_PROGRESS to RESOLVED]
-    AuditResolved --> ResolvedState[(Ticket Resolved)]
-
-    ResolvedState --> EmpFeedback{Employee Satisfied with Solution?}
-    
-    EmpFeedback -- No: Issue Persists --> ReopenTicket[Employee Reopens Ticket]
-    ReopenTicket --> ClearResolved[Clear resolvedAt & Status: IN_PROGRESS]
-    ClearResolved --> AuditReopen[Audit: TICKET_STATUS Reopened]
-    AuditReopen --> InProgressState
-
-    EmpFeedback -- Yes: Problem Solved --> StaffClose[Support / Admin Closes Ticket]
-    StaffClose --> SetClosed[Update Status: CLOSED, closedAt: now]
-    SetClosed --> AuditClosed[Audit: TICKET_STATUS from RESOLVED to CLOSED]
-    AuditClosed --> EndState([Immutable Archived Ticket])
+flowchart LR
+    A(["Employee Submits<br/>Incident Ticket"]) --> B["Auto-Compute SLA<br/>& Set OPEN"]
+    B --> C["Technician Claims &<br/>Sets IN_PROGRESS"]
+    C --> D["Two-Way Threaded<br/>Comments"]
+    D --> E{"Resolution Note<br/>Provided?"}
+    E -- "No" --> D
+    E -- "Yes" --> F["Set RESOLVED &<br/>Record Timestamp"]
+    F --> G{"Requester<br/>Satisfied?"}
+    G -- "Reopen" --> C
+    G -- "Yes" --> H(["Set CLOSED &<br/>Immutable Archive"])

@@ -2,78 +2,54 @@
   <h1 class="chapter">Chapter 4: System Planning</h1>
   <div class="section-content" data-part="C04" data-page="1">
     <h2 class="section">4.1 Requirement Analysis & Data Gathering</h2>
-    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 8px;">
-      Requirement engineering in this enterprise software internship followed a structured multi-source elicitation methodology. Elicitation combined semi-structured interviews with the industry mentor, structured consultations with the internal academic guide, observational studies of operational bottlenecks in manual spreadsheet logs, and comparative evaluation of ITIL v4 asset management paradigms. Requirements gathered were cataloged into an elicitation log and subsequently consolidated into functional specifications prioritized under the MoSCoW framework.
+    <p style="font-size: 10pt; text-align: justify; line-height: 1.4; margin-bottom: 8px;">
+      Requirement engineering in this enterprise software internship followed a structured multi-source elicitation methodology. Elicitation combined semi-structured interviews with the industry mentor, consultations with the academic guide, observational studies of operational bottlenecks in manual spreadsheet logs, and comparative evaluation of ITIL v4 asset management paradigms. Requirements gathered were cataloged into an elicitation log and subsequently consolidated into functional specifications prioritized under the MoSCoW framework.
     </p>
 
-    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 6px; margin-bottom: 2px;">
+    <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-top: 6px; margin-bottom: 3px;">
       Table 4.1: Requirement Gathering Log (Stakeholder Consultations)
     </div>
-    <table class="grid" style="width: 100%; font-size: 8pt; margin-bottom: 10px; border-collapse: collapse;">
+    <table class="grid" style="width: 100%; font-size: 8.2pt; margin-bottom: 10px; border-collapse: collapse;">
       <thead>
         <tr style="background: #f1f5f9;">
           <th style="width: 14%; padding: 4px 6px;">Date</th>
-          <th style="width: 26%; padding: 4px 6px;">Source (Person / Role)</th>
-          <th style="width: 46%; padding: 4px 6px;">Requirement Collected</th>
+          <th style="width: 25%; padding: 4px 6px;">Source (Person / Role)</th>
+          <th style="width: 47%; padding: 4px 6px;">Requirement Elicited & Operational Need</th>
           <th style="width: 14%; padding: 4px 6px; text-align: center;">Priority</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+        <tr>
+          <td>Week 2 (Jan 2026)</td>
+          <td style="font-weight: bold;">Industry Mentor</td>
+          <td>Mandatory role separation: Admins manage users/licenses; IT Support triages tickets; Employees view assigned assets.</td>
+          <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must Have</td>
         </tr>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+        <tr>
+          <td>Week 3 (Jan 2026)</td>
+          <td style="font-weight: bold;">IT Operations Lead</td>
+          <td>Atomic hardware allocation to prevent duplicate asset assignments across departments; automatic asset tag numbering.</td>
+          <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must Have</td>
         </tr>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+        <tr>
+          <td>Week 3 (Feb 2026)</td>
+          <td style="font-weight: bold;">Helpdesk Technician</td>
+          <td>Four-tier SLA deadline calculation based on ticket priority (Critical: 4h, High: 24h, Med: 48h, Low: 72h) with mandatory resolution notes.</td>
+          <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must Have</td>
         </tr>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr style="height: 10mm;">
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+        <tr>
+          <td>Week 4 (Feb 2026)</td>
+          <td style="font-weight: bold;">Institutional Guide</td>
+          <td>Immutable audit trail logging every state modification; RFC 4180 CSV report export for hardware, licenses, and tickets.</td>
+          <td style="text-align: center; color: #1e3a8a; font-weight: bold;">Should Have</td>
         </tr>
       </tbody>
     </table>
 
-    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+    <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-top: 6px; margin-bottom: 3px;">
       Table 4.2: Consolidated Requirements & MoSCoW Prioritization Matrix
     </div>
-    <table class="grid" style="width: 100%; font-size: 8pt; margin-bottom: 4px; border-collapse: collapse;">
+    <table class="grid" style="width: 100%; font-size: 8.2pt; margin-bottom: 4px; border-collapse: collapse;">
       <thead>
         <tr style="background: #f1f5f9;">
           <th style="width: 16%; padding: 4px 6px;">Module</th>
@@ -121,28 +97,28 @@
 <div class="page">
   <div class="section-content" data-part="C04" data-page="2">
     <h2 class="section">4.2 Time-line Chart & SOP Milestones</h2>
-    <p style="font-size: 9.5pt; text-align: justify; line-height: 1.35; margin-bottom: 6px;">
+    <p style="font-size: 10pt; text-align: justify; line-height: 1.4; margin-bottom: 6px;">
       The 15-week internship curriculum was scheduled in strict compliance with VICAIT SOP Section 2.4 guidelines. Project execution was divided into four foundational phases punctuated by four formal institutional progress report evaluations. Figure 4.1 visualizes the schedule, while Table 4.3 outlines the week-by-week deliverable roadmap.
     </p>
 
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa; margin-bottom: 8px;">
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa; margin-bottom: 8px;">
       <figure data-caption="15-Week Internship Timeline Gantt Chart" style="margin: 0;">
-        <img src="docs/assets/diagrams/d16-gantt-15-weeks.png" style="max-height: 42mm; max-width: 155mm; object-fit: contain;" alt="Gantt Chart" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 4.1: 15-Week Internship Project Schedule & SOP Milestones</figcaption>
+        <img src="docs/assets/diagrams/d16-gantt-15-weeks.png" style="max-height: 62mm; max-width: 172mm; object-fit: contain;" alt="Gantt Chart" />
+        <figcaption style="font-size: 9.5pt; font-weight: bold; margin-top: 4px;">Figure 4.1: 15-Week Internship Project Schedule & SOP Milestones</figcaption>
       </figure>
     </div>
 
-    <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
+    <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-top: 4px; margin-bottom: 2px;">
       Table 4.3: 15-Week Project Plan as per VICAIT SOP Section 2.4
     </div>
-    <table class="grid" style="width: 100%; font-size: 7.8pt; margin-bottom: 4px; border-collapse: collapse;">
+    <table class="grid" style="width: 100%; font-size: 7.8pt; margin-bottom: 2px; border-collapse: collapse;">
       <thead>
         <tr style="background: #f1f5f9;">
-          <th style="width: 10%; padding: 4px 6px;">Week</th>
-          <th style="width: 16%; padding: 4px 6px;">Project Phase</th>
-          <th style="width: 32%; padding: 4px 6px;">Activity Description</th>
-          <th style="width: 24%; padding: 4px 6px;">Formal Deliverable</th>
-          <th style="width: 18%; padding: 4px 6px; text-align: center;">Actual Dates</th>
+          <th style="width: 10%; padding: 2.5px 4px;">Week</th>
+          <th style="width: 16%; padding: 2.5px 4px;">Project Phase</th>
+          <th style="width: 36%; padding: 2.5px 4px;">Activity Description</th>
+          <th style="width: 24%; padding: 2.5px 4px;">Formal Deliverable</th>
+          <th style="width: 14%; padding: 2.5px 4px; text-align: center;">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -151,63 +127,63 @@
           <td>Inception & Approval</td>
           <td>Internship registration, industry host onboarding, topic finalization, and initial project scope proposal approval.</td>
           <td>Approved Project Proposal (SOP 4.1)</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W3</td>
           <td>Planning & Elicitation</td>
           <td>Interviews with mentor and IT staff, manual workflow observation, feasibility assessment, initial backlog synthesis.</td>
           <td>Requirement Log & Feasibility Matrix</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W4–W5</td>
           <td>Analysis & Modeling</td>
           <td>Authoring IEEE-830 SRS, defining FR-01..FR-20, drafting DFD Level 0/1/2 and functional decomposition hierarchies.</td>
           <td><strong>Progress Report I</strong> & SRS Document</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W6–W7</td>
           <td>Architectural Design</td>
           <td>3-tier architecture definition, MongoDB schema design, ER diagramming, class/sequence diagrams, UI wireframing.</td>
           <td>Database Schema & UI Design Blueprints</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W8</td>
           <td>Mid-Term Review</td>
           <td>Backend API scaffolding, authentication engine completion, mid-term progress demo to institutional guide.</td>
           <td><strong>Progress Report II</strong> & Milestone Demo</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W9–W10</td>
           <td>Core Implementation</td>
           <td>Full implementation of M1–M5 (hardware tracking, software seats, ticket triage, audit logging, CSV reports).</td>
           <td><strong>Progress Report III</strong> & Working Software</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W11–W12</td>
           <td>Quality Assurance</td>
-          <td>Automated test execution: 57 unit tests, 199 integration tests, 16 Playwright E2E journeys, latency benchmark runs.</td>
+          <td>Automated test execution: 57 unit tests, 187 integration tests, 16 Playwright E2E journeys, latency benchmark runs.</td>
           <td>Test Suite (272 Tests, 87.16% Coverage)</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W13–W14</td>
           <td>Documentation</td>
           <td>VICAIT SOP 50-page technical report drafting, user guide manual creation, logbook annexure consolidation.</td>
           <td><strong>Progress Report IV</strong> & Draft Report</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
         <tr>
           <td style="font-weight: bold; text-align: center;">W15</td>
           <td>Evaluation & Defense</td>
           <td>Host organization sign-off, hard-binding, presentation preparation, comprehensive academic viva voce examination.</td>
           <td>Final Bound Report & Project Defense</td>
-          <td style="border-bottom: 1px dotted #94a3b8;">&nbsp;</td>
+          <td style="text-align: center; color: #16a34a; font-weight: bold;">Completed</td>
         </tr>
       </tbody>
     </table>

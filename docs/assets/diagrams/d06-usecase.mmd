@@ -1,75 +1,41 @@
 flowchart LR
-    subgraph LeftActors ["Requesters & Operations"]
+    subgraph OperationalUsers ["Operational Users"]
+        direction TB
         Emp(["Employee User"]):::actor
         Support(["IT Support Staff"]):::actor
     end
 
     subgraph SystemBoundary ["IT Asset & Support Desk System (AssetDesk)"]
-        UC01(["Login & Authenticate Session"])
-        UC02(["Change Personal Password"])
-        UC03(["View Assigned Hardware (My Assets)"])
-        UC04(["Submit Support Ticket"])
-        UC05(["Post Comment to Ticket"])
-        UC06(["Reopen Resolved Ticket"])
-        
-        UC07(["Triage & Assign Tickets"])
-        UC08(["Resolve Ticket with Notes"])
-        UC09(["Close Completed Ticket"])
-        UC10(["Update Asset Status (Maintenance)"])
-        UC11(["Download CSV Inventory Reports"])
-
-        UC12(["Manage User Accounts & Roles"])
-        UC13(["Register & Update Hardware Assets"])
-        UC14(["Assign Asset to Employee"])
-        UC15(["Register Software License"])
-        UC16(["Allocate / Release License Seat"])
-        UC17(["Reveal License Product Key"])
-        UC18(["Inspect Compliance Audit Trail"])
+        direction TB
+        UC1(["UC-01: Session Login & Authentication"])
+        UC2(["UC-02: View Assigned Hardware Assets"])
+        UC3(["UC-03: Submit & Track Helpdesk Tickets"])
+        UC4(["UC-04: Triage & Resolve Support Tickets"])
+        UC5(["UC-05: Update Hardware Status & Repairs"])
+        UC6(["UC-06: Export Asset & Ticket CSV Reports"])
+        UC7(["UC-07: User Registration & Role Assignment"])
+        UC8(["UC-08: Software License Quotas & Keys"])
+        UC9(["UC-09: Inspect Compliance Audit Journal"])
     end
 
-    subgraph RightActors ["System Administration"]
+    subgraph GovernanceUsers ["System Governance"]
+        direction TB
         Admin(["System Administrator"]):::actor
-        SMTP(["SMTP Mailer Engine"]):::actor
     end
 
-    %% Employee Links
-    Emp --> UC01
-    Emp --> UC02
-    Emp --> UC03
-    Emp --> UC04
-    Emp --> UC05
-    Emp --> UC06
+    %% Employee links
+    Emp --> UC1
+    Emp --> UC2
+    Emp --> UC3
 
-    %% IT Support Links
-    Support --> UC01
-    Support --> UC02
-    Support --> UC04
-    Support --> UC05
-    Support --> UC07
-    Support --> UC08
-    Support --> UC09
-    Support --> UC10
-    Support --> UC11
+    %% Support links
+    Support --> UC1
+    Support --> UC4
+    Support --> UC5
+    Support --> UC6
 
-    %% Admin Links
-    Admin --> UC01
-    Admin --> UC02
-    Admin --> UC07
-    Admin --> UC08
-    Admin --> UC09
-    Admin --> UC10
-    Admin --> UC11
-    Admin --> UC12
-    Admin --> UC13
-    Admin --> UC14
-    Admin --> UC15
-    Admin --> UC16
-    Admin --> UC17
-    Admin --> UC18
-
-    %% System links
-    UC04 -.-> SMTP
-    UC07 -.-> SMTP
-    UC08 -.-> SMTP
-
-    classDef actor fill:#f8fafc,stroke:#334155,stroke-width:2px;
+    %% Admin links
+    Admin --> UC1
+    Admin --> UC7
+    Admin --> UC8
+    Admin --> UC9

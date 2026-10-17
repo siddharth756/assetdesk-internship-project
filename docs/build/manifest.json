@@ -144,7 +144,7 @@
     "file": "C02_proposed_system.html",
     "orientation": "portrait",
     "startsNewPage": true,
-    "pageBudget": 3,
+    "pageBudget": 2,
     "tocTitle": "Chapter 2: Proposed System",
     "tocLevel": 1,
     "includeInToc": true
@@ -154,7 +154,7 @@
     "file": "C03_system_analysis.html",
     "orientation": "portrait",
     "startsNewPage": true,
-    "pageBudget": 6,
+    "pageBudget": 5,
     "tocTitle": "Chapter 3: System Analysis",
     "tocLevel": 1,
     "includeInToc": true
@@ -184,7 +184,7 @@
     "file": "C06_design_and_implementation.html",
     "orientation": "portrait",
     "startsNewPage": true,
-    "pageBudget": 10,
+    "pageBudget": 13,
     "tocTitle": "Chapter 6: System Design & Implementation",
     "tocLevel": 1,
     "includeInToc": true
@@ -194,7 +194,7 @@
     "file": "C07_system_testing.html",
     "orientation": "portrait",
     "startsNewPage": true,
-    "pageBudget": 5,
+    "pageBudget": 4,
     "tocTitle": "Chapter 7: System Testing",
     "tocLevel": 1,
     "includeInToc": true

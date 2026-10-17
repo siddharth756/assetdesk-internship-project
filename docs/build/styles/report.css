@@ -34,130 +34,196 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: "Calibri", "Carlito", sans-serif;
-  font-size: 11pt;
-  line-height: 1.35;
+  font-size: 11.5pt;
+  line-height: 1.42;
   color: #1e293b;
   background-color: #ffffff;
 }
 
-/* Page Container (Portrait 210mm x 297mm) */
+/* Page Container (Portrait 210mm x 297mm) - 26mm bottom margin prevents footer overlap */
 .page {
   width: 210mm;
   height: 297mm;
-  padding-top: 0.8in;
-  padding-bottom: 0.8in;
-  padding-right: 0.8in;
-  padding-left: 1.2in; /* 0.8" + 0.4" gutter */
+  padding-top: 16mm;
+  padding-bottom: 26mm;
+  padding-right: 16mm;
+  padding-left: 20mm;
   position: relative;
   page-break-after: always;
   overflow: hidden;
   background: #ffffff;
+  box-sizing: border-box;
 }
 
 /* Landscape Page Container (297mm x 210mm) */
 .page.landscape {
   width: 297mm;
   height: 210mm;
-  padding-top: 0.8in;
-  padding-bottom: 0.8in;
-  padding-right: 0.8in;
-  padding-left: 1.2in;
-}
-
-/* Full Bleed Black Cover Page with Gold Embellishments */
-.page.cover-page {
-  padding: 0;
-  background-color: #0b0f19;
-  color: #d4af37;
-  display: flex;
-}
-
-.cover-side-strip {
-  width: 22mm;
-  height: 100%;
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-  border-right: 2.5px solid #d4af37;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 4px;
+  padding-top: 14mm;
+  padding-bottom: 22mm;
+  padding-right: 16mm;
+  padding-left: 20mm;
   box-sizing: border-box;
 }
 
-.cover-side-text {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 9pt;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #d4af37;
-  text-transform: uppercase;
+/* 2 Screenshots Per Page System (referencing 279_awd.pdf) */
+.screenshots-2-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
 }
 
-.cover-main-content {
-  flex: 1;
-  padding: 45mm 25mm 30mm 20mm;
+.screenshot-card-large {
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 6px 8px;
+  text-align: center;
+  background: #fafafa;
+}
+
+.screenshot-img-large {
+  width: 100%;
+  max-height: 84mm;
+  object-fit: contain;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  background: #ffffff;
+}
+
+.screenshot-title-large {
+  font-size: 9.5pt;
+  font-weight: bold;
+  color: #0f172a;
+  margin-top: 4px;
+}
+
+.screenshot-desc-large {
+  font-size: 8.5pt;
+  color: #475569;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+/* Clean Academic Cover Page (simple, classic college format referencing 279_awd.pdf) */
+.page.cover-page {
+  padding: 12mm 14mm;
+  background-color: #ffffff;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.cover-border-frame {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #0f172a;
+  outline: 1px solid #475569;
+  outline-offset: -5px;
+  padding: 16mm 14mm 12mm 14mm;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  box-sizing: border-box;
+}
+
+.cover-institution-header {
+  font-size: 12pt;
+  font-weight: bold;
+  color: #0f172a;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.cover-univ-sub {
+  font-size: 10pt;
+  color: #334155;
+  margin-top: 4px;
+}
+
+.cover-title-group {
+  margin: 15px 0;
+}
+
+.cover-report-on {
+  font-size: 12pt;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #1e3a8a;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .cover-title {
-  font-size: 24pt;
+  font-size: 21pt;
   font-weight: 800;
-  color: #d4af37;
-  line-height: 1.2;
+  color: #0f172a;
+  line-height: 1.25;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
 }
 
 .cover-subtitle {
-  font-size: 13pt;
+  font-size: 12pt;
   font-weight: 600;
-  color: #e2e8f0;
-  letter-spacing: 1px;
+  color: #334155;
   text-transform: uppercase;
-  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.cover-degree {
+  font-size: 11pt;
+  color: #475569;
+  line-height: 1.4;
+  margin: 0 auto;
 }
 
 .cover-divider {
-  width: 80px;
-  height: 2.5px;
-  background-color: #d4af37;
-  margin: 0 auto 30px auto;
+  width: 90px;
+  height: 2px;
+  background-color: #1e3a8a;
+  margin: 12px auto;
 }
 
-.cover-institution {
-  font-size: 11pt;
-  color: #cbd5e1;
-  line-height: 1.4;
+.cover-columns-box {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 12px 18px;
+  margin: 14px 0;
 }
 
 /* Typography per SOP */
 h1.chapter {
-  font-size: 14pt;
+  font-size: 15pt;
   font-weight: bold;
   color: #0f172a;
   text-transform: uppercase;
   border-bottom: 2px solid #0f172a;
   padding-bottom: 4px;
   margin-top: 0;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 h2.section {
-  font-size: 12pt;
+  font-size: 13pt;
   font-weight: bold;
   color: #1e293b;
-  margin-top: 14px;
-  margin-bottom: 8px;
+  margin-top: 12px;
+  margin-bottom: 6px;
 }
 
 h3.sub {
-  font-size: 11pt;
+  font-size: 11.5pt;
+  font-weight: bold;
+  color: #334155;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
   font-weight: bold;
   color: #334155;
   margin-top: 10px;
@@ -184,8 +250,8 @@ li {
 table.grid {
   width: 100%;
   border-collapse: collapse;
-  font-size: 10pt;
-  margin: 10px 0;
+  font-size: 9.5pt;
+  margin: 8px 0;
 }
 
 table.grid th {
@@ -193,13 +259,13 @@ table.grid th {
   color: #0f172a;
   font-weight: bold;
   border: 1px solid #cbd5e1;
-  padding: 6px 8px;
+  padding: 5px 8px;
   text-align: left;
 }
 
 table.grid td {
   border: 1px solid #cbd5e1;
-  padding: 5px 8px;
+  padding: 4.5px 8px;
   text-align: left;
 }
 
@@ -209,23 +275,23 @@ table.grid tr:nth-child(even) td {
 
 /* Figures */
 figure {
-  margin: 10px 0;
+  margin: 8px 0;
   text-align: center;
 }
 
 figure img {
-  max-width: 159mm;
-  max-height: 105mm;
+  max-width: 172mm;
+  max-height: 125mm;
   object-fit: contain;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
 }
 
 figcaption {
-  font-size: 10pt;
+  font-size: 9.5pt;
   font-style: italic;
   color: #475569;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 /* Code Snippets */
@@ -234,12 +300,12 @@ figcaption {
   border: 1px solid #cbd5e1;
   border-left: 3.5px solid #0f172a;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 7px 11px;
   font-family: "Consolas", "DejaVu Sans Mono", "Courier New", monospace;
-  font-size: 8.5pt;
+  font-size: 9pt;
   line-height: 1.35;
   white-space: pre-wrap;
-  margin: 10px 0;
+  margin: 8px 0;
   color: #0f172a;
 }
 
@@ -247,9 +313,9 @@ figcaption {
 .note-box {
   background-color: #eff6ff;
   border-left: 4px solid #3b82f6;
-  padding: 8px 12px;
-  font-size: 10pt;
-  margin: 10px 0;
+  padding: 7px 11px;
+  font-size: 9.5pt;
+  margin: 8px 0;
   border-radius: 0 4px 4px 0;
 }
 

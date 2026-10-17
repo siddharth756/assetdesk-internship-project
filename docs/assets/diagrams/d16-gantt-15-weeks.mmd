@@ -1,21 +1,30 @@
-gantt
-    title 15-Week Internship Project Timeline & SOP Milestones
-    dateFormat YYYY-MM-DD
-    axisFormat W%W
+flowchart LR
+    subgraph P1 ["Phase 1: Inception (W1–W3)"]
+        direction TB
+        W1["W1–W2: Project Approval<br/>• SOP 4.1 Proposal Sign-off"]
+        W3["W3: Requirement Elicitation<br/>• Stakeholder Need Matrix"]
+        W1 --> W3
+    end
 
-    section Inception
-    W1-2 Proposal & Approval               :done, w1, 2026-06-01, 14d
-    W3 Planning & Requirement Analysis     :done, w3, after w1, 7d
+    subgraph P2 ["Phase 2: Architecture (W4–W7)"]
+        direction TB
+        W4["W4–W5: SRS & DFD Models<br/>• <b>Progress Report I</b>"]
+        W6["W6–W7: DB & UI Schemas<br/>• 3-Tier Technical Design"]
+        W4 --> W6
+    end
 
-    section Analysis & Design
-    W4-5 Analysis & Initial Development    :done, w4, after w3, 14d
-    W6-7 System Architecture & UI Design   :done, w6, after w4, 14d
-    W8 Mid-Term Review & Milestone Demo    :done, w8, after w6, 7d
+    subgraph P3 ["Phase 3: Development (W8–W12)"]
+        direction TB
+        W8["W8–W10: Core Modules<br/>• <b>Progress Reports II & III</b>"]
+        W11["W11–W12: Testing Suites<br/>• 272 Automated Unit/E2E Tests"]
+        W8 --> W11
+    end
 
-    section Core Implementation
-    W9-10 Backend & Frontend Integration   :done, w9, after w8, 14d
-    W11-12 System Testing & Draft Report   :done, w11, after w9, 14d
+    subgraph P4 ["Phase 4: Closure (W13–W15)"]
+        direction TB
+        W13["W13–W14: Report Drafting<br/>• <b>Progress Report IV</b>"]
+        W15["W15: Academic Evaluation<br/>• Final Defense & Sign-off"]
+        W13 --> W15
+    end
 
-    section Closure & Evaluation
-    W13-14 Final Documentation & Manuals   :done, w13, after w11, 14d
-    W15 Final Review & Academic Evaluation :done, w15, after w13, 7d
+    P1 ==> P2 ==> P3 ==> P4

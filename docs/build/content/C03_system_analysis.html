@@ -1,539 +1,355 @@
-<!-- C03 Page 1 of 6 -->
+<!-- C03 Page 1 of 5 -->
 <div class="page">
   <h1 class="chapter">Chapter 3: System Analysis</h1>
 
-  <h2 class="section">3.1 Existing System</h2>
-  <p style="text-align: justify; line-height: 1.5; margin-bottom: 8px;">
-    In many corporate, academic, and small-to-medium enterprise IT environments, the administration of physical assets, software entitlements, and technical helpdesk incidents is handled using disjointed, manual mechanisms. Physical equipment is tracked in decentralized desktop spreadsheets (e.g. Microsoft Excel or Google Sheets), software license keys are recorded on local text files or paper invoices, and support requests arrive haphazardly via email, instant messaging apps, or oral walk-ins.
-  </p>
-  <p style="text-align: justify; line-height: 1.5; margin-bottom: 10px;">
-    This conventional approach lacks automated synchronization, concurrency controls, and tamper-proof verification, resulting in severe operational vulnerabilities across the organization as detailed in Table 3.1:
+  <h2 class="section">3.1 Existing System & Operational Deficiencies</h2>
+  <p style="text-align: justify; line-height: 1.45; font-size: 10pt; margin-bottom: 8px;">
+    In typical small-to-medium enterprise and academic IT environments, computing equipment, software entitlements, and employee helpdesk requests are managed using disjointed desktop spreadsheets, paper handovers, and ad-hoc email chains. This approach lacks concurrency controls, automated alerts, and tamper-proof verification, creating severe operational vulnerabilities:
   </p>
 
   <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-bottom: 4px;">
     Table 3.1: Operational Deficiencies of the Existing Manual System
   </div>
-  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 2px 0 10px 0; border-collapse: collapse;">
+  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 4px 0 10px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
-        <th style="width: 32%; padding: 4px 6px;">Manual System Practice</th>
-        <th style="width: 68%; padding: 4px 6px;">Operational Deficiency & Institutional Risk</th>
+        <th style="width: 28%; padding: 4px 6px;">Manual System Practice</th>
+        <th style="width: 72%; padding: 4px 6px;">Operational Deficiency & Institutional Risk</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td style="font-weight: bold;">Unsynchronized Spreadsheets</td>
-        <td>Multiple administrators edit separate file copies, causing conflicting records, duplicate entries, and "ghost" inventory items.</td>
+        <td>Multiple administrators edit separate spreadsheet copies, causing conflicting records and duplicate entries.</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Untracked Handover Forms</td>
-        <td>Paper issue slips get misplaced, leaving the organization with no legal proof of custody when an employee departs.</td>
+        <td>Paper issue slips get misplaced, leaving the organization with no legal proof of custody when employees depart.</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Manual License Key Tracking</td>
-        <td>Keys are exposed in plain text; administrators miss renewal dates, causing unexpected service disruptions or compliance fines.</td>
+        <td>License keys exposed in plain text; missed renewal dates cause unexpected service disruption or compliance fines.</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Ad-Hoc Email Support Queues</td>
-        <td>Support requests lack priority classification and SLA tracking; critical hardware faults languish unassigned in personal inboxes.</td>
+        <td>Requests lack priority classification and SLA tracking; critical hardware faults languish unassigned in personal inboxes.</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Absence of Immutable Audit Trails</td>
         <td>Modifications, status alterations, and record deletions occur without historical logs, preventing accountability.</td>
       </tr>
-      <tr>
-        <td style="font-weight: bold;">Manual Status Reconciliations</td>
-        <td>Preparing compliance audit reports requires labor-intensive physical inventory checks, wasting valuable IT engineering hours.</td>
-      </tr>
     </tbody>
   </table>
 
-  <div style="font-size: 9pt; font-weight: bold; color: #0f172a; margin-top: 8px; margin-bottom: 4px;">
-    Existing System at Host Organization (Observations & Field Notes):
-  </div>
-  <div class="blank-box" style="height: 55mm; border: 1.5px dashed #94a3b8; border-radius: 4px; background: #fafafa; padding: 8px; box-sizing: border-box;">
-    <span style="font-size: 8.5pt; color: #94a3b8; text-transform: uppercase;">
-      Write observations regarding hardware inventory practices, license recording, and support ticket channels at the host company:
-    </span>
-  </div>
+  <h2 class="section" style="margin-top: 10px; margin-bottom: 6px;">3.2 Need for the New System</h2>
+  <p style="text-align: justify; line-height: 1.45; font-size: 10pt; margin-bottom: 6px;">
+    The development of AssetDesk was motivated by the imperative to establish an automated, secure, and auditable software infrastructure:
+  </p>
+  <ul style="font-size: 9.5pt; line-height: 1.45; margin-top: 4px; padding-left: 20px;">
+    <li><strong>Single Source of Truth:</strong> Eliminate data divergence through an indexed MongoDB database accessed via unified REST endpoints.</li>
+    <li><strong>Custody Accountability:</strong> Atomic concurrency guards ensure computing devices are definitively bound to a single employee.</li>
+    <li><strong>Automated License Compliance:</strong> Background cron daemons scan software renewal dates daily, proactively triggering visual alerts.</li>
+    <li><strong>Deterministic SLA Enforcement:</strong> Dynamic deadline timers enforce transparent ticket resolution across 4 defined status phases.</li>
+    <li><strong>Compliance Audit Journal:</strong> Immutable event logging creates cryptographic traceability for every system modification.</li>
+  </ul>
 </div>
 
-<!-- C03 Page 2 of 6 -->
+<!-- C03 Page 2 of 5 -->
 <div class="page">
-  <h2 class="section" style="margin-top: 0;">3.2 Need for New System</h2>
-  <p style="text-align: justify; line-height: 1.5; margin-bottom: 8px;">
-    To overcome the systemic liabilities of manual recordkeeping, an integrated software solution is mandatory. The core drivers compelling this development are:
-  </p>
-  <ol style="font-size: 9.5pt; line-height: 1.45; margin-top: 2px; margin-bottom: 12px; padding-left: 20px;">
-    <li><strong>Unified Single Source of Truth:</strong> Eliminate fragmented spreadsheets by establishing a centralized, relational database storing all hardware, software, and ticket entities.</li>
-    <li><strong>Definitive Custody Tracking:</strong> Bind every physical device directly to a verified employee profile with atomic assignment locks to prevent inventory leakage.</li>
-    <li><strong>Vendor Compliance & Expiry Prevention:</strong> Enforce strict seat quotas and deliver automated alerts 30 days prior to license expiration dates.</li>
-    <li><strong>Measurable Service Level Agreements (SLAs):</strong> Formalize support resolution with priority-driven resolution windows and transparent state tracking.</li>
-    <li><strong>Regulatory Accountability:</strong> Ensure every system action is permanently preserved in an append-only, tamper-proof security audit log.</li>
-  </ol>
-
-  <h2 class="section" style="margin-top: 10px;">3.3 Software Requirements Specification (SRS)</h2>
-  <h3 class="sub" style="margin-top: 4px; margin-bottom: 4px;">3.3.1 Purpose, Scope & Definitions</h3>
-  <p style="text-align: justify; line-height: 1.45; font-size: 9pt; margin-bottom: 6px;">
-    This specification documents the functional and non-functional requirements for the <em>AssetDesk</em> system in conformance with the IEEE-830 standard. Key terminology used throughout this document is defined in Table 3.2:
+  <h2 class="section" style="margin-top: 0; margin-bottom: 4px;">3.3 Software Requirements Specification (SRS)</h2>
+  <p style="text-align: justify; line-height: 1.4; font-size: 9.5pt; margin-bottom: 6px;">
+    Formulated in accordance with the IEEE-830 standard, system functional and quality requirements define precise behavioral contracts verified by automated integration test suites.
   </p>
 
-  <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-bottom: 2px;">
-    Table 3.2: Engineering Abbreviations & Technical Definitions
+  <div style="font-weight: bold; font-size: 9pt; color: #1e293b; margin-bottom: 3px;">
+    Table 3.2: User Roles & Access Authorization Matrix
   </div>
-  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0 10px 0; border-collapse: collapse;">
+  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0 8px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
-        <th style="width: 15%; padding: 3px 6px;">Term</th>
-        <th style="width: 35%; padding: 3px 6px;">Full Form</th>
-        <th style="width: 50%; padding: 3px 6px;">Operational Definition</th>
+        <th style="width: 20%; padding: 3px 6px;">User Role</th>
+        <th style="width: 25%; padding: 3px 6px;">System Persona</th>
+        <th style="width: 55%; padding: 3px 6px;">Primary Permissions & Operational Boundary</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style="font-weight: bold;">SRS</td>
-        <td>Software Requirements Specification</td>
-        <td>Formal IEEE-830 specification document defining complete system behavior.</td>
+        <td style="font-weight: bold;">ADMIN</td>
+        <td>System Administrator</td>
+        <td>Full governance: user creation, asset CRUD, license key reveal, system audit inspection, CSV exports.</td>
       </tr>
       <tr>
-        <td style="font-weight: bold;">RBAC</td>
-        <td>Role-Based Access Control</td>
-        <td>Authorization paradigm restricting resource access based on assigned user roles.</td>
+        <td style="font-weight: bold;">IT_SUPPORT</td>
+        <td>Helpdesk Engineer</td>
+        <td>Operational desk: asset status changes, incident triage, resolution notes, and SLA tracking.</td>
       </tr>
       <tr>
-        <td style="font-weight: bold;">JWT</td>
-        <td>JSON Web Token</td>
-        <td>Stateless, cryptographically signed token used for secure API authentication.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">CRUD</td>
-        <td>Create, Read, Update, Delete</td>
-        <td>Four foundational persistent storage operations executed across database entities.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">REST</td>
-        <td>Representational State Transfer</td>
-        <td>Architectural style for network-based web services communicating over HTTP.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">API</td>
-        <td>Application Programming Interface</td>
-        <td>Standardized interface exposing backend business logic to client consumers.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">SLA</td>
-        <td>Service Level Agreement</td>
-        <td>Committed time threshold within which a reported issue must be resolved.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">CSV</td>
-        <td>Comma-Separated Values</td>
-        <td>Plain-text tabular data format widely used for accounting and spreadsheet interchange.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">SPA</td>
-        <td>Single Page Application</td>
-        <td>Web app that dynamically rewrites the current web page without full browser reloads.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">SMTP</td>
-        <td>Simple Mail Transfer Protocol</td>
-        <td>Standard protocol used by background workers to dispatch alert notifications.</td>
+        <td style="font-weight: bold;">EMPLOYEE</td>
+        <td>Standard End-User</td>
+        <td>Self-service: view assigned hardware, submit support tickets, participate in comment threads.</td>
       </tr>
     </tbody>
   </table>
 
-  <h3 class="sub" style="margin-top: 6px; margin-bottom: 4px;">3.3.2 Overall System Description & User Classes</h3>
-  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0; border-collapse: collapse;">
+  <h3 class="sub" style="margin-top: 6px; margin-bottom: 4px;">3.3.1 Functional Requirements (Part 1: FR-01 to FR-10)</h3>
+  <table class="grid" style="width: 100%; font-size: 7.8pt; margin: 2px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
-        <th style="width: 20%; padding: 3px 6px;">User Persona</th>
-        <th style="width: 30%; padding: 3px 6px;">Assigned Role Key</th>
-        <th style="width: 50%; padding: 3px 6px;">System Responsibilities & Entitlements</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-weight: bold;">System Administrator</td>
-        <td><code>ADMIN</code></td>
-        <td>Full governance: user creation, asset CRUD, license management, audit review, CSV exports.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Support Technician</td>
-        <td><code>IT_SUPPORT</code></td>
-        <td>Operational desk: asset assignments, status updates, ticket triage, comments, and resolution.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Standard Employee</td>
-        <td><code>EMPLOYEE</code></td>
-        <td>Self-service: view assigned hardware/licenses, submit support tickets, track ticket status.</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- C03 Page 3 of 6 -->
-<div class="page">
-  <h3 class="sub" style="margin-top: 0; margin-bottom: 6px;">3.3.3 Functional Requirements Specification (Part 1: FR-01 to FR-10)</h3>
-  <p style="text-align: justify; line-height: 1.45; font-size: 9pt; margin-bottom: 8px;">
-    The system functions are formally partitioned into discrete requirements. Each functional requirement is mapped to its parent module, priority level, and the verified automated integration/system test ID confirming implementation:
-  </p>
-
-  <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-bottom: 4px;">
-    Table 3.3: Functional Requirements Matrix (FR-01 to FR-10)
-  </div>
-  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 2px 0; border-collapse: collapse;">
-    <thead>
-      <tr style="background: #f1f5f9;">
-        <th style="width: 9%; padding: 4px 6px;">Req ID</th>
-        <th style="width: 44%; padding: 4px 6px;">Functional Requirement Description</th>
-        <th style="width: 12%; padding: 4px 6px; text-align: center;">Module</th>
-        <th style="width: 12%; padding: 4px 6px; text-align: center;">Priority</th>
-        <th style="width: 23%; padding: 4px 6px;">Verified By Test ID</th>
+        <th style="width: 10%; padding: 3px 5px;">Req ID</th>
+        <th style="width: 48%; padding: 3px 5px;">Functional Requirement Description</th>
+        <th style="width: 12%; padding: 3px 5px; text-align: center;">Module</th>
+        <th style="width: 12%; padding: 3px 5px; text-align: center;">Priority</th>
+        <th style="width: 18%; padding: 3px 5px;">Test Trace ID</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-01</td>
-        <td><strong>User Login:</strong> Authenticate users via email and bcrypt-hashed password; issue 24-hour cryptographically signed JWT.</td>
+        <td><strong>User Login:</strong> Authenticate users via email & bcrypt hash; issue signed JWT token.</td>
         <td style="text-align: center;">M1</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M1-01</code>, <code>ST-01</code></td>
+        <td><code>IT-M1-01</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-02</td>
-        <td><strong>Role-Based Access:</strong> Restrict endpoint execution strictly according to user role (ADMIN, IT_SUPPORT, EMPLOYEE).</td>
+        <td><strong>Role-Based Access:</strong> Restrict endpoints strictly by role (Admin, Support, Employee).</td>
         <td style="text-align: center;">M1</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M1-12</code>, <code>SEC-02</code></td>
+        <td><code>IT-M1-12</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-03</td>
-        <td><strong>User Management:</strong> Enable ADMIN to register new staff members, update role assignments, and deactivate user accounts.</td>
+        <td><strong>User Management:</strong> Enable Admin to register staff, modify roles, and toggle active status.</td>
         <td style="text-align: center;">M1</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M1-18</code>, <code>ST-13</code></td>
+        <td><code>IT-M1-18</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-04</td>
-        <td><strong>Password Modification:</strong> Allow authenticated users to change passwords upon verifying current password hash.</td>
+        <td><strong>Password Change:</strong> Authenticated users change passwords upon verifying current hash.</td>
         <td style="text-align: center;">M1</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M1-25</code>, <code>SEC-05</code></td>
+        <td><code>IT-M1-25</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-05</td>
-        <td><strong>Asset Registration:</strong> Register physical assets with unique asset tag, serial, model, category, purchase date, and specs.</td>
+        <td><strong>Asset Registration:</strong> Register physical assets with tag, serial, model, and category.</td>
         <td style="text-align: center;">M2</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M2-01</code>, <code>ST-04</code></td>
+        <td><code>IT-M2-01</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-06</td>
-        <td><strong>Asset Record Update:</strong> Allow authorized staff to update hardware details, specifications, warranty, and location.</td>
+        <td><strong>Asset Update:</strong> Authorized staff update hardware specs, warranty, and physical location.</td>
         <td style="text-align: center;">M2</td>
         <td style="text-align: center; color: #1e3a8a; font-weight: bold;">Should</td>
-        <td><code>IT-M2-10</code>, <code>ST-05</code></td>
+        <td><code>IT-M2-10</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-07</td>
-        <td><strong>Asset Assignment:</strong> Concurrency-safe atomic assignment and unassignment of hardware items to employees.</td>
+        <td><strong>Asset Assignment:</strong> Concurrency-safe atomic allocation of hardware to employees.</td>
         <td style="text-align: center;">M2</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M2-16</code>, <code>ST-06</code></td>
+        <td><code>IT-M2-16</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-08</td>
-        <td><strong>Asset Lifecycle Transitions:</strong> Enforce valid status transitions between IN_USE, AVAILABLE, IN_REPAIR, and RETIRED.</td>
+        <td><strong>Lifecycle Transitions:</strong> Enforce states: AVAILABLE, ASSIGNED, MAINTENANCE, RETIRED.</td>
         <td style="text-align: center;">M2</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M2-24</code>, <code>ST-07</code></td>
+        <td><code>IT-M2-24</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-09</td>
-        <td><strong>Asset Search & Filters:</strong> Enable multi-criteria filtering by category, status, assignment state, and search terms.</td>
+        <td><strong>Asset Audit Filter:</strong> Filter inventory by department, status, and assigned custodian.</td>
         <td style="text-align: center;">M2</td>
         <td style="text-align: center; color: #1e3a8a; font-weight: bold;">Should</td>
-        <td><code>IT-M2-31</code>, <code>ST-03</code></td>
+        <td><code>IT-M2-31</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-10</td>
-        <td><strong>Software License Management:</strong> Catalog enterprise software with purchased seats, vendor, and license keys.</td>
+        <td><strong>License Tracking:</strong> Register software licenses with seat quotas, vendor, and expiry date.</td>
         <td style="text-align: center;">M3</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M3-01</code>, <code>ST-08</code></td>
+        <td><code>IT-M3-01</code></td>
       </tr>
     </tbody>
   </table>
-
-  <div class="note-box" style="margin-top: 10px;">
-    <strong>Traceability Guarantee:</strong> Every functional requirement is bound to executable integration test suites, guaranteeing zero unimplemented specifications in the codebase.
-  </div>
 </div>
 
-<!-- C03 Page 4 of 6 -->
+<!-- C03 Page 3 of 5 -->
 <div class="page">
-  <h3 class="sub" style="margin-top: 0; margin-bottom: 6px;">3.3.3 Functional Requirements Specification (Part 2: FR-11 to FR-20)</h3>
-  <p style="text-align: justify; line-height: 1.45; font-size: 9pt; margin-bottom: 8px;">
-    Continued specification matrix detailing software seat quotas, support ticket lifecycle, immutable logging, and administrative intelligence:
-  </p>
-
-  <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-bottom: 4px;">
-    Table 3.4: Functional Requirements Matrix (FR-11 to FR-20)
-  </div>
-  <table class="grid" style="width: 100%; font-size: 8.5pt; margin: 2px 0; border-collapse: collapse;">
+  <h3 class="sub" style="margin-top: 0; margin-bottom: 4px;">3.3.2 Functional Requirements (Part 2: FR-11 to FR-20)</h3>
+  <table class="grid" style="width: 100%; font-size: 7.8pt; margin: 2px 0 8px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
-        <th style="width: 9%; padding: 4px 6px;">Req ID</th>
-        <th style="width: 44%; padding: 4px 6px;">Functional Requirement Description</th>
-        <th style="width: 12%; padding: 4px 6px; text-align: center;">Module</th>
-        <th style="width: 12%; padding: 4px 6px; text-align: center;">Priority</th>
-        <th style="width: 23%; padding: 4px 6px;">Verified By Test ID</th>
+        <th style="width: 10%; padding: 3px 5px;">Req ID</th>
+        <th style="width: 48%; padding: 3px 5px;">Functional Requirement Description</th>
+        <th style="width: 12%; padding: 3px 5px; text-align: center;">Module</th>
+        <th style="width: 12%; padding: 3px 5px; text-align: center;">Priority</th>
+        <th style="width: 18%; padding: 3px 5px;">Test Trace ID</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-11</td>
-        <td><strong>Seat Allocation & Deallocation:</strong> Allocate licenses to users while blocking allocations when purchased seats are exhausted.</td>
+        <td><strong>Seat Allocation:</strong> Allocate license seats preventing over-allocation past total quota.</td>
         <td style="text-align: center;">M3</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M3-14</code>, <code>ST-09</code></td>
+        <td><code>IT-M3-05</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-12</td>
-        <td><strong>License Expiry Warnings:</strong> Automatically flag licenses nearing expiration (&le;30 days) via scheduled node-cron service.</td>
+        <td><strong>License Expiry Alerts:</strong> Proactive alerts for software expiring within 30 days.</td>
         <td style="text-align: center;">M3</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M3-26</code>, <code>UT-M3-07</code></td>
+        <td><code>IT-M3-14</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-13</td>
-        <td><strong>Ticket Submission:</strong> Allow employees to create support tickets with title, description, category, and priority level.</td>
+        <td><strong>Ticket Creation:</strong> Employees log support incidents with title, category, and priority.</td>
         <td style="text-align: center;">M4</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M4-01</code>, <code>ST-11</code></td>
+        <td><code>IT-M4-02</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-14</td>
-        <td><strong>Ticket Assignment:</strong> Assign unassigned support tickets to designated IT support technicians with audit logging.</td>
+        <td><strong>SLA Deadline Computation:</strong> Dynamic resolution due date based on ticket priority.</td>
         <td style="text-align: center;">M4</td>
         <td style="text-align: center; color: #1e3a8a; font-weight: bold;">Should</td>
-        <td><code>IT-M4-15</code>, <code>ST-12</code></td>
+        <td><code>IT-M4-15</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-15</td>
-        <td><strong>Ticket State Machine:</strong> Enforce strict linear status transitions: OPEN &rarr; IN_PROGRESS &rarr; RESOLVED &rarr; CLOSED.</td>
+        <td><strong>Ticket State Machine:</strong> Linear transitions: OPEN &rarr; IN_PROGRESS &rarr; RESOLVED &rarr; CLOSED.</td>
         <td style="text-align: center;">M4</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M4-22</code>, <code>ST-10</code></td>
+        <td><code>IT-M4-22</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-16</td>
-        <td><strong>Ticket Communication:</strong> Enable threaded conversation comments between ticket creator and assigned support engineer.</td>
+        <td><strong>Threaded Comments:</strong> Discussion thread between requester and support technician.</td>
         <td style="text-align: center;">M4</td>
         <td style="text-align: center; color: #1e3a8a; font-weight: bold;">Should</td>
-        <td><code>IT-M4-33</code>, <code>UT-M4-09</code></td>
+        <td><code>IT-M4-33</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-17</td>
-        <td><strong>Security Audit Logging:</strong> Record immutable event logs containing timestamp, action, actor ID, target entity, and IP address.</td>
+        <td><strong>Audit Logging:</strong> Immutable log of timestamp, action, user ID, target entity, and IP.</td>
         <td style="text-align: center;">M5</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M5-01</code>, <code>SEC-04</code></td>
+        <td><code>IT-M5-01</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-18</td>
-        <td><strong>Dashboard KPI Summaries:</strong> Aggregate real-time statistics (total assets, active tickets, license seats, expiring alerts).</td>
+        <td><strong>Dashboard KPIs:</strong> Real-time aggregates (total assets, active tickets, license seats).</td>
         <td style="text-align: center;">M5</td>
         <td style="text-align: center; color: #1e3a8a; font-weight: bold;">Should</td>
-        <td><code>IT-M5-12</code>, <code>ST-02</code></td>
+        <td><code>IT-M5-12</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-19</td>
-        <td><strong>CSV Report Generation:</strong> Export compliant CSV files for assets, licenses, tickets, and audit trails with custom filters.</td>
+        <td><strong>CSV Report Export:</strong> Export compliant CSV files for assets, licenses, tickets, and audits.</td>
         <td style="text-align: center;">M5</td>
         <td style="text-align: center; color: #1e3a8a; font-weight: bold;">Should</td>
-        <td><code>IT-M5-22</code>, <code>ST-15</code></td>
+        <td><code>IT-M5-22</code></td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">FR-20</td>
-        <td><strong>License Key Masking:</strong> Mask sensitive software license keys (<code>XXXX-****-****-XXXX</code>) for standard users.</td>
+        <td><strong>License Key Masking:</strong> Sensitive software keys masked (<code>XXXX-****-****-XXXX</code>) in UI.</td>
         <td style="text-align: center;">M3</td>
         <td style="text-align: center; color: #b91c1c; font-weight: bold;">Must</td>
-        <td><code>IT-M3-08</code>, <code>SEC-09</code></td>
+        <td><code>IT-M3-08</code></td>
       </tr>
     </tbody>
   </table>
 
-  <div class="note-box" style="margin-top: 10px;">
-    <strong>Verification Integrity:</strong> Functional correctness for all 20 requirements is backed by 272 automated test cases executed across isolated memory databases.
-  </div>
-</div>
-
-<!-- C03 Page 5 of 6 -->
-<div class="page">
-  <h3 class="sub" style="margin-top: 0; margin-bottom: 4px;">3.3.4 Non-Functional Requirements (NFR)</h3>
-  <p style="text-align: justify; line-height: 1.45; font-size: 9pt; margin-bottom: 6px;">
-    System quality attributes were measured quantitatively against verified benchmark logs and automated testing results:
-  </p>
-
-  <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-bottom: 3px;">
-    Table 3.5: Non-Functional Requirements & Verified Engineering Metrics
-  </div>
-  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0 10px 0; border-collapse: collapse;">
+  <h3 class="sub" style="margin-top: 6px; margin-bottom: 4px;">3.3.3 Non-Functional Requirements & Engineering Targets</h3>
+  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
         <th style="width: 18%; padding: 3px 6px;">Quality Attribute</th>
         <th style="width: 47%; padding: 3px 6px;">Measurable Engineering Target</th>
-        <th style="width: 35%; padding: 3px 6px;">Real Measured Verification Result</th>
+        <th style="width: 35%; padding: 3px 6px;">Real Verification Result</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td style="font-weight: bold;">Security</td>
-        <td>Encrypted passwords (bcrypt 10 rounds), signed JWT tokens, role guards, Helmet HTTP security headers, injection defense.</td>
-        <td>12/12 dedicated security tests passed (<code>SEC-01..12</code>). XSS sanitization & NoSQL injection verified.</td>
+        <td>Encrypted passwords (bcrypt 10 rounds), signed JWT tokens, role guards, Helmet HTTP security headers.</td>
+        <td>12/12 dedicated security tests passed (<code>SEC-01..12</code>). Injection defense verified.</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Performance</td>
         <td>Query endpoint p95 latency under 100ms; login response time under 250ms for 50 concurrent requests.</td>
-        <td>Measured: <code>POST /auth/login</code> avg 75.82ms; <code>GET /assets</code> avg 7.49ms; <code>GET /tickets</code> avg 7.96ms (50 samples).</td>
+        <td>Measured: <code>POST /auth/login</code> avg 75.82ms; <code>GET /assets</code> avg 7.49ms.</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Usability</td>
-        <td>Responsive layout on 1366&times;768 and 1920&times;1080 screens; clear validation errors; actionable empty/loading states.</td>
+        <td>Responsive layout on 1366&times;768 and 1920&times;1080 screens; clear form validation errors.</td>
         <td>16/16 Playwright system journeys (<code>ST-01..16</code>) validated with automated UI screenshots.</td>
       </tr>
       <tr>
         <td style="font-weight: bold;">Reliability</td>
-        <td>Zero server crashes during malformed input payloads; robust Express exception handler returns uniform JSON error payloads.</td>
-        <td>100% test pass rate (272/272 tests passing) with 87.16% statement coverage and 0 unhandled rejections.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Maintainability</td>
-        <td>Modular directory architecture, strict separation of concerns (MVC), unified constants, ESLint zero errors.</td>
-        <td>19,383 lines of clean, self-documenting JavaScript adhering to Prettier and ESLint standards.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold;">Portability</td>
-        <td>Run on Linux/macOS/Windows servers via Node.js runtime; client compatible with all modern evergreen browsers.</td>
-        <td>Verified on Node.js 20/24 LTS across Chromium, Firefox, and WebKit rendering engines.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3 class="sub" style="margin-top: 6px; margin-bottom: 4px;">3.3.5 Use-Case Specification Summary</h3>
-  <div style="font-weight: bold; font-size: 9.5pt; color: #1e293b; margin-bottom: 3px;">
-    Table 3.6: System Use-Case Summary Matrix
-  </div>
-  <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0; border-collapse: collapse;">
-    <thead>
-      <tr style="background: #f1f5f9;">
-        <th style="width: 10%; padding: 3px 6px;">UC ID</th>
-        <th style="width: 25%; padding: 3px 6px;">Use Case Title</th>
-        <th style="width: 18%; padding: 3px 6px;">Primary Actor</th>
-        <th style="width: 47%; padding: 3px 6px;">Primary Operational Flow</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-01</td>
-        <td>System Authentication</td>
-        <td>All Users</td>
-        <td>Submit credentials &rarr; Verify bcrypt hash &rarr; Issue JWT &rarr; Load role routes.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-02</td>
-        <td>Hardware Provisioning</td>
-        <td>ADMIN, IT_SUPPORT</td>
-        <td>Input device specs & serial &rarr; Validate uniqueness &rarr; Store asset record.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-03</td>
-        <td>Asset Custody Handover</td>
-        <td>ADMIN, IT_SUPPORT</td>
-        <td>Select asset & employee &rarr; Validate AVAILABLE state &rarr; Lock & assign &rarr; Audit log.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-04</td>
-        <td>License Seat Allocation</td>
-        <td>ADMIN</td>
-        <td>Select license & staff member &rarr; Check seat quota &rarr; Allocate & update remaining.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-05</td>
-        <td>Incident Ticket Filing</td>
-        <td>EMPLOYEE</td>
-        <td>Enter issue summary, priority & category &rarr; Auto-set OPEN state &rarr; Set SLA deadline.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-06</td>
-        <td>Ticket Triage & Resolve</td>
-        <td>IT_SUPPORT</td>
-        <td>Claim ticket &rarr; Set IN_PROGRESS &rarr; Add comments &rarr; Mark RESOLVED with resolution note.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-07</td>
-        <td>Audit Trail Inspection</td>
-        <td>ADMIN</td>
-        <td>Query audit collection &rarr; Apply user/module filters &rarr; Inspect mutation logs.</td>
-      </tr>
-      <tr>
-        <td style="font-weight: bold; text-align: center;">UC-08</td>
-        <td>CSV Report Extraction</td>
-        <td>ADMIN, IT_SUPPORT</td>
-        <td>Select report dataset &rarr; Stream database records &rarr; Format CSV &rarr; Trigger browser download.</td>
+        <td>Zero server crashes during malformed input payloads; uniform JSON error payloads.</td>
+        <td>100% test pass rate (272/272 tests passing) with 87.16% statement coverage.</td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- C03 Page 6 of 6 -->
+<!-- C03 Page 4 of 5 -->
 <div class="page">
-  <h2 class="section" style="margin-top: 0; margin-bottom: 4px;">3.4 Analysis Diagrams & Data Store Architecture</h2>
-  <p style="text-align: justify; line-height: 1.4; font-size: 8.5pt; margin-bottom: 6px;">
-    The operational dynamics of AssetDesk are modeled using Data Flow Diagrams (DFD) and functional decomposition trees to depict information boundaries and data flows:
+  <h2 class="section" style="margin-top: 0; margin-bottom: 6px;">3.4 Analysis Diagrams (Part I)</h2>
+  <p style="text-align: justify; line-height: 1.4; font-size: 9.5pt; margin-bottom: 10px;">
+    System interactions and macro functional processes are modeled below using high-resolution Data Flow Diagrams (DFD) depicting clear information boundaries:
   </p>
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 6px;">
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-      <figure data-caption="System Context Diagram (DFD Level 0)" style="margin: 0;">
-        <img src="docs/assets/diagrams/d02-context-dfd0.png" style="max-height: 28mm; max-width: 72mm; object-fit: contain;" alt="DFD Level 0" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 3.1: System Context Diagram (DFD Level 0)</figcaption>
-      </figure>
-      <div style="font-size: 7.5pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.3;">
-        Illustrates the macro system boundary: Admin, IT Support, and Employee interact through secure API boundaries, producing reports, alerts, and custody logs.
-      </div>
+  <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; text-align: center; background: #fafafa; margin-bottom: 14px;">
+    <figure data-caption="System Context Diagram (DFD Level 0)" style="margin: 0;">
+      <img src="docs/assets/diagrams/d02-context-dfd0.png" style="max-height: 85mm; max-width: 172mm; object-fit: contain;" alt="DFD Level 0" />
+      <figcaption style="font-size: 10pt; font-weight: bold; margin-top: 4px;">Figure 3.1: System Context Diagram (DFD Level 0)</figcaption>
+    </figure>
+    <div style="font-size: 8.5pt; color: #475569; text-align: justify; margin-top: 4px; line-height: 1.3;">
+      Illustrates the macro system boundary: Administrator, IT Support Staff, and Employees interact through secure API boundaries, producing reports, alerts, and custody audit logs.
     </div>
+  </div>
 
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-      <figure data-caption="DFD Level 1: System Process Decomposition" style="margin: 0;">
-        <img src="docs/assets/diagrams/d03-dfd-level1.png" style="max-height: 28mm; max-width: 72mm; object-fit: contain;" alt="DFD Level 1" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 3.2: DFD Level 1: Process Decomposition</figcaption>
-      </figure>
-      <div style="font-size: 7.5pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.3;">
-        Deconstructs core processes (Auth, Asset Lifecycle, License Quota, Ticket Management, Audit Generation) and their bidirectional interactions with data stores.
-      </div>
+  <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; text-align: center; background: #fafafa;">
+    <figure data-caption="DFD Level 1: System Process Decomposition" style="margin: 0;">
+      <img src="docs/assets/diagrams/d03-dfd-level1.png" style="max-height: 85mm; max-width: 172mm; object-fit: contain;" alt="DFD Level 1" />
+      <figcaption style="font-size: 10pt; font-weight: bold; margin-top: 4px;">Figure 3.2: DFD Level 1: System Process Decomposition</figcaption>
+    </figure>
+    <div style="font-size: 8.5pt; color: #475569; text-align: justify; margin-top: 4px; line-height: 1.3;">
+      Deconstructs the 5 core processes (Authentication, Asset Lifecycle, License Quota, Incident Ticket Management, and Audit Generation) with bidirectional data store flows.
     </div>
+  </div>
+</div>
 
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-      <figure data-caption="DFD Level 2: Support Ticket Lifecycle Subsystem" style="margin: 0;">
-        <img src="docs/assets/diagrams/d04-dfd-level2-ticket.png" style="max-height: 28mm; max-width: 72mm; object-fit: contain;" alt="DFD Level 2 Tickets" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 3.3: DFD Level 2: Support Ticket Lifecycle</figcaption>
-      </figure>
-      <div style="font-size: 7.5pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.3;">
-        Details the ticket subsystem: ticket submission, technician assignment, threaded conversation comments, and SLA-governed status resolution.
-      </div>
+<!-- C03 Page 5 of 5 -->
+<div class="page">
+  <h2 class="section" style="margin-top: 0; margin-bottom: 6px;">3.4 Analysis Diagrams (Part II) & Data Architecture</h2>
+  <p style="text-align: justify; line-height: 1.4; font-size: 9.5pt; margin-bottom: 8px;">
+    Subsystem workflow for incident support tickets and the overall modular breakdown of the application architecture:
+  </p>
+
+  <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa; margin-bottom: 8px;">
+    <figure data-caption="DFD Level 2: Support Ticket Lifecycle Subsystem" style="margin: 0;">
+      <img src="docs/assets/diagrams/d04-dfd-level2-ticket.png" style="max-height: 65mm; max-width: 172mm; object-fit: contain;" alt="DFD Level 2 Tickets" />
+      <figcaption style="font-size: 9.5pt; font-weight: bold; margin-top: 3px;">Figure 3.3: DFD Level 2: Support Ticket Lifecycle Subsystem</figcaption>
+    </figure>
+    <div style="font-size: 8pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+      Details the ticket subsystem: ticket submission, technician triage, threaded communication, and SLA-governed status resolution.
     </div>
+  </div>
 
-    <div style="border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px; text-align: center; background: #fafafa;">
-      <figure data-caption="Functional Decomposition Tree" style="margin: 0;">
-        <img src="docs/assets/diagrams/d05-functional-decomposition.png" style="max-height: 28mm; max-width: 72mm; object-fit: contain;" alt="Functional Decomposition" />
-        <figcaption style="font-size: 8pt; margin-top: 2px;">Figure 3.4: Functional Decomposition Tree</figcaption>
-      </figure>
-      <div style="font-size: 7.5pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.3;">
-        Hierarchical breakdown depicting the 5 foundational engineering modules branching into 36 distinct REST API service controllers and UI routes.
-      </div>
+  <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px; text-align: center; background: #fafafa; margin-bottom: 8px;">
+    <figure data-caption="Functional Decomposition Tree" style="margin: 0;">
+      <img src="docs/assets/diagrams/d05-functional-decomposition.png" style="max-height: 55mm; max-width: 172mm; object-fit: contain;" alt="Functional Decomposition" />
+      <figcaption style="font-size: 9.5pt; font-weight: bold; margin-top: 3px;">Figure 3.4: Functional Decomposition Tree</figcaption>
+    </figure>
+    <div style="font-size: 8pt; color: #475569; text-align: justify; margin-top: 2px; line-height: 1.25;">
+      Hierarchical breakdown depicting the 5 foundational engineering modules branching into 36 distinct REST API service controllers.
     </div>
   </div>
 
@@ -543,16 +359,16 @@
   <table class="grid" style="width: 100%; font-size: 8pt; margin: 2px 0; border-collapse: collapse;">
     <thead>
       <tr style="background: #f1f5f9;">
-        <th style="width: 12%; padding: 3px 6px;">Data Store</th>
-        <th style="width: 25%; padding: 3px 6px;">Database Collection</th>
-        <th style="width: 63%; padding: 3px 6px;">Storage Schema & Primary Entities Maintained</th>
+        <th style="width: 12%; padding: 3px 5px;">Data Store</th>
+        <th style="width: 24%; padding: 3px 5px;">Database Collection</th>
+        <th style="width: 64%; padding: 3px 5px;">Storage Schema & Primary Entities Maintained</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td style="font-weight: bold; text-align: center;">D1</td>
         <td><code>users</code></td>
-        <td>User credentials, hashed password, role (ADMIN/IT_SUPPORT/EMPLOYEE), department, active state.</td>
+        <td>User credentials, hashed password, role (ADMIN/IT_SUPPORT/EMPLOYEE), department.</td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">D2</td>
@@ -567,12 +383,12 @@
       <tr>
         <td style="font-weight: bold; text-align: center;">D4</td>
         <td><code>tickets</code></td>
-        <td>Support incidents: title, description, priority, status (4-state), assignedTo, comments, dueAt.</td>
+        <td>Support incidents: title, description, priority, status (4-state), assignedTo, dueAt.</td>
       </tr>
       <tr>
         <td style="font-weight: bold; text-align: center;">D5</td>
         <td><code>auditlogs</code></td>
-        <td>Append-only event journal: timestamp, action, entity, entityId, actorId, ipAddress, details.</td>
+        <td>Append-only event journal: timestamp, action, entity, entityId, actorId, ipAddress.</td>
       </tr>
     </tbody>
   </table>

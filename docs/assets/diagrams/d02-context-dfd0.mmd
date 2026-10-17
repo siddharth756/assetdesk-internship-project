@@ -1,22 +1,22 @@
 flowchart LR
-    Admin["System Administrator"]
-    Support["IT Support Staff"]
-    Employee["Employee / Requester"]
-    SMTP["External SMTP Mailer"]
+    subgraph Users ["User Roles"]
+        Admin["System Administrator"]
+        Support["IT Support Staff"]
+        Employee["Employee / Requester"]
+    end
 
-    System(["0.0<br/>IT Asset & Support Desk<br/>Management System<br/>(AssetDesk)"])
+    System(["0.0<br/><b>IT Asset & Support Desk<br/>Management System (AssetDesk)</b>"])
+
+    External["External SMTP Mailer"]
 
     %% Admin flows
-    Admin -- "Credentials, User Accounts,<br/>Hardware Catalog, Licenses,<br/>System Policies" --> System
-    System -- "Inventory Metrics, System Audit Trail,<br/>Compliance CSV Reports" --> Admin
+    Admin <-->|"User Accounts, Hardware Catalog,<br/>Licenses, Audit Logs & CSV Reports"| System
 
-    %% IT Support flows
-    Support -- "Triage Updates, Assignees,<br/>Resolution Notes, Hardware Status" --> System
-    System -- "Open Tickets Queue, SLA Timers,<br/>Hardware Assignment Details" --> Support
+    %% Support flows
+    Support <-->|"Triage Updates, Hardware Status,<br/>Open Tickets & SLA Timers"| System
 
     %% Employee flows
-    Employee -- "Login, Ticket Submissions,<br/>Comments, Reopen Requests" --> System
-    System -- "Assigned Assets, Ticket Progress,<br/>Profile & Password Status" --> Employee
+    Employee <-->|"Incident Submissions, Comments,<br/>Assigned Assets & Status Updates"| System
 
-    %% SMTP flows
-    System -- "Dispatch Alerts, Overdue Warnings,<br/>Password Reset Links" --> SMTP
+    %% Mailer flows
+    System -->|"Overdue Ticket Warnings,<br/>Assignment & Reset Notifications"| External

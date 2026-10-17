@@ -1,33 +1,26 @@
-graph TB
-    subgraph ClientHosting ["Frontend Production Hosting (Vercel Edge Network)"]
-        Browser["User Workstation Browser<br/>(Chrome, Firefox, Safari, Edge)"]
-        VercelCDN["Vercel Global Edge CDN<br/>(HTTPS / HTTP/2 SSL)"]
-        SPA["Vite Static Production Assets<br/>(HTML5, Bundled JS, CSS tokens)"]
-        
-        Browser -- "HTTPS :443" --> VercelCDN
-        VercelCDN --> SPA
+flowchart TD
+    subgraph Host1 ["1. Client & Global Edge Network Tier (Vercel Global CDN)"]
+        direction LR
+        Browser["Workstation Web Browser<br/>(Chromium / Firefox / Safari)"]
+        CDN["Vercel Global Edge CDN<br/>(HTTPS / HTTP/2 Edge Caching)"]
+        SPA["Vite Static Production Assets<br/>(HTML5 / ES-Modules / CSS)"]
+        Browser -- "HTTPS :443" --> CDN --> SPA
     end
 
-    subgraph BackendHosting ["Backend API Cloud Server (Render / Linux Container)"]
-        RenderEnv["Render Web Service (Node.js 20 LTS Runtime)"]
-        ExpressApp["Express.js REST API Server (:5000)<br/>(CORS, Helmet, RateLimiter, JWT)"]
-        Nodemailer["Nodemailer Mail Dispatcher"]
-
-        RenderEnv --> ExpressApp
-        ExpressApp --> Nodemailer
+    subgraph Host2 ["2. Application Container Tier (Render Cloud Linux Container)"]
+        direction LR
+        Proxy["NGINX Reverse Proxy<br/>(TLS & Rate Limiting)"]
+        NodeCluster["Node.js PM2 Process Cluster<br/>(Express 4 REST Server :5000)"]
+        Mailer["Nodemailer SMTP Dispatcher<br/>(TLS Port 587)"]
+        Proxy --> NodeCluster --> Mailer
     end
 
-    subgraph DatabaseCloud ["Database Cloud (MongoDB Atlas Tier M0/M10)"]
-        AtlasCluster[("MongoDB Atlas Replica Set<br/>(TLS Encrypted, VPC Peered)")]
-        Collections[("Collections: users, assets,<br/>licenses, tickets, audit_logs")]
-
-        AtlasCluster --> Collections
+    subgraph Host3 ["3. Cloud Database Tier (MongoDB Atlas Cloud Cluster)"]
+        direction LR
+        Atlas[("MongoDB Atlas Primary Replica<br/>(TLS Encrypted, Automated Backups)")]
+        Data[("Persistent BSON Collections:<br/>users, assets, licenses, tickets, auditlogs")]
+        Atlas --> Data
     end
 
-    subgraph ThirdPartyCloud ["External Cloud Services"]
-        SMTPGateway["SMTP Server / Brevo / SendGrid<br/>(Port 587 TLS)"]
-    end
-
-    SPA -- "REST API Calls (JSON / Bearer Token)" --> ExpressApp
-    ExpressApp -- "Mongoose Driver (mongodb+srv://)" --> AtlasCluster
-    Nodemailer -- "SMTP Auth (TLS)" --> SMTPGateway
+    Host1 -- "HTTPS REST API Calls (JSON / Bearer JWT)" --> Host2
+    Host2 -- "TLS Connection Pool (mongodb+srv://)" --> Host3
